@@ -1,7 +1,9 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { listenerMiddleware } from './listener';
+import generalSlice from "./slices/general"
 
 const rootReducer = combineReducers({
+  generalSlice
   // here should be slices
 });
 
