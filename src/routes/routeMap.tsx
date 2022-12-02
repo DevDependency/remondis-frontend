@@ -8,20 +8,20 @@ export const routeMap : RouteObject[] = [
     path: Locations.ROOT,
     element: <><Main /><Outlet/> </>,
     loader: ()=>{},
-    children: [{
-      path: Locations.SIGNUP,
-      element: <> <SignUp /> <Outlet/> </>,
-      loader: ()=>{},
-      children: [{
-        path: Locations.LOGIN,
-        element: <Login />,
-        loader: ()=>{},
-        children: []
-      },]
-    },]
+    children: []
   },
-  
-  
+  {
+    path: Locations.SIGNUP,
+    element: <> <SignUp /> <Outlet/> </>,
+    loader: ()=>{},
+    children: []
+  },
+  {
+    path: Locations.LOGIN,
+    element: <Login />,
+    loader: ()=>{},
+    children: []
+  },
   {
     path: Locations.PAGE_NOT_FOUND,
     element: <PageNotFound />,
