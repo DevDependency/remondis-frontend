@@ -1,6 +1,6 @@
 import { Main } from "./Main";
 import { PageNotFound } from "./PageNotFound";
-import { SignUp } from "./SingUp";
+import { SignUp } from "./SignUp";
 import { Login } from "./Login";
 
 
