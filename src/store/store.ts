@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { listenerMiddleware } from './listenerMiddleware';
+import { listenerMiddleware } from './listener';
 
 const rootReducer = combineReducers({
   // here should be slices
