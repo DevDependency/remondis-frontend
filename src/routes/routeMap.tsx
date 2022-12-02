@@ -7,25 +7,25 @@ export const routeMap : RouteObject[] = [
   {
     path: Locations.ROOT,
     element: <><Main /><Outlet/> </>,
-    loader: ()=>{},
+    //loader: ()=>{},
     children: []
   },
   {
     path: Locations.SIGNUP,
-    element: <> <SignUp /> <Outlet/> </>,
-    loader: ()=>{},
+    element: <SignUp />,
+    //loader: ()=>{},
     children: []
   },
   {
     path: Locations.LOGIN,
     element: <Login />,
-    loader: ()=>{},
+    //loader: ()=>{},
     children: []
   },
   {
     path: Locations.PAGE_NOT_FOUND,
     element: <PageNotFound />,
-    loader: ()=>{},
+    //loader: ()=>{},
     children: []
   }
 ]
