@@ -1,0 +1,58 @@
+import axios from "axios";
+
+const server = axios.create({
+  baseURL: process.env.VITE_BASE_API_URL,
+});
+export interface Appointment {
+  date: string;
+  time_from: string;
+  time_to: string;
+}
+
+export const apiGetAppointments = async () => {
+  try {
+    const res = await server.get(`/appointments`);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const apiPostAppointment = async (caseId: number, body: Appointment) => {
+  try {
+    const res = await server.post(`/appointments/${caseId}`, body);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const apiGetAppointmentById = async (caseId: number) => {
+  try {
+    const res = await server.get(`/appointments/${caseId}`);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const apiPutAppointmentById = async (
+  caseId: number,
+  body: Appointment
+) => {
+  try {
+    const res = await server.put(`/appointments/${caseId}`, body);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const apiDeleteAppointmentById = async (caseId: number) => {
+  try {
+    const res = await server.delete(`/appointments/${caseId}`);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
