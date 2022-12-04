@@ -21,7 +21,9 @@
             "api",
             "redux",
             "style",
-            "route"
+            "route",
+            "user",
+            "case"
         ],
         "validate": true,
         "multiple": false
