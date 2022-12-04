@@ -9,10 +9,10 @@ import { router } from "./routes/Router";
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
       <StoreProvider store={store}>
         <GlobalStyle />
-        <ThemeProvider theme={baseTheme}></ThemeProvider>
+        <RouterProvider router={router} />
+        <ThemeProvider theme={baseTheme} />
       </StoreProvider>
     </>
   );
