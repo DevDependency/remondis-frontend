@@ -19,7 +19,7 @@
             "client",
             "model",
             "api",
-            "redux",
+            "store",
             "style",
             "route",
             "user",
