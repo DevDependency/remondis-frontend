@@ -1,8 +1,8 @@
-import axios from "axios";
-//import { Cases } from "redux/caseSlice";
+import axios from 'axios';
+import { CaseClient } from '../../interfaces/cases';
 
 const server = axios.create({
-  baseURL: process.env.VITE_BASE_API_URL,
+  baseURL: import.meta.env.VITE_BASE_API_URL,
 });
 
 export const apiGetCases = async () => {
@@ -23,9 +23,9 @@ export const apiGetCasesById = async (caseId: number) => {
   }
 };
 
-export const apiPostCases = async (newCase: any) => {
+export const apiPostCases = async (body: CaseClient) => {
   try {
-    const res = await server.post(`/cases`, newCase);
+    const res = await server.post(`/cases`, body);
     return res.data;
   } catch (error) {
     console.log(error);

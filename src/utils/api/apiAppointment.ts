@@ -1,8 +1,9 @@
 import axios from "axios";
 
 const server = axios.create({
-  baseURL: process.env.VITE_BASE_API_URL,
+  baseURL: import.meta.env.VITE_BASE_API_URL,
 });
+
 export interface Appointment {
   date: string;
   time_from: string;

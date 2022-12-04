@@ -2,7 +2,7 @@ import axios from 'axios'
 import { UserRegister, UserSettings } from '../../interfaces/users'
 
 const server = axios.create({
-  baseURL: process.env.VITE_BASE_API_URL,
+  baseURL: import.meta.env.VITE_BASE_API_URL,
 });
 
 export const apiGetUsersList = async () => {
