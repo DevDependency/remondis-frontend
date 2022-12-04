@@ -1,9 +1,11 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { listenerMiddleware } from './listener';
 import generalSlice from "./slices/general"
+import caseSlice from "./slices/case"
 
 const rootReducer = combineReducers({
-  generalSlice
+  generalSlice,
+  caseSlice,
   // here should be slices
 });
 
