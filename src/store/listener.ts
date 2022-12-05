@@ -1,9 +1,19 @@
 import { createListenerMiddleware, addListener } from '@reduxjs/toolkit'
 import type { TypedStartListening, TypedAddListener } from '@reduxjs/toolkit'
-
 import type { RootState, AppDispatch } from './store'
+import { setCreatedCaseId } from '../store/slices/case'
 
 export const listenerMiddleware = createListenerMiddleware()
+
+listenerMiddleware.startListening({
+  type: 'case/createCase',
+  effect: async (action, listenerApi) => {
+    console.log('get orriginal state', listenerApi.getOriginalState());
+    console.log('action', action);
+    await listenerApi.delay(5000);
+    console.log(listenerApi.getState());
+  },
+});
 
 export type AppStartListening = TypedStartListening<RootState, AppDispatch>
 

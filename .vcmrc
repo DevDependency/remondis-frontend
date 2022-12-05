@@ -19,9 +19,11 @@
             "client",
             "model",
             "api",
-            "redux",
+            "store",
             "style",
-            "route"
+            "route",
+            "user",
+            "case"
         ],
         "validate": true,
         "multiple": false

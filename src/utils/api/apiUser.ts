@@ -1,7 +1,8 @@
-import axios from "axios";
+import axios from 'axios'
+import { UserRegister, UserSettings } from '../../interfaces/users'
 
 const server = axios.create({
-  baseURL: process.env.VITE_BASE_API_URL,
+  baseURL: import.meta.env.VITE_BASE_API_URL,
 });
 
 export const apiGetUsersList = async () => {
@@ -31,12 +32,7 @@ export const apiPostUsersRegister = async (email_address: string) => {
   }
 };
 
-interface Confirm {
-  token?: string;
-  email?: string;
-}
-
-export const apiPostUsersConfirm = async (confirmData: Confirm) => {
+export const apiPostUsersConfirm = async (confirmData: UserRegister) => {
   const { token, email } = confirmData;
   const config = {
     headers: {
@@ -56,17 +52,9 @@ export const apiPostUsersConfirm = async (confirmData: Confirm) => {
   }
 };
 
-interface IChangedValue {
-  username: string;
-  email: string;
-  password: string;
-  phone: string;
-  role: string;
-}
-
 export const apiPutUsersById = async (
   userId: number,
-  changedData: IChangedValue
+  changedData: UserSettings
 ) => {
   try {
     const res = await server.put(`/users/${userId}`, { ...changedData });

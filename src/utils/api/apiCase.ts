@@ -1,8 +1,8 @@
-import axios from "axios";
-//import { Cases } from "redux/caseSlice";
+import axios from 'axios';
+import { CaseClient, Case } from '../../interfaces/cases';
 
 const server = axios.create({
-  baseURL: process.env.VITE_BASE_API_URL,
+  baseURL: import.meta.env.VITE_BASE_API_URL,
 });
 
 export const apiGetCases = async () => {
@@ -23,9 +23,9 @@ export const apiGetCasesById = async (caseId: number) => {
   }
 };
 
-export const apiPostCases = async (newCase: any) => {
+export const apiPostCases = async (body: CaseClient) => {
   try {
-    const res = await server.post(`/cases`, newCase);
+    const res = await server.post(`/cases`, body);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -34,7 +34,7 @@ export const apiPostCases = async (newCase: any) => {
 
 export const apiPutCasesById = async (
   caseId: number,
-  changedValue: unknown
+  changedValue: CaseClient
 ) => {
   try {
     const res = await server.put(`/cases/${caseId}`, changedValue);
@@ -44,31 +44,11 @@ export const apiPutCasesById = async (
   }
 };
 
-export interface CaseRooms {
-  id: number;
-  title: string;
-  images: File[];
-}
 
-interface IChangedValue {
-  type_of_property_id: string;
-  floor: number;
-  number_of_rooms: number;
-  clear_area: boolean;
-  back_house: boolean;
-  parking: boolean;
-  elevator: boolean;
-  furniture_lift: boolean;
-  closet_contents: boolean;
-  removing_carpets: boolean;
-  removing_lamps: boolean;
-  removing_curtain: boolean;
-  rooms: CaseRooms[];
-}
 
 export const apiPatchCaseById = async (
-  caseId: number | string | undefined,
-  changedData: IChangedValue
+  caseId: number,
+  changedData: Case
 ) => {
   const { rooms, ...body } = changedData;
 
@@ -79,14 +59,6 @@ export const apiPatchCaseById = async (
     console.log(error);
   }
 };
-
-interface UserInter {
-  id: number;
-  email: string;
-  username: string;
-  role: string;
-  state: string;
-}
 
 export const apiPatchCasesByIdAssign = async (
   caseId: number,
