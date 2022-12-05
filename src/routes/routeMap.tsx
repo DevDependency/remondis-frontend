@@ -1,13 +1,30 @@
 import { Outlet, RouteObject } from "react-router-dom";
-import { Main, ToDo, Cases, Calendar, Map, PageNotFound, SignUp, Login  } from "../pages";
-import { Locations} from "../interfaces/route"
-import { CaseGeneral, CaseDetails } from '../components/case';
+import { Locations } from "../interfaces/route";
+import {
+  Main,
+  ToDo,
+  Cases,
+  Calendar,
+  Map,
+  Case,
+  PageNotFound,
+  SignUp,
+  Login,
+} from "../pages";
+import {
+  CaseGeneral,
+  CaseDetails,
+  CasePhotos,
+  CaseGeneralEdit,
+  CaseDetailsEdit,
+  CasePhotosEdit,
+} from "../components/case";
 
 
-export const routeMap : RouteObject[] = [
+export const routeMap: RouteObject[] = [
   {
     path: Locations.ROOT,
-    element: <><Main /><Outlet/> </>,
+    element: <Main />,
     //loader: ()=>{},
     children: [
       {
@@ -27,32 +44,54 @@ export const routeMap : RouteObject[] = [
         element: <Map />,
       },
       {
-        path: Locations.CASE_GENERAL,
-        element: <CaseGeneral />,
+        path: Locations.CASE,
+        element: <Case />,
+        children: [
+          {
+            path: Locations.CASE_GENERAL,
+            element: <CaseGeneral />,
+          },
+          {
+            path: Locations.CASE_DETAILS,
+            element: <CaseDetails />,
+          },
+          {
+            path: Locations.CASE_PHOTOS,
+            element: <CasePhotos />,
+          },
+          {
+            path: Locations.CASE_GENERAL_EDIT,
+            element: <CaseGeneralEdit />,
+          },
+          {
+            path: Locations.CASE_DETAILS_EDIT,
+            element: <CaseDetailsEdit />,
+          },
+          {
+            path: Locations.CASE_PHOTOS_EDIT,
+            element: <CasePhotosEdit />,
+          },
+        ],
       },
-      {
-        path: Locations.CASE_DETAILS,
-        element: <CaseDetails />,
-      },
-    ]
+    ],
   },
 
   {
     path: Locations.SIGNUP,
     element: <SignUp />,
     //loader: ()=>{},
-    children: []
+    children: [],
   },
   {
     path: Locations.LOGIN,
     element: <Login />,
     //loader: ()=>{},
-    children: []
+    children: [],
   },
   {
     path: Locations.PAGE_NOT_FOUND,
     element: <PageNotFound />,
     //loader: ()=>{},
-    children: []
-  }
-]
+    children: [],
+  },
+];
