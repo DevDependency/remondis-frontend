@@ -1,5 +1,5 @@
 import { Outlet, RouteObject } from "react-router-dom";
-import { Main, ToDo, Cases, PageNotFound, SignUp, Login  } from "../pages";
+import { Main, ToDo, Cases, Calendar, Map, PageNotFound, SignUp, Login  } from "../pages";
 import { Locations} from "../interfaces/route"
 import { CaseGeneral, CaseDetails } from '../components/case';
 
@@ -17,6 +17,14 @@ export const routeMap : RouteObject[] = [
       {
         path: Locations.CASES,
         element: <Cases />,
+      },
+      {
+        path: Locations.CALENDAR,
+        element: <Calendar />,
+      },
+      {
+        path: Locations.MAP,
+        element: <Map />,
       },
       {
         path: Locations.CASE_GENERAL,
