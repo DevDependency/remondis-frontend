@@ -3,8 +3,8 @@ import * as api from '../../utils/api';
 import { UserState, UserLogin } from '../../interfaces/users'
 
 const initialState : UserState = {
-  userRole: "manager",
-  userId: 0,
+  userRole: "inspector",
+  userId: 2,
 }
 
 export const checkUserLogin = createAsyncThunk(
