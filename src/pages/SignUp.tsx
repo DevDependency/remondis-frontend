@@ -93,7 +93,7 @@ export const SignUp: React.FC = () => {
                 onClick={resetLinkHandler}
                 style={{ width: "100%" }}
               >
-                <button>Back to login page</button>
+                Back to login page
               </button>
             </Link>
           ) : (
