@@ -16,3 +16,6 @@ export interface UserLogin {
   password: string;
 }
 
+export interface UsersValidation {
+  email: string;
+}
