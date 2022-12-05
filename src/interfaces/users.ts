@@ -10,3 +10,13 @@ export interface UserSettings {
   phone?: string;
   roles?: string;
 }
+
+export interface UserLogin {
+  name: string;
+  password: string;
+}
+
+export interface UserState {
+  userRole: string;
+  userId: number;
+}
