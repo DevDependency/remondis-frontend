@@ -71,10 +71,4 @@ export interface Coordinates {
   lat: number;
 }
 
-export interface CaseState {
-  createdCaseId: number;
-  cases: CaseWithId[];
-  casesToDo: CasesToDo[];
-  currentCase: CaseWithId | undefined;
-  coordinates: Coordinates[];
-}
+

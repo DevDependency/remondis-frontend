@@ -16,7 +16,3 @@ export interface UserLogin {
   password: string;
 }
 
-export interface UserState {
-  userRole: string;
-  userId: number;
-}
