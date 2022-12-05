@@ -20,7 +20,7 @@ export interface CaseGeneral {
   client_email?: string;
   client_phone?: string;
   manager_id?: number;
-  inspector_id?: number;
+  inspector_id?: number;  
   state_id?: number;
 }
 
