@@ -1,4 +1,4 @@
-import { CaseWithId, CasesToDo, Coordinates } from './cases';
+import { CaseWithId, CasesToDo, Coordinates, Room } from './cases';
 
 export interface CaseState {
   createdCaseId: number;
@@ -6,6 +6,7 @@ export interface CaseState {
   casesToDo: CasesToDo[];
   currentCase: CaseWithId | undefined;
   coordinates: Coordinates[];
+  caseRooms: Room[];
 }
 
 export interface UserState {
