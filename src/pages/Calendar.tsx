@@ -15,7 +15,7 @@ export const Calendar: React.FC = () => {
   const handleDateChange = (date: Date) => {
     setDate(date);
   };
-  console.log(cases)
+  
   return (
     <>
       <TabBarInspector />
