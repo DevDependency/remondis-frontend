@@ -57,7 +57,7 @@ export interface CasesToDo extends Case {
   id: number;
 }
 
-export interface State {
+export interface CaseState {
   createdCaseId: number;
   cases: CaseWithId[];
   casesToDo: CasesToDo[];
