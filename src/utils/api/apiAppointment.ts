@@ -1,14 +1,10 @@
 import axios from "axios";
+import { Appointment } from '../../interfaces/appointment'
+
 
 const server = axios.create({
   baseURL: import.meta.env.VITE_BASE_API_URL,
 });
-
-export interface Appointment {
-  date: string;
-  time_from: string;
-  time_to: string;
-}
 
 export const apiGetAppointments = async () => {
   try {

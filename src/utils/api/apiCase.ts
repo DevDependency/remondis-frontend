@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CaseClient } from '../../interfaces/cases';
+import { CaseClient, Case } from '../../interfaces/cases';
 
 const server = axios.create({
   baseURL: import.meta.env.VITE_BASE_API_URL,
@@ -34,7 +34,7 @@ export const apiPostCases = async (body: CaseClient) => {
 
 export const apiPutCasesById = async (
   caseId: number,
-  changedValue: unknown
+  changedValue: CaseClient
 ) => {
   try {
     const res = await server.put(`/cases/${caseId}`, changedValue);
@@ -44,31 +44,11 @@ export const apiPutCasesById = async (
   }
 };
 
-export interface CaseRooms {
-  id: number;
-  title: string;
-  images: File[];
-}
 
-interface IChangedValue {
-  type_of_property_id: string;
-  floor: number;
-  number_of_rooms: number;
-  clear_area: boolean;
-  back_house: boolean;
-  parking: boolean;
-  elevator: boolean;
-  furniture_lift: boolean;
-  closet_contents: boolean;
-  removing_carpets: boolean;
-  removing_lamps: boolean;
-  removing_curtain: boolean;
-  rooms: CaseRooms[];
-}
 
 export const apiPatchCaseById = async (
-  caseId: number | string | undefined,
-  changedData: IChangedValue
+  caseId: number,
+  changedData: Case
 ) => {
   const { rooms, ...body } = changedData;
 
@@ -79,14 +59,6 @@ export const apiPatchCaseById = async (
     console.log(error);
   }
 };
-
-interface UserInter {
-  id: number;
-  email: string;
-  username: string;
-  role: string;
-  state: string;
-}
 
 export const apiPatchCasesByIdAssign = async (
   caseId: number,
