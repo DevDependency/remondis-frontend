@@ -8,10 +8,11 @@ export const ToDo: React.FC = () => {
   const dispatch = useAppDispatch();
   const tasks = useAppSelector((state) => state.caseSlice.casesToDo);
   const userRole = useAppSelector((state) => state.userSlice.userRole);
+  const userId = useAppSelector((state) => state.userSlice.userId);
 
   useEffect(() => {
     // TODO put real user ID
-    dispatch(getCasesToDo(1));
+    dispatch(getCasesToDo(userId));
   }, []);
   return (
     <>
