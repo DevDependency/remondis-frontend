@@ -47,4 +47,19 @@ export interface CasePhotos {
 
 export type Case = CaseGeneral & CaseDetails & CasePhotos;
 
+export interface CaseWithId extends Case {
+  id: number;
+}
 
+export interface CasesToDo extends Case {
+  message: string;
+  action: string;
+  id: number;
+}
+
+export interface State {
+  createdCaseId: number;
+  cases: CaseWithId[];
+  casesToDo: CasesToDo[];
+  currentCase: CaseWithId | undefined;
+}
