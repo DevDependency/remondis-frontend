@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CaseClient, Case } from '../../interfaces/cases';
+import { CaseGeneral, Case } from '../../interfaces/cases';
 
 const server = axios.create({
   baseURL: import.meta.env.VITE_BASE_API_URL,
@@ -23,7 +23,7 @@ export const apiGetCasesById = async (caseId: number) => {
   }
 };
 
-export const apiPostCases = async (body: CaseClient) => {
+export const apiPostCases = async (body: CaseGeneral) => {
   try {
     const res = await server.post(`/cases`, body);
     return res.data;
@@ -34,7 +34,7 @@ export const apiPostCases = async (body: CaseClient) => {
 
 export const apiPutCasesById = async (
   caseId: number,
-  changedValue: CaseClient
+  changedValue: CaseGeneral
 ) => {
   try {
     const res = await server.put(`/cases/${caseId}`, changedValue);
@@ -43,8 +43,6 @@ export const apiPutCasesById = async (
     console.log(error);
   }
 };
-
-
 
 export const apiPatchCaseById = async (
   caseId: number,
@@ -163,3 +161,24 @@ export const apiGetCoordinates = async (userId: number) => {
     console.log(error);
   }
 };
+
+/**
+ * case items
+ */
+export const apiGetCasesItems = async (caseId: number) => {
+  try {
+    const res = await server.get(`cases/${caseId}/items`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const apiGetCasesItemByRoom = async (caseId: number, room: number) => {
+  try {
+    const res = await server.get(`cases/${caseId}/items/${room}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+}

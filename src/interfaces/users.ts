@@ -13,6 +13,10 @@ export interface UserSettings {
 
 export interface UserLogin {
   name: string;
-  password: string;
+  password: string | undefined;
 }
 
+export interface UsersValidation {
+  email: string;
+  password?: string;
+}

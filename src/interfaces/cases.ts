@@ -5,8 +5,9 @@ export interface File {
 
 export interface Room {
   id: number;
-  title: string;
-  images: File[];
+  title?: string;
+  description?: string;
+  images?: File[];
 }
 
 export interface CaseGeneral {
@@ -19,7 +20,7 @@ export interface CaseGeneral {
   client_email?: string;
   client_phone?: string;
   manager_id?: number;
-  inspector_id?: number;
+  inspector_id?: number;  
   state_id?: number;
 }
 
