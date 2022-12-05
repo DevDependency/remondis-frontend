@@ -8,6 +8,12 @@ export enum Locations {
   MAP = "/map",
 
   CASE = "/case:id",
+  CASE_DETAILS = "/case:id/details",
+  CASE_PHOTOS = "/case:id/photos",
+  
+  CASE_EDIT = "/case:id/edit",
+  CASE_DETAILS_EDIT = "/case:id/details-edit",
+  CASE_PHOTOS_EDIT = "/case:id/photos-edit",
 
   SIGNUP = "/signup",
   LOGIN = "/login",
