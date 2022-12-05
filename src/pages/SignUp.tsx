@@ -7,7 +7,7 @@ import {
   registerUser,
 } from "../store/slices/user";
 import { useState } from "react";
-import { Navigate, Link } from "react-router-dom";
+import { Navigate, Link, useNavigate } from "react-router-dom";
 import { RootState } from "../interfaces/store";
 import { UsersValidation } from "../interfaces/users";
 
@@ -16,16 +16,16 @@ const validationSchema = Yup.object({
 });
 
 export const SignUp: React.FC = () => {
-  {
-    /* useState */
-  }
+  // useState
   const [areCredentialsWrong, setAreCredentialsWrong] =
     useState<boolean>(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
 
-  {
-    /* Redux */
-  }
+  // useNavigate
+
+  const navigate = useNavigate();
+
+  // Redux
   const { isHoveringEmail, isForgotPassword, isResetLinkSend } = useAppSelector(
     (state: RootState) => state.userSlice
   );
@@ -33,9 +33,11 @@ export const SignUp: React.FC = () => {
   const dispatch = useAppDispatch();
   const forgotPasswordHandler = () => {
     dispatch(setIsForgotPassword());
+    navigate("/");
   };
   const resetLinkHandler = () => {
     dispatch(setIsResetLinkSend());
+    navigate("/");
   };
   const returnToLogin = () => {
     dispatch(setIsResetLinkSend());
@@ -47,9 +49,7 @@ export const SignUp: React.FC = () => {
     setIsEmailSent(true);
   };
 
-  {
-    /* Formik */
-  }
+  // Formik
   const formik = useFormik({
     initialValues: { email: "" },
     validationSchema,
@@ -87,9 +87,7 @@ export const SignUp: React.FC = () => {
             </div>
           )}
           {isResetLinkSend ? (
-            <Link to="/">
-              <button onClick={resetLinkHandler}>Back to login page</button>
-            </Link>
+            <button onClick={resetLinkHandler}>Back to login page</button>
           ) : (
             <div>
               {isForgotPassword ? (
@@ -101,12 +99,10 @@ export const SignUp: React.FC = () => {
               )}
 
               {isForgotPassword ? (
-                <Link to="/">
-                  <button onClick={forgotPasswordHandler}>Cancel</button>
-                </Link>
+                <button onClick={forgotPasswordHandler}>Cancel</button>
               ) : (
                 <div>
-                  <Link to="/">Login</Link>
+                  <Link to="/login">Login</Link>
                 </div>
               )}
             </div>

@@ -15,6 +15,8 @@ export interface UserState {
   isForgotPassword: boolean;
   isResetLinkSend: boolean;
   isHoveringEmail: boolean;
+  areCredentialsWrong: boolean;
+  isLoggedIn: boolean;
 }
 
 export type AppDispatch = typeof store.dispatch;
