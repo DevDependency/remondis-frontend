@@ -66,9 +66,15 @@ export interface CaseItemProps {
   action?: string;
 }
 
+export interface Coordinates {
+  lng: number;
+  lat: number;
+}
+
 export interface CaseState {
   createdCaseId: number;
   cases: CaseWithId[];
   casesToDo: CasesToDo[];
   currentCase: CaseWithId | undefined;
+  coordinates: Coordinates[];
 }
