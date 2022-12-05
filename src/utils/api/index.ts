@@ -18,6 +18,7 @@ import {
 
 import {
   apiGetCases,
+  apiGetCasesById,
   apiPostCases,
   apiPatchCaseById,
   apiPutCasesById,
@@ -38,6 +39,7 @@ export {
   apiPutAppointmentById,
   apiDeleteAppointmentById,
   apiGetCases,
+  apiGetCasesById,
   apiPostCases,
   apiPatchCaseById,
   apiPutCasesById,
