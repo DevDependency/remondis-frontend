@@ -64,6 +64,9 @@ const caseSlice = createSlice({
     setCases(state, action) {
       state.cases = action.payload;
     },
+    setCasesToDo(state, action) {
+      state.casesToDo = action.payload;
+    },
     setCurrentCase(state, action){
       state.currentCase = action.payload;
     },
@@ -75,6 +78,9 @@ const caseSlice = createSlice({
     builder
       .addCase(getCases.fulfilled, (state, action) => {
         caseSlice.caseReducers.setCases(state, action);
+      })
+      .addCase(getCasesToDo.fulfilled, (state, action) => {
+        caseSlice.caseReducers.setCasesToDo(state, action);
       })
       .addCase(getCasesById.fulfilled, (state, action) => {
         caseSlice.caseReducers.setCurrentCase(state, action);
