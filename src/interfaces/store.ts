@@ -1,4 +1,4 @@
-import { CaseWithId, CasesToDo, Coordinates } from './cases';
+import { CaseWithId, CasesToDo, Coordinates } from "./cases";
 
 export interface CaseState {
   createdCaseId: number;
@@ -11,4 +11,7 @@ export interface CaseState {
 export interface UserState {
   userRole: string;
   userId: number;
+  isForgotPassword: boolean;
+  isResetLinkSend: boolean;
+  isHoveringEmail: boolean;
 }

@@ -1,12 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import * as api from '../../utils/api';
-import { UserLogin } from '../../interfaces/users'
-import { UserState} from '../../interfaces/store';
+import * as api from "../../utils/api";
+import { UserLogin } from "../../interfaces/users";
+import { UserState } from "../../interfaces/store";
+import { apiPostUsersRegister } from "../../utils/api";
 
-const initialState : UserState = {
+const initialState: UserState = {
   userRole: "inspector",
   userId: 2,
-}
+  isForgotPassword: false,
+  isResetLinkSend: false,
+  isHoveringEmail: false,
+};
+
+export const registerUser = createAsyncThunk(
+  "isLoggedIn/registerUser",
+  async (email: string) => {
+    const response = await apiPostUsersRegister(email);
+  }
+);
 
 export const checkUserLogin = createAsyncThunk(
   "user/checkUserLogin",
@@ -36,19 +47,25 @@ const userSlice = createSlice({
         state.userRole = action.payload.user.role;
         state.userId = action.payload.user.id;
       }
-
-    }
+    },
+    setIsForgotPassword: (state) => {
+      state.isForgotPassword = !state.isForgotPassword;
+    },
+    setIsResetLinkSend: (state) => {
+      state.isResetLinkSend = !state.isResetLinkSend;
+    },
+    signInIsEmailHovered(state) {
+      state.isHoveringEmail = !state.isHoveringEmail;
+    },
   },
   extraReducers(builder) {
-    builder
-      .addCase(checkUserLogin.fulfilled, (state, action) => {
-        userSlice.caseReducers.setUser(state, action);
-      });
+    builder.addCase(checkUserLogin.fulfilled, (state, action) => {
+      userSlice.caseReducers.setUser(state, action);
+    });
   },
 });
 
-export const {
-
-} = userSlice.actions;
+export const { setIsForgotPassword, setIsResetLinkSend, signInIsEmailHovered } =
+  userSlice.actions;
 
 export default userSlice.reducer;

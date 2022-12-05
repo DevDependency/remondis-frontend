@@ -5,7 +5,7 @@ import {
   setIsForgotPassword,
   setIsResetLinkSend,
   registerUser,
-} from "../store/slices/general";
+} from "../store/slices/user";
 import { useState } from "react";
 import { Navigate, Link } from "react-router-dom";
 import { RootState } from "../store/store";
@@ -27,7 +27,7 @@ export const SignUp: React.FC = () => {
     /* Redux */
   }
   const { isHoveringEmail, isForgotPassword, isResetLinkSend } = useAppSelector(
-    (state: RootState) => state.generalSlice
+    (state: RootState) => state.userSlice
   );
 
   const dispatch = useAppDispatch();
@@ -88,29 +88,21 @@ export const SignUp: React.FC = () => {
           )}
           {isResetLinkSend ? (
             <Link to="/">
-              <button
-                color={"red"}
-                onClick={resetLinkHandler}
-                style={{ width: "100%" }}
-              >
-                Back to login page
-              </button>
+              <button onClick={resetLinkHandler}>Back to login page</button>
             </Link>
           ) : (
             <div>
-              <button type="submit">
-                {isForgotPassword ? (
-                  <button onClick={returnToLogin}>Request reset link</button>
-                ) : (
-                  <button>Sign up</button>
-                )}
-              </button>
+              {isForgotPassword ? (
+                <button type="submit" onClick={returnToLogin}>
+                  Request reset link
+                </button>
+              ) : (
+                <button>Sign up</button>
+              )}
 
               {isForgotPassword ? (
                 <Link to="/">
-                  <button>
-                    <button onClick={forgotPasswordHandler}>Cancel</button>
-                  </button>
+                  <button onClick={forgotPasswordHandler}>Cancel</button>
                 </Link>
               ) : (
                 <div>
