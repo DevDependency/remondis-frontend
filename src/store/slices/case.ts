@@ -3,7 +3,8 @@ import * as api from '../../utils/api';
 import { Case } from '../../interfaces/cases';
 
 const initialState = {
-  createdCaseId: 0
+  createdCaseId: 0,
+  cases: [],
 }
 
 
@@ -16,6 +17,18 @@ export const createCase = createAsyncThunk(
     } catch (error) {
       console.error(error);
     }
+  }
+);
+export const editTheCase = createAsyncThunk(
+  "cases/editTheCase",
+  async (values: any) => {
+    const response = await api.apiPatchCaseById(
+      values.id,
+      values.changedValue
+    );
+    console.log(response);
+
+    return response;
   }
 );
 
