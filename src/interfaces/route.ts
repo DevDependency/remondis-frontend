@@ -2,18 +2,18 @@
 export enum Locations {
   ROOT = "/",
 
-  TODO = "/todo",
+  TODO = "/",
   CASES = "/cases",
   CALENDAR = "/calendar",
   MAP = "/map",
 
-  CASE = "/case:id",
-  CASE_DETAILS = "/case:id/details",
-  CASE_PHOTOS = "/case:id/photos",
+  CASE_GENERAL = "/cases/:id",
+  CASE_DETAILS = "/cases/:id/details",
+  CASE_PHOTOS = "/cases/:id/photos",
   
-  CASE_EDIT = "/case:id/edit",
-  CASE_DETAILS_EDIT = "/case:id/details-edit",
-  CASE_PHOTOS_EDIT = "/case:id/photos-edit",
+  CASE_EDIT = "/cases/:id/edit",
+  CASE_DETAILS_EDIT = "/cases/:id/details-edit",
+  CASE_PHOTOS_EDIT = "/cases/:id/photos-edit",
 
   SIGNUP = "/signup",
   LOGIN = "/login",
