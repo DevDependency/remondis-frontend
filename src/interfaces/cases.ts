@@ -9,7 +9,7 @@ export interface Room {
   images: File[];
 }
 
-export interface CaseClient {
+export interface CaseGeneral {
   address: string;
   created_at?: Date;
   assigned_at?: Date;
@@ -23,7 +23,7 @@ export interface CaseClient {
   state_id?: number;
 }
 
-export interface CaseInspection {
+export interface CaseDetails {
   elevator?: boolean;
   floor?: number;
   quantity?: number;
@@ -40,11 +40,26 @@ export interface CaseInspection {
   removing_curtain?: boolean;
 }
 
-export interface CaseRoom {
+export interface CasePhotos {
   number_of_rooms?: number;
   rooms?: Room[];
 }
 
-export type Case = CaseClient & CaseInspection & CaseRoom;
+export type Case = CaseGeneral & CaseDetails & CasePhotos;
 
+export interface CaseWithId extends Case {
+  id: number;
+}
 
+export interface CasesToDo extends Case {
+  message: string;
+  action: string;
+  id: number;
+}
+
+export interface State {
+  createdCaseId: number;
+  cases: CaseWithId[];
+  casesToDo: CasesToDo[];
+  currentCase: CaseWithId | undefined;
+}
