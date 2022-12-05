@@ -10,3 +10,7 @@ export interface UserSettings {
   phone?: string;
   roles?: string;
 }
+
+export interface UsersValidation {
+  email: string;
+}
