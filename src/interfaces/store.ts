@@ -12,4 +12,7 @@ export interface CaseState {
 export interface UserState {
   userRole: string;
   userId: number;
+  isForgotPassword: boolean;
+  isResetLinkSend: boolean;
+  isHoveringEmail: boolean;
 }

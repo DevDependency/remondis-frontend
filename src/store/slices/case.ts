@@ -59,6 +59,18 @@ export const createCase = createAsyncThunk(
     }
   }
 );
+export const editTheCase = createAsyncThunk(
+  "cases/editTheCase",
+  async (values: any) => {
+    const response = await api.apiPatchCaseById(
+      values.id,
+      values.changedValue
+    );
+    console.log(response);
+
+    return response;
+  }
+);
 
 export const getCoordinates = createAsyncThunk(
   "case/getCoordinates",
