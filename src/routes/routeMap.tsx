@@ -24,12 +24,7 @@ import {
 export const routeMap: RouteObject[] = [
   {
     path: Locations.ROOT,
-    element: (
-      <>
-        <Main />
-        <Outlet />{" "}
-      </>
-    ),
+    element: <Main />,
     //loader: ()=>{},
     children: [
       {
@@ -50,12 +45,7 @@ export const routeMap: RouteObject[] = [
       },
       {
         path: Locations.CASE,
-        element: (
-          <>
-            <Case />
-            <Outlet />{" "}
-          </>
-        ),
+        element: <Case />,
         children: [
           {
             path: Locations.CASE_GENERAL,
