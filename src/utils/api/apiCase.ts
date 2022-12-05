@@ -44,8 +44,6 @@ export const apiPutCasesById = async (
   }
 };
 
-
-
 export const apiPatchCaseById = async (
   caseId: number,
   changedData: Case
@@ -163,3 +161,24 @@ export const apiGetCoordinates = async (userId: number) => {
     console.log(error);
   }
 };
+
+/**
+ * case items
+ */
+export const apiGetCasesItems = async (caseId: number) => {
+  try {
+    const res = await server.get(`cases/${caseId}/items`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const apiGetCasesItemByRoom = async (caseId: number, room: number) => {
+  try {
+    const res = await server.get(`cases/${caseId}/items/${room}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
