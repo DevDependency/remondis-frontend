@@ -8,7 +8,7 @@ import {
 } from "../store/slices/user";
 import { useState } from "react";
 import { Navigate, Link } from "react-router-dom";
-import { RootState } from "../store/store";
+import { RootState } from "../interfaces/store";
 import { UsersValidation } from "../interfaces/users";
 
 const validationSchema = Yup.object({

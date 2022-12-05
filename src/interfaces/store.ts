@@ -1,4 +1,5 @@
 import { CaseWithId, CasesToDo, Coordinates } from "./cases";
+import { store } from "../store/store";
 
 export interface CaseState {
   createdCaseId: number;
@@ -15,3 +16,7 @@ export interface UserState {
   isResetLinkSend: boolean;
   isHoveringEmail: boolean;
 }
+
+export type AppDispatch = typeof store.dispatch;
+
+export type RootState = ReturnType<typeof store.getState>;
