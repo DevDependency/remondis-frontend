@@ -7,13 +7,13 @@ export enum Locations {
   CALENDAR = "/calendar",
   MAP = "/map",
 
-  CASE_GENERAL = "/cases/:id",
-  CASE_DETAILS = "/cases/:id/details",
-  CASE_PHOTOS = "/cases/:id/photos",
+  CASE_GENERAL = "/cases/:caseId",
+  CASE_DETAILS = "/cases/:caseId/details",
+  CASE_PHOTOS = "/cases/:caseId/photos",
   
-  CASE_EDIT = "/cases/:id/edit",
-  CASE_DETAILS_EDIT = "/cases/:id/details-edit",
-  CASE_PHOTOS_EDIT = "/cases/:id/photos-edit",
+  CASE_EDIT = "/cases/:caseId/edit",
+  CASE_DETAILS_EDIT = "/cases/:caseId/details-edit",
+  CASE_PHOTOS_EDIT = "/cases/:caseId/photos-edit",
 
   SIGNUP = "/signup",
   LOGIN = "/login",
