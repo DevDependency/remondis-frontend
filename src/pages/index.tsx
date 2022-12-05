@@ -7,6 +7,8 @@ import { Profile } from "./Profile";
 import { Case } from "./Case";
 import { ToDo } from "./ToDo";
 import { Cases } from "./Cases";
+import { Calendar } from "./Calendar";
+import { Map } from "./Map";
 
 
 export {
@@ -19,4 +21,6 @@ export {
   Case,
   ToDo,
   Cases,
+  Calendar,
+  Map,
 }

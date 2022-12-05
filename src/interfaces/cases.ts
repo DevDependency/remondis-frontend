@@ -11,9 +11,9 @@ export interface Room {
 
 export interface CaseGeneral {
   address: string;
-  created_at?: Date;
-  assigned_at?: Date;
-  confirmed_at?: Date;
+  created_at?: string;
+  assigned_at?: string;
+  confirmed_at?: string;
   client_first_name?: string;
   client_last_name?: string;
   client_email?: string;
@@ -57,9 +57,18 @@ export interface CasesToDo extends Case {
   id: number;
 }
 
-export interface State {
-  createdCaseId: number;
-  cases: CaseWithId[];
-  casesToDo: CasesToDo[];
-  currentCase: CaseWithId | undefined;
+export interface CaseItemProps {
+  time: string;
+  address: string;
+  link: number;
+  isTodo?: boolean;
+  message?: string;
+  action?: string;
 }
+
+export interface Coordinates {
+  lng: number;
+  lat: number;
+}
+
+
