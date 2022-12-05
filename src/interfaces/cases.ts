@@ -11,9 +11,9 @@ export interface Room {
 
 export interface CaseGeneral {
   address: string;
-  created_at?: Date;
-  assigned_at?: Date;
-  confirmed_at?: Date;
+  created_at?: string;
+  assigned_at?: string;
+  confirmed_at?: string;
   client_first_name?: string;
   client_last_name?: string;
   client_email?: string;
