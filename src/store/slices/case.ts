@@ -7,6 +7,7 @@ const initialState: CaseState = {
   casesToDo: [],
   cases: [],
   currentCase: undefined,
+  coordinates: [],
 }
 
 export const getCases = createAsyncThunk(
@@ -57,6 +58,18 @@ export const createCase = createAsyncThunk(
   }
 );
 
+export const getCoordinates = createAsyncThunk(
+  "case/getCoordinates",
+  async (user_id: number) => {
+    try {
+      const response = await api.apiGetCoordinates(user_id);
+      return response.coordinates;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 const caseSlice = createSlice({
   name: "case",
   initialState,
@@ -73,6 +86,9 @@ const caseSlice = createSlice({
     setCreatedCaseId(state, action) {
       state.createdCaseId = action.payload;
     },
+    setCoordinates(state, action){
+      state.coordinates = action.payload;
+    }
   },
   extraReducers(builder) {
     builder
@@ -87,6 +103,9 @@ const caseSlice = createSlice({
       })
       .addCase(createCase.fulfilled, (state, action) => {
         caseSlice.caseReducers.setCreatedCaseId(state, action);
+      })
+      .addCase(getCoordinates.fulfilled, (state, action) => {
+        caseSlice.caseReducers.setCoordinates(state, action);
       });
   },
 });
