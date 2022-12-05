@@ -2,10 +2,12 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { listenerMiddleware } from './listener';
 import generalSlice from "./slices/general"
 import caseSlice from "./slices/case"
+import userSlice from "./slices/user"
 
 const rootReducer = combineReducers({
   generalSlice,
   caseSlice,
+  userSlice,
   // here should be slices
 });
 
