@@ -1,11 +1,13 @@
 import { useEffect } from "react";
-import { TabBarManager } from "../components/containers/TabBarManager";
 import { useAppSelector, useAppDispatch } from "../utils/hooks/useStore";
 import { getCasesToDo } from "../store/slices/case";
+import { TabBarManager, TabBarInspector } from "../components/containers/";
+import { CaseItem } from "../components/case/";
 
 export const ToDo: React.FC = () => {
-  const tasks = useAppSelector((state) => state.caseSlice.casesToDo);
   const dispatch = useAppDispatch();
+  const tasks = useAppSelector((state) => state.caseSlice.casesToDo);
+  const userRole = useAppSelector((state) => state.userSlice.userRole);
 
   useEffect(() => {
     // TODO put real user ID
@@ -13,17 +15,21 @@ export const ToDo: React.FC = () => {
   }, []);
   return (
     <>
-      <TabBarManager />
-      {tasks &&
-        tasks
-        .map((item: any, index) => (
-          <div key={index}>
-            time={new Date(item.created_at).toLocaleDateString("en-Us")}
-            address={item.address}
-            link={item.id}
-            isTodo={false}
-          </div>
-        ))}
+      <div className="CaseDiv">
+        {userRole === "manager" ? <TabBarManager /> : <TabBarInspector />}
+        {tasks &&
+          tasks.map((item: any, index) => (
+            <CaseItem
+              key={index}
+              time={new Date(item.created_at).toLocaleDateString("en-Us")}
+              address={item.address}
+              link={item.id}
+              message={item.message}
+              action={item.action}
+              isTodo={true}
+            />
+          ))}
+      </div>
     </>
   );
 };

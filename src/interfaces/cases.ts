@@ -57,6 +57,15 @@ export interface CasesToDo extends Case {
   id: number;
 }
 
+export interface CaseItemProps {
+  time: string;
+  address: string;
+  link: number;
+  isTodo?: boolean;
+  message?: string;
+  action?: string;
+}
+
 export interface CaseState {
   createdCaseId: number;
   cases: CaseWithId[];
