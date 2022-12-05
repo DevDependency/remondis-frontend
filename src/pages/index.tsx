@@ -4,6 +4,9 @@ import { SignUp } from "./SignUp";
 import { Login } from "./Login";
 import { Confirm } from "./Confirm";
 import { Profile } from "./Profile";
+import { Case } from "./Case";
+import { ToDo } from "./ToDo";
+import { Cases } from "./Cases";
 
 
 export {
@@ -13,4 +16,7 @@ export {
   Login,
   Confirm,
   Profile,
+  Case,
+  ToDo,
+  Cases,
 }
