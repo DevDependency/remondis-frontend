@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from '../../utils/api';
-import { Case, CaseState } from '../../interfaces/cases';
+import { Case } from '../../interfaces/cases';
+import {CaseState} from '../../interfaces/store';
 
 const initialState: CaseState = {
   createdCaseId: 0,

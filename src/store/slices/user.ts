@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from '../../utils/api';
-import { UserState, UserLogin } from '../../interfaces/users'
+import { UserLogin } from '../../interfaces/users'
+import { UserState} from '../../interfaces/store';
 
 const initialState : UserState = {
   userRole: "inspector",
