@@ -11,8 +11,7 @@ export const CaseGeneral : React.FC = () => {
     if (caseId) {dispatch(getCasesById(parseInt(caseId)));}
   }, [] )
   return (
-    <>
-      
+    <>      
       <div className="WrapContainerUnderNavbar">         
         <div className="CaseItemMain">
           <div className="CaseItemDiv">
