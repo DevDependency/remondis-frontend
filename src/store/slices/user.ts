@@ -10,6 +10,8 @@ const initialState: UserState = {
   isForgotPassword: false,
   isResetLinkSend: false,
   isHoveringEmail: false,
+  areCredentialsWrong: false,
+  isLoggedIn: false,
 };
 
 export const registerUser = createAsyncThunk(
@@ -46,6 +48,9 @@ const userSlice = createSlice({
       if (action.payload && action.payload.success) {
         state.userRole = action.payload.user.role;
         state.userId = action.payload.user.id;
+        state.isLoggedIn = true;
+      } else {
+        state.isLoggedIn = false;
       }
     },
     setIsForgotPassword: (state) => {

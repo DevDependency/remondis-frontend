@@ -1,4 +1,6 @@
 import { CaseWithId, CasesToDo, Coordinates, Room } from './cases';
+import { store } from "../store/store";
+
 
 export interface CaseState {
   createdCaseId: number;
@@ -15,4 +17,10 @@ export interface UserState {
   isForgotPassword: boolean;
   isResetLinkSend: boolean;
   isHoveringEmail: boolean;
+  areCredentialsWrong: boolean;
+  isLoggedIn: boolean;
 }
+
+export type AppDispatch = typeof store.dispatch;
+
+export type RootState = ReturnType<typeof store.getState>;
