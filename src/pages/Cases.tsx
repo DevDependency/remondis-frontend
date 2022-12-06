@@ -23,7 +23,7 @@ export const Cases: React.FC = () => {
           .map((item: CaseWithId, index: number) => (
             <CaseItem
               key={index}
-              time={new Date(item.created_at as string).toLocaleDateString("en-Us")}
+              time={new Date(item.created_at as string).toLocaleDateString("en-GB")}
               address={item.address}
               link={item.id}
               isTodo={false}

@@ -23,7 +23,7 @@ export const ToDo: React.FC = () => {
           tasks.map((item: CasesToDo, index: number) => (
             <CaseItem
               key={index}
-              time={new Date(item.created_at as string).toLocaleDateString("en-Us")}
+              time={new Date(item.created_at as string).toLocaleDateString("en-GB")}
               address={item.address}
               link={item.id}
               message={item.message}
