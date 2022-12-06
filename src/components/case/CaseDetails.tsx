@@ -63,7 +63,7 @@ export const CaseDetails : React.FC = () => {
         </div>
         <div className="CaseItemMain">
           <p className="InputPlaceholderShown">Date of appointment</p>
-          <p className="TextMain">???</p>
+          <p className="TextMain">{new Date(currentCase.Appointment.date).toLocaleDateString("en-GB")}</p>
         </div>
       </div>
     </>
