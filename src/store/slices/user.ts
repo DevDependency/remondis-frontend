@@ -51,6 +51,7 @@ const userSlice = createSlice({
         state.isLoggedIn = true;
       } else {
         state.isLoggedIn = false;
+        state.areCredentialsWrong = true;
       }
     },
     setIsForgotPassword: (state) => {
