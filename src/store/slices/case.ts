@@ -9,6 +9,7 @@ const initialState: CaseState = {
   cases: [],
   currentCase: undefined,
   coordinates: [],
+  caseRooms: [],
 }
 
 export const getCases = createAsyncThunk(
@@ -56,6 +57,18 @@ export const createCase = createAsyncThunk(
     } catch (error) {
       console.error(error);
     }
+  }
+);
+export const editTheCase = createAsyncThunk(
+  "cases/editTheCase",
+  async (values: any) => {
+    const response = await api.apiPatchCaseById(
+      values.id,
+      values.changedValue
+    );
+    console.log(response);
+
+    return response;
   }
 );
 

@@ -5,8 +5,8 @@ import { UserState } from "../../interfaces/store";
 import { apiPostUsersRegister } from "../../utils/api";
 
 const initialState: UserState = {
-  userRole: "inspector",
-  userId: 2,
+  userRole: "manager",
+  userId: 1,
   isForgotPassword: false,
   isResetLinkSend: false,
   isHoveringEmail: false,
