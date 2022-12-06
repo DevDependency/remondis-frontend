@@ -18,10 +18,7 @@ const validationSchema = Yup.object({
 
 export const Login: React.FC = () => {
   // Redux
-  const isLoggedIn = useAppSelector(
-    (state: RootState) => state.userSlice.isLoggedIn
-  );
-  const { areCredentialsWrong } = useAppSelector(
+  const { areCredentialsWrong, isLoggedIn } = useAppSelector(
     (state: RootState) => state.userSlice
   );
 
@@ -31,23 +28,24 @@ export const Login: React.FC = () => {
   };
 
   // Cookies
-  const [cookiesName, setCookiesName, removeCookiesName] = useCookies<string>([
-    "Name",
+  const [cookiesName, setCookiesName] = useCookies<string>(["Name"]);
+  const [cookiesPassword, setCookiesPassword] = useCookies<string>([
+    "Password",
   ]);
-  const [cookiesPassword, setCookiesPassword, removeCookiesPassword] =
-    useCookies<string>(["Password"]);
   const checkUser = (values: UsersValidation) => {
     dispatch(checkUserLogin({ name: values.email, password: values.password }));
     setCookiesName("Name", values.email, { path: "/" });
     setCookiesPassword("Password", values.password, { path: "/" });
   };
   useEffect(() => {
-    dispatch(
-      checkUserLogin({
-        name: cookiesName.Name,
-        password: cookiesPassword.Password,
-      })
-    );
+    if (cookiesName.Name !== undefined && cookiesName.Password !== undefined) {
+      dispatch(
+        checkUserLogin({
+          name: cookiesName.Name,
+          password: cookiesPassword.Password,
+        })
+      );
+    }
   }, []);
 
   // Formik
@@ -96,7 +94,7 @@ export const Login: React.FC = () => {
                 {areCredentialsWrong && (
                   <div>email or password is incorrect</div>
                 )}
-                <Link to="/signup" onClick={forgotPasswordHandler}>
+                <Link to="/forgotpassword" onClick={forgotPasswordHandler}>
                   Forgot Password
                 </Link>
               </div>
