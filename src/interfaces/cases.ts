@@ -22,6 +22,7 @@ export interface CaseGeneral {
   manager_id?: number;
   inspector_id?: number;  
   state_id?: number;
+  inspector: string;
 }
 
 export interface CaseDetails {
