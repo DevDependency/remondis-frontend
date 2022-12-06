@@ -9,7 +9,7 @@ const initialState: CaseState = {
   cases: [],
   currentCase: undefined,
   coordinates: [],
-  caseRooms: [],
+  caseRooms: [],  
 }
 
 export const getCases = createAsyncThunk(

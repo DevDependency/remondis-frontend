@@ -46,3 +46,30 @@ export const TAB_BAR_CASE = [
     path: "photos"
   },
 ];
+
+export const TYPE_OF_PROPERTIES = [
+  {
+    id: 1, 
+    name: "Appartment"
+  },
+  {
+    id: 2, 
+    name: "House"
+  },
+  {
+    id: 3, 
+    name: "Basement"
+  },
+  {
+    id: 4, 
+    name: "Room"
+  },
+  {
+    id: 5, 
+    name: "Attic"
+  },
+  {
+    id: 6, 
+    name: "Backyard"
+  },
+]
