@@ -1,37 +1,26 @@
-export const baseTheme = {
+// import { Theme, Colors, Fonts, BorderLine } from "../interfaces/style"
+
+export const theme = {
   colors: {
-    primary: '#7986cb',
-    secondary: '#2b2b2b',
-    success: '#4caf50',
-    danger: '#f44336 ',
-    
-    bg: '#E5E4E8',
-    font: '#19191B',
+    tx_grey_main: "#3A3A42",
+    tx_grey_secondary: "#9E9E9E",
+    red: "#E3001B",
+    red_hover: "#B50A1A",
+    grey: "#AEB0B7",
+    grey_hover: "#868996",
+    white: "#ffffff",
+    blue_light: "#025392",
+    blue_dark: "#012D59",
+    border: "#D1D1D1",
   },
-
-  media: {
-    extraLarge: '(max-width: 1140px)',
-    large: '(max-width: 960px)',
-    medium: '(max-width: 720px)',
-    small: '(max-width: 540px)',
+  fonts: {
+    default: "Roboto",
   },
-
-  // in px
-  sizes: {
-    header: { height: 56 },
-    container: { width: 1200 },
-    footer: { height: 128 },
-    modal: { width: 540 },
+  borderline: {
+    border: "0.5px solid #D1D1D1",
+    errorBorder: "2px solid #E3001B",
   },
-
-  // in ms
-  durations: {
-    ms300: 300,
+  effects: {
+    shadow: "0px 0px 10px rgba(0, 0, 0, 0.15)",
   },
-
-  // z-index
-  order: {
-    header: 50,
-    modal: 100,
-  },
-}
+};

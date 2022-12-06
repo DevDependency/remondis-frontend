@@ -1,5 +1,5 @@
 import GlobalStyle from "./styles/global";
-import { baseTheme } from "./styles/theme";
+import { theme } from "./styles/theme";
 import { ThemeProvider } from "styled-components";
 import { RouterProvider } from "react-router-dom";
 import { Provider as StoreProvider } from "react-redux";
@@ -12,7 +12,7 @@ function App() {
       <StoreProvider store={store}>
         <GlobalStyle />
         <RouterProvider router={router} />
-        <ThemeProvider theme={baseTheme} />
+        <ThemeProvider theme={theme} />
       </StoreProvider>
     </>
   );
