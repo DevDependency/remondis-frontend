@@ -5,7 +5,8 @@ export interface File {
 
 export interface Room {
   id: number;
-  title?: string;
+  room: number;
+  room_title?: string;
   description?: string;
   images?: File[];
 }

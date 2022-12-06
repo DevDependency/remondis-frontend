@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../utils/hooks/useStore";
 import { getCasesToDo } from "../store/slices/case";
+import { CasesToDo } from '../interfaces/cases';
 import { TabBarManager, TabBarInspector } from "../components/containers/";
 import { CaseItem } from "../components/case/";
+
 
 export const ToDo: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -11,7 +13,6 @@ export const ToDo: React.FC = () => {
   const userId = useAppSelector((state) => state.userSlice.userId);
 
   useEffect(() => {
-    // TODO put real user ID
     dispatch(getCasesToDo(userId));
   }, []);
   return (
@@ -19,10 +20,10 @@ export const ToDo: React.FC = () => {
       <div className="CaseDiv">
         {userRole === "manager" ? <TabBarManager /> : <TabBarInspector />}
         {tasks &&
-          tasks.map((item: any, index) => (
+          tasks.map((item: CasesToDo, index: number) => (
             <CaseItem
               key={index}
-              time={new Date(item.created_at).toLocaleDateString("en-Us")}
+              time={new Date(item.created_at as string).toLocaleDateString("en-GB")}
               address={item.address}
               link={item.id}
               message={item.message}
