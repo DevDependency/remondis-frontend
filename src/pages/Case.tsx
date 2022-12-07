@@ -1,4 +1,4 @@
-import { TabBarCase } from "../components/containers";
+import { ButtonContainer, TabBarCase } from "../components/containers";
 import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import { useAppDispatch } from "../utils/hooks/useStore";
@@ -18,6 +18,7 @@ export const Case: React.FC = () => {
     <>
       <TabBarCase />
       <Outlet />
+      <ButtonContainer />
     </>
   );
 };
