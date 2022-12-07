@@ -2,12 +2,13 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RootState } from "../interfaces/store";
 import { UsersValidation } from "../interfaces/users";
 import { useAppDispatch, useAppSelector } from "../utils/hooks/useStore";
 import { checkUserLogin, setIsForgotPassword } from "../store/slices/user";
 import { Main } from "./Main";
+import { Locations } from "../interfaces/route";
 
 const validationSchema = Yup.object({
   email: Yup.string().required(),
@@ -17,6 +18,8 @@ const validationSchema = Yup.object({
 });
 
 export const Login: React.FC = () => {
+  const navigate = useNavigate();
+
   // Redux
   const { areCredentialsWrong, isLoggedIn } = useAppSelector(
     (state: RootState) => state.userSlice
@@ -48,6 +51,10 @@ export const Login: React.FC = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (isLoggedIn) navigate(Locations.ROOT);
+  }, [isLoggedIn]);
+
   // Formik
   const formik = useFormik({
     initialValues: { email: "", password: "" },
@@ -59,54 +66,48 @@ export const Login: React.FC = () => {
 
   return (
     <>
-      {isLoggedIn ? (
-        <Main />
-      ) : (
+      <div>
         <div>
-          <div>
-            {/* <Logo src={NEW_CONSTANT.logo} /> */}
-            {/* A logo must be here */}
-            <h1>Login</h1>
-            <form onSubmit={formik.handleSubmit} noValidate>
-              <label htmlFor="email">Name</label>
+          {/* <Logo src={NEW_CONSTANT.logo} /> */}
+          {/* A logo must be here */}
+          <h1>Login</h1>
+          <form onSubmit={formik.handleSubmit} noValidate>
+            <label htmlFor="email">Name</label>
+            <input
+              // emailError={formik.errors.email && formik.touched.email}
+              // areCredentialsWrong={areCredentialsWrong}
+              {...formik.getFieldProps("email")}
+            />
+            {formik.errors.email && formik.touched.email && (
+              <div>{formik.errors.email}</div>
+            )}
+            <br />
+            <div>
+              <label htmlFor="Password">Password</label>
               <input
-                // emailError={formik.errors.email && formik.touched.email}
                 // areCredentialsWrong={areCredentialsWrong}
-                {...formik.getFieldProps("email")}
+                // passwordError={
+                //   formik.errors.password && formik.touched.password
+                // }
+                {...formik.getFieldProps("password")}
+                type="password"
               />
-              {formik.errors.email && formik.touched.email && (
-                <div>{formik.errors.email}</div>
+              {formik.errors.password && formik.touched.password && (
+                <div>{formik.errors.password}</div>
               )}
-              <br />
-              <div>
-                <label htmlFor="Password">Password</label>
-                <input
-                  // areCredentialsWrong={areCredentialsWrong}
-                  // passwordError={
-                  //   formik.errors.password && formik.touched.password
-                  // }
-                  {...formik.getFieldProps("password")}
-                  type="password"
-                />
-                {formik.errors.password && formik.touched.password && (
-                  <div>{formik.errors.password}</div>
-                )}
-                {areCredentialsWrong && (
-                  <div>email or password is incorrect</div>
-                )}
-                <Link to="/forgotpassword" onClick={forgotPasswordHandler}>
-                  Forgot Password
-                </Link>
-              </div>
+              {areCredentialsWrong && <div>email or password is incorrect</div>}
+              <Link to="/forgotpassword" onClick={forgotPasswordHandler}>
+                Forgot Password
+              </Link>
+            </div>
 
-              <button type="submit">Login</button>
-              <div>
-                <Link to="/signup">Sign up</Link>
-              </div>
-            </form>
-          </div>
+            <button type="submit">Login</button>
+            <div>
+              <Link to="/signup">Sign up</Link>
+            </div>
+          </form>
         </div>
-      )}
+      </div>
     </>
   );
 };
