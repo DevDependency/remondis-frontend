@@ -105,10 +105,10 @@ export const CaseDetailsEdit : React.FC = () => {
         <CheckBoxLabel htmlFor="removing_curtain" />
         </CheckBoxWrapper>
       </div>
-      <div>
+      {/* <div>
         <label htmlFor="date_of_appointment">Date of appointment</label>
         <input type="date" id="date_of_appointment" name="date_of_appointment" defaultValue={values.date_of_appointment} onChange={handleChange}></input>
-      </div>      
+      </div>       */}
       <button id="submit" type="submit">Submit</button> {/* this should be deleted, used only for test*/}
       </Form> 
       )}

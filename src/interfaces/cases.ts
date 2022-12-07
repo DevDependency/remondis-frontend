@@ -1,3 +1,6 @@
+import { Appointment } from "./appointment";
+import { UserSettings } from "./users";
+
 export interface File {
   id: number;
   img: any;
@@ -25,6 +28,8 @@ export interface CaseGeneral {
   inspector_id?: number;  
   state_id?: number;
   inspector: string;
+  Appointment: Appointment;
+  Inspector: UserSettings;
 }
 
 export interface CaseDetails {

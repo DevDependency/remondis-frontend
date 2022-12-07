@@ -1,10 +1,11 @@
-import { getCasesById } from "../../store/slices/case";
+import { getCasesById,createCase,editTheCase } from "../../store/slices/case";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks/useStore";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Formik, Form } from "formik";
 
-export const CaseGeneralEdit : React.FC = () => {  
+export const CaseGeneralEdit : React.FC <boolean> = (isNewCase) => { 
+  isNewCase = false; 
   const dispatch = useAppDispatch();
   const { caseId } = useParams<{ caseId?: string }>();
   const currentCase = useAppSelector( state => state.caseSlice.currentCase);  
@@ -16,7 +17,8 @@ export const CaseGeneralEdit : React.FC = () => {
     <>
       {currentCase && 
       <Formik initialValues={{...currentCase}} onSubmit={async (values) => {        
-        console.log(values);
+        if (isNewCase) {dispatch(createCase(values))}
+        else { dispatch(editTheCase(values))}
       }}>
       {({ values, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
         <Form>
@@ -39,11 +41,7 @@ export const CaseGeneralEdit : React.FC = () => {
           <div>
             <label htmlFor="address">Street / House number</label>
             <input type="text" id="address" name="address" defaultValue={values.address} onChange={handleChange}/>
-          </div>
-          <div>
-            <label htmlFor="created_at">Date of creating</label>
-            <input type="text" id="created_at" name="created_at" defaultValue={new Date(values.created_at).toLocaleString("en-KR")} onChange={handleChange}/>
-          </div>
+          </div>         
           <button id="submit" type="submit">Submit</button> {/* this should be deleted, used only for test*/}
         </Form>
       )}
