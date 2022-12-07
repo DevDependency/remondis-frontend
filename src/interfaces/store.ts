@@ -19,6 +19,7 @@ export interface UserState {
   isHoveringEmail: boolean;
   areCredentialsWrong: boolean;
   isLoggedIn: boolean;
+  isInspectorActive: boolean;
 }
 
 export type AppDispatch = typeof store.dispatch;

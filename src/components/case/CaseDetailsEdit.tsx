@@ -111,8 +111,7 @@ export const CaseDetailsEdit : React.FC = () => {
       </div>       */}
       <button id="submit" type="submit">Submit</button> {/* this should be deleted, used only for test*/}
       </Form> 
-      )}
-      
+      )}      
       </Formik>
 }
     </>

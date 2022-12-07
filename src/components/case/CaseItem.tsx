@@ -36,7 +36,8 @@ export const CaseItem: React.FC<CaseItemProps> = ({
       <CaseBackgroundContainerStyled>
         <CaseContainerStyled isSize={size}>
           <CaseInfoStyled>
-            <DataAndAdressStyled to={`/cases/${link}`}>
+            {/* <DataAndAdressStyled to={`/cases/${link}`}> */}
+            <DataAndAdressStyled>
               <TextMain>{time}</TextMain>
               <TextMain>{address}</TextMain>
             </DataAndAdressStyled>
