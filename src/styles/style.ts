@@ -54,13 +54,6 @@ export const InputPlaceholder = styled.p<Props>`
   font-size: 14px;
 `;
 
-export const TitleButton = styled.p<Props>`
-  font-family: ${(props: Props) => props.theme.fonts.default};
-  color: ${(props: Props) => props.theme.colors.white};
-  font-weight: 500;
-  font-size: 16px;
-`;
-
 export const TextAction = styled.p<Props>`
   font-family: ${(props: Props) => props.theme.fonts.default};
   color: ${(props: Props) => props.theme.colors.red};
@@ -140,7 +133,44 @@ export const ToDoCaseStyled = styled.div<Props>``;
 
 // Case
 
-export const CaseStyled = styled.div<Props>``;
+export const CaseContainerStyled = styled.div<Props>`
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0px auto 10px auto;
+  width: 92%;
+`;
+
+export const CaseStyled = styled.div<Props>`
+  padding: 15px 18px;
+  width: 100%;
+  margin: 0px auto 10px auto;
+  background-color: #fff;
+  box-shadow: ${(props) => props.theme.effects.shadow};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  float: ${({ isSize }) => (isSize ? "left" : "none")};
+  margin: ${({ isSize }) => (isSize ? "0px auto 0px -10rem" : "0px")};
+  transition: 0.4s ease;
+`;
+
+export const CaseInfoStyled = styled.h3`
+  display: block;
+  width: 30%;
+  font-size: 15px;
+  padding-left: 15px;
+  color: grey;
+`;
+
+export const CaseAddressStyled = styled.h3`
+  display: block;
+  width: 50%;
+  font-size: 15px;
+  padding-left: 15px;
+  color: grey;
+  text-align: left;
+`;
 
 //-----
 
@@ -157,6 +187,7 @@ export const ButtonContainerStyled = styled.div<Props>`
   left: 0;
   bottom: 0;
   background-color: ${(props) => props.theme.colors.white};
+  box-shadow: ${(props: Props) => props.theme.effects.shadow};
 `;
 
 export const ButtonStyled = styled.div<Props>`
@@ -166,11 +197,13 @@ align-items: center;
 width: 360px;
 height: 45px;
 border: none;
-color: ${(props) => props.theme.colors.white};
-font-family: ${(props) => props.theme.fonts.default};
 background-color: ${(props) =>
   props.color === "red" ? props.theme.colors.red : props.theme.colors.grey};
 border: none;
+font-family: ${(props: Props) => props.theme.fonts.default};
+color: ${(props: Props) => props.theme.colors.white};
+font-weight: 500;
+font-size: 16px;
 
 &:hover{
 cursor: pointer;
@@ -272,4 +305,8 @@ export const CheckBox = styled.input<Props>`
 
 //-----
 
+// Popup
+
 export const Popup = styled.div<Props>``;
+
+//-----
