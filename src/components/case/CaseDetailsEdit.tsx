@@ -1,4 +1,4 @@
-import { getCasesById } from "../../store/slices/case";
+import { editTheCase, getCasesById } from "../../store/slices/case";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks/useStore";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -16,24 +16,11 @@ export const CaseDetailsEdit : React.FC = () => {
 
   return (
     <>
-    <Formik initialValues={{        
-        type_of_property_id: 2,
-        clear_area: false,
-        number_of_rooms: 0,
-        floor: 0,
-        back_house: false,
-        parking: false,
-        elevator: false,
-        furniture_lift: false,
-        closet_contents: false,
-        removing_carpets: false,
-        removing_lamps: false,
-        removing_curtain: false,                
-      }}
+    {currentCase &&
+    <Formik initialValues={{...currentCase}}
       onSubmit={async (values) => {        
-        console.log(values);
+        dispatch(editTheCase({id: currentCase.id, changedValue: values}));
       }}
-
       >
       {({ values, isSubmitting, handleChange, handleBlur, handleSubmit }) => ( 
         <Form>
@@ -118,12 +105,16 @@ export const CaseDetailsEdit : React.FC = () => {
         <CheckBoxLabel htmlFor="removing_curtain" />
         </CheckBoxWrapper>
       </div>
-      
+      {/* <div>
+        <label htmlFor="date_of_appointment">Date of appointment</label>
+        <input type="date" id="date_of_appointment" name="date_of_appointment" defaultValue={values.date_of_appointment} onChange={handleChange}></input>
+      </div>       */}
       <button id="submit" type="submit">Submit</button> {/* this should be deleted, used only for test*/}
       </Form> 
       )}
       
       </Formik>
+}
     </>
   )
 }
