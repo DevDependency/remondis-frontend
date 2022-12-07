@@ -238,21 +238,6 @@ background-color: ${(props) =>
     : props.theme.colors.grey_hover};
 `;
 
-export const PopupStyled = styled.div<Props>`
-  z-index: 200;
-  position: fixed;
-  left: 0;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  visibility: ${({ isPopupVisible }) =>
-    isPopupVisible ? "visible" : "hidden"};
-`;
-
 //-----
 
 // Switcher
@@ -307,6 +292,29 @@ export const CheckBox = styled.input<Props>`
 
 // Popup
 
-export const Popup = styled.div<Props>``;
+export const Popup = styled.div<Props>`
+z-index: 50;
+position: fixed;
+left: 0;
+top: 0;
+background-color: rgba(0, 0, 0, 0.5);
+width: 100vw;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+visibility: ${({ isPopupVisible }) =>
+  isPopupVisible ? "visible" : "hidden"};
+`;
+
+export const PopupStyled = styled.div<Props>`
+  z display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background: white;
+  max-width: 100%;
+  padding: 4em 2em;
+  text-align: center;
+`;
 
 //-----
