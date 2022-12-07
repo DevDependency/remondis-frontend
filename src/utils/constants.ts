@@ -46,3 +46,48 @@ export const TAB_BAR_CASE = [
     path: "photos"
   },
 ];
+
+export const TYPE_OF_PROPERTIES = [
+  {
+    id: 1, 
+    name: "Appartment"
+  },
+  {
+    id: 2, 
+    name: "House"
+  },
+  {
+    id: 3, 
+    name: "Basement"
+  },
+  {
+    id: 4, 
+    name: "Room"
+  },
+  {
+    id: 5, 
+    name: "Attic"
+  },
+  {
+    id: 6, 
+    name: "Backyard"
+  },
+]
+
+export const FLOOR = [
+  { name: "1", value: 1 },
+  { name: "2", value: 2 },
+  { name: "3", value: 3 },
+  { name: "4", value: 4 },
+  { name: "5", value: 5 },
+  { name: "6", value: 6 },
+]
+
+export const NUMBER_OF_ROOMS = [
+  { name: "1", value: 1 },
+  { name: "2", value: 2 },
+  { name: "3", value: 3 },
+  { name: "4", value: 4 },
+  { name: "5", value: 5 },
+  { name: "6", value: 6 },
+];

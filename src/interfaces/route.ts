@@ -1,4 +1,3 @@
-
 export enum Locations {
   ROOT = "/",
 
@@ -11,7 +10,7 @@ export enum Locations {
   CASE_GENERAL = "/cases/:caseId/",
   CASE_DETAILS = "/cases/:caseId/details",
   CASE_PHOTOS = "/cases/:caseId/photos",
-  
+
   CASE_GENERAL_EDIT = "/cases/:caseId/edit",
   CASE_DETAILS_EDIT = "/cases/:caseId/details-edit",
   CASE_PHOTOS_EDIT = "/cases/:caseId/photos-edit",
@@ -20,7 +19,7 @@ export enum Locations {
   LOGIN = "/login",
   PROFILE = "/profile",
   CONFIRM = "/confirm",
+  FORGOT_PASSWORD = "/forgotpassword",
 
-  PAGE_NOT_FOUND = "*"
-
+  PAGE_NOT_FOUND = "*",
 }

@@ -40,7 +40,7 @@ export const CaseGeneral : React.FC = () => {
           </div>
           <div className="CaseItemDiv">
             <p className="InputPlaceholderShown">Inspector</p>
-            <p className="TextMain">{currentCase?.inspector_id}</p>
+            <p className="TextMain">{currentCase?.Inspector.username}</p>
           </div>
         </div>
       </div>
