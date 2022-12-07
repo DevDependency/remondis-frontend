@@ -8,7 +8,7 @@ export const ButtonContainer: React.FC = () => {
   return (
     <ButtonContainerStyled>
       <ButtonSmallStyled onClick={() => {
-              navigate('edit', {replace: true, relative: "path" });
+              navigate('edit', {relative: "path" });
             }}>Edit</ButtonSmallStyled>
       <ButtonSmallStyled color={"red"}>Submit</ButtonSmallStyled>
     </ButtonContainerStyled>
