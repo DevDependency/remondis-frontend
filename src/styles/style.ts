@@ -82,7 +82,9 @@ export const NavBarStyled = styled.div<Props>`
   }
 `;
 
-export const LogoStyled = styled.img``;
+export const LogoStyled = styled.img`
+  width: 28cqw;
+`;
 
 export const IconStyled = styled.img`
   width: 3vh;
@@ -99,9 +101,7 @@ export const TabBarCantainerStyled = styled.div<Props>`
   visibility: ${({ scrollDirection }) =>
     scrollDirection === "down" ? "hidden" : "visible"};
   z-index: 20;
-  margin-top: 15px;
   width: 92%;
-  margin-bottom: 20px;
   margin: 15px auto 20px auto;
   height: 45px;
   display: flex;
@@ -125,51 +125,65 @@ export const TabIconStyled = styled.div<Props>`
   width: 3vh;
 `;
 
-export const AllCasesCaseStyled = styled.div<Props>``;
-
-export const ToDoCaseStyled = styled.div<Props>``;
-
 //-----
 
 // Case
 
-export const CaseContainerStyled = styled.div<Props>`
-  position: relative;
+export const MainContainerStyled = styled.div<Props>`
+  padding-top: 65px;
+`;
+
+export const CaseBackgroundContainerStyled = styled.div<Props>`
   display: flex;
-  align-items: center;
   margin: 0px auto 10px auto;
   width: 92%;
 `;
 
-export const CaseStyled = styled.div<Props>`
+export const CaseContainerStyled = styled.div<Props>`
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  box-shadow: ${(props) => props.theme.effects.shadow};
   padding: 15px 18px;
   width: 100%;
   margin: 0px auto 10px auto;
-  background-color: #fff;
-  box-shadow: ${(props) => props.theme.effects.shadow};
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   float: ${({ isSize }) => (isSize ? "left" : "none")};
-  margin: ${({ isSize }) => (isSize ? "0px auto 0px -10rem" : "0px")};
+  margin: ${({ isSize }) => (isSize ? "0px auto 0px -6rem" : "0px")};
   transition: 0.4s ease;
 `;
 
-export const CaseInfoStyled = styled.h3`
-  display: block;
-  width: 30%;
-  font-size: 15px;
-  padding-left: 15px;
-  color: grey;
+export const CaseInfoStyled = styled.div<Props>`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
-export const CaseAddressStyled = styled.h3`
-  display: block;
-  width: 50%;
-  font-size: 15px;
-  padding-left: 15px;
-  color: grey;
-  text-align: left;
+export const DataAndAdressStyled = styled.div<Props>`
+  display: flex;
+  gap: 20px;
+
+  // & :nth-of-type(3) {
+  //   margin-top: 10px;
+  // }
+`;
+
+export const ActionStyled = styled.div<Props>`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  p {
+    color: ${(props) => props.theme.colors.red};
+  }
+`;
+
+export const IconsContainerStyled = styled.div<Props>`
+  display: flex;
+  justify-content: space-around;
+  width: 10rem;
+  visibility: ${({ isSize }) => (isSize ? "visible" : "hidden")};
+  width: ${({ isSize }) => (isSize ? "6rem" : "0rem")};
+  transition: width 0.4s ease;
 `;
 
 //-----
