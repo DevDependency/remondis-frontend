@@ -1,14 +1,15 @@
 export interface File {
   id: number;
-  img: BinaryType;
+  img: any;
+  file_name: string;
 }
 
 export interface Room {
   id: number;
   room: number;
-  room_title?: string;
-  description?: string;
-  images?: File[];
+  room_title: string;
+  description: string;
+  CasePhoto: File[];
 }
 
 export interface CaseGeneral {

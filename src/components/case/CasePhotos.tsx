@@ -13,7 +13,7 @@ export const CasePhotos : React.FC = () => {
   useEffect(() => {
     if (caseId) dispatch(getCaseItems(parseInt(caseId)));
   }, []);
-  
+  console.log(rooms)
   return (
     <>
     {rooms.map( (el: Room, index : number) => (
@@ -21,6 +21,24 @@ export const CasePhotos : React.FC = () => {
         <div>{el.room}</div>
         <div>{el.room_title}</div>
         <div>{el.description}</div>
+        {el.CasePhoto.map((img, index) => (
+        <div
+          style={{
+            position: "relative",
+          }}
+          key={index}
+        >
+          <img
+            src={img.img}
+            alt=""
+            style={{
+              position: "relative",
+              width: "110px",
+              height: "100px",
+            }}
+          />
+        </div>
+      ))}
       </div>
     )
     )}
