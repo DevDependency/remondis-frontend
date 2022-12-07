@@ -2,12 +2,13 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 import { RootState } from "../interfaces/store";
 import { UsersValidation } from "../interfaces/users";
 import { useAppDispatch, useAppSelector } from "../utils/hooks/useStore";
 import { checkUserLogin, setIsForgotPassword } from "../store/slices/user";
 import { Main } from "./Main";
+import { Locations } from '../interfaces/route';
 
 const validationSchema = Yup.object({
   email: Yup.string().required(),
@@ -17,6 +18,9 @@ const validationSchema = Yup.object({
 });
 
 export const Login: React.FC = () => {
+
+  const navigate = useNavigate();
+
   // Redux
   const { areCredentialsWrong, isLoggedIn } = useAppSelector(
     (state: RootState) => state.userSlice
@@ -47,6 +51,10 @@ export const Login: React.FC = () => {
       );
     }
   }, []);
+
+  useEffect( () => {
+    if (isLoggedIn) navigate(Locations.ROOT);
+  }, [isLoggedIn] )
 
   // Formik
   const formik = useFormik({
