@@ -99,7 +99,7 @@ export const CasePhotosEdit: React.FC = () => {
           style={{
             width: "100px",
             height: "100px",
-            backgroundImage: `url(${addPhoto})`,
+            // backgroundImage: `url(${addPhoto})`,
           }}
         ></label>
       </div>
