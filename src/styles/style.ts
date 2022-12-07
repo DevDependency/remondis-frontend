@@ -140,23 +140,23 @@ export const ToDoCaseStyled = styled.div<Props>``;
 
 // Case
 
-export const CaseStyled = styled.div<Props>``
+export const CaseStyled = styled.div<Props>``;
 
 //-----
 
 // Buttons
 
 export const ButtonContainerStyled = styled.div<Props>`
-display: flex;
-align-items: center;
-justify-content: center;
-width: 100%;
-height: 85px;
-margin: 0 auto;
-position: fixed;
-left: 0;
-bottom: 0;
-background-color: ${(props) => props.theme.colors.white};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 85px;
+  margin: 0 auto;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background-color: ${(props) => props.theme.colors.white};
 `;
 
 export const ButtonStyled = styled.div<Props>`
@@ -272,48 +272,4 @@ export const CheckBox = styled.input<Props>`
 
 //-----
 
-export const Popup = styled.div<Props>`
-`
-export const CheckBoxWrapper = styled.div`
-  position: relative;
-`;
-export const CheckBoxLabel = styled.label`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 42px;
-  height: 26px;
-  border-radius: 15px;
-  background: #bebebe;
-  cursor: pointer;
-  &::after {
-    content: "";
-    display: block;
-    border-radius: 50%;
-    width: 18px;
-    height: 18px;
-    margin: 3px;
-    background: #ffffff;
-    box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.2);
-    transition: 0.2s;
-  }
-`;
-export const CheckBox = styled.input`
-opacity: 0;
-  z-index: 1;
-  border-radius: 15px;
-  width: 42px;
-  height: 26px;
-  &:checked + ${CheckBoxLabel} {
-    background: #E3001B;
-    &::after {
-      content: "";
-      display: block;
-      border-radius: 50%;
-      width: 18px;
-      height: 18px;
-      margin-left: 21px;
-      transition: 0.2s;
-    }
-  }
-`;
+export const Popup = styled.div<Props>``;
