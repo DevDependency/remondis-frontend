@@ -82,8 +82,7 @@ export const NavBarStyled = styled.div<Props>`
   }
 `;
 
-export const LogoStyled = styled.img`
-`;
+export const LogoStyled = styled.img``;
 
 export const IconStyled = styled.img`
   width: 3vh;
@@ -212,6 +211,31 @@ export const CaseItemStyled = styled.div<Props>`
 
 //-----
 
+// CaseItemEdit
+
+export const CaseItemContainerEditStyled = styled.div<Props>`
+  width: 92%;
+`;
+
+export const CaseItemEditStyled = styled.div<Props>`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 15px;
+  gap: 5px;
+  
+  input {
+    border: ${(props) => props.theme.borderline.border};
+    color: ${(props: any) => props.theme.colors.tx_grey_main};
+    height: 38px;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 5px 7px;
+    width: 100%;
+  }
+`;
+
+//-----
+
 // Buttons
 
 export const ButtonContainerStyled = styled.div<Props>`
@@ -331,18 +355,18 @@ export const CheckBox = styled.input<Props>`
 // Popup
 
 export const Popup = styled.div<Props>`
-z-index: 50;
-position: fixed;
-left: 0;
-top: 0;
-background-color: rgba(0, 0, 0, 0.5);
-width: 100vw;
-height: 100vh;
-display: flex;
-justify-content: center;
-align-items: center;
-visibility: ${({ isPopupVisible }) =>
-  isPopupVisible ? "visible" : "hidden"};
+  z-index: 50;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: ${({ isPopupVisible }) =>
+    isPopupVisible ? "visible" : "hidden"};
 `;
 
 export const PopupStyled = styled.div<Props>`

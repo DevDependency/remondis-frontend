@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../utils/hooks/useStore";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Formik, Form } from "formik";
+import { CaseItemContainerEditStyled, CaseItemEditStyled, InputLabel, InputPlaceholder } from "../../styles/style";
 
 export const CaseGeneralEdit : React.FC <boolean> = (isNewCase) => { 
   isNewCase = false; 
@@ -22,27 +23,29 @@ export const CaseGeneralEdit : React.FC <boolean> = (isNewCase) => {
       }}>
       {({ values, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
         <Form>
-          <div>
-            <label htmlFor="client_first_name">Name</label>
+          <CaseItemContainerEditStyled>
+          <CaseItemEditStyled>
+            <InputLabel>Name</InputLabel>
             <input type="text" id="client_first_name" name="client_first_name" defaultValue={values.client_first_name} onChange={handleChange}/>
-          </div>
-          <div>
-            <label htmlFor="client_last_name">Surname</label>
+          </CaseItemEditStyled>
+          <CaseItemEditStyled>
+            <InputLabel>Surname</InputLabel>
             <input type="text" id="client_last_name" name="client_last_name" defaultValue={values.client_last_name} onChange={handleChange}/>
-          </div>
-          <div>
-            <label htmlFor="client_phone">Phone number</label>
+          </CaseItemEditStyled>
+          <CaseItemEditStyled>
+            <InputLabel>Phone number</InputLabel>
             <input type="phone" id="client_phone" name="client_phone" defaultValue={values.client_phone} onChange={handleChange}/>
-          </div>
-          <div>
-            <label htmlFor="client_email">Phone number</label>
+          </CaseItemEditStyled>
+          <CaseItemEditStyled>
+            <InputLabel>Phone number</InputLabel>
             <input type="email" id="client_email" name="client_email" defaultValue={values.client_email} onChange={handleChange}/>
-          </div>
-          <div>
-            <label htmlFor="address">Street / House number</label>
+          </CaseItemEditStyled>
+          <CaseItemEditStyled>
+            <InputLabel>Street / House number</InputLabel>
             <input type="text" id="address" name="address" defaultValue={values.address} onChange={handleChange}/>
-          </div>         
+          </CaseItemEditStyled>         
           <button id="submit" type="submit">Submit</button> {/* this should be deleted, used only for test*/}
+          </CaseItemContainerEditStyled>
         </Form>
       )}
       </Formik>
