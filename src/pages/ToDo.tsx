@@ -19,7 +19,7 @@ export const ToDo: React.FC = () => {
       <div className="CaseDiv">
         {userRole === "manager" ? <TabBarManager /> : <TabBarInspector />}
         {tasks &&
-          tasks.map((item: any, index) => (
+          tasks.map((item: any, index: any) => (
             <CaseItem
               key={index}
               time={new Date(item.created_at).toLocaleDateString("en-Us")}

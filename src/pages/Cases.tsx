@@ -18,7 +18,7 @@ export const Cases: React.FC = () => {
       {tasks &&
         tasks
           .filter((e) => e.state_id != 7)
-          .map((item: any, index) => (
+          .map((item: any, index: any) => (
             <CaseItem
               key={index}
               time={new Date(item.created_at).toLocaleDateString("en-Us")}
