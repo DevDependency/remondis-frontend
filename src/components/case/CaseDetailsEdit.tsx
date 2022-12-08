@@ -1,18 +1,25 @@
 import { editTheCase, getCasesById } from "../../store/slices/case";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks/useStore";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { TYPE_OF_PROPERTIES, FLOOR, NUMBER_OF_ROOMS } from "../../utils/constants";
-import { CheckBox, CheckBoxWrapper, CheckBoxLabel } from "../../styles/style";
+import { CheckBox, CheckBoxWrapper, CheckBoxLabel,ButtonContainerStyled, ButtonSmallStyled } from "../../styles/style";
 
 export const CaseDetailsEdit : React.FC = () => {  
   const dispatch = useAppDispatch();
   const { caseId } = useParams<{ caseId?: string }>();
-  const currentCase = useAppSelector( state => state.caseSlice.currentCase);  
+  const currentCase = useAppSelector( state => state.caseSlice.currentCase);
+  const navigate = useNavigate();   
   useEffect(() => {
     if (caseId) {dispatch(getCasesById(parseInt(caseId)));}
-  }, [] )  
+  }, [] ) 
+  const cancelHandler = () => {
+    navigate(-1)
+  }
+  const saveHandler = () => {
+    navigate(`/cases/${caseId}/details`, {replace: true})
+  } 
 
   return (
     <>
@@ -20,6 +27,7 @@ export const CaseDetailsEdit : React.FC = () => {
     <Formik initialValues={{...currentCase}}
       onSubmit={async (values) => {        
         dispatch(editTheCase({id: currentCase.id, changedValue: values}));
+        saveHandler();
       }}
       >
       {({ values, isSubmitting, handleChange, handleBlur, handleSubmit }) => ( 
@@ -108,9 +116,17 @@ export const CaseDetailsEdit : React.FC = () => {
       {/* <div>
         <label htmlFor="date_of_appointment">Date of appointment</label>
         <input type="date" id="date_of_appointment" name="date_of_appointment" defaultValue={values.date_of_appointment} onChange={handleChange}></input>
-      </div>       */}
-      <button id="submit" type="submit">Submit</button> {/* this should be deleted, used only for test*/}
-      </Form> 
+      </div>       */}      
+      <ButtonContainerStyled>             
+            <button type="button">
+              <ButtonSmallStyled onClick={cancelHandler}>Cancel</ButtonSmallStyled> 
+            </button>             
+            <button id="submit" type="submit">
+              <ButtonSmallStyled color={"red"}>Save</ButtonSmallStyled>
+            </button>            
+          </ButtonContainerStyled>
+      </Form>
+      
       )}      
       </Formik>
 }
