@@ -11,7 +11,7 @@ import {
   ButtonSmallStyled,
 
 } from "../../styles/style";
-
+import { apiPatchCasesByIdReady } from "../../utils/api";
 export const CaseGeneral: React.FC = () => {
   const dispatch = useAppDispatch();
   const { caseId } = useParams<{ caseId?: string }>();

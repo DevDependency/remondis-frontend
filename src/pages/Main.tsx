@@ -16,6 +16,7 @@ export const Main: React.FC = () => {
     <>
       <NavBar />
       <Outlet />
+      
     </>
   );
 };

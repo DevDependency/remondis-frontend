@@ -26,7 +26,7 @@ export const CaseGeneralEdit : React.FC <boolean> = (isNewCase) => {
       {currentCase && 
       <Formik initialValues={{...currentCase}} onSubmit={async (values) => {
         if (isNewCase) {dispatch(createCase(values))}
-        else { dispatch(editTheCase({id: caseId, changedValue: values})); console.log(values);}
+        else { dispatch(editTheCase({id: caseId, changedValue: values}))}
         saveHandler();      
       }}>
       {({ values, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
