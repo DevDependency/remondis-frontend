@@ -19,6 +19,10 @@ export const Confirm: React.FC = () => {
     dispatch(getUserByEmail(paramsData.email));
   }, []);
   return (
-    <>{confirmUserHandler && userId ? <Navigate to="/profile" /> : null}</>
+    <>
+      {confirmUserHandler && userId ? (
+        <Navigate to="/profile" state={{ afterSignUp: true }} />
+      ) : null}
+    </>
   );
 };

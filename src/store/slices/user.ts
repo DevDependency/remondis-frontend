@@ -48,26 +48,11 @@ export const updateUser = createAsyncThunk(
     try {
       const response = await api.apiPutUsersById(
         values.userId,
-        values.changedValue,        
-      );
-      return response;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-);
-
-export const updateUser = createAsyncThunk(
-  "isLoggedIn/updateUser",
-  async (values: any) => {
-    try {
-      const response = await api.apiPutUsersById(
-        values.userId,
         values.changedValue
       );
       return response;
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 );
@@ -128,7 +113,7 @@ const userSlice = createSlice({
     },
     setIsInspectorActive(state) {
       state.isInspectorActive = !state.isInspectorActive;
-    }
+    },
   },
   extraReducers(builder) {
     builder
@@ -153,7 +138,7 @@ export const {
   setConfirmUserHandler,
   setEmail,
   setUserId,
-  setIsInspectorActive
+  setIsInspectorActive,
 } = userSlice.actions;
 
 export default userSlice.reducer;
