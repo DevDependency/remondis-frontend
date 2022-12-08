@@ -1,25 +1,33 @@
 import { getCasesById,createCase,editTheCase } from "../../store/slices/case";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks/useStore";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
-import { CaseItemContainerEditStyled, CaseItemEditStyled, InputLabel, InputPlaceholder } from "../../styles/style";
+import { CaseItemContainerEditStyled, CaseItemEditStyled, InputLabel, ButtonContainerStyled, ButtonSmallStyled  } from "../../styles/style";
 
 export const CaseGeneralEdit : React.FC <boolean> = (isNewCase) => { 
   isNewCase = false; 
   const dispatch = useAppDispatch();
   const { caseId } = useParams<{ caseId?: string }>();
-  const currentCase = useAppSelector( state => state.caseSlice.currentCase);  
+  const currentCase = useAppSelector( state => state.caseSlice.currentCase);
+  const navigate = useNavigate();  
   useEffect(() => {
     if (caseId) {dispatch(getCasesById(parseInt(caseId)));}
-  }, [] ) 
+  }, [] ); 
+  const cancelHandler = () => {
+    navigate(-1)
+  };
+  const saveHandler = () => {
+    navigate(`/cases/${caseId}`, {replace: true})
+  };
   
   return (
     <>
       {currentCase && 
-      <Formik initialValues={{...currentCase}} onSubmit={async (values) => {        
+      <Formik initialValues={{...currentCase}} onSubmit={async (values) => {
         if (isNewCase) {dispatch(createCase(values))}
-        else { dispatch(editTheCase(values))}
+        else { dispatch(editTheCase({id: caseId, changedValue: values})); console.log(values);}
+        saveHandler();      
       }}>
       {({ values, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
         <Form>
@@ -43,9 +51,16 @@ export const CaseGeneralEdit : React.FC <boolean> = (isNewCase) => {
           <CaseItemEditStyled>
             <InputLabel>Street / House number</InputLabel>
             <input type="text" id="address" name="address" defaultValue={values.address} onChange={handleChange}/>
-          </CaseItemEditStyled>         
-          <button id="submit" type="submit">Submit</button> {/* this should be deleted, used only for test*/}
+          </CaseItemEditStyled>
           </CaseItemContainerEditStyled>
+          <ButtonContainerStyled>             
+            <button type="button">
+              <ButtonSmallStyled onClick={cancelHandler}>Cancel</ButtonSmallStyled> 
+            </button>             
+            <button id="submit" type="submit">
+              <ButtonSmallStyled color={"red"}>Save</ButtonSmallStyled>
+            </button>            
+          </ButtonContainerStyled>
         </Form>
       )}
       </Formik>
