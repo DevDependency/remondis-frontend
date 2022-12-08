@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../../utils/hooks/useStore";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { getCasesById } from "../../store/slices/case";
 import {
@@ -7,17 +7,26 @@ import {
   CaseItemStyled,
   InputPlaceholderShown,
   TextMain,
+  ButtonContainerStyled,
+  ButtonSmallStyled,
 } from "../../styles/style";
 
 export const CaseDetails: React.FC = () => {
   const dispatch = useAppDispatch();
   const { caseId } = useParams<{ caseId?: string }>();
   const currentCase = useAppSelector((state) => state.caseSlice.currentCase);
+  const navigate = useNavigate();
   useEffect(() => {
     if (caseId) {
       dispatch(getCasesById(parseInt(caseId)));
     }
   }, []);
+  const editlHandler = () => {
+    navigate('edit', {relative: "path" })
+  }
+  const submitHandler = () => {
+    navigate('/cases', {relative: "route" })
+  }
   return (
     <>
       {currentCase && (
@@ -86,6 +95,14 @@ export const CaseDetails: React.FC = () => {
           </CaseItemStyled>
         </CaseItemContainerStyled>
       )}
+      <ButtonContainerStyled>             
+        <button>
+          <ButtonSmallStyled onClick={editlHandler}>Edit</ButtonSmallStyled> 
+        </button>             
+        <button id="submit" type="submit">
+          <ButtonSmallStyled color={"red"} onClick={submitHandler}>Submit</ButtonSmallStyled>
+        </button>            
+      </ButtonContainerStyled>
     </>
   );
 };
