@@ -20,6 +20,7 @@ export const CaseGeneral: React.FC = () => {
   }, []);
   return (
     <>
+    {currentCase && 
       <CaseItemContainerStyled>
         <CaseItemStyled>
           <InputPlaceholderShown>Name</InputPlaceholderShown>
@@ -47,9 +48,10 @@ export const CaseGeneral: React.FC = () => {
         </CaseItemStyled>
         <CaseItemStyled>
           <InputPlaceholderShown>Inspector</InputPlaceholderShown>
-          <TextMain>{currentCase?.Inspector.username}</TextMain>
+          <TextMain>{currentCase?.Inspector?.username}</TextMain>
         </CaseItemStyled>
       </CaseItemContainerStyled>
+      }
     </>
   );
 };
