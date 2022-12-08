@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CaseGeneral, Case } from '../../interfaces/cases';
+import { CaseGeneral, Case, Room } from '../../interfaces/cases';
 
 const server = axios.create({
   baseURL: import.meta.env.VITE_BASE_API_URL,
@@ -177,6 +177,63 @@ export const apiGetCasesItems = async (caseId: number) => {
 export const apiGetCasesItemByRoom = async (caseId: number, room: number) => {
   try {
     const res = await server.get(`cases/${caseId}/items/${room}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const apiPostCaseItem = async (caseId: number, room: number, body: Room) => {
+  try {
+    const res = await server.post(`cases/${caseId}/items/${room}`, body);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const apiPutCaseItem = async (caseId: number, room: number, body: Room) => {
+  try {
+    const res = await server.put(`cases/${caseId}/items/${room}`, body);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const apiDeleteCaseItem = async (caseId: number, room: number) => {
+  try {
+    const res = await server.delete(`cases/${caseId}/items/${room}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+/**
+ *  Photos
+ */
+export const apiPostCasePhoto = async (caseId: number, room: number, body: Room) => {
+  try {
+    const res = await server.post(`cases/${caseId}/items/${room}`, body);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const apiPutCasePhoto = async (caseId: number, room: number, body: Room) => {
+  try {
+    const res = await server.put(`cases/${caseId}/items/${room}`, body);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const apiDeleteCasePhoto = async (caseId: number, room: number) => {
+  try {
+    const res = await server.delete(`cases/${caseId}/items/${room}`);
     return res.data;
   } catch (error) {
     console.log(error);
