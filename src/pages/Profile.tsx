@@ -1,12 +1,15 @@
 import { useFormik, FormikProps } from "formik";
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../utils/hooks/useStore";
 import { setUserId, updateUser, setUser } from "../store/slices/user";
 import { UsersValidation } from "../interfaces/users";
 import { Role } from "../interfaces/users";
 
 export const Profile: React.FC = () => {
+  const { state } = useLocation();
+  const afterSignUp = state?.afterSignUp ? state?.afterSignUp : false;
+  console.log(afterSignUp);
   const [resultSuccess] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const { userId, userEmail, userRole } = useAppSelector(
@@ -76,22 +79,28 @@ export const Profile: React.FC = () => {
               {formik.errors.password && formik.touched.password && (
                 <div className="CaseErrors">{formik.errors.password}</div>
               )}
-              <label className="InputLabel" htmlFor="email_address">
-                Email
-              </label>
-              <input
-                className="InputCaseStyled"
-                name="email_address"
-                onChange={formik.handleChange}
-                id="email_address"
-                type="email"
-                onBlur={formik.handleBlur}
-                defaultValue={userEmail}
-              />
-              {formik.errors.email_address && formik.touched.email_address && (
-                <div className="CaseErrors">{formik.errors.email_address}</div>
+              {afterSignUp && (
+                <>
+                  <label className="InputLabel" htmlFor="email_address">
+                    Email
+                  </label>
+                  <input
+                    className="InputCaseStyled"
+                    name="email_address"
+                    onChange={formik.handleChange}
+                    id="email_address"
+                    type="email"
+                    onBlur={formik.handleBlur}
+                    defaultValue={userEmail}
+                  />
+                  {formik.errors.email_address &&
+                    formik.touched.email_address && (
+                      <div className="CaseErrors">
+                        {formik.errors.email_address}
+                      </div>
+                    )}
+                </>
               )}
-
               <label className="InputLabel" htmlFor="Phone">
                 Phone Number
               </label>
@@ -106,27 +115,31 @@ export const Profile: React.FC = () => {
               {formik.errors.phone && formik.touched.phone && (
                 <div className="CaseErrors">{formik.errors.phone}</div>
               )}
-              <label className="InputLabel" htmlFor="role">
-                Role
-              </label>
-              <select
-                className="SelectStyled"
-                id="role"
-                name="role"
-                onChange={formik.handleChange}
-              >
-                {Object.values(Role).map((oneRole: any, index: number) => {
-                  return (
-                    <option
-                      className="OptionsStyled"
-                      value={oneRole}
-                      key={index}
-                    >
-                      {oneRole}
-                    </option>
-                  );
-                })}
-              </select>
+              {afterSignUp && (
+                <>
+                  <label className="InputLabel" htmlFor="role">
+                    Role
+                  </label>
+                  <select
+                    className="SelectStyled"
+                    id="role"
+                    name="role"
+                    onChange={formik.handleChange}
+                  >
+                    {Object.values(Role).map((oneRole: any, index: number) => {
+                      return (
+                        <option
+                          className="OptionsStyled"
+                          value={oneRole}
+                          key={index}
+                        >
+                          {oneRole}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </>
+              )}
             </div>
 
             <button className="LongButtonStyled" type="submit" color={"red"}>

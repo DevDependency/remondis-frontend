@@ -48,7 +48,7 @@ export const updateUser = createAsyncThunk(
     try {
       const response = await api.apiPutUsersById(
         values.userId,
-        values.changedValue,        
+        values.changedValue
       );
       return response;
     } catch (error) {
@@ -113,7 +113,7 @@ const userSlice = createSlice({
     },
     setIsInspectorActive(state) {
       state.isInspectorActive = !state.isInspectorActive;
-    }
+    },
   },
   extraReducers(builder) {
     builder
@@ -138,7 +138,7 @@ export const {
   setConfirmUserHandler,
   setEmail,
   setUserId,
-  setIsInspectorActive
+  setIsInspectorActive,
 } = userSlice.actions;
 
 export default userSlice.reducer;
