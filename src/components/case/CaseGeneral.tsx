@@ -23,7 +23,7 @@ export const CaseGeneral: React.FC = () => {
     }
   }, []);
   const editlHandler = () => {
-    navigate('edit', {relative: "path" })
+    navigate('edit', {relative: "path", state: { isNewCase: false} })
   }
   const submitHandler = () => {
     navigate('/', {relative: "route" })

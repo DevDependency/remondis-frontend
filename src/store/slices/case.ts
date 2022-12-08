@@ -67,7 +67,8 @@ export const editTheCase = createAsyncThunk(
     const response = await api.apiPatchCaseById(
       values.id,
       values.changedValue
-    ); 
+    );
+
     return response;
   }
 );

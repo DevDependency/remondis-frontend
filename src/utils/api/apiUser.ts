@@ -1,5 +1,5 @@
-import axios from 'axios'
-import { UserRegister, UserSettings } from '../../interfaces/users'
+import axios from "axios";
+import { UserRegister, UserSettings } from "../../interfaces/users";
 
 const server = axios.create({
   baseURL: import.meta.env.VITE_BASE_API_URL,
@@ -17,6 +17,17 @@ export const apiGetUsersList = async () => {
 export const apiGetUsersListById = async (userId: number) => {
   try {
     const res = await server.get(`/users/${userId}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const apiGetUserByEmail = async (email_address: string) => {
+  try {
+    const res = await server.post(`/users/getuserid`, {
+      email_address,
+    });
     return res.data;
   } catch (error) {
     console.log(error);
@@ -75,7 +86,7 @@ export const apiGetUsersLogin = async (username: string, password: string) => {
 
 export const apiGetUsersForgotPassword = async (email_address: string) => {
   try {
-    const res = await server.patch("/users/:user_id/forgotPassword", {
+    const res = await server.patch("/users/forgotPassword", {
       email_address,
     });
     return res.data;

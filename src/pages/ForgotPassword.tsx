@@ -36,43 +36,49 @@ export const ForgotPassword: React.FC = () => {
     initialValues: { email: "" },
     validationSchema,
     onSubmit: (values: UsersValidation) => {
-      setIsEmailSent(true);
-      apiGetUsersForgotPassword(values.email);
+      if (values.email) {
+        setIsEmailSent(true);
+        apiGetUsersForgotPassword(values.email);
+        dispatch(setIsResetLinkSend());
+      }
     },
   });
 
   return (
     <>
-      {isEmailSent ? <Navigate to="/email" /> : null}
       <div>
         {/* <Logo src={NEW_CONSTANT.logo} /> */}
         {/* Logo must be here */}
-        <form onSubmit={formik.handleSubmit} noValidate>
-          {isResetLinkSend ? (
-            <>
-              <p>We sent a link on your email</p>
-              <button onClick={resetLinkHandler}>Back to login page</button>
-            </>
-          ) : (
-            <div>
-              <h1>Reset password</h1>
-              <label htmlFor="email">Email</label>
-              <input
-                {...formik.getFieldProps("email")}
-                // areCredentialsWrong={areCredentialsWrong}
-              />
-              {formik.errors.email && formik.touched.email && (
-                <>{isHoveringEmail && <div>{formik.errors.email}</div>}</>
-              )}
+        {!isEmailSent ? (
+          <form onSubmit={formik.handleSubmit} noValidate>
+            {isResetLinkSend ? (
+              <>
+                <p>We sent a link on your email</p>
+                <button onClick={resetLinkHandler}>Back to login page</button>
+              </>
+            ) : (
               <div>
-                <button type="submit" onClick={returnToLogin}>
-                  Request reset link
-                </button>
-                <button onClick={forgotPasswordHandler}>Cancel</button>
+                <h1>Reset password</h1>
+                <label htmlFor="email">Email</label>
+                <input
+                  {...formik.getFieldProps("email")}
+                  // areCredentialsWrong={areCredentialsWrong}
+                />
+                {formik.errors.email && formik.touched.email && (
+                  <>{isHoveringEmail && <div>{formik.errors.email}</div>}</>
+                )}
+                <div>
+                  <button type="submit"> Request reset link </button>
+                  <button onClick={forgotPasswordHandler}>Cancel</button>
+                </div>
               </div>
-            </div>
-          )}
-        </form>
+            )}
+          </form>
+        ) : (
+          <div>
+            <h1> Email is sent </h1>
+          </div>
+        )}
       </div>
     </>
   );
