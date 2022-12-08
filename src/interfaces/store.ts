@@ -8,6 +8,7 @@ export interface CaseState {
   currentCase: CaseWithId | undefined;
   coordinates: Coordinates[];
   caseRooms: Room[];
+  currentRoom: Room | undefined;
 }
 
 export interface UserState {
@@ -20,6 +21,7 @@ export interface UserState {
   isLoggedIn: boolean;
   confirmUserHandler: boolean;
   userEmail: string;
+  isInspectorActive: boolean;
 }
 
 export type AppDispatch = typeof store.dispatch;

@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../utils/hooks/useStore";
 import { getCasesToDo } from "../store/slices/case";
-import { CasesToDo } from '../interfaces/cases';
+import { CasesToDo } from "../interfaces/cases";
 import { TabBarManager, TabBarInspector } from "../components/containers/";
 import { CaseItem } from "../components/case/";
-
+import { Main } from "./Main";
+import { MainContainerStyled } from "../styles/style";
 
 export const ToDo: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -17,13 +18,15 @@ export const ToDo: React.FC = () => {
   }, []);
   return (
     <>
-      <div className="CaseDiv">
-        {userRole === "manager" ? <TabBarManager /> : <TabBarInspector />}
+      {userRole === "manager" ? <TabBarManager /> : <TabBarInspector />}
+      <MainContainerStyled>
         {tasks &&
           tasks.map((item: CasesToDo, index: number) => (
             <CaseItem
               key={index}
-              time={new Date(item.created_at as string).toLocaleDateString("en-GB")}
+              time={new Date(item.created_at as string).toLocaleDateString(
+                "en-GB"
+              )}
               address={item.address}
               link={item.id}
               message={item.message}
@@ -31,7 +34,7 @@ export const ToDo: React.FC = () => {
               isTodo={true}
             />
           ))}
-      </div>
+      </MainContainerStyled>
     </>
   );
 };

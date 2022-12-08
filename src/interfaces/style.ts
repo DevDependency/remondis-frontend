@@ -1,3 +1,16 @@
+export interface Props {
+  theme: Theme;
+  background?: string;
+  color?: string;
+  isSize?: boolean;
+  width?: string;
+  float?: string;
+  isPopupVisible?: boolean;
+  scrollDirection?: string;
+  role?: string;
+  bottom?: string;
+}
+
 export interface Theme {
   colors: Colors;
   fonts: Fonts;
@@ -29,17 +42,4 @@ export interface BorderLine {
 
 export interface Effects {
   shadow: string;
-}
-
-export interface Props {
-  theme?: Theme;
-  background?: string;
-  color?: string;
-  isSize?: boolean;
-  width?: string;
-  float?: string;
-  isPopupVisible?: boolean;
-  scrollDirection?: string;
-  role?: string;
-  bottom?: string;
 }

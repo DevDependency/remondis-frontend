@@ -34,10 +34,10 @@ export const Calendar: React.FC = () => {
               return false;
             }
           })
-          .map((item: CasesToDo, index) => (
+          .map((item: CasesToDo, index: number) => (
             <CaseItem
               key={index}
-              time ={ item.created_at ? new Date(item.created_at).toLocaleDateString("en-Us") : ""}
+              time ={ item.created_at ? new Date(item.created_at).toLocaleDateString("en-GB") : ""}
               address={item.address}
               link={item.id}
               message={item.message}

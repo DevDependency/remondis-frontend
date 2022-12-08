@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from '../../utils/api';
-import { Case } from '../../interfaces/cases';
+import { Case, Room } from '../../interfaces/cases';
 import {CaseState} from '../../interfaces/store';
-import { apiGetCasesItems } from '../../utils/api/apiCase';
+import { apiGetCasesItems, apiGetCasesItemByRoom } from '../../utils/api/apiCase';
 
 const initialState: CaseState = {
   createdCaseId: 0,
@@ -11,6 +11,7 @@ const initialState: CaseState = {
   currentCase: undefined,
   coordinates: [],
   caseRooms: [],
+  currentRoom: undefined,
 }
 
 export const getCases = createAsyncThunk(
@@ -96,6 +97,19 @@ export const getCaseItems = createAsyncThunk(
   }
 );
 
+export const getCaseItem = createAsyncThunk(
+  "case/getCaseItem",
+  async (params: any) => {
+    try {
+      const response = await api.apiGetCasesItemByRoom(params.caseId, params.room);
+      return response.caseItem;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
+
 const caseSlice = createSlice({
   name: "case",
   initialState,
@@ -118,6 +132,9 @@ const caseSlice = createSlice({
     setCaseItems(state, action){
       state.caseRooms = action.payload;
     },
+    setCurrentRoom(state, action){
+      state.currentRoom = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -138,6 +155,9 @@ const caseSlice = createSlice({
       })
       .addCase(getCaseItems.fulfilled, (state, action) => {
         caseSlice.caseReducers.setCaseItems(state, action);
+      })
+      .addCase(getCaseItem.fulfilled, (state, action) => {
+        caseSlice.caseReducers.setCurrentRoom(state, action);
       });
   },
 });
@@ -145,6 +165,7 @@ const caseSlice = createSlice({
 export const {
   setCreatedCaseId,
   setCurrentCase,
+  setCurrentRoom,
 
 } = caseSlice.actions;
 

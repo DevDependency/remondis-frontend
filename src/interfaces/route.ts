@@ -12,8 +12,8 @@ export enum Locations {
   CASE_PHOTOS = "/cases/:caseId/photos",
 
   CASE_GENERAL_EDIT = "/cases/:caseId/edit",
-  CASE_DETAILS_EDIT = "/cases/:caseId/details-edit",
-  CASE_PHOTOS_EDIT = "/cases/:caseId/photos-edit",
+  CASE_DETAILS_EDIT = "/cases/:caseId/details/edit",
+  CASE_PHOTOS_EDIT = "/cases/:caseId/photos/:room/edit",
 
   SIGNUP = "/signup",
   SIGNUPDETAILS = "/signupdetails",

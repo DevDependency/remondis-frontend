@@ -10,9 +10,10 @@ function App() {
   return (
     <>
       <StoreProvider store={store}>
-        <GlobalStyle />
-        <RouterProvider router={router} />
-        <ThemeProvider theme={theme} />
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <RouterProvider router={router} />
+        </ThemeProvider>
       </StoreProvider>
     </>
   );

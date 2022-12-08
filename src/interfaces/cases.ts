@@ -1,14 +1,18 @@
+import { Appointment } from "./appointment";
+import { UserSettings } from "./users";
+
 export interface File {
   id: number;
-  img: BinaryType;
+  img: any;
+  file_name: string;
 }
 
 export interface Room {
   id: number;
   room: number;
-  room_title?: string;
-  description?: string;
-  images?: File[];
+  room_title: string;
+  description: string;
+  CasePhoto: File[];
 }
 
 export interface CaseGeneral {
@@ -24,6 +28,8 @@ export interface CaseGeneral {
   inspector_id?: number;  
   state_id?: number;
   inspector: string;
+  Appointment: Appointment;
+  Inspector: UserSettings;
 }
 
 export interface CaseDetails {

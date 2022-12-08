@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useAppDispatch } from "../utils/hooks/useStore";
 import { setInsideCase } from "../store/slices/general";
 
+
 export const Case: React.FC = () => {
   const dispatch = useAppDispatch();
 
@@ -17,7 +18,7 @@ export const Case: React.FC = () => {
   return (
     <>
       <TabBarCase />
-      <Outlet />
+        <Outlet />      
     </>
   );
 };

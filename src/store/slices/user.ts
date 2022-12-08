@@ -14,6 +14,7 @@ const initialState: UserState = {
   isLoggedIn: false,
   confirmUserHandler: false,
   userEmail: "",
+  isInspectorActive: true,
 };
 
 export const registerUser = createAsyncThunk(
@@ -36,6 +37,20 @@ export const checkUserLogin = createAsyncThunk(
       } else {
         return undefined;
       }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+export const updateUser = createAsyncThunk(
+  "user/updateUser",
+  async (values: any) => {
+    try {
+      const response = await api.apiPutUsersById(
+        values.userId,
+        values.changedValue,        
+      );
+      return response;
     } catch (error) {
       console.error(error);
     }
@@ -111,6 +126,9 @@ const userSlice = createSlice({
     setUserId: (state, action) => {
       state.userId = action.payload.id;
     },
+    setIsInspectorActive(state) {
+      state.isInspectorActive = !state.isInspectorActive;
+    }
   },
   extraReducers(builder) {
     builder
@@ -135,6 +153,7 @@ export const {
   setConfirmUserHandler,
   setEmail,
   setUserId,
+  setIsInspectorActive
 } = userSlice.actions;
 
 export default userSlice.reducer;
