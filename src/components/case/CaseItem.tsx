@@ -1,5 +1,21 @@
+import { useState } from "react";
 import { CaseItemProps } from "../../interfaces/cases";
 import { Link } from "react-router-dom";
+import {
+  CaseContainerStyled,
+  CaseBackgroundContainerStyled,
+  CaseInfoStyled,
+  TextMain,
+  DataAndAdressStyled,
+  TextSecondary,
+  IconStyled,
+  ActionStyled,
+  IconsContainerStyled,
+} from "../../styles/style";
+import actionIcon from "../../assets/-case-iconAction.svg";
+import settingsIcon from "../../assets/-case-iconSettings.svg";
+import bin from "../../assets/-case-iconBin.svg";
+import edit from "../../assets/-case-iconEdit.svg";
 
 export const CaseItem: React.FC<CaseItemProps> = ({
   time,
@@ -9,40 +25,41 @@ export const CaseItem: React.FC<CaseItemProps> = ({
   message,
   action,
 }) => {
+  const [size, setSize] = useState(false);
+
+  const showEditButton = () => {
+    setSize((current) => !current);
+  };
+
   return (
     <>
-      <div className="TaskContainer">
-        <div className="TaskStyled">
-          <div className="ToDoContainerStyled">
-            <Link className="LinkStyled" to={`/cases/${link}`}>
-              <div className="FlexBlock">
-                <p className="TextMain">{time}</p>
-                <p className="TextMain">{address}</p>
-              </div>
-            </Link>
+      <CaseBackgroundContainerStyled>
+        <CaseContainerStyled isSize={size}>
+          <CaseInfoStyled>
+            {/* <DataAndAdressStyled to={`/cases/${link}`}> */}
+            <DataAndAdressStyled>
+              <TextMain>{time}</TextMain>
+              <TextMain>{address}</TextMain>
+            </DataAndAdressStyled>
             {isTodo && (
               <>
-                <p className="TextSecondary" style={{ padding: "10px 0 10px" }}>
-                  {" "}
-                  {message}{" "}
-                </p>
-                <Link
-                  className="LinkStyled"
-                  to={`/cases/${link}`}
-                  style={{ display: "flex", alignItems: "center" }}
-                >
-                  <img
-                    className="IconStyle"
-                    //src={ICONACTION.IconAction}
-                    style={{ paddingRight: "10px" }}
-                  />
-                  <p className="TextAction"> {action} </p>
+                <TextSecondary>{message}</TextSecondary>
+                <Link to={`/cases/${link}`}>
+                  <ActionStyled>
+                    <IconStyled src={actionIcon} />
+                    <TextSecondary>{action}</TextSecondary>
+                  </ActionStyled>
                 </Link>
               </>
             )}
-          </div>
-        </div>
-      </div>
+          </CaseInfoStyled>
+          <IconStyled src={settingsIcon} onClick={showEditButton}/>
+        </CaseContainerStyled>
+        <IconsContainerStyled isSize={size}>
+          <IconStyled src={bin} />
+          <IconStyled src={edit} />
+        </IconsContainerStyled>
+      </CaseBackgroundContainerStyled>
     </>
   );
 };

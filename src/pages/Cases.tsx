@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import { TabBarManager } from "../components/containers/TabBarManager";
 import { useAppSelector, useAppDispatch } from "../utils/hooks/useStore";
 import { getCases } from "../store/slices/case";
+import { CaseWithId } from "../interfaces/cases";
 import { CaseItem } from "../components/case/CaseItem";
+import { MainContainerStyled } from "../styles/style";
 
 export const Cases: React.FC = () => {
   const tasks = useAppSelector((state) => state.caseSlice.cases);
@@ -15,18 +17,22 @@ export const Cases: React.FC = () => {
   return (
     <>
       <TabBarManager />
-      {tasks &&
-        tasks
-          .filter((e) => e.state_id != 7)
-          .map((item: any, index) => (
-            <CaseItem
-              key={index}
-              time={new Date(item.created_at).toLocaleDateString("en-Us")}
-              address={item.address}
-              link={item.id}
-              isTodo={false}
-            />
-          ))}
+      <MainContainerStyled>
+        {tasks &&
+          tasks
+            .filter((item: CaseWithId) => item.state_id != 7 && item)
+            .map((item: CaseWithId, index: number) => (
+              <CaseItem
+                key={index}
+                time={new Date(item.created_at as string).toLocaleDateString(
+                  "en-GB"
+                )}
+                address={item.address}
+                link={item.id}
+                isTodo={false}
+              />
+            ))}
+      </MainContainerStyled>
     </>
   );
 };

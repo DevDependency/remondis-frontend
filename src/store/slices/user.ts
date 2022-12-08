@@ -10,6 +10,9 @@ const initialState: UserState = {
   isForgotPassword: false,
   isResetLinkSend: false,
   isHoveringEmail: false,
+  areCredentialsWrong: false,
+  isLoggedIn: false,
+  isInspectorActive: true,
 };
 
 export const registerUser = createAsyncThunk(
@@ -37,6 +40,20 @@ export const checkUserLogin = createAsyncThunk(
     }
   }
 );
+export const updateUser = createAsyncThunk(
+  "user/updateUser",
+  async (values: any) => {
+    try {
+      const response = await api.apiPutUsersById(
+        values.userId,
+        values.changedValue,        
+      );
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
 
 const userSlice = createSlice({
   name: "user",
@@ -46,6 +63,10 @@ const userSlice = createSlice({
       if (action.payload && action.payload.success) {
         state.userRole = action.payload.user.role;
         state.userId = action.payload.user.id;
+        state.isLoggedIn = true;
+      } else {
+        state.isLoggedIn = false;
+        state.areCredentialsWrong = true;
       }
     },
     setIsForgotPassword: (state) => {
@@ -57,6 +78,9 @@ const userSlice = createSlice({
     signInIsEmailHovered(state) {
       state.isHoveringEmail = !state.isHoveringEmail;
     },
+    setIsInspectorActive(state) {
+      state.isInspectorActive = !state.isInspectorActive;
+    }
   },
   extraReducers(builder) {
     builder.addCase(checkUserLogin.fulfilled, (state, action) => {
@@ -65,7 +89,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { setIsForgotPassword, setIsResetLinkSend, signInIsEmailHovered } =
+export const { setIsForgotPassword, setIsResetLinkSend, signInIsEmailHovered, setIsInspectorActive } =
   userSlice.actions;
 
 export default userSlice.reducer;

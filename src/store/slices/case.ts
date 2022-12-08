@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from '../../utils/api';
 import { Case } from '../../interfaces/cases';
 import {CaseState} from '../../interfaces/store';
+import { apiGetCasesItems } from '../../utils/api/apiCase';
 
 const initialState: CaseState = {
   createdCaseId: 0,
@@ -9,7 +10,7 @@ const initialState: CaseState = {
   cases: [],
   currentCase: undefined,
   coordinates: [],
-  caseRooms: [],
+  caseRooms: [],  
 }
 
 export const getCases = createAsyncThunk(
@@ -84,6 +85,18 @@ export const getCoordinates = createAsyncThunk(
   }
 );
 
+export const getCaseItems = createAsyncThunk(
+  "case/getCaseItems",
+  async (caseId: number) => {
+    try {
+      const response = await api.apiGetCasesItems(caseId);
+      return response.caseItems;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 const caseSlice = createSlice({
   name: "case",
   initialState,
@@ -102,7 +115,10 @@ const caseSlice = createSlice({
     },
     setCoordinates(state, action){
       state.coordinates = action.payload;
-    }
+    },
+    setCaseItems(state, action){
+      state.caseRooms = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -120,6 +136,9 @@ const caseSlice = createSlice({
       })
       .addCase(getCoordinates.fulfilled, (state, action) => {
         caseSlice.caseReducers.setCoordinates(state, action);
+      })
+      .addCase(getCaseItems.fulfilled, (state, action) => {
+        caseSlice.caseReducers.setCaseItems(state, action);
       });
   },
 });

@@ -30,6 +30,8 @@ import {
   apiPatchCasesByIdClose,
   apiGetCasesToDo,
   apiGetCoordinates,
+  apiGetCasesItems,
+  apiGetCasesItemByRoom,
 } from "./apiCase";
 
 export {
@@ -58,4 +60,6 @@ export {
   apiPutUsersById,
   apiGetCasesToDo,
   apiGetCoordinates,
+  apiGetCasesItems,
+  apiGetCasesItemByRoom,
 };
