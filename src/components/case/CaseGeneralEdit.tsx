@@ -1,12 +1,16 @@
 import { getCasesById,createCase,editTheCase } from "../../store/slices/case";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks/useStore";
 import { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { CaseItemContainerEditStyled, CaseItemEditStyled, InputLabel, ButtonContainerStyled, ButtonSmallStyled  } from "../../styles/style";
 
-export const CaseGeneralEdit : React.FC <boolean> = (isNewCase) => { 
-  isNewCase = false; 
+export const CaseGeneralEdit : React.FC <boolean> = () => { 
+  const { state } = useLocation(); 
+  const { isNewCase } = state;
+
+  console.log(isNewCase);
+  
   const dispatch = useAppDispatch();
   const { caseId } = useParams<{ caseId?: string }>();
   const currentCase = useAppSelector( state => state.caseSlice.currentCase);
