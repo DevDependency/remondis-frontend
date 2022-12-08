@@ -57,21 +57,6 @@ export const updateUser = createAsyncThunk(
   }
 );
 
-export const updateUser = createAsyncThunk(
-  "isLoggedIn/updateUser",
-  async (values: any) => {
-    try {
-      const response = await api.apiPutUsersById(
-        values.userId,
-        values.changedValue
-      );
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
-
 export const confirmUser = createAsyncThunk(
   "isLoggedIn/confirmUser",
   async (values: any) => {

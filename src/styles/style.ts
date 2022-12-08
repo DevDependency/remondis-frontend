@@ -2,6 +2,25 @@ import { theme } from "../../src/styles/theme";
 import { Theme, Colors, Fonts, BorderLine, Props } from "../interfaces/style";
 import styled from "styled-components";
 
+// Main
+
+export const MainStyled = styled.div<Props>`
+  width: 100vw;
+`;
+
+export const InsideMainStyled = styled.div<Props>`
+  margin-top: 75px;
+`;
+
+export const CalendarContainerStyled = styled.div<Props>`
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  text-align: center;
+`;
+
+//-----
+
 // Fonts
 
 export const TitleLogin = styled.h1<Props>`
@@ -10,13 +29,6 @@ export const TitleLogin = styled.h1<Props>`
   font-weight: 400;
   font-size: 32px;
   text-align: center;
-`;
-
-export const Title = styled.p<Props>`
-  font-family: ${(props: Props) => props.theme.fonts.default};
-  color: ${(props: Props) => props.theme.colors.tx_grey_main};
-  font-weight: 700;
-  font-size: 20px;
 `;
 
 export const TextMain = styled.p<Props>`
@@ -66,14 +78,14 @@ export const TextAction = styled.p<Props>`
 // NavBar
 
 export const NavBarStyled = styled.div<Props>`
+  position: fixed;
   display: flex;
   z-index: 2;
   justify-content: space-between;
   background-color: ${(props: Props) => props.theme.colors.grey};
   height: 68px;
   padding: 16px 15px;
-  position: fixed;
-  width: 100%;
+  width: 100vw;
   left: 0;
   top: 0;
 
@@ -128,7 +140,7 @@ export const TabIconStyled = styled.div<Props>`
 // Case
 
 export const MainContainerStyled = styled.div<Props>`
-  padding-top: 65px;
+  // padding-top: 65px;
 `;
 
 export const CaseBackgroundContainerStyled = styled.div<Props>`
@@ -222,7 +234,7 @@ export const CaseItemEditStyled = styled.div<Props>`
   flex-direction: column;
   padding-bottom: 15px;
   gap: 5px;
-  
+
   input {
     border: ${(props) => props.theme.borderline.border};
     color: ${(props: any) => props.theme.colors.tx_grey_main};
@@ -237,6 +249,15 @@ export const CaseItemEditStyled = styled.div<Props>`
 //-----
 
 // Buttons
+
+export const ButtonContainerPopupStyled = styled.div<Props>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // width: 100%;
+  height: 85px;
+  margin: 0 auto;
+`;
 
 export const ButtonContainerStyled = styled.div<Props>`
   display: flex;
