@@ -37,7 +37,7 @@ export const CaseGeneralEdit : React.FC <boolean> = (isNewCase) => {
             <input type="phone" id="client_phone" name="client_phone" defaultValue={values.client_phone} onChange={handleChange}/>
           </CaseItemEditStyled>
           <CaseItemEditStyled>
-            <InputLabel>Phone number</InputLabel>
+            <InputLabel>Email</InputLabel>
             <input type="email" id="client_email" name="client_email" defaultValue={values.client_email} onChange={handleChange}/>
           </CaseItemEditStyled>
           <CaseItemEditStyled>
