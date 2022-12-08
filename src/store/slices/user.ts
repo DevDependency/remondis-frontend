@@ -2,16 +2,18 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from "../../utils/api";
 import { UserLogin } from "../../interfaces/users";
 import { UserState } from "../../interfaces/store";
-import { apiPostUsersRegister } from "../../utils/api";
+import { apiPostUsersRegister, apiGetUserByEmail } from "../../utils/api";
 
 const initialState: UserState = {
   userRole: "manager",
-  userId: 1,
+  userId: 0,
   isForgotPassword: false,
   isResetLinkSend: false,
   isHoveringEmail: false,
   areCredentialsWrong: false,
   isLoggedIn: false,
+  confirmUserHandler: false,
+  userEmail: "",
   isInspectorActive: true,
 };
 
@@ -55,6 +57,40 @@ export const updateUser = createAsyncThunk(
   }
 );
 
+export const updateUser = createAsyncThunk(
+  "isLoggedIn/updateUser",
+  async (values: any) => {
+    try {
+      const response = await api.apiPutUsersById(
+        values.userId,
+        values.changedValue
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const confirmUser = createAsyncThunk(
+  "isLoggedIn/confirmUser",
+  async (values: any) => {
+    const response = await api.apiPostUsersConfirm({
+      email: values.email,
+      token: values.token,
+    });
+    return response;
+  }
+);
+
+export const getUserByEmail = createAsyncThunk(
+  "user/userId",
+  async (values: any) => {
+    const response = await api.apiGetUserByEmail(values);
+    return response.user;
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -78,18 +114,46 @@ const userSlice = createSlice({
     signInIsEmailHovered(state) {
       state.isHoveringEmail = !state.isHoveringEmail;
     },
+    setAreCredentialsWrong: (state) => {
+      state.areCredentialsWrong = false;
+    },
+    setConfirmUserHandler: (state, action) => {
+      state.confirmUserHandler = action.payload.success;
+    },
+    setEmail: (state, action) => {
+      state.userEmail = action.payload;
+    },
+    setUserId: (state, action) => {
+      state.userId = action.payload.id;
+    },
     setIsInspectorActive(state) {
       state.isInspectorActive = !state.isInspectorActive;
     }
   },
   extraReducers(builder) {
-    builder.addCase(checkUserLogin.fulfilled, (state, action) => {
-      userSlice.caseReducers.setUser(state, action);
-    });
+    builder
+      .addCase(checkUserLogin.fulfilled, (state, action) => {
+        userSlice.caseReducers.setUser(state, action);
+      })
+      .addCase(confirmUser.fulfilled, (state, action) => {
+        userSlice.caseReducers.setConfirmUserHandler(state, action);
+      })
+      .addCase(getUserByEmail.fulfilled, (state, action) => {
+        userSlice.caseReducers.setUserId(state, action);
+      });
   },
 });
 
-export const { setIsForgotPassword, setIsResetLinkSend, signInIsEmailHovered, setIsInspectorActive } =
-  userSlice.actions;
+export const {
+  setUser,
+  setIsForgotPassword,
+  setIsResetLinkSend,
+  signInIsEmailHovered,
+  setAreCredentialsWrong,
+  setConfirmUserHandler,
+  setEmail,
+  setUserId,
+  setIsInspectorActive
+} = userSlice.actions;
 
 export default userSlice.reducer;
