@@ -1,3 +1,10 @@
+import iconListDefault from "../assets/-tabbar-iconListDefault.svg";
+import iconListSelected from "../assets/-tabbar-iconListSelected.svg";
+import iconMapDefault from "../assets/-tabbar-iconMapDefault.svg";
+import iconMapSelected from "../assets/-tabbar-iconMapSelected.svg";
+import iconCalenderDefault from "../assets/-tabbar-iconCalenderDefault.svg";
+import iconCalenderSelected from "../assets/-tabbar-iconCalenderSelected.svg";
+
 export const TAB_BAR_MANAGER = [
   {
     name: "ToDo",
@@ -16,16 +23,22 @@ export const TAB_BAR_INSPECTOR = [
     name: "ToDo",
     id: "list",
     path: "/",
+    default: iconListDefault,
+    selected: iconListSelected,
   },
   {
     name: "Calendar",
     id: "calendar",
     path: "/calendar",
+    default: iconCalenderDefault,
+    selected: iconCalenderSelected,
   },
   {
     name: "Map",
     id: "map",
     path: "/map",
+    default: iconMapDefault,
+    selected: iconMapSelected,
   },
 ];
 

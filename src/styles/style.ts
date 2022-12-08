@@ -42,7 +42,7 @@ export const InputLabel = styled.label<Props>`
 
 export const InputPlaceholderShown = styled.p<Props>`
   font-family: ${(props: Props) => props.theme.fonts.default};
-  color: ${(props: Props) => props.theme.colors.tx_grey_secondary};
+  color: ${(props: Props) => props.theme.colors.blue_dark};
   font-weight: 400;
   font-size: 14px;
 `;
@@ -99,9 +99,7 @@ export const TabBarCantainerStyled = styled.div<Props>`
   visibility: ${({ scrollDirection }) =>
     scrollDirection === "down" ? "hidden" : "visible"};
   z-index: 20;
-  margin-top: 15px;
   width: 92%;
-  margin-bottom: 20px;
   margin: 15px auto 20px auto;
   height: 45px;
   display: flex;
@@ -125,51 +123,115 @@ export const TabIconStyled = styled.div<Props>`
   width: 3vh;
 `;
 
-export const AllCasesCaseStyled = styled.div<Props>``;
-
-export const ToDoCaseStyled = styled.div<Props>``;
-
 //-----
 
 // Case
 
-export const CaseContainerStyled = styled.div<Props>`
-  position: relative;
+export const MainContainerStyled = styled.div<Props>`
+  padding-top: 65px;
+`;
+
+export const CaseBackgroundContainerStyled = styled.div<Props>`
   display: flex;
-  align-items: center;
   margin: 0px auto 10px auto;
   width: 92%;
 `;
 
-export const CaseStyled = styled.div<Props>`
+export const CaseContainerStyled = styled.div<Props>`
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  box-shadow: ${(props) => props.theme.effects.shadow};
   padding: 15px 18px;
   width: 100%;
   margin: 0px auto 10px auto;
-  background-color: #fff;
-  box-shadow: ${(props) => props.theme.effects.shadow};
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   float: ${({ isSize }) => (isSize ? "left" : "none")};
-  margin: ${({ isSize }) => (isSize ? "0px auto 0px -10rem" : "0px")};
+  margin: ${({ isSize }) => (isSize ? "0px auto 0px -6rem" : "0px")};
   transition: 0.4s ease;
 `;
 
-export const CaseInfoStyled = styled.h3`
-  display: block;
-  width: 30%;
-  font-size: 15px;
-  padding-left: 15px;
-  color: grey;
+export const CaseInfoStyled = styled.div<Props>`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
-export const CaseAddressStyled = styled.h3`
-  display: block;
-  width: 50%;
-  font-size: 15px;
-  padding-left: 15px;
-  color: grey;
-  text-align: left;
+export const DataAndAdressStyled = styled.div<Props>`
+  display: flex;
+  gap: 20px;
+
+  // & :nth-of-type(3) {
+  //   margin-top: 10px;
+  // }
+`;
+
+export const ActionStyled = styled.div<Props>`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  p {
+    color: ${(props) => props.theme.colors.red};
+  }
+`;
+
+export const IconsContainerStyled = styled.div<Props>`
+  display: flex;
+  justify-content: space-around;
+  width: 10rem;
+  visibility: ${({ isSize }) => (isSize ? "visible" : "hidden")};
+  width: ${({ isSize }) => (isSize ? "6rem" : "0rem")};
+  transition: width 0.4s ease;
+`;
+
+//-----
+
+// CaseItem
+
+export const CaseItemContainerStyled = styled.div<Props>`
+  display: flex;
+  flex-direction: column;
+  width: 92%;
+  margin: 0 auto;
+  padding: 15px;
+  box-shadow: ${(props: Props) => props.theme.effects.shadow};
+`;
+
+export const CaseItemStyled = styled.div<Props>`
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  height: 46px;
+  margin: 10px 0 10px;
+  align-items: center;
+  box-sizing: border-box;
+  text-align: right;
+  border-bottom: ${(props) => props.theme.colors.border} 1px solid;
+`;
+
+//-----
+
+// CaseItemEdit
+
+export const CaseItemContainerEditStyled = styled.div<Props>`
+  width: 92%;
+`;
+
+export const CaseItemEditStyled = styled.div<Props>`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 15px;
+  gap: 5px;
+  
+  input {
+    border: ${(props) => props.theme.borderline.border};
+    color: ${(props: any) => props.theme.colors.tx_grey_main};
+    height: 38px;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 5px 7px;
+    width: 100%;
+  }
 `;
 
 //-----
@@ -293,18 +355,18 @@ export const CheckBox = styled.input<Props>`
 // Popup
 
 export const Popup = styled.div<Props>`
-z-index: 50;
-position: fixed;
-left: 0;
-top: 0;
-background-color: rgba(0, 0, 0, 0.5);
-width: 100vw;
-height: 100vh;
-display: flex;
-justify-content: center;
-align-items: center;
-visibility: ${({ isPopupVisible }) =>
-  isPopupVisible ? "visible" : "hidden"};
+  z-index: 50;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: ${({ isPopupVisible }) =>
+    isPopupVisible ? "visible" : "hidden"};
 `;
 
 export const PopupStyled = styled.div<Props>`
