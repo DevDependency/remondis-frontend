@@ -9,6 +9,7 @@ export interface UserSettings {
   password?: string;
   phone?: string;
   roles?: string;
+  email_address?: string;
 }
 
 export interface UserLogin {
@@ -17,6 +18,15 @@ export interface UserLogin {
 }
 
 export interface UsersValidation {
-  email: string;
+  email?: string;
   password?: string;
+  username?: string;
+  phone?: string;
+  role?: string;
+  email_address?: string;
+}
+
+export enum Role {
+  MANAGER = "manager",
+  INSPECTOR = "inspector",
 }

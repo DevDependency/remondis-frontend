@@ -67,7 +67,6 @@ export const editTheCase = createAsyncThunk(
       values.id,
       values.changedValue
     );
-    console.log(response);
 
     return response;
   }

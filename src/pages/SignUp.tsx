@@ -30,9 +30,12 @@ export const SignUp: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const createNewUser = (values: UsersValidation) => {
-    dispatch(registerUser(values.email));
-    setIsEmailSent(true);
-    apiPostUsersRegister(values.email);
+    if (values.email) {
+      dispatch(registerUser(values.email));
+      setIsEmailSent(true);
+      setAreCredentialsWrong(!areCredentialsWrong);
+      apiPostUsersRegister(values.email);
+    }
   };
 
   // Formik
@@ -41,7 +44,6 @@ export const SignUp: React.FC = () => {
     validationSchema,
     onSubmit: (values: UsersValidation) => {
       createNewUser(values);
-      setAreCredentialsWrong(!areCredentialsWrong);
     },
   });
 

@@ -14,6 +14,7 @@ import {
   apiGetUsersLogin,
   apiGetUsersForgotPassword,
   apiPutUsersById,
+  apiGetUserByEmail,
 } from "./apiUser";
 
 import {
@@ -52,6 +53,7 @@ export {
   apiPatchCasesByIdQuote,
   apiPatchCasesByIdClose,
   apiGetUsersList,
+  apiGetUserByEmail,
   apiGetUsersListById,
   apiPostUsersRegister,
   apiPostUsersConfirm,

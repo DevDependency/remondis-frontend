@@ -16,6 +16,7 @@ export enum Locations {
   CASE_PHOTOS_EDIT = "/cases/:caseId/photos-edit",
 
   SIGNUP = "/signup",
+  SIGNUPDETAILS = "/signupdetails",
   LOGIN = "/login",
   PROFILE = "/profile",
   CONFIRM = "/confirm",

@@ -9,8 +9,10 @@ import {
   Case,
   PageNotFound,
   SignUp,
+  Profile,
   Login,
   ForgotPassword,
+  Confirm,
 } from "../pages";
 import {
   CaseGeneral,
@@ -83,6 +85,12 @@ export const routeMap: RouteObject[] = [
     children: [],
   },
   {
+    path: Locations.PROFILE,
+    element: <Profile />,
+    //loader: ()=>{},
+    children: [],
+  },
+  {
     path: Locations.LOGIN,
     element: <Login />,
     //loader: ()=>{},
@@ -91,6 +99,12 @@ export const routeMap: RouteObject[] = [
   {
     path: Locations.FORGOT_PASSWORD,
     element: <ForgotPassword />,
+    //loader: ()=>{},
+    children: [],
+  },
+  {
+    path: Locations.CONFIRM,
+    element: <Confirm />,
     //loader: ()=>{},
     children: [],
   },

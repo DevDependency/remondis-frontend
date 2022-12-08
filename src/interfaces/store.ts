@@ -1,6 +1,5 @@
-import { CaseWithId, CasesToDo, Coordinates, Room } from './cases';
+import { CaseWithId, CasesToDo, Coordinates, Room } from "./cases";
 import { store } from "../store/store";
-
 
 export interface CaseState {
   createdCaseId: number;
@@ -19,6 +18,8 @@ export interface UserState {
   isHoveringEmail: boolean;
   areCredentialsWrong: boolean;
   isLoggedIn: boolean;
+  confirmUserHandler: boolean;
+  userEmail: string;
 }
 
 export type AppDispatch = typeof store.dispatch;
