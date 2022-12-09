@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 export const MainStyled = styled.div<Props>`
   width: 100vw;
+  // height: 100vh;
 `;
 
 export const InsideMainStyled = styled.div<Props>`
