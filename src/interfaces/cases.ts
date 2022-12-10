@@ -3,7 +3,7 @@ import { UserSettings } from "./users";
 
 export interface File {
   id: number;
-  img: any;
+  photo: any;
   file_name: string;
 }
 
