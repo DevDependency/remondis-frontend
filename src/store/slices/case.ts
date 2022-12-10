@@ -109,6 +109,58 @@ export const getCaseItem = createAsyncThunk(
   }
 );
 
+export const addCaseItem = createAsyncThunk(
+  "case/addCaseItem",
+  async (params: any) => {
+    try {
+      const response = await api.apiPostCaseItem(params.caseId, params.room, params.item);
+      return response.caseItem;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
+export const updateCaseItem = createAsyncThunk(
+  "case/updateCaseItem",
+  async (params: any) => {
+    try {
+      const response = await api.apiPutCaseItem(params.caseId, params.room, params.item);
+      return response.caseItem;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
+export const deleteCaseItem = createAsyncThunk(
+  "case/deleteCaseItem",
+  async (params: any) => {
+    try {
+      const response = await api.apiDeleteCaseItem(params.caseId, params.room);
+      return response.caseItem;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
+/**
+ * Photos
+ */
+
+export const updateCasePhoto = createAsyncThunk(
+  "case/updateCasePhoto",
+  async (params: any) => {
+    try {
+      const response = await api.apiPutCasePhoto(params.caseId, params.room, params.photos);
+      return response.caseItem;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 
 const caseSlice = createSlice({
   name: "case",
