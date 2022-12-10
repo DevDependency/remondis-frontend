@@ -2,8 +2,9 @@ import { useAppSelector, useAppDispatch } from "../../utils/hooks/useStore";
 import { getCaseItems } from "../../store/slices/case";
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Room } from "../../interfaces/cases";
+import { Room } from '../../interfaces/cases';
 import iconEdit from "../../assets/-case-iconEdit.svg";
+import { ButtonContainerStyled, ButtonSmallStyled } from '../../styles/style';
 
 export const CasePhotos: React.FC = () => {
   const rooms = useAppSelector((state) => state.caseSlice.caseRooms);
@@ -15,12 +16,22 @@ export const CasePhotos: React.FC = () => {
     if (caseId) dispatch(getCaseItems(parseInt(caseId)));
   }, []);
 
-  const editElement = (e: any) => {
-    navigate(`${e.target.id}/edit`)
-    
+  const editlHandler = (e: any) => {
+    console.log(e.target.id)
+    if(e.target.id === '0') {
+      let maxRoom = 0;
+      if(rooms.length) {
+        maxRoom = Math.max.apply(null, Array.from(rooms, (x : Room) => x.room))
+      }
+      navigate(`${maxRoom+1}/edit`)
+    } else {
+      navigate(`${e.target.id}/edit`)
+    }
   };
 
-  //console.log(rooms);
+  const submitHandler = () => {
+  }
+  
   return (
     <>
       {rooms.map((el: Room, index: number) => (
@@ -33,7 +44,7 @@ export const CasePhotos: React.FC = () => {
           >
             {el.room_title}
             <img
-              onClick={editElement}
+              onClick={editlHandler}
               src={iconEdit}
               id={el.room.toString()}
               style={{
@@ -53,7 +64,7 @@ export const CasePhotos: React.FC = () => {
               key={index}
             >
               <img
-                src={img.img}
+                src={"data:image/jpeg;base64," + Buffer.from(img.photo.data).toString('base64')}
                 alt=""
                 style={{
                   position: "relative",
@@ -65,7 +76,14 @@ export const CasePhotos: React.FC = () => {
           ))}
         </div>
       ))}
-      <button id={'0'} onClick={editElement}>Add room</button>
+      <ButtonContainerStyled>             
+        <button>
+          <ButtonSmallStyled id="0" onClick={editlHandler}>Add room</ButtonSmallStyled> 
+        </button>             
+        <button id="submit" type="submit">
+          <ButtonSmallStyled color={"red"} onClick={submitHandler}>Submit</ButtonSmallStyled>
+        </button>            
+      </ButtonContainerStyled>
     </>
   );
 };
