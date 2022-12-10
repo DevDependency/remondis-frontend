@@ -228,6 +228,11 @@ export const CaseItemStyled = styled.div<Props>`
 
 export const CaseItemContainerEditStyled = styled.div<Props>`
   width: 92%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 15px;
+  box-shadow: ${(props: Props) => props.theme.effects.shadow};
 `;
 
 export const CaseItemEditStyled = styled.div<Props>`
@@ -267,6 +272,7 @@ export const ButtonContainerStyled = styled.div<Props>`
   width: 100%;
   height: 85px;
   margin: 0 auto;
+  padding: 15px;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -295,7 +301,7 @@ background-color: ${(props) =>
   props.color === "red"
     ? props.theme.colors.red_hover
     : props.theme.colors.grey_hover};
-`;
+}`;
 
 export const ButtonSmallStyled = styled.div<Props>`
 display: flex; 
@@ -320,7 +326,7 @@ background-color: ${(props) =>
   props.color === "red"
     ? props.theme.colors.red_hover
     : props.theme.colors.grey_hover};
-`;
+}`;
 
 //-----
 
@@ -392,7 +398,7 @@ export const Popup = styled.div<Props>`
 `;
 
 export const PopupStyled = styled.div<Props>`
-  z display: flex;
+  display: flex;
   justify-content: center;
   flex-direction: column;
   background: white;
@@ -402,3 +408,18 @@ export const PopupStyled = styled.div<Props>`
 `;
 
 //-----
+
+export const PhotoContainerStyled = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+export const PhotoStyled = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+  margin-right: 8px;
+`;
