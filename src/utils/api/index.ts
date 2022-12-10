@@ -14,6 +14,7 @@ import {
   apiGetUsersLogin,
   apiGetUsersForgotPassword,
   apiPutUsersById,
+  apiGetUserByEmail,
 } from "./apiUser";
 
 import {
@@ -32,6 +33,13 @@ import {
   apiGetCoordinates,
   apiGetCasesItems,
   apiGetCasesItemByRoom,
+  apiPostCaseItem,
+  apiPutCaseItem,
+  apiDeleteCaseItem,
+  apiPostCasePhoto,
+  apiPutCasePhoto,
+  apiDeleteCasePhoto,
+
 } from "./apiCase";
 
 export {
@@ -52,6 +60,7 @@ export {
   apiPatchCasesByIdQuote,
   apiPatchCasesByIdClose,
   apiGetUsersList,
+  apiGetUserByEmail,
   apiGetUsersListById,
   apiPostUsersRegister,
   apiPostUsersConfirm,
@@ -62,4 +71,10 @@ export {
   apiGetCoordinates,
   apiGetCasesItems,
   apiGetCasesItemByRoom,
+  apiPostCaseItem,
+  apiPutCaseItem,
+  apiDeleteCaseItem,
+  apiPostCasePhoto,
+  apiPutCasePhoto,
+  apiDeleteCasePhoto,
 };

@@ -8,10 +8,7 @@ export const listenerMiddleware = createListenerMiddleware();
 listenerMiddleware.startListening({
   type: "case/createCase",
   effect: async (action, listenerApi) => {
-    console.log("get orriginal state", listenerApi.getOriginalState());
-    console.log("action", action);
     await listenerApi.delay(5000);
-    console.log(listenerApi.getState());
   },
 });
 

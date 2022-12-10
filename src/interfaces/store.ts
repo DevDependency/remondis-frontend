@@ -1,6 +1,5 @@
-import { CaseWithId, CasesToDo, Coordinates, Room } from './cases';
+import { CaseWithId, CasesToDo, Coordinates, Room } from "./cases";
 import { store } from "../store/store";
-
 
 export interface CaseState {
   createdCaseId: number;
@@ -9,6 +8,7 @@ export interface CaseState {
   currentCase: CaseWithId | undefined;
   coordinates: Coordinates[];
   caseRooms: Room[];
+  currentRoom: Room | undefined;
 }
 
 export interface UserState {
@@ -19,6 +19,8 @@ export interface UserState {
   isHoveringEmail: boolean;
   areCredentialsWrong: boolean;
   isLoggedIn: boolean;
+  confirmUserHandler: boolean;
+  userEmail: string;
   isInspectorActive: boolean;
 }
 

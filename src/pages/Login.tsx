@@ -6,7 +6,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { RootState } from "../interfaces/store";
 import { UsersValidation } from "../interfaces/users";
 import { useAppDispatch, useAppSelector } from "../utils/hooks/useStore";
-import { checkUserLogin, setIsForgotPassword } from "../store/slices/user";
+import {
+  checkUserLogin,
+  setIsForgotPassword,
+  setAreCredentialsWrong,
+} from "../store/slices/user";
 import { Main } from "./Main";
 import { Locations } from "../interfaces/route";
 
@@ -49,6 +53,7 @@ export const Login: React.FC = () => {
         })
       );
     }
+    dispatch(setAreCredentialsWrong());
   }, []);
 
   useEffect(() => {
