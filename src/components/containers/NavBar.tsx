@@ -9,6 +9,7 @@ import logo from "../../assets/logoREMONDISx112.png";
 import { setIsPopupVisible } from "../../store/slices/general";
 import { PopUpConfirm } from "../PopUpConfirm";
 import { setIsInspectorActive, updateUser } from "../../store/slices/user";
+import { Locations } from "../../interfaces/route";
 
 export const NavBar: React.FC = () => {
   const navigate = useNavigate();
@@ -53,7 +54,10 @@ export const NavBar: React.FC = () => {
           src={isInspectorActive ? iconStatusBusy : iconStatusFree}
           onClick={handler}
         />
-        <IconStyled src={account} />
+        <IconStyled src={account}  
+            onClick={() => {
+            navigate(Locations.PROFILE);
+          }}/>
       </NavBarStyled>
       {isPopupVisible && (
         <PopUpConfirm
