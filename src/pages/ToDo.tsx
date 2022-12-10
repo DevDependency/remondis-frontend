@@ -14,6 +14,7 @@ export const ToDo: React.FC = () => {
   const userId = useAppSelector((state) => state.userSlice.userId);
 
   useEffect(() => {
+    if(userId !== 0)
     dispatch(getCasesToDo(userId));
   }, []);
   return (
