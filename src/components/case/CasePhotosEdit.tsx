@@ -35,7 +35,6 @@ export const CasePhotosEdit: React.FC = () => {
 
   useEffect(() => {
     if (caseId && room && caseId !== "0" && room !== "0") {
-      //console.log(caseId, room);
       dispatch(
         getCaseItem({
           caseId: parseInt(caseId),
@@ -90,7 +89,6 @@ export const CasePhotosEdit: React.FC = () => {
 
   const uploadImage = async (event: any) => {
     const file = event.target.files.item(0);
-    //console.log(file);
     const base64 = await convertBase64(file);
     setRoomImages([
       ...roomImages,
@@ -104,7 +102,6 @@ export const CasePhotosEdit: React.FC = () => {
         file_name: file.name,
       },
     ]);
-    console.log(roomImages)
     event.target.value = "";
   };
 
@@ -116,7 +113,6 @@ export const CasePhotosEdit: React.FC = () => {
     navigate(-1);
   };
 
-  console.log(roomImages);
   return (
     <>
       <Formik

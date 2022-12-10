@@ -22,7 +22,6 @@ export const CasePhotos: React.FC = () => {
   }, []);
 
   const editlHandler = (e: any) => {
-    console.log(e.target.id);
     if (e.target.id === "0") {
       let maxRoom = 0;
       if (rooms.length) {
