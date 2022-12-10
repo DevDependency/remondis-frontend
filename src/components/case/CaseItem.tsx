@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CaseItemProps } from "../../interfaces/cases";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 import {
   CaseContainerStyled,
   CaseBackgroundContainerStyled,
@@ -25,17 +25,23 @@ export const CaseItem: React.FC<CaseItemProps> = ({
   message,
   action,
 }) => {
+
+  const navigate = useNavigate();
   const [size, setSize] = useState(false);
 
   const showEditButton = () => {
     setSize((current) => !current);
   };
 
+  const openCaseHandler = () => {
+    navigate(`/cases/${link}`);
+  }
+
   return (
     <>
       <CaseBackgroundContainerStyled>
         <CaseContainerStyled isSize={size}>
-          <CaseInfoStyled>
+          <CaseInfoStyled onClick={openCaseHandler}>
             {/* <DataAndAdressStyled to={`/cases/${link}`}> */}
             <DataAndAdressStyled>
               <TextMain>{time}</TextMain>
@@ -44,12 +50,12 @@ export const CaseItem: React.FC<CaseItemProps> = ({
             {isTodo && (
               <>
                 <TextSecondary>{message}</TextSecondary>
-                <Link to={`/cases/${link}`}>
+                {/* <Link to={`/cases/${link}`}> */}
                   <ActionStyled>
                     <IconStyled src={actionIcon} />
                     <TextSecondary>{action}</TextSecondary>
                   </ActionStyled>
-                </Link>
+                {/* </Link> */}
               </>
             )}
           </CaseInfoStyled>
