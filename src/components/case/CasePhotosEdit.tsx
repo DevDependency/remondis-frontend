@@ -22,6 +22,7 @@ import {
 import { Formik, Form } from "formik";
 import * as buffer from "buffer";
 import { PhotoStyled, PhotoContainerStyled } from "../../styles/style";
+import { setIsEditMode } from "../../store/slices/general";
 window.Buffer = buffer.Buffer;
 
 export const CasePhotosEdit: React.FC = () => {
@@ -42,8 +43,11 @@ export const CasePhotosEdit: React.FC = () => {
         })
       );
     }
+    dispatch(setIsEditMode(true))
+
     return () => {
       setCurrentRoom(undefined);
+      dispatch(setIsEditMode(false));
     };
   }, []);
 
@@ -113,6 +117,7 @@ export const CasePhotosEdit: React.FC = () => {
     navigate(-1);
   };
 
+  console.log(currentRoom)
   return (
     <>
       <Formik

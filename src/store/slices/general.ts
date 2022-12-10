@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   insideCase: false,
+  isEditMode: false,
   isPopupVisible: false,
 };
 
@@ -14,10 +15,13 @@ const generalSlice = createSlice({
     },
     setIsPopupVisible(state, action) {
       state.isPopupVisible = action.payload;
-    }
+    },
+    setIsEditMode(state, action) {
+      state.isEditMode = action.payload;
+    },
   },
 });
 
-export const { setInsideCase, setIsPopupVisible  } = generalSlice.actions;
+export const { setInsideCase, setIsPopupVisible, setIsEditMode  } = generalSlice.actions;
 
 export default generalSlice.reducer;

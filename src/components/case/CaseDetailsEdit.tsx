@@ -20,6 +20,7 @@ import {
   CaseItemEditStyled,
   CaseItemStyled,
 } from "../../styles/style";
+import { setIsEditMode } from "../../store/slices/general";
 
 export const CaseDetailsEdit: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -30,6 +31,10 @@ export const CaseDetailsEdit: React.FC = () => {
     if (caseId) {
       dispatch(getCasesById(parseInt(caseId)));
     }
+    dispatch(setIsEditMode(true))
+    return () => {
+      dispatch(setIsEditMode(false));
+    };
   }, []);
   const cancelHandler = () => {
     navigate(-1);

@@ -10,6 +10,7 @@ import {
   ButtonContainerStyled,
   ButtonSmallStyled,
 } from "../../styles/style";
+import { setIsEditMode } from "../../store/slices/general";
 
 export const CaseGeneralEdit: React.FC = () => {
   const { state } = useLocation();
@@ -25,6 +26,10 @@ export const CaseGeneralEdit: React.FC = () => {
     if (caseId) {
       dispatch(getCasesById(parseInt(caseId)));
     }
+    dispatch(setIsEditMode(true))
+    return () => {
+      dispatch(setIsEditMode(false));
+    };
   }, []);
   const cancelHandler = () => {
     navigate(-1);

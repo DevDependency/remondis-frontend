@@ -1,5 +1,5 @@
 import { useAppSelector, useAppDispatch } from "../../utils/hooks/useStore";
-import { getCaseItems } from "../../store/slices/case";
+import { getCaseItems, getCaseItem } from '../../store/slices/case';
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Room } from "../../interfaces/cases";
@@ -32,6 +32,14 @@ export const CasePhotos: React.FC = () => {
       }
       navigate(`${maxRoom + 1}/edit`);
     } else {
+      if (caseId) {
+        dispatch(
+          getCaseItem({
+            caseId: parseInt(caseId),
+            room: parseInt(e.target.id),
+          })
+        );
+      }
       navigate(`${e.target.id}/edit`);
     }
   };
@@ -66,9 +74,9 @@ export const CasePhotos: React.FC = () => {
             <PhotoContainerStyled>
             {el.CasePhoto.map((img, index) => (
               <PhotoStyled
-                style={{
+                /* style={{
                   position: "relative",
-                }}
+                }} */
                 key={index}
               >
                 <img
@@ -78,7 +86,7 @@ export const CasePhotos: React.FC = () => {
                   }
                   alt=""
                   style={{
-                    position: "relative",
+                    /* position: "relative", */
                     width: "110px",
                     height: "100px",
                   }}
