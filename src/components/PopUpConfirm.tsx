@@ -17,8 +17,8 @@ export const PopUpConfirm = (props: any) => {
         <TextMain>{props.text}</TextMain>
         <ButtonContainerPopupStyled>
           {props.buttons.map((el: any, index: number) => (
-            <ButtonSmallStyled>
-              <button key={index} onClick={el.onClick}>
+            <ButtonSmallStyled key={index}>
+              <button  onClick={el.onClick}>
                 {el.title}
               </button>
             </ButtonSmallStyled>
