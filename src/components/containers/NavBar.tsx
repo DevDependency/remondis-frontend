@@ -10,17 +10,16 @@ import { setIsPopupVisible } from "../../store/slices/general";
 import { PopUpConfirm } from "../PopUpConfirm";
 import { setIsInspectorActive, updateUser } from "../../store/slices/user";
 import { Locations } from "../../interfaces/route";
+import { Role } from "../../interfaces/users";
 
 export const NavBar: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const insideCase = useAppSelector((state) => state.generalSlice.insideCase);
-  const isPopupVisible = useAppSelector(
-    (state) => state.generalSlice.isPopupVisible
+  const { insideCase, isPopupVisible } = useAppSelector(
+    (state) => state.generalSlice
   );
-  const userId = useAppSelector((state) => state.userSlice.userId);
-  const isInspectorActive = useAppSelector(
-    (state) => state.userSlice.isInspectorActive
+  const { userRole, userId, isInspectorActive } = useAppSelector(
+    (state) => state.userSlice
   );
 
   const handler = () => {
@@ -50,14 +49,18 @@ export const NavBar: React.FC = () => {
         ) : (
           <LogoStyled src={logo} alt=""></LogoStyled>
         )}
+        {userRole === Role.INSPECTOR && (
+          <IconStyled
+            src={isInspectorActive ? iconStatusBusy : iconStatusFree}
+            onClick={handler}
+          />
+        )}
         <IconStyled
-          src={isInspectorActive ? iconStatusBusy : iconStatusFree}
-          onClick={handler}
-        />
-        <IconStyled src={account}  
-            onClick={() => {
+          src={account}
+          onClick={() => {
             navigate(Locations.PROFILE);
-          }}/>
+          }}
+        />
       </NavBarStyled>
       {isPopupVisible && (
         <PopUpConfirm
