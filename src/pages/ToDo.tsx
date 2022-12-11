@@ -32,7 +32,7 @@ export const ToDo: React.FC = () => {
                 "en-GB"
               )}
               address={item.address}
-              link={item.id}
+              caseId={item.id}
               message={item.message}
               action={item.action}
               isTodo={true}

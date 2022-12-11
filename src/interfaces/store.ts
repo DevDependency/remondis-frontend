@@ -3,6 +3,7 @@ import { store } from "../store/store";
 
 export interface CaseState {
   createdCaseId: number;
+  deletedCaseId: number;
   cases: CaseWithId[];
   casesToDo: CasesToDo[];
   currentCase: CaseWithId | undefined;

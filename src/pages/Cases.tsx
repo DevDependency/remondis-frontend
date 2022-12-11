@@ -31,7 +31,7 @@ export const Cases: React.FC = () => {
                   "en-GB"
                 )}
                 address={item.address}
-                link={item.id}
+                caseId={item.id}
                 isTodo={false}
               />
             ))}
