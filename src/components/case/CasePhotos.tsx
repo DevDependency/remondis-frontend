@@ -3,7 +3,7 @@ import { getCaseItems, getCaseItem } from '../../store/slices/case';
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Room } from "../../interfaces/cases";
-import iconEdit from "../../assets/-case-iconEdit.svg";
+import {caseIconEdit} from "../../assets/";
 import { PhotoContainerStyled, PhotoStyled, TextMain } from '../../styles/style';
 import {
   ButtonContainerStyled,
@@ -62,7 +62,7 @@ export const CasePhotos: React.FC = () => {
               {el.room_title}
               <img
                 onClick={editlHandler}
-                src={iconEdit}
+                src={caseIconEdit}
                 id={el.room.toString()}
                 style={{
                   position: "absolute",

@@ -1,12 +1,10 @@
 import { useAppDispatch, useAppSelector } from "../../utils/hooks/useStore";
 import { useState, useEffect } from "react";
-import addPhoto from "../../assets/addPhoto.png";
-import iconCancel from "../../assets/iconCancel.svg";
+import { addPhoto, iconCancel } from "../../assets/";
 import { File } from "../../interfaces/cases";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   getCaseItem,
-  addCaseItem,
   updateCasePhoto,
   updateCaseItem,
   setCurrentRoom,
@@ -18,11 +16,13 @@ import {
   ButtonContainerStyled,
   ButtonSmallStyled,
   CaseItemContainerEditStyled,
+  PhotoStyled,
+  PhotoContainerStyled,
 } from "../../styles/style";
 import { Formik, Form } from "formik";
-import * as buffer from "buffer";
-import { PhotoStyled, PhotoContainerStyled } from "../../styles/style";
 import { setIsEditMode } from "../../store/slices/general";
+
+import * as buffer from "buffer";
 window.Buffer = buffer.Buffer;
 
 export const CasePhotosEdit: React.FC = () => {

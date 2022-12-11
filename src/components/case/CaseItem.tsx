@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { CaseItemProps } from "../../interfaces/cases";
 import { useNavigate } from "react-router-dom";
+import { PopUpConfirm } from "../PopUpConfirm";
+import { useAppSelector, useAppDispatch } from "../../utils/hooks/useStore";
+import { setIsPopupVisible } from "../../store/slices/general";
+import { closeCase, setDeletedCaseId } from "../../store/slices/case";
 import {
   CaseContainerStyled,
   CaseBackgroundContainerStyled,
@@ -12,14 +16,12 @@ import {
   ActionStyled,
   IconsContainerStyled,
 } from "../../styles/style";
-import actionIcon from "../../assets/-case-iconAction.svg";
-import settingsIcon from "../../assets/-case-iconSettings.svg";
-import bin from "../../assets/-case-iconBin.svg";
-import edit from "../../assets/-case-iconEdit.svg";
-import { setIsPopupVisible } from "../../store/slices/general";
-import { useAppSelector, useAppDispatch } from "../../utils/hooks/useStore";
-import { PopUpConfirm } from "../PopUpConfirm";
-import { closeCase, setDeletedCaseId } from "../../store/slices/case";
+import {
+  caseIconAction,
+  caseIconSettings,
+  caseIconBin,
+  caseIconEdit,
+} from "../../assets/";
 
 export const CaseItem: React.FC<CaseItemProps> = ({
   time,
@@ -59,7 +61,7 @@ export const CaseItem: React.FC<CaseItemProps> = ({
   };
 
   const openCaseEditHandler = () => {
-    navigate(`/cases/${caseId}/edit`, {state: {isNewCase: false}});
+    navigate(`/cases/${caseId}/edit`, { state: { isNewCase: false } });
   };
 
   return (
@@ -75,17 +77,17 @@ export const CaseItem: React.FC<CaseItemProps> = ({
               <>
                 <TextSecondary>{message}</TextSecondary>
                 <ActionStyled>
-                  <IconStyled src={actionIcon} />
+                  <IconStyled src={caseIconAction} />
                   <TextSecondary>{action}</TextSecondary>
                 </ActionStyled>
               </>
             )}
           </CaseInfoStyled>
-          <IconStyled src={settingsIcon} onClick={showEditButton} />
+          <IconStyled src={caseIconSettings} onClick={showEditButton} />
         </CaseContainerStyled>
         <IconsContainerStyled isSize={size}>
-          <IconStyled src={bin} onClick={setPopUpVisible} />
-          <IconStyled src={edit} onClick={openCaseEditHandler} />
+          <IconStyled src={caseIconBin} onClick={setPopUpVisible} />
+          <IconStyled src={caseIconEdit} onClick={openCaseEditHandler} />
         </IconsContainerStyled>
       </CaseBackgroundContainerStyled>
 
