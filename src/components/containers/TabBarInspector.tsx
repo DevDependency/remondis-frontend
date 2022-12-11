@@ -7,8 +7,6 @@ export const TabBarInspector: React.FC = () => {
   const navigate = useNavigate();
   const { activeInspectorTabBar } = useAppSelector(state => state.generalSlice);
 
-  console.log(activeInspectorTabBar)
-  
   return (
     <>
       <TabBarCantainerStyled>
