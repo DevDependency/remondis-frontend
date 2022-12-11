@@ -102,7 +102,7 @@ export const CaseItem: React.FC<CaseItemProps> = ({
             {
               title: "Confirm",
               onClick: () => {
-                closeCaseHandler(caseId);
+                closeCaseHandler();
               },
             },
           ]}
