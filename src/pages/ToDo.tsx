@@ -6,6 +6,7 @@ import { TabBarManager, TabBarInspector } from "../components/containers/";
 import { CaseItem } from "../components/case/";
 import { Main } from "./Main";
 import { MainContainerStyled } from "../styles/style";
+import { setActiveInspectorTabBar, setActiveManagerTabBar } from "../store/slices/general";
 
 export const ToDo: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -16,6 +17,8 @@ export const ToDo: React.FC = () => {
   useEffect(() => {
     if(userId !== 0)
     dispatch(getCasesToDo(userId));
+    dispatch(setActiveManagerTabBar("todo"))
+    dispatch(setActiveInspectorTabBar("todo"))
   }, []);
   return (
     <>

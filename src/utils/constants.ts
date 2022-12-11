@@ -21,7 +21,7 @@ export const TAB_BAR_MANAGER = [
 export const TAB_BAR_INSPECTOR = [
   {
     name: "ToDo",
-    id: "list",
+    id: "todo",
     path: "/",
     default: iconListDefault,
     selected: iconListSelected,

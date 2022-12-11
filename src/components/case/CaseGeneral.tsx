@@ -11,6 +11,7 @@ import {
   ButtonSmallStyled,
 
 } from "../../styles/style";
+import { setActiveCaseTabBar } from "../../store/slices/general";
 
 export const CaseGeneral: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -21,6 +22,7 @@ export const CaseGeneral: React.FC = () => {
     if (caseId) {
       dispatch(getCasesById(parseInt(caseId)));
     }
+    dispatch(setActiveCaseTabBar("general"))
   }, []);
   const editlHandler = () => {
     navigate('edit', {relative: "path", state: { isNewCase: false} })

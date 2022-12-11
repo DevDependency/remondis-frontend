@@ -10,6 +10,7 @@ import {
   ButtonSmallStyled,
   CaseItemContainerStyled,
 } from "../../styles/style";
+import { setActiveCaseTabBar } from "../../store/slices/general";
 
 export const CasePhotos: React.FC = () => {
   const rooms = useAppSelector((state) => state.caseSlice.caseRooms);
@@ -19,6 +20,7 @@ export const CasePhotos: React.FC = () => {
 
   useEffect(() => {
     if (caseId) dispatch(getCaseItems(parseInt(caseId)));
+    dispatch(setActiveCaseTabBar("photos"))
   }, []);
 
   const editlHandler = (e: any) => {
