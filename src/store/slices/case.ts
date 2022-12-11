@@ -2,10 +2,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from '../../utils/api';
 import { Case, Room } from '../../interfaces/cases';
 import {CaseState} from '../../interfaces/store';
-import { apiGetCasesItems, apiGetCasesItemByRoom } from '../../utils/api/apiCase';
 
 const initialState: CaseState = {
   createdCaseId: 0,
+  deletedCaseId: 0,
   casesToDo: [],
   cases: [],
   currentCase: undefined,
@@ -61,12 +61,25 @@ export const createCase = createAsyncThunk(
     }
   }
 );
+
 export const editTheCase = createAsyncThunk(
   "cases/editTheCase",
   async (values: any) => {
     const response = await api.apiPatchCaseById(
       values.id,
       values.changedValue
+    );
+
+    return response;
+  }
+);
+
+export const closeCase = createAsyncThunk(
+  "cases/closeCase",
+  async (params: any) => {
+    const response = await api.apiPatchCasesByIdClose(
+      params.caseId,
+      params.userId,
     );
 
     return response;
@@ -178,6 +191,9 @@ const caseSlice = createSlice({
     setCreatedCaseId(state, action) {
       state.createdCaseId = action.payload;
     },
+    setDeletedCaseId(state, action) {
+      state.deletedCaseId = action.payload;
+    },
     setCoordinates(state, action){
       state.coordinates = action.payload;
     },
@@ -216,6 +232,7 @@ const caseSlice = createSlice({
 
 export const {
   setCreatedCaseId,
+  setDeletedCaseId,
   setCurrentCase,
   setCurrentRoom,
 

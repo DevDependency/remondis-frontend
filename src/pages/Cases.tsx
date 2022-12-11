@@ -5,6 +5,7 @@ import { getCases } from "../store/slices/case";
 import { CaseWithId } from "../interfaces/cases";
 import { CaseItem } from "../components/case/CaseItem";
 import { MainContainerStyled } from "../styles/style";
+import { setActiveInspectorTabBar, setActiveManagerTabBar } from "../store/slices/general";
 
 export const Cases: React.FC = () => {
   const tasks = useAppSelector((state) => state.caseSlice.cases);
@@ -12,6 +13,8 @@ export const Cases: React.FC = () => {
 
   useEffect(() => {
     dispatch(getCases());
+    dispatch(setActiveManagerTabBar("cases"))
+    dispatch(setActiveInspectorTabBar("cases"))
   }, []);
 
   return (
@@ -28,7 +31,7 @@ export const Cases: React.FC = () => {
                   "en-GB"
                 )}
                 address={item.address}
-                link={item.id}
+                caseId={item.id}
                 isTodo={false}
               />
             ))}

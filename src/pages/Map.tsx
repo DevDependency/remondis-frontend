@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { TabBarInspector } from "../components/containers/";
 import { useAppDispatch, useAppSelector } from "../utils/hooks/useStore";
 import { getCoordinates } from "../store/slices/case";
+import { setActiveInspectorTabBar } from "../store/slices/general";
 
 export const Map: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -37,6 +38,7 @@ export const Map: React.FC = () => {
 
   useEffect(() => {
     dispatch(getCoordinates(userId));
+    dispatch(setActiveInspectorTabBar("map"))
   }, []);
 
   useEffect(() => {

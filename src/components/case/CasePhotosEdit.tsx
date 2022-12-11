@@ -1,12 +1,27 @@
 import { useAppDispatch, useAppSelector } from "../../utils/hooks/useStore";
 import { useState, useEffect } from "react";
-import addPhoto from "../../assets/addPhoto.png";
-import iconCancel from "../../assets/iconCancel.svg";
+import { addPhoto, iconCancel } from "../../assets/";
 import { File } from "../../interfaces/cases";
-import { useParams, useNavigate } from 'react-router-dom';
-import { getCaseItem, addCaseItem, updateCasePhoto, updateCaseItem, setCurrentRoom } from '../../store/slices/case';
-import { CaseItemEditStyled, InputLabel, IconStyled, ButtonContainerStyled, ButtonSmallStyled } from '../../styles/style';
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  getCaseItem,
+  updateCasePhoto,
+  updateCaseItem,
+  setCurrentRoom,
+} from "../../store/slices/case";
+import {
+  CaseItemEditStyled,
+  InputLabel,
+  IconStyled,
+  ButtonContainerStyled,
+  ButtonSmallStyled,
+  CaseItemContainerEditStyled,
+  PhotoStyled,
+  PhotoContainerStyled,
+} from "../../styles/style";
 import { Formik, Form } from "formik";
+import { setIsEditMode } from "../../store/slices/general";
+
 import * as buffer from "buffer";
 window.Buffer = buffer.Buffer;
 
@@ -21,7 +36,6 @@ export const CasePhotosEdit: React.FC = () => {
 
   useEffect(() => {
     if (caseId && room && caseId !== "0" && room !== "0") {
-      //console.log(caseId, room);
       dispatch(
         getCaseItem({
           caseId: parseInt(caseId),
@@ -29,23 +43,38 @@ export const CasePhotosEdit: React.FC = () => {
         })
       );
     }
-    return ()=> { setCurrentRoom(undefined) }
+    dispatch(setIsEditMode(true))
+
+    return () => {
+      setCurrentRoom(undefined);
+      dispatch(setIsEditMode(false));
+    };
   }, []);
 
   useEffect(() => {
     if (currentRoom) {
-      setRoomImages(fillImages())
+      setRoomImages(fillImages());
     }
   }, [currentRoom]);
 
   const fillImages = () => {
     const arrayPhotos: File[] = [];
-    for(const currentPhoto of currentRoom.CasePhoto) {
-      const base64 = "data:image/jpeg;base64," + Buffer.from(currentPhoto.photo.data).toString('base64')
-      arrayPhotos.push({ photo: base64, id: Math.max.apply(null, Array.from(roomImages, (x : File) => x.id)) + 1, file_name: currentPhoto.file_name })
+    for (const currentPhoto of currentRoom.CasePhoto) {
+      const base64 =
+        "data:image/jpeg;base64," +
+        Buffer.from(currentPhoto.photo.data).toString("base64");
+      arrayPhotos.push({
+        photo: base64,
+        id:
+          Math.max.apply(null, [
+            0,
+            ...Array.from(roomImages, (x: File) => x.id),
+          ]) + 1,
+        file_name: currentPhoto.file_name,
+      });
     }
     return arrayPhotos;
-  }
+  };
 
   const convertBase64 = (file: any) => {
     return new Promise((resolve, reject) => {
@@ -63,13 +92,19 @@ export const CasePhotosEdit: React.FC = () => {
   };
 
   const uploadImage = async (event: any) => {
-    
     const file = event.target.files.item(0);
-    //console.log(file);
     const base64 = await convertBase64(file);
     setRoomImages([
       ...roomImages,
-      { photo: base64, id: Math.max.apply(null, Array.from(roomImages, (x : File) => x.id)) + 1, file_name: file.name },
+      {
+        photo: base64,
+        id:
+          Math.max.apply(null, [
+            0,
+            ...Array.from(roomImages, (x: File) => x.id),
+          ]) + 1,
+        file_name: file.name,
+      },
     ]);
     event.target.value = "";
   };
@@ -80,8 +115,9 @@ export const CasePhotosEdit: React.FC = () => {
 
   const cancelHandler = () => {
     navigate(-1);
-  }
-  
+  };
+
+  console.log(currentRoom)
   return (
     <>
       <Formik
@@ -91,93 +127,104 @@ export const CasePhotosEdit: React.FC = () => {
         }}
         onSubmit={async (values) => {
           if (caseId && room && caseId !== "0" && room !== "0") {
-            dispatch(updateCaseItem({caseId: parseInt(caseId), room: parseInt(room), item: values }))
-            dispatch(updateCasePhoto({caseId: parseInt(caseId), room: parseInt(room), photos: roomImages }))
+            dispatch(
+              updateCaseItem({
+                caseId: parseInt(caseId),
+                room: parseInt(room),
+                item: values,
+              })
+            );
+            dispatch(
+              updateCasePhoto({
+                caseId: parseInt(caseId),
+                room: parseInt(room),
+                photos: roomImages,
+              })
+            );
           }
-          navigate(-1)
+          navigate(-1);
         }}
       >
         {({ values, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
           <Form>
-            <CaseItemEditStyled>
-              <InputLabel htmlFor="title">Name</InputLabel>
-              <input
-                id="room_title"
-                name="room_title"
-                type="text"
-                defaultValue={values?.room_title}
-                onChange={handleChange}
-              />
-            </CaseItemEditStyled>
-            <CaseItemEditStyled>
-              <InputLabel htmlFor="description">Description</InputLabel>
-              <input
-                id="description"
-                name="description"
-                type="text"
-                defaultValue={values?.description}
-                onChange={handleChange}
-              />
-            </CaseItemEditStyled>
-            {roomImages.map((img, index) => (
-              <div
-                style={{
-                  position: "relative",
-                }}
-                key={index}
-              >
-                <IconStyled
-                  onClick={removeElement}
-                  src={iconCancel}
-                  id={img.id.toString()}
-                  style={{
-                    position: "absolute",
-                    top: "0",
-                    right: "0",
-                    zIndex: "10",
-                  }}
+            <CaseItemContainerEditStyled>
+              <CaseItemEditStyled>
+                <InputLabel htmlFor="title">Name</InputLabel>
+                <input
+                  id="room_title"
+                  name="room_title"
+                  type="text"
+                  defaultValue={values?.room_title}
+                  onChange={handleChange}
                 />
-                <IconStyled
-                  src={img.photo}
-                  alt=""
-                  style={{
-                    position: "relative",
-                    width: "110px",
-                    height: "100px",
-                  }}
+              </CaseItemEditStyled>
+              <CaseItemEditStyled>
+                <InputLabel htmlFor="description">Description</InputLabel>
+                <input
+                  id="description"
+                  name="description"
+                  type="text"
+                  defaultValue={values?.description}
+                  onChange={handleChange}
                 />
-              </div>
-            ))}
+              </CaseItemEditStyled>
+              <PhotoContainerStyled>
+                {roomImages.map((img, index) => (
+                  <PhotoStyled style={{position: "relative"}} key={index}>
+                    <IconStyled
+                      onClick={removeElement}
+                      src={iconCancel}
+                      id={img.id.toString()}
+                      style={{
+                        position: "absolute",
+                        top: "0",
+                        right: "0",
+                        zIndex: "10",
+                      }}
+                    />
+                    <IconStyled
+                      src={img.photo}
+                      alt=""
+                      style={{
+                        position: "relative",
+                        width: "100px",
+                        height: "100px",
+                      }}
+                    />
+                  </PhotoStyled>
+                ))}
 
-            {/* 
+                {/* 
             new image 
             */}
-            <div
-              style={{
-                width: "100px",
-                height: "100px",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <input
-                id={`file-loader-button-${1}`}
-                type="file"
-                accept="image/*"
-                capture="environment"
-                onChange={(e) => uploadImage(e)}
-                style={{ display: "none" }}
-              />
-              <InputLabel
-                htmlFor={`file-loader-button-${1}`}
-                style={{
-                  width: "100px",
-                  height: "100px",
-                  backgroundImage: `url(${addPhoto})`,
-                }}
-              />
-            </div>
+                <PhotoStyled
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <input
+                    id={`file-loader-button-${1}`}
+                    type="file"
+                    accept="image/*"
+                    capture="environment"
+                    onChange={(e) => uploadImage(e)}
+                    style={{ display: "none" }}
+                  />
+                  <InputLabel
+                    htmlFor={`file-loader-button-${1}`}
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                      backgroundImage: `url(${addPhoto})`,
+                    }}
+                  />
+                </PhotoStyled>
+              </PhotoContainerStyled>
+            </CaseItemContainerEditStyled>
             <ButtonContainerStyled>
               <button type="button">
                 <ButtonSmallStyled onClick={cancelHandler}>

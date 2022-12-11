@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useAppSelector } from "../utils/hooks/useStore";
+import { useState, useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '../utils/hooks/useStore';
 import { TabBarInspector } from "../components/containers/";
 import { Calendar as CalendarComponnent } from "react-date-range";
 import "react-date-range/dist/styles.css";
@@ -7,11 +7,16 @@ import "react-date-range/dist/theme/default.css";
 import { CaseItem } from "../components/case/CaseItem";
 import { CasesToDo } from "../interfaces/cases";
 import { CalendarContainerStyled } from "../styles/style";
+import { setActiveInspectorTabBar } from '../store/slices/general';
 
 export const Calendar: React.FC = () => {
+  const dispatch = useAppDispatch();
   const [date, setDate] = useState(new Date());
   const cases = useAppSelector((state) => state.caseSlice.casesToDo);
 
+  useEffect(()=>{
+    dispatch(setActiveInspectorTabBar("calendar"))
+  },[])
   const handleDateChange = (date: Date) => {
     setDate(date);
   };

@@ -69,7 +69,7 @@ export interface CasesToDo extends Case {
 export interface CaseItemProps {
   time: string;
   address: string;
-  link: number;
+  caseId: number;
   isTodo?: boolean;
   message?: string;
   action?: string;

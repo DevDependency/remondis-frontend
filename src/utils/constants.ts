@@ -1,9 +1,10 @@
-import iconListDefault from "../assets/-tabbar-iconListDefault.svg";
-import iconListSelected from "../assets/-tabbar-iconListSelected.svg";
-import iconMapDefault from "../assets/-tabbar-iconMapDefault.svg";
-import iconMapSelected from "../assets/-tabbar-iconMapSelected.svg";
-import iconCalenderDefault from "../assets/-tabbar-iconCalenderDefault.svg";
-import iconCalenderSelected from "../assets/-tabbar-iconCalenderSelected.svg";
+import { 
+  tabbarIconListDefault, 
+  tabbarIconListSelected, 
+  tabbarIconCalenderDefault, 
+  tabbarIconCalenderSelected, 
+  tabbarIconMapDefault, 
+  tabbarIconMapSelected } from "../assets/";
 
 export const TAB_BAR_MANAGER = [
   {
@@ -21,24 +22,24 @@ export const TAB_BAR_MANAGER = [
 export const TAB_BAR_INSPECTOR = [
   {
     name: "ToDo",
-    id: "list",
+    id: "todo",
     path: "/",
-    default: iconListDefault,
-    selected: iconListSelected,
+    default: tabbarIconListDefault,
+    selected: tabbarIconListSelected,
   },
   {
     name: "Calendar",
     id: "calendar",
     path: "/calendar",
-    default: iconCalenderDefault,
-    selected: iconCalenderSelected,
+    default: tabbarIconCalenderDefault,
+    selected: tabbarIconCalenderSelected,
   },
   {
     name: "Map",
     id: "map",
     path: "/map",
-    default: iconMapDefault,
-    selected: iconMapSelected,
+    default: tabbarIconMapDefault,
+    selected: tabbarIconMapSelected,
   },
 ];
 
@@ -62,27 +63,27 @@ export const TAB_BAR_CASE = [
 
 export const TYPE_OF_PROPERTIES = [
   {
-    id: 1, 
+    id: 1,
     name: "Appartment"
   },
   {
-    id: 2, 
+    id: 2,
     name: "House"
   },
   {
-    id: 3, 
+    id: 3,
     name: "Basement"
   },
   {
-    id: 4, 
+    id: 4,
     name: "Room"
   },
   {
-    id: 5, 
+    id: 5,
     name: "Attic"
   },
   {
-    id: 6, 
+    id: 6,
     name: "Backyard"
   },
 ]
