@@ -1,7 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { PopUpConfirm } from "../PopUpConfirm";
-import { LogoStyled, IconStyled, NavBarStyled } from "../../styles/style";
-import { logo, navbarIconAccount, navbarIconStatusFree, navbarIconStatusBusy, navbarIconBack} from "../../assets/";
+import {
+  LogoStyled,
+  IconStyled,
+  NavBarStyled,
+  ContainerNavBarIconsStyled,
+} from "../../styles/style";
+import {
+  logo,
+  navbarIconAccount,
+  navbarIconStatusFree,
+  navbarIconStatusBusy,
+  navbarIconBack,
+} from "../../assets/";
 import { useAppSelector, useAppDispatch } from "../../utils/hooks/useStore";
 import { setIsPopupVisible } from "../../store/slices/general";
 import { setIsInspectorActive, updateUser } from "../../store/slices/user";
@@ -45,18 +56,22 @@ export const NavBar: React.FC = () => {
         ) : (
           <LogoStyled src={logo} alt=""></LogoStyled>
         )}
-        {userRole === Role.INSPECTOR && (
+        <ContainerNavBarIconsStyled>
+          {userRole === Role.INSPECTOR && (
+            <IconStyled
+              src={
+                isInspectorActive ? navbarIconStatusBusy : navbarIconStatusFree
+              }
+              onClick={handler}
+            />
+          )}
           <IconStyled
-            src={isInspectorActive ? navbarIconStatusBusy : navbarIconStatusFree}
-            onClick={handler}
+            src={navbarIconAccount}
+            onClick={() => {
+              navigate(Locations.PROFILE);
+            }}
           />
-        )}
-        <IconStyled
-          src={navbarIconAccount}
-          onClick={() => {
-            navigate(Locations.PROFILE);
-          }}
-        />
+        </ContainerNavBarIconsStyled>
       </NavBarStyled>
       {isPopupVisible && (
         <PopUpConfirm

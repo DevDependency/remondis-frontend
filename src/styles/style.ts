@@ -11,6 +11,7 @@ export const MainStyled = styled.div<Props>`
 
 export const InsideMainStyled = styled.div<Props>`
   margin-top: 75px;
+  margin-bottom: 100px;
 `;
 
 export const CalendarContainerStyled = styled.div<Props>`
@@ -89,10 +90,13 @@ export const NavBarStyled = styled.div<Props>`
   width: 100vw;
   left: 0;
   top: 0;
+`;
 
-  & :nth-child(2) {
-    margin-left: 130px;
-  }
+export const ContainerNavBarIconsStyled = styled.div<Props>`
+  display: flex;
+  width: 5rem;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const LogoStyled = styled.img<Props>`
@@ -222,13 +226,22 @@ export const CaseItemStyled = styled.div<Props>`
   margin: 10px 0 10px;
   align-items: center;
   box-sizing: border-box;
-  text-align: right;
+  // text-align: right;
+  gap: 15px;
   border-bottom: ${(props) => props.theme.colors.border} 1px solid;
 `;
 
 //-----
 
 // CaseItemEdit
+
+export const CaseItemContainerViewStyled = styled.div<Props>`
+  width: 92%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 15px 0;
+`;
 
 export const CaseItemContainerEditStyled = styled.div<Props>`
   width: 92%;
@@ -254,6 +267,16 @@ export const CaseItemEditStyled = styled.div<Props>`
     padding: 5px 7px;
     width: 100%;
   }
+
+  select {
+    border: ${(props) => props.theme.borderline.border};
+    color: ${(props: any) => props.theme.colors.tx_grey_main};
+    height: 38px;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 5px 7px;
+    width: 100%;
+  }
 `;
 
 //-----
@@ -266,7 +289,7 @@ export const ButtonContainerPopupStyled = styled.div<Props>`
   justify-content: center;
   // width: 100%;
   height: 85px;
-  margin: 0 auto;
+  // margin: 0 auto;
 `;
 
 export const ButtonContainerStyled = styled.div<Props>`

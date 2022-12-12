@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import {
-  CaseItemContainerEditStyled,
+  CaseItemContainerViewStyled,
 } from "../../styles/style";
 import {
   TYPE_OF_PROPERTIES,
@@ -63,7 +63,7 @@ export const CaseDetailsEdit: React.FC = () => {
             handleSubmit,
           }) => (
             <Form>
-              <CaseItemContainerEditStyled>
+              <CaseItemContainerViewStyled>
                 <CaseItemEditStyled>
                   <label htmlFor="apartments">Type of appartment</label>
                   <select
@@ -234,7 +234,7 @@ export const CaseDetailsEdit: React.FC = () => {
                     <CheckBoxLabel htmlFor="removing_curtain" />
                   </CheckBoxWrapper>
                 </CaseItemStyled>
-              </CaseItemContainerEditStyled>
+              </CaseItemContainerViewStyled>
               {/* <div>
         <label htmlFor="date_of_appointment">Date of appointment</label>
         <input type="date" id="date_of_appointment" name="date_of_appointment" defaultValue={values.date_of_appointment} onChange={handleChange}></input>
