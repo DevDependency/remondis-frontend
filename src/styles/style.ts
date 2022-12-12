@@ -99,6 +99,9 @@ export const ContainerNavBarIconsStyled = styled.div<Props>`
   justify-content: space-between;
 `;
 
+export const LogoNavBarStyled = styled.img`
+`;
+
 export const LogoStyled = styled.img`
   position: absolute;
   top: 0;
