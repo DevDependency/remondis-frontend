@@ -8,15 +8,25 @@ export default createGlobalStyle`
         outline:0;
         box-sizing:border-box;  
     }
+
     body {
       font-family: 'Roboto', sans-serif;
+    }
 
-  /* *::before,
-  *::after { 
-    ...
-  }
-
-  body {
-    ...
-  } */
+    button {
+      background-color: transparent;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
+      border: none;
+      weight: 170px;
+      position: parent;
+      border-radius: 0;
+      text-decoration: none;
+      cursor: pointer;
+      padding: 10px 20px;
+      &: hover {
+        border: none;
+      }
+    }
 `

@@ -11,7 +11,8 @@ import {
   ButtonSmallStyled,
 
 } from "../../styles/style";
-import { apiPatchCasesByIdReady } from "../../utils/api";
+import { setActiveCaseTabBar } from "../../store/slices/general";
+
 export const CaseGeneral: React.FC = () => {
   const dispatch = useAppDispatch();
   const { caseId } = useParams<{ caseId?: string }>();
@@ -21,6 +22,7 @@ export const CaseGeneral: React.FC = () => {
     if (caseId) {
       dispatch(getCasesById(parseInt(caseId)));
     }
+    dispatch(setActiveCaseTabBar("general"))
   }, []);
   const editlHandler = () => {
     navigate('edit', {relative: "path", state: { isNewCase: false} })
@@ -54,7 +56,9 @@ export const CaseGeneral: React.FC = () => {
         </CaseItemStyled>
         <CaseItemStyled>
           <InputPlaceholderShown>Date Of Creating</InputPlaceholderShown>
-          <TextMain>{currentCase?.created_at}</TextMain>
+          <TextMain>{new Date(currentCase?.created_at as string).toLocaleDateString(
+                  "en-GB"
+                )}</TextMain>
         </CaseItemStyled>
         <CaseItemStyled>
           <InputPlaceholderShown>Inspector</InputPlaceholderShown>

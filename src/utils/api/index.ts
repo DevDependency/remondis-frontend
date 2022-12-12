@@ -33,6 +33,13 @@ import {
   apiGetCoordinates,
   apiGetCasesItems,
   apiGetCasesItemByRoom,
+  apiPostCaseItem,
+  apiPutCaseItem,
+  apiDeleteCaseItem,
+  apiPostCasePhoto,
+  apiPutCasePhoto,
+  apiDeleteCasePhoto,
+
 } from "./apiCase";
 
 export {
@@ -64,4 +71,10 @@ export {
   apiGetCoordinates,
   apiGetCasesItems,
   apiGetCasesItemByRoom,
+  apiPostCaseItem,
+  apiPutCaseItem,
+  apiDeleteCaseItem,
+  apiPostCasePhoto,
+  apiPutCasePhoto,
+  apiDeleteCasePhoto,
 };
