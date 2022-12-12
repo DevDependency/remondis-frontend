@@ -237,6 +237,7 @@ export const {
   setDeletedCaseId,
   setCurrentCase,
   setCurrentRoom,
+  setCaseItems,
 
 } = caseSlice.actions;
 

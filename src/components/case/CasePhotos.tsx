@@ -1,10 +1,14 @@
 import { useAppSelector, useAppDispatch } from "../../utils/hooks/useStore";
-import { getCaseItems, getCaseItem } from '../../store/slices/case';
+import { getCaseItems, getCaseItem, setCaseItems } from "../../store/slices/case";
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Room } from "../../interfaces/cases";
-import {caseIconEdit} from "../../assets/";
-import { PhotoContainerStyled, PhotoStyled, TextMain } from '../../styles/style';
+import { caseIconEdit } from "../../assets/";
+import {
+  PhotoContainerStyled,
+  PhotoStyled,
+  TextMain,
+} from "../../styles/style";
 import {
   ButtonContainerStyled,
   ButtonSmallStyled,
@@ -19,8 +23,15 @@ export const CasePhotos: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (caseId) dispatch(getCaseItems(parseInt(caseId)));
-    dispatch(setActiveCaseTabBar("photos"))
+    if (caseId) {
+      dispatch(getCaseItems(parseInt(caseId)));
+      console.log("mounting photos");
+    }
+    dispatch(setActiveCaseTabBar("photos"));
+    return () => {
+      console.log("unmounting photos");
+      dispatch(setCaseItems([]));
+    };
   }, []);
 
   const editlHandler = (e: any) => {
@@ -74,27 +85,27 @@ export const CasePhotos: React.FC = () => {
             </TextMain>
             <TextMain>{el.description}</TextMain>
             <PhotoContainerStyled>
-            {el.CasePhoto.map((img, index) => (
-              <PhotoStyled
-                /* style={{
+              {el.CasePhoto.map((img, index) => (
+                <PhotoStyled
+                  /* style={{
                   position: "relative",
                 }} */
-                key={index}
-              >
-                <img
-                  src={
-                    "data:image/jpeg;base64," +
-                    Buffer.from(img.photo.data).toString("base64")
-                  }
-                  alt=""
-                  style={{
-                    /* position: "relative", */
-                    width: "110px",
-                    height: "100px",
-                  }}
-                />
-              </PhotoStyled>
-            ))}
+                  key={index}
+                >
+                  <img
+                    src={
+                      "data:image/jpeg;base64," +
+                      Buffer.from(img.photo.data).toString("base64")
+                    }
+                    alt=""
+                    style={{
+                      /* position: "relative", */
+                      width: "110px",
+                      height: "100px",
+                    }}
+                  />
+                </PhotoStyled>
+              ))}
             </PhotoContainerStyled>
           </div>
         ))}
