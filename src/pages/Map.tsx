@@ -38,7 +38,7 @@ export const Map: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(getCoordinates(userId));
+    if(userId) dispatch(getCoordinates(userId));
     dispatch(setActiveInspectorTabBar("map"))
   }, []);
 
