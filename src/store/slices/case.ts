@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from '../../utils/api';
 import { Case, Room } from '../../interfaces/cases';
-import {CaseState} from '../../interfaces/store';
+import { CaseState } from '../../interfaces/store';
 
 const initialState: CaseState = {
   createdCaseId: 0,
@@ -40,7 +40,7 @@ export const getCasesById = createAsyncThunk(
 
 export const getCasesToDo = createAsyncThunk(
   "case/getCasesToDo",
-  async (userId : number) => {
+  async (userId: number) => {
     try {
       const response = await api.apiGetCasesToDo(userId);
       return response.cases;
@@ -185,7 +185,7 @@ const caseSlice = createSlice({
     setCasesToDo(state, action) {
       state.casesToDo = action.payload;
     },
-    setCurrentCase(state, action){
+    setCurrentCase(state, action) {
       state.currentCase = action.payload;
     },
     setCreatedCaseId(state, action) {
@@ -194,13 +194,14 @@ const caseSlice = createSlice({
     setDeletedCaseId(state, action) {
       state.deletedCaseId = action.payload;
     },
-    setCoordinates(state, action){
-      state.coordinates = action.payload;
+    setCoordinates(state, action) {
+      if (action.payload) state.coordinates = action.payload;
+      else state.coordinates = [];
     },
-    setCaseItems(state, action){
+    setCaseItems(state, action) {
       state.caseRooms = action.payload;
     },
-    setCurrentRoom(state, action){
+    setCurrentRoom(state, action) {
       state.currentRoom = action.payload;
     },
   },

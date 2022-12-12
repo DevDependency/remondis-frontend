@@ -5,6 +5,7 @@ import { TabBarInspector } from "../components/containers/";
 import { useAppDispatch, useAppSelector } from "../utils/hooks/useStore";
 import { getCoordinates } from "../store/slices/case";
 import { setActiveInspectorTabBar } from "../store/slices/general";
+import { COORDINATES_BERLIN } from "../utils/constants";
 
 export const Map: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -14,7 +15,7 @@ export const Map: React.FC = () => {
   );
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<any>(null);
-  const [zoom] = useState(10);
+  const [zoom] = useState(9);
 
   const renderCurrentMap = () => {
     if (mapContainer.current !== null)
@@ -23,7 +24,7 @@ export const Map: React.FC = () => {
         style: `https://api.maptiler.com/maps/streets/style.json?key=${
           import.meta.env.VITE_MAPTILER_API_KEY
         }`,
-        center: [coordinates[0].lng, coordinates[0].lat],
+        center: coordinates.length ? [coordinates[0].lng, coordinates[0].lat] : COORDINATES_BERLIN,
         zoom,
       });
     map.current.addControl(new maplibregl.NavigationControl({}), "top-right");
@@ -42,14 +43,14 @@ export const Map: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (map.current || !coordinates.length) return;
+    if (map.current) return;
     renderCurrentMap();
   }, [coordinates]);
 
   return (
     <>
       <TabBarInspector />
-        {coordinates.lat !== 0 && coordinates.lng !== 0 && (
+        { coordinates.lat !== 0 && coordinates.lng !== 0 && (
           <div
             className="MapWindow"
             ref={mapContainer}
