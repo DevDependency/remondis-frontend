@@ -3,6 +3,9 @@ import { CaseGeneral, Case, Room, File } from '../../interfaces/cases';
 
 const server = axios.create({
   baseURL: import.meta.env.VITE_BASE_API_URL,
+  validateStatus: (status: number) => {
+    return (status >= 200 && status < 300) || status == 404
+},
 });
 
 export const apiGetCases = async () => {
@@ -154,11 +157,14 @@ export const apiGetCasesToDo = async (userId: number) => {
 };
 
 export const apiGetCoordinates = async (userId: number) => {
+  let res = null;
   try {
-    const res = await server.get(`cases/coordinates/${userId}`);
+    res = await server.get(`cases/coordinates/${userId}`);
     return res.data;
   } catch (error) {
     console.log(error);
+  } finally {
+    if(res) return res.data;
   }
 };
 
