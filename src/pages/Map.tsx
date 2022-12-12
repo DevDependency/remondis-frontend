@@ -24,7 +24,9 @@ export const Map: React.FC = () => {
         style: `https://api.maptiler.com/maps/streets/style.json?key=${
           import.meta.env.VITE_MAPTILER_API_KEY
         }`,
-        center: coordinates.length ? [coordinates[0].lng, coordinates[0].lat] : COORDINATES_BERLIN,
+        center: coordinates.length
+          ? [coordinates[0].lng, coordinates[0].lat]
+          : COORDINATES_BERLIN,
         zoom,
       });
     map.current.addControl(new maplibregl.NavigationControl({}), "top-right");
@@ -38,8 +40,8 @@ export const Map: React.FC = () => {
   };
 
   useEffect(() => {
-    if(userId) dispatch(getCoordinates(userId));
-    dispatch(setActiveInspectorTabBar("map"))
+    if (userId) dispatch(getCoordinates(userId));
+    dispatch(setActiveInspectorTabBar("map"));
   }, []);
 
   useEffect(() => {
@@ -50,16 +52,26 @@ export const Map: React.FC = () => {
   return (
     <>
       <TabBarInspector />
-        { coordinates.lat !== 0 && coordinates.lng !== 0 && (
-          <div
-            className="MapWindow"
-            ref={mapContainer}
-            style={{
-              width: "100vw",
-              height: "100vh",
-            }}
-          />
-        )}
+      {coordinates.lat !== 0 && coordinates.lng !== 0 && (
+        <div
+          className="MapWindow"
+          ref={mapContainer}
+          style={{
+            width: "100vw",
+            height: "100vh",
+          }}
+        />
+      )}
+      {coordinates.lat !== 0 && coordinates.lng !== 0 && (
+        <div
+          className="MapWindow"
+          ref={mapContainer}
+          style={{
+            width: "100vw",
+            height: "100vh",
+          }}
+        />
+      )}
     </>
   );
 };

@@ -28,8 +28,10 @@ export const CaseDetailsEdit: React.FC = () => {
   const currentCase = useAppSelector((state) => state.caseSlice.currentCase);
   const navigate = useNavigate();
   useEffect(() => {
-    if (caseId) {
+    if (caseId && caseId !== "0") {
       dispatch(getCasesById(parseInt(caseId)));
+      console.log('Inside caseById');
+      console.log(caseId);
     }
     dispatch(setIsEditMode(true))
     return () => {

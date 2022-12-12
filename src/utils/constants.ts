@@ -106,4 +106,13 @@ export const NUMBER_OF_ROOMS = [
   { name: "6", value: 6 },
 ];
 
+export const NEW_CASE = {    
+  address: "",
+  client_first_name:"",
+  client_last_name:"",
+  client_email:"",
+  client_phone:"",  
+}
+
+
 export const COORDINATES_BERLIN: [number, number] = [13.396318, 52.494622];

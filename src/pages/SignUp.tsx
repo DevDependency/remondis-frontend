@@ -7,6 +7,21 @@ import { Link, useNavigate } from "react-router-dom";
 import { RootState } from "../interfaces/store";
 import { UsersValidation } from "../interfaces/users";
 import { apiPostUsersRegister } from "../utils/api";
+import {
+  AuthorizationWrapper,
+  AuthorizationForm,
+  LogoStyled,
+  TitleLogin,
+  InputLabel,
+  AuthorizationInput,
+  AuthorizationLinksContainer,
+  AuthorizationButtonTop,
+  AuthorizationLinkBottom,
+  AuthorizationContainer,
+  AuthorizationInputContainer,
+  AuthorizationInputTitleContainer,
+} from "../styles/style";
+import logo from "../assets/logoREMONDISx112.png";
 
 const validationSchema = Yup.object({
   email: Yup.string().email().required(),
@@ -48,25 +63,38 @@ export const SignUp: React.FC = () => {
   });
 
   return (
-    <>
-      <div>
-        {/* <Logo src={NEW_CONSTANT.logo} /> */}
-        {/* Logo must be here */}
-        <form onSubmit={formik.handleSubmit} noValidate>
-          <h1>Sign Up</h1>
-          <label htmlFor="email">Email</label>
-          <input
-            {...formik.getFieldProps("email")}
-            // areCredentialsWrong={areCredentialsWrong}
-          />
-          {formik.errors.email && formik.touched.email && (
-            <>{isHoveringEmail && <div>{formik.errors.email}</div>}</>
-          )}
-          <div>
-            <Link to="/login">Login</Link>
-          </div>
-        </form>
-      </div>
-    </>
+    <AuthorizationWrapper>
+      <AuthorizationForm onSubmit={formik.handleSubmit} noValidate>
+        <AuthorizationContainer>
+          <LogoStyled src={logo} />
+
+          <AuthorizationInputTitleContainer>
+            <TitleLogin>Sign Up</TitleLogin>
+            <AuthorizationInputContainer>
+              <InputLabel htmlFor="email">Email</InputLabel>
+              <AuthorizationInput
+                {...formik.getFieldProps("email")}
+                // areCredentialsWrong={areCredentialsWrong}
+              />
+              {formik.errors.email && formik.touched.email && (
+                <>{isHoveringEmail && <div>{formik.errors.email}</div>}</>
+              )}
+            </AuthorizationInputContainer>
+          </AuthorizationInputTitleContainer>
+          <AuthorizationLinksContainer>
+            <AuthorizationButtonTop type="submit">
+              Sign Up
+            </AuthorizationButtonTop>
+            <AuthorizationLinkBottom
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              Login
+            </AuthorizationLinkBottom>
+          </AuthorizationLinksContainer>
+        </AuthorizationContainer>
+      </AuthorizationForm>
+    </AuthorizationWrapper>
   );
 };

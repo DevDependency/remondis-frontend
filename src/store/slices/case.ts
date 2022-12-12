@@ -1,14 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from '../../utils/api';
-import { Case, Room } from '../../interfaces/cases';
+import { Case, CaseGeneral, Room } from '../../interfaces/cases';
 import { CaseState } from '../../interfaces/store';
+import { NEW_CASE } from "../../utils/constants";
 
 const initialState: CaseState = {
   createdCaseId: 0,
   deletedCaseId: 0,
   casesToDo: [],
   cases: [],
-  currentCase: undefined,
+  currentCase: NEW_CASE,
   coordinates: [],
   caseRooms: [],
   currentRoom: undefined,
@@ -52,7 +53,7 @@ export const getCasesToDo = createAsyncThunk(
 
 export const createCase = createAsyncThunk(
   "case/createCase",
-  async (Case: Case) => {
+  async (Case: CaseGeneral) => {
     try {
       const response = await api.apiPostCases(Case);
       return response.case.id;
