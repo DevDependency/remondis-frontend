@@ -10,13 +10,26 @@ import {
   ButtonContainerStyled,
   ButtonSmallStyled,
 } from "../../styles/style";
+import {
+  inputIconNo,
+  inputIconYes,
+} from '../../assets';
 import { setActiveCaseTabBar } from "../../store/slices/general";
+import { IconStyled } from '../../styles/style';
+import { TYPE_OF_PROPERTIES } from "../../utils/constants";
 
 export const CaseDetails: React.FC = () => {
   const dispatch = useAppDispatch();
   const { caseId } = useParams<{ caseId?: string }>();
   const currentCase = useAppSelector((state) => state.caseSlice.currentCase);
   const navigate = useNavigate();
+  
+  const inputIcons = {
+    true: inputIconYes,
+    false: inputIconNo,
+  };
+  type inputValue = keyof typeof inputIcons;
+
   useEffect(() => {
     if (caseId) {
       dispatch(getCasesById(parseInt(caseId)));
@@ -35,7 +48,7 @@ export const CaseDetails: React.FC = () => {
         <CaseItemContainerStyled>
           <CaseItemStyled>
             <InputPlaceholderShown>Type of apartment</InputPlaceholderShown>
-            <TextMain>{currentCase.type_of_property_id}</TextMain>
+            <TextMain>{ currentCase.type_of_property_id}</TextMain>
           </CaseItemStyled>
           <CaseItemStyled>
             <InputPlaceholderShown>Number of rooms</InputPlaceholderShown>
@@ -47,45 +60,45 @@ export const CaseDetails: React.FC = () => {
           </CaseItemStyled>
           <CaseItemStyled>
             <InputPlaceholderShown>Clear the property</InputPlaceholderShown>
-            <TextMain>{currentCase.clear_area}</TextMain>
+            <IconStyled src={inputIcons[currentCase.clear_area as inputValue]} />
           </CaseItemStyled>
           <CaseItemStyled>
             <InputPlaceholderShown>Backyard</InputPlaceholderShown>
-            <TextMain>{currentCase.back_house}</TextMain>
+            <IconStyled src={inputIcons[currentCase.back_house as inputValue]} />
           </CaseItemStyled>
           <CaseItemStyled>
             <InputPlaceholderShown>
               Accessibility / parking facilities
             </InputPlaceholderShown>
-            <TextMain>{currentCase.parking}</TextMain>
+            <IconStyled src={inputIcons[currentCase.parking as inputValue]} />
           </CaseItemStyled>
           <CaseItemStyled>
             <InputPlaceholderShown>Elevator</InputPlaceholderShown>
-            <TextMain>{currentCase.elevator}</TextMain>
+            <IconStyled src={inputIcons[currentCase.elevator as inputValue]} />
           </CaseItemStyled>
           <CaseItemStyled>
             <InputPlaceholderShown>Lift for furniture</InputPlaceholderShown>
-            <TextMain>{currentCase.furniture_lift}</TextMain>
+            <IconStyled src={inputIcons[currentCase.furniture_lift as inputValue]} />
           </CaseItemStyled>
           <CaseItemStyled>
             <InputPlaceholderShown>
               Clearance with closet contents (GSA)
             </InputPlaceholderShown>
-            <TextMain>{currentCase.closet_contents}</TextMain>
+            <IconStyled src={inputIcons[currentCase.closet_contents as inputValue]} />
           </CaseItemStyled>
           <CaseItemStyled>
             <InputPlaceholderShown>
               Removing carpets (not glued)
             </InputPlaceholderShown>
-            <TextMain>{currentCase.removing_carpets}</TextMain>
+            <IconStyled src={inputIcons[currentCase.removing_carpets as inputValue]} />
           </CaseItemStyled>
           <CaseItemStyled>
             <InputPlaceholderShown>Removing lamps</InputPlaceholderShown>
-            <TextMain>{currentCase.removing_lamps}</TextMain>
+            <IconStyled src={inputIcons[currentCase.removing_lamps as inputValue]} />
           </CaseItemStyled>
           <CaseItemStyled>
             <InputPlaceholderShown>Removing curtain rods</InputPlaceholderShown>
-            <TextMain>{currentCase.removing_curtain}</TextMain>
+            <IconStyled src={inputIcons[currentCase.removing_curtain as inputValue]} />
           </CaseItemStyled>
           <CaseItemStyled>
             <InputPlaceholderShown>Date of appointment</InputPlaceholderShown>
