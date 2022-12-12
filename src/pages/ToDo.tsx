@@ -20,6 +20,7 @@ export const ToDo: React.FC = () => {
     dispatch(setActiveManagerTabBar("todo"))
     dispatch(setActiveInspectorTabBar("todo"))
   }, []);
+  
   return (
     <>
       {userRole === Role.MANAGER ? <TabBarManager /> : <TabBarInspector />}
@@ -33,6 +34,7 @@ export const ToDo: React.FC = () => {
               )}
               address={item.address}
               caseId={item.id}
+              state={item.State?.title}
               message={item.message}
               action={item.action}
               isTodo={true}

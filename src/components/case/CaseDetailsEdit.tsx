@@ -51,7 +51,7 @@ export const CaseDetailsEdit: React.FC = () => {
         <Formik
           initialValues={{ ...currentCase }}
           onSubmit={async (values) => {
-            dispatch(editTheCase({ id: currentCase.id, changedValue: values }));
+            dispatch(editTheCase({ id: caseId, changedValue: values }));
             saveHandler();
           }}
         >

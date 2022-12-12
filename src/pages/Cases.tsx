@@ -32,6 +32,7 @@ export const Cases: React.FC = () => {
                 )}
                 address={item.address}
                 caseId={item.id}
+                state={item.State?.title}
                 isTodo={false}
               />
             ))}
