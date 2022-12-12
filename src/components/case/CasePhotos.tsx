@@ -25,11 +25,9 @@ export const CasePhotos: React.FC = () => {
   useEffect(() => {
     if (caseId) {
       dispatch(getCaseItems(parseInt(caseId)));
-      console.log("mounting photos");
     }
     dispatch(setActiveCaseTabBar("photos"));
     return () => {
-      console.log("unmounting photos");
       dispatch(setCaseItems([]));
     };
   }, []);
@@ -43,7 +41,7 @@ export const CasePhotos: React.FC = () => {
           Array.from(rooms, (x: Room) => x.room)
         );
       }
-      navigate(`${maxRoom + 1}/edit`);
+      navigate(`${maxRoom + 1}/edit`, {state: {isNewRoom: true}});
     } else {
       if (caseId) {
         dispatch(
@@ -53,7 +51,7 @@ export const CasePhotos: React.FC = () => {
           })
         );
       }
-      navigate(`${e.target.id}/edit`);
+      navigate(`${e.target.id}/edit`, {state: {isNewRoom: false}});
     }
   };
 

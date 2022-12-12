@@ -1,4 +1,4 @@
-import { CaseWithId, CasesToDo, Coordinates, Room } from "./cases";
+import { CaseWithId, CasesToDo, Coordinates, Room, Case } from './cases';
 import { store } from "../store/store";
 
 export interface CaseState {
@@ -6,7 +6,7 @@ export interface CaseState {
   deletedCaseId: number;
   cases: CaseWithId[];
   casesToDo: CasesToDo[];
-  currentCase: CaseWithId | undefined;
+  currentCase: Case | undefined;
   coordinates: Coordinates[];
   caseRooms: Room[];
   currentRoom: Room | undefined;

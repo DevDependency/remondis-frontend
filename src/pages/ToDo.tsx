@@ -22,27 +22,27 @@ export const ToDo: React.FC = () => {
     dispatch(setActiveManagerTabBar("todo"));
     dispatch(setActiveInspectorTabBar("todo"));
   }, []);
+  
   return (
     <>
-      <InsideMainBottomStyled>
-        {userRole === Role.MANAGER ? <TabBarManager /> : <TabBarInspector />}
-        <MainContainerStyled>
-          {tasks &&
-            tasks.map((item: CasesToDo, index: number) => (
-              <CaseItem
-                key={index}
-                time={new Date(item.created_at as string).toLocaleDateString(
-                  "en-GB"
-                )}
-                address={item.address}
-                caseId={item.id}
-                message={item.message}
-                action={item.action}
-                isTodo={true}
-              />
-            ))}
-        </MainContainerStyled>
-      </InsideMainBottomStyled>
+      {userRole === Role.MANAGER ? <TabBarManager /> : <TabBarInspector />}
+      <MainContainerStyled>
+        {tasks &&
+          tasks.map((item: CasesToDo, index: number) => (
+            <CaseItem
+              key={index}
+              time={new Date(item.created_at as string).toLocaleDateString(
+                "en-GB"
+              )}
+              address={item.address}
+              caseId={item.id}
+              state={item.State?.title}
+              message={item.message}
+              action={item.action}
+              isTodo={true}
+            />
+          ))}  
+      </MainContainerStyled>
     </>
   );
 };

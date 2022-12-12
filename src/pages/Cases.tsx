@@ -22,25 +22,24 @@ export const Cases: React.FC = () => {
 
   return (
     <>
-      <InsideMainBottomStyled>
-        <TabBarManager />
-        <MainContainerStyled>
-          {tasks &&
-            tasks
-              .filter((item: CaseWithId) => item.state_id != 7 && item)
-              .map((item: CaseWithId, index: number) => (
-                <CaseItem
-                  key={index}
-                  time={new Date(item.created_at as string).toLocaleDateString(
-                    "en-GB"
-                  )}
-                  address={item.address}
-                  caseId={item.id}
-                  isTodo={false}
-                />
-              ))}
-        </MainContainerStyled>
-      </InsideMainBottomStyled>
+      <TabBarManager />
+      <MainContainerStyled>
+        {tasks &&
+          tasks
+            .filter((item: CaseWithId) => item.state_id != 7 && item)
+            .map((item: CaseWithId, index: number) => (
+              <CaseItem
+                key={index}
+                time={new Date(item.created_at as string).toLocaleDateString(
+                  "en-GB"
+                )}
+                address={item.address}
+                caseId={item.id}
+                state={item.State?.title}
+                isTodo={false}
+              />
+            ))}
+      </MainContainerStyled>
     </>
   );
 };

@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "../../utils/hooks/useStore";
 import { useState, useEffect } from "react";
 import { addPhoto, iconCancel } from "../../assets/";
 import { File } from "../../interfaces/cases";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import {
   getCaseItem,
   updateCasePhoto,
@@ -26,6 +26,10 @@ import * as buffer from "buffer";
 window.Buffer = buffer.Buffer;
 
 export const CasePhotosEdit: React.FC = () => {
+  
+  const { state } = useLocation();
+  const { isNewRoom } = state;
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const currentRoom = useAppSelector((state) => state.caseSlice.currentRoom);
@@ -35,7 +39,7 @@ export const CasePhotosEdit: React.FC = () => {
   const { room } = useParams<{ room: string }>();
 
   useEffect(() => {
-    if (caseId && room && caseId !== "0" && room !== "0") {
+    if (!isNewRoom && caseId && room && caseId !== "0" && room !== "0") {
       dispatch(
         getCaseItem({
           caseId: parseInt(caseId),
@@ -120,7 +124,7 @@ export const CasePhotosEdit: React.FC = () => {
 
   return (
     <>
-      {currentRoom && (
+      {(isNewRoom || currentRoom) && (
         <Formik
           initialValues={{
             room_title: currentRoom?.room_title,

@@ -21,12 +21,14 @@ import {
   caseIconSettings,
   caseIconBin,
   caseIconEdit,
+  tabbarIconCalenderDefault,
 } from "../../assets/";
 import { Role } from "../../interfaces/users";
 
 export const CaseItem: React.FC<CaseItemProps> = ({
   time,
   address,
+  state,
   caseId,
   isTodo,
   message,
@@ -71,9 +73,11 @@ export const CaseItem: React.FC<CaseItemProps> = ({
         <CaseContainerStyled isSize={size}>
           <CaseInfoStyled onClick={openCaseHandler}>
             <DataAndAdressStyled>
+              <IconStyled src={tabbarIconCalenderDefault}></IconStyled>
               <TextMain>{time}</TextMain>
-              <TextMain>{address}</TextMain>
+              <TextMain>{state}</TextMain>
             </DataAndAdressStyled>
+            <TextMain>{address}</TextMain>
             {isTodo && (
               <>
                 <TextSecondary>{message}</TextSecondary>
