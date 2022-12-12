@@ -1,6 +1,6 @@
 import { Theme } from "../interfaces/style";
 
-export const theme:Theme = {
+export const theme: Theme = {
   colors: {
     tx_grey_main: "#3A3A42",
     tx_grey_secondary: "#9E9E9E",

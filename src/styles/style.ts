@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 export const MainStyled = styled.div<Props>`
   width: 100vw;
-  // height: 100vh;
+  height: 100vh;
 `;
 
 export const InsideMainStyled = styled.div<Props>`
@@ -95,7 +95,10 @@ export const NavBarStyled = styled.div<Props>`
   }
 `;
 
-export const LogoStyled = styled.img``;
+export const LogoStyled = styled.img`
+  position: absolute;
+  top: 0;
+`;
 
 export const IconStyled = styled.img`
   width: 3vh;
@@ -281,52 +284,54 @@ export const ButtonContainerStyled = styled.div<Props>`
 `;
 
 export const ButtonStyled = styled.div<Props>`
-display: flex; 
-justify-content: center;
-align-items: center;
-width: 360px;
-height: 45px;
-border: none;
-background-color: ${(props) =>
-  props.color === "red" ? props.theme.colors.red : props.theme.colors.grey};
-border: none;
-font-family: ${(props: Props) => props.theme.fonts.default};
-color: ${(props: Props) => props.theme.colors.white};
-font-weight: 500;
-font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 360px;
+  height: 45px;
+  border: none;
+  background-color: ${(props) =>
+    props.color === "red" ? props.theme.colors.red : props.theme.colors.grey};
+  border: none;
+  font-family: ${(props: Props) => props.theme.fonts.default};
+  color: ${(props: Props) => props.theme.colors.white};
+  font-weight: 500;
+  font-size: 16px;
 
-&:hover{
-cursor: pointer;
-background-color: ${(props) =>
-  props.color === "red"
-    ? props.theme.colors.red_hover
-    : props.theme.colors.grey_hover};
-}`;
+  &:hover {
+    cursor: pointer;
+    background-color: ${(props) =>
+      props.color === "red"
+        ? props.theme.colors.red_hover
+        : props.theme.colors.grey_hover};
+  }
+`;
 
 export const ButtonSmallStyled = styled.div<Props>`
-display: flex; 
-justify-content: center;
-align-items: center;
-width: 170px;
-height: 45px;
-font-family: ${(props) => props.theme.fonts.default};
-color: ${(props) => props.theme.colors.white};
-background-color: ${(props) =>
-  props.color === "red" ? props.theme.colors.red : props.theme.colors.grey};
-padding: 1rem;
-border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 170px;
+  height: 45px;
+  font-family: ${(props) => props.theme.fonts.default};
+  color: ${(props) => props.theme.colors.white};
+  background-color: ${(props) =>
+    props.color === "red" ? props.theme.colors.red : props.theme.colors.grey};
+  padding: 1rem;
+  border: none;
 
-&:not(last-item){
+  &:not(last-item) {
     margin: 10px;
-}
+  }
 
-&:hover{
-cursor: pointer;
-background-color: ${(props) =>
-  props.color === "red"
-    ? props.theme.colors.red_hover
-    : props.theme.colors.grey_hover};
-}`;
+  &:hover {
+    cursor: pointer;
+    background-color: ${(props) =>
+      props.color === "red"
+        ? props.theme.colors.red_hover
+        : props.theme.colors.grey_hover};
+  }
+`;
 
 //-----
 
@@ -422,4 +427,73 @@ export const PhotoStyled = styled.div`
   height: 100px;
   margin-bottom: 10px;
   margin-right: 8px;
+`;
+// SignUp
+
+export const AuthorizationWrapper = styled.div<Props>`
+  box-sizing: border-box;
+  margin-top: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  // @media (min-width: 400px) {
+  //   width: 20rem;
+  //   margin: 10rem auto;
+  // }
+`;
+
+export const AuthorizationForm = styled.form``;
+
+export const AuthorizationHeader = styled.p<Props>`
+  font-family: ${(props) => props.theme.fonts.default};
+  color: ${(props) => props.theme.colors.tx_grey_main};
+  font-weight: 400;
+  font-size: 16px;
+`;
+
+export const AuthorizationInput = styled.input<Props>`
+  font-family: ${(props) => props.theme.fonts.default};
+  color: ${(props) => props.theme.colors.tx_grey_main};
+  font-weight: 400;
+  font-size: 32px;
+  text-align: center;
+`;
+
+export const AuthorizationButtonTop = styled.button<Props>`
+  background-color: ${(props) => props.theme.colors.red};
+`;
+
+export const AuthorizationLinkBottom = styled.p<Props>`
+  color: ${(props) => props.theme.colors.tx_grey_main};
+  text-align: center;
+`;
+// Authorization Containers (divs)
+export const AuthorizationContainer = styled.div<Props>`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 100px;
+
+  // @media (max-width: 480px) {
+  //   max-width: 480px;
+  // }
+`;
+
+export const AuthorizationLinksContainer = styled.div<Props>`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const AuthorizationInputContainer = styled.div<Props>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const AuthorizationInputTitleContainer = styled.div<Props>`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 30px;
 `;
