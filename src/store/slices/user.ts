@@ -3,6 +3,7 @@ import * as api from "../../utils/api";
 import { UserLogin } from "../../interfaces/users";
 import { UserState } from "../../interfaces/store";
 import { apiPostUsersRegister, apiGetUserByEmail } from "../../utils/api";
+import { apiGetUsersListByRole } from "../../utils/api/apiUser";
 
 const initialState: UserState = {
   userRole: "manager",
@@ -15,6 +16,7 @@ const initialState: UserState = {
   confirmUserHandler: false,
   userEmail: "",
   isInspectorActive: true,
+  inspectorList: [],
 };
 
 export const registerUser = createAsyncThunk(
@@ -76,6 +78,14 @@ export const getUserByEmail = createAsyncThunk(
   }
 );
 
+export const getUsersByRole = createAsyncThunk(
+  "user/userRole",
+ async () => {
+    const response = await api.apiGetUsersListByRole();
+    console.log(response.users);
+    return response.users;
+ })
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -114,6 +124,9 @@ const userSlice = createSlice({
     setIsInspectorActive(state) {
       state.isInspectorActive = !state.isInspectorActive;
     },
+    setInspectorList(state, action) {
+      state.inspectorList = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -125,6 +138,9 @@ const userSlice = createSlice({
       })
       .addCase(getUserByEmail.fulfilled, (state, action) => {
         userSlice.caseReducers.setUserId(state, action);
+      })
+      .addCase(getUsersByRole.fulfilled, (state, action) => {
+        userSlice.caseReducers.setInspectorList(state, action);
       });
   },
 });
@@ -139,6 +155,7 @@ export const {
   setEmail,
   setUserId,
   setIsInspectorActive,
+  setInspectorList,
 } = userSlice.actions;
 
 export default userSlice.reducer;
