@@ -9,10 +9,11 @@ import {
   ButtonContainerStyled,
   ButtonStyled
 } from "../styles/style";
+import { Role } from "../interfaces/users";
 
 export const Main: React.FC = () => {
   const navigate = useNavigate();
-  const isLoggedIn = useAppSelector((state) => state.userSlice.isLoggedIn);
+  const {isLoggedIn, userRole} = useAppSelector((state) => state.userSlice);
   useEffect(() => {
     if (!isLoggedIn) navigate(Locations.LOGIN);
   }, [isLoggedIn]);
@@ -25,9 +26,9 @@ export const Main: React.FC = () => {
     <>
       <MainStyled>
         <NavBar />
-        {!insideCase && <ButtonContainerStyled>
+        {userRole === Role.MANAGER && !insideCase && <ButtonContainerStyled>
         <button onClick={toNewCase}>
-          <ButtonStyled color={"red"} >Create New Case</ButtonStyled>
+          <ButtonStyled color={"red"} >New Case</ButtonStyled>
         </button>
       </ButtonContainerStyled>}       
         <InsideMainStyled>
