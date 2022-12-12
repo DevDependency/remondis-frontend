@@ -1,4 +1,4 @@
-import { getCasesById, createCase, editTheCase } from "../../store/slices/case";
+import { getCasesById, createCase, editTheCase, setCreatedCaseId, setCurrentCase } from "../../store/slices/case";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks/useStore";
 import { useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
@@ -11,24 +11,24 @@ import {
   ButtonSmallStyled,
 } from "../../styles/style";
 import { setIsEditMode } from "../../store/slices/general";
+import { NEW_CASE } from "../../utils/constants";
 
 export const CaseGeneralEdit: React.FC = () => {
   const { state } = useLocation();
   const { isNewCase } = state;
-
-  console.log(isNewCase);
-
   const dispatch = useAppDispatch();
   const { caseId } = useParams<{ caseId?: string }>();
   const currentCase = useAppSelector((state) => state.caseSlice.currentCase);
   const navigate = useNavigate();
   useEffect(() => {
-    if (caseId) {
-      dispatch(getCasesById(parseInt(caseId)));
+    if (caseId && caseId !== "0") {
+      dispatch(getCasesById(parseInt(caseId)));      
     }
     dispatch(setIsEditMode(true))
     return () => {
       dispatch(setIsEditMode(false));
+      dispatch(setCurrentCase(NEW_CASE));
+      dispatch(setCreatedCaseId(0));        
     };
   }, []);
   const cancelHandler = () => {
@@ -37,6 +37,12 @@ export const CaseGeneralEdit: React.FC = () => {
   const saveHandler = () => {
     navigate(`/cases/${caseId}`, { replace: true });
   };
+  const createdCaseId = useAppSelector((state) => state.caseSlice.createdCaseId);
+  useEffect(() => {
+    if(createdCaseId !== 0 ) {      
+      navigate(`/cases/${createdCaseId}`)
+    }   
+  },[createdCaseId]);
 
   return (
     <>
@@ -45,12 +51,11 @@ export const CaseGeneralEdit: React.FC = () => {
           initialValues={{ ...currentCase }}
           onSubmit={async (values) => {
             if (isNewCase) {
-              dispatch(createCase(values));
+              dispatch(createCase(values));              
             } else {
-              dispatch(editTheCase({ id: caseId, changedValue: values }));
-              console.log(values);
-            }
-            saveHandler();
+              dispatch(editTheCase({ id: caseId, changedValue: values }));              
+              saveHandler();
+            }            
           }}
         >
           {({

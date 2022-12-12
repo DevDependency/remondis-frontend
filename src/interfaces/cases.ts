@@ -27,9 +27,9 @@ export interface CaseGeneral {
   manager_id?: number;
   inspector_id?: number;  
   state_id?: number;
-  inspector: string;
-  Appointment: Appointment;
-  Inspector: UserSettings;
+  inspector?: string;
+  Appointment?: Appointment;
+  Inspector?: UserSettings;
 }
 
 export interface CaseDetails {
@@ -57,7 +57,7 @@ export interface CasePhotos {
 export type Case = CaseGeneral & CaseDetails & CasePhotos;
 
 export interface CaseWithId extends Case {
-  id: number;
+  id?: number;
 }
 
 export interface CasesToDo extends Case {

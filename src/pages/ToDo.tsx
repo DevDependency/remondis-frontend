@@ -4,19 +4,14 @@ import { getCasesToDo } from "../store/slices/case";
 import { CasesToDo } from "../interfaces/cases";
 import { TabBarManager, TabBarInspector } from "../components/containers/";
 import { CaseItem } from "../components/case/";
-import { Main } from "./Main";
-import { MainContainerStyled } from "../styles/style";
+import { MainContainerStyled} from "../styles/style";
 import { setActiveInspectorTabBar, setActiveManagerTabBar } from "../store/slices/general";
 
 export const ToDo: React.FC = () => {
   const dispatch = useAppDispatch();
   const tasks = useAppSelector((state) => state.caseSlice.casesToDo);
   const userRole = useAppSelector((state) => state.userSlice.userRole);
-  const userId = useAppSelector((state) => state.userSlice.userId);
-  const navigate = useNavigate();
-  const toNewCase = () => {
-    navigate('/cases', {relative: "route" })
-  }
+  const userId = useAppSelector((state) => state.userSlice.userId);   
 
   useEffect(() => {
     if(userId !== 0)
@@ -41,12 +36,7 @@ export const ToDo: React.FC = () => {
               action={item.action}
               isTodo={true}
             />
-          ))}
-      <ButtonContainerStyled>
-        <button onClick={toNewCase}>
-          <ButtonStyled color={"red"} >Create New Case</ButtonStyled>
-        </button>
-      </ButtonContainerStyled>
+          ))}  
       </MainContainerStyled>
     </>
   );

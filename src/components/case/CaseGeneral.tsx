@@ -1,4 +1,4 @@
-import { getCasesById } from "../../store/slices/case";
+import { getCasesById,setCurrentCase } from "../../store/slices/case";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks/useStore";
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ import {
 
 } from "../../styles/style";
 import { setActiveCaseTabBar } from "../../store/slices/general";
+import { NEW_CASE } from "../../utils/constants";
 
 export const CaseGeneral: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -23,6 +24,9 @@ export const CaseGeneral: React.FC = () => {
       dispatch(getCasesById(parseInt(caseId)));
     }
     dispatch(setActiveCaseTabBar("general"))
+    return () => {
+      dispatch(setCurrentCase(NEW_CASE));
+    }
   }, []);
   const editlHandler = () => {
     navigate('edit', {relative: "path", state: { isNewCase: false} })
