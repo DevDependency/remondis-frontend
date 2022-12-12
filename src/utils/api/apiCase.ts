@@ -157,14 +157,11 @@ export const apiGetCasesToDo = async (userId: number) => {
 };
 
 export const apiGetCoordinates = async (userId: number) => {
-  let res = null;
   try {
-    res = await server.get(`cases/coordinates/${userId}`);
+    const res = await server.get(`cases/coordinates/${userId}`);
     return res.data;
   } catch (error) {
     console.log(error);
-  } finally {
-    if(res) return res.data;
   }
 };
 
