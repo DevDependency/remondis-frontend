@@ -1,5 +1,5 @@
-import styled, { createGlobalStyle } from 'styled-components'
-import { Props } from "../interfaces/style"
+import styled, { createGlobalStyle } from "styled-components";
+import { Props } from "../interfaces/style";
 
 export default createGlobalStyle`
   *{
@@ -29,4 +29,4 @@ export default createGlobalStyle`
         border: none;
       }
     }
-`
+`;

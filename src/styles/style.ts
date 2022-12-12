@@ -99,12 +99,10 @@ export const ContainerNavBarIconsStyled = styled.div<Props>`
   justify-content: space-between;
 `;
 
-export const LogoNavBarStyled = styled.img`
-`;
-
-export const LogoStyled = styled.img`
-  position: absolute;
+export const LogoStyled = styled.img<Props>`
   top: 0;
+  // padding-bottom: 60px;
+  margin: ${({ isSignUp }) => (isSignUp ? "10px" : "inherit")};
 `;
 
 export const IconStyled = styled.img`
@@ -458,10 +456,11 @@ export const PhotoStyled = styled.div`
 
 export const AuthorizationWrapper = styled.div<Props>`
   box-sizing: border-box;
-  margin-top: 40%;
+  bottom: 0px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  height: 100vh;
 
   // @media (min-width: 400px) {
   //   width: 20rem;
@@ -493,6 +492,7 @@ export const AuthorizationButtonTop = styled.button<Props>`
 export const AuthorizationLinkBottom = styled.p<Props>`
   color: ${(props) => props.theme.colors.tx_grey_main};
   text-align: center;
+  cursor: pointer;
 `;
 // Authorization Containers (divs)
 export const AuthorizationContainer = styled.div<Props>`
@@ -500,6 +500,8 @@ export const AuthorizationContainer = styled.div<Props>`
   flex-direction: column;
   justify-content: space-between;
   gap: 100px;
+  width: 100%;
+  height: 100%;
 
   // @media (max-width: 480px) {
   //   max-width: 480px;
@@ -515,11 +517,12 @@ export const AuthorizationInputContainer = styled.div<Props>`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 20px;
 `;
 
 export const AuthorizationInputTitleContainer = styled.div<Props>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 30px;
+  // gap: 30px;
 `;

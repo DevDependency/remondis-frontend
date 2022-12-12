@@ -20,8 +20,10 @@ import {
   AuthorizationContainer,
   AuthorizationInputContainer,
   AuthorizationInputTitleContainer,
+  ButtonContainerStyled,
+  ButtonStyled,
 } from "../styles/style";
-import logo from "../assets/logoREMONDISx112.png";
+import { logo } from "../assets";
 
 const validationSchema = Yup.object({
   email: Yup.string().email().required(),
@@ -66,7 +68,7 @@ export const SignUp: React.FC = () => {
     <AuthorizationWrapper>
       <AuthorizationForm onSubmit={formik.handleSubmit} noValidate>
         <AuthorizationContainer>
-          <LogoStyled src={logo} />
+          <LogoStyled src={logo} isSignUp={true} />
 
           <AuthorizationInputTitleContainer>
             <TitleLogin>Sign Up</TitleLogin>
@@ -82,9 +84,9 @@ export const SignUp: React.FC = () => {
             </AuthorizationInputContainer>
           </AuthorizationInputTitleContainer>
           <AuthorizationLinksContainer>
-            <AuthorizationButtonTop type="submit">
-              Sign Up
-            </AuthorizationButtonTop>
+            <button type="submit">
+              <ButtonStyled color={"red"}>Sign Up</ButtonStyled>
+            </button>
             <AuthorizationLinkBottom
               onClick={() => {
                 navigate("/login");
