@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { PopUpConfirm } from "../PopUpConfirm";
 import {
-  LogoNavBarStyled,
+  LogoStyled,
   IconStyled,
   NavBarStyled,
   ContainerNavBarIconsStyled,
@@ -54,7 +54,7 @@ export const NavBar: React.FC = () => {
         {insideCase ? (
           <IconStyled src={navbarIconBack} onClick={() => navigate("/")} />
         ) : (
-          <LogoNavBarStyled src={logo} alt=""></LogoNavBarStyled>
+          <LogoStyled src={logo} alt=""></LogoStyled>
         )}
         <ContainerNavBarIconsStyled>
           {userRole === Role.INSPECTOR && (

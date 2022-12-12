@@ -6,11 +6,13 @@ import styled from "styled-components";
 
 export const MainStyled = styled.div<Props>`
   width: 100vw;
-  height: 100vh;
 `;
 
 export const InsideMainStyled = styled.div<Props>`
   margin-top: 75px;
+`;
+
+export const InsideMainBottomStyled = styled.div<Props>`
   margin-bottom: 100px;
 `;
 
@@ -300,7 +302,7 @@ export const ButtonContainerStyled = styled.div<Props>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 100vw;
   height: 85px;
   margin: 0 auto;
   padding: 15px;
@@ -420,7 +422,7 @@ export const Popup = styled.div<Props>`
   position: fixed;
   left: 0;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.1);
   width: 100vw;
   height: 100vh;
   display: flex;
