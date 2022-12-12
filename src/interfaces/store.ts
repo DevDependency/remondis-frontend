@@ -25,7 +25,7 @@ export interface UserState {
   confirmUserHandler: boolean;
   userEmail: string;
   isInspectorActive: boolean;
-  InspectorList: UserSettings[];  
+  inspectorList: UserSettings[];  
 }
 
 

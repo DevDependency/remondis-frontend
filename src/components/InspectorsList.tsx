@@ -2,30 +2,34 @@ import { getUsersByRole } from "../store/slices/user";
 import { useAppDispatch, useAppSelector } from "../utils/hooks/useStore";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { ButtonContainerStyled, ButtonSmallStyled } from "../styles/style";
+import { ButtonContainerStyled, ButtonSmallStyled, CaseItemContainerStyled, CaseItemStyled, InputPlaceholderShown, TextMain } from "../styles/style";
 import { useNavigate } from "react-router-dom";
 import { setIsEditMode } from "../store/slices/general";
 
-export const InspectorList = () => {
-    const inspectorList = useAppSelector((state) => state.userSlice.inspectorList);    
+
+export const InspectorList: React.FC = () => {
+    const inspectorList = useAppSelector((state) => state.userSlice.inspectorList);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        getUsersByRole();
+        dispatch(getUsersByRole());
         dispatch(setIsEditMode(true))
+        console.log(inspectorList);
         return () => {
             dispatch(setIsEditMode(false))
         }
     }, [])
     const cancelHandler = () => {
         navigate(-1);
-      };
+    };
     return (
-        <>
-            <h1>Hello i'm from List</h1>
+        <CaseItemContainerStyled>
             {inspectorList && inspectorList.map((el, index) =>
-                <div key={index}>{el.username}{el.state}</div>)}
+                <CaseItemStyled key={index}>
+                    <InputPlaceholderShown>{el.username}</InputPlaceholderShown>
+                    <TextMain>{el.state}</TextMain>
+                </CaseItemStyled>)}
             <ButtonContainerStyled>
                 <button type="button">
                     <ButtonSmallStyled onClick={cancelHandler}>
@@ -36,6 +40,6 @@ export const InspectorList = () => {
                     <ButtonSmallStyled color={"red"}>Save</ButtonSmallStyled>
                 </button>
             </ButtonContainerStyled>
-        </>
+        </CaseItemContainerStyled>
     )
 }

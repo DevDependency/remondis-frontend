@@ -79,11 +79,15 @@ export const getUserByEmail = createAsyncThunk(
 );
 
 export const getUsersByRole = createAsyncThunk(
-  "user/userRole",
+  "user/getUsersByRole",
  async () => {
+  try{
     const response = await api.apiGetUsersListByRole();
     console.log(response.users);
     return response.users;
+  } catch (error) {
+    console.error(error);
+ }
  })
 
 const userSlice = createSlice({
@@ -141,6 +145,7 @@ const userSlice = createSlice({
       })
       .addCase(getUsersByRole.fulfilled, (state, action) => {
         userSlice.caseReducers.setInspectorList(state, action);
+        console.log(state.inspectorList);
       });
   },
 });
