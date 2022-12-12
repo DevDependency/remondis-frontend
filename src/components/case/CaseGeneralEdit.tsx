@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Formik, Form } from "formik";
 import {
-  CaseItemContainerEditStyled,
+  CaseItemContainerViewStyled,
   CaseItemEditStyled,
   InputLabel,
   ButtonContainerStyled,
@@ -61,7 +61,7 @@ export const CaseGeneralEdit: React.FC = () => {
             handleSubmit,
           }) => (
             <Form>
-              <CaseItemContainerEditStyled>
+              <CaseItemContainerViewStyled>
                 <CaseItemEditStyled>
                   <InputLabel>Name</InputLabel>
                   <input
@@ -112,7 +112,7 @@ export const CaseGeneralEdit: React.FC = () => {
                     onChange={handleChange}
                   />
                 </CaseItemEditStyled>
-              </CaseItemContainerEditStyled>
+              </CaseItemContainerViewStyled>
               <ButtonContainerStyled>
                 <button type="button">
                   <ButtonSmallStyled onClick={cancelHandler}>
