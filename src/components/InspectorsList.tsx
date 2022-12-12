@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { ButtonContainerStyled, ButtonSmallStyled, CaseItemContainerStyled, CaseItemStyled, InputPlaceholderShown, TextMain } from "../styles/style";
 import { useNavigate } from "react-router-dom";
 import { setIsEditMode } from "../store/slices/general";
+import { UserSettings } from "../interfaces/users";
 
 
 export const InspectorList: React.FC = () => {
@@ -25,7 +26,7 @@ export const InspectorList: React.FC = () => {
     };
     return (
         <CaseItemContainerStyled>
-            {inspectorList && inspectorList.map((el, index) =>
+            {inspectorList && inspectorList.map((el:UserSettings, index: number) =>
                 <CaseItemStyled key={index}>
                     <InputPlaceholderShown>{el.username}</InputPlaceholderShown>
                     <TextMain>{el.state}</TextMain>
