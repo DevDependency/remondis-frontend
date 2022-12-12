@@ -1,8 +1,11 @@
 import axios from 'axios';
-import { CaseGeneral, Case, Room } from '../../interfaces/cases';
+import { CaseGeneral, Case, Room, File } from '../../interfaces/cases';
 
 const server = axios.create({
   baseURL: import.meta.env.VITE_BASE_API_URL,
+  validateStatus: (status: number) => {
+    return (status >= 200 && status < 300) || status == 404
+},
 });
 
 export const apiGetCases = async () => {
@@ -213,18 +216,18 @@ export const apiDeleteCaseItem = async (caseId: number, room: number) => {
 /**
  *  Photos
  */
-export const apiPostCasePhoto = async (caseId: number, room: number, body: Room) => {
+export const apiPostCasePhoto = async (caseId: number, room: number, body: File) => {
   try {
-    const res = await server.post(`cases/${caseId}/items/${room}`, body);
+    const res = await server.post(`cases/${caseId}/items/${room}/photos`, body);
     return res.data;
   } catch (error) {
     console.log(error);
   }
 }
 
-export const apiPutCasePhoto = async (caseId: number, room: number, body: Room) => {
+export const apiPutCasePhoto = async (caseId: number, room: number, body: File[]) => {
   try {
-    const res = await server.put(`cases/${caseId}/items/${room}`, body);
+    const res = await server.put(`cases/${caseId}/items/${room}/photos`, {CasePhotos: body});
     return res.data;
   } catch (error) {
     console.log(error);
@@ -233,7 +236,7 @@ export const apiPutCasePhoto = async (caseId: number, room: number, body: Room) 
 
 export const apiDeleteCasePhoto = async (caseId: number, room: number) => {
   try {
-    const res = await server.delete(`cases/${caseId}/items/${room}`);
+    const res = await server.delete(`cases/${caseId}/items/${room}/photos`);
     return res.data;
   } catch (error) {
     console.log(error);

@@ -1,25 +1,21 @@
-import { useAppSelector, useAppDispatch } from "../../utils/hooks/useStore";
-import { Link, useNavigate } from "react-router-dom";
-import { LogoStyled, IconStyled, NavBarStyled } from "../../styles/style";
-import account from "../../assets/-navbar-iconAccount.svg";
-import iconStatusFree from "../../assets/-navbar-iconStatusFree.svg";
-import iconStatusBusy from "../../assets/-navbar-iconStatusBusy.svg";
-import iconBack from "../../assets/-navbar-iconBack.svg";
-import logo from "../../assets/logoREMONDISx112.png";
-import { setIsPopupVisible } from "../../store/slices/general";
+import { useNavigate } from "react-router-dom";
 import { PopUpConfirm } from "../PopUpConfirm";
+import { LogoStyled, IconStyled, NavBarStyled } from "../../styles/style";
+import { logo, navbarIconAccount, navbarIconStatusFree, navbarIconStatusBusy, navbarIconBack} from "../../assets/";
+import { useAppSelector, useAppDispatch } from "../../utils/hooks/useStore";
+import { setIsPopupVisible } from "../../store/slices/general";
 import { setIsInspectorActive, updateUser } from "../../store/slices/user";
+import { Locations } from "../../interfaces/route";
+import { Role } from "../../interfaces/users";
 
 export const NavBar: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const insideCase = useAppSelector((state) => state.generalSlice.insideCase);
-  const isPopupVisible = useAppSelector(
-    (state) => state.generalSlice.isPopupVisible
+  const { insideCase, isPopupVisible } = useAppSelector(
+    (state) => state.generalSlice
   );
-  const userId = useAppSelector((state) => state.userSlice.userId);
-  const isInspectorActive = useAppSelector(
-    (state) => state.userSlice.isInspectorActive
+  const { userRole, userId, isInspectorActive } = useAppSelector(
+    (state) => state.userSlice
   );
 
   const handler = () => {
@@ -45,15 +41,22 @@ export const NavBar: React.FC = () => {
     <>
       <NavBarStyled>
         {insideCase ? (
-          <IconStyled src={iconBack} onClick={() => navigate("/")} />
+          <IconStyled src={navbarIconBack} onClick={() => navigate("/")} />
         ) : (
           <LogoStyled src={logo} alt=""></LogoStyled>
         )}
+        {userRole === Role.INSPECTOR && (
+          <IconStyled
+            src={isInspectorActive ? navbarIconStatusBusy : navbarIconStatusFree}
+            onClick={handler}
+          />
+        )}
         <IconStyled
-          src={isInspectorActive ? iconStatusBusy : iconStatusFree}
-          onClick={handler}
+          src={navbarIconAccount}
+          onClick={() => {
+            navigate(Locations.PROFILE);
+          }}
         />
-        <IconStyled src={account} />
       </NavBarStyled>
       {isPopupVisible && (
         <PopUpConfirm

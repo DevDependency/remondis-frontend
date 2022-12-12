@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { CaseItemProps } from "../../interfaces/cases";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { PopUpConfirm } from "../PopUpConfirm";
+import { useAppSelector, useAppDispatch } from "../../utils/hooks/useStore";
+import { setIsPopupVisible } from "../../store/slices/general";
+import { closeCase, setDeletedCaseId } from "../../store/slices/case";
 import {
   CaseContainerStyled,
   CaseBackgroundContainerStyled,
@@ -12,31 +16,59 @@ import {
   ActionStyled,
   IconsContainerStyled,
 } from "../../styles/style";
-import actionIcon from "../../assets/-case-iconAction.svg";
-import settingsIcon from "../../assets/-case-iconSettings.svg";
-import bin from "../../assets/-case-iconBin.svg";
-import edit from "../../assets/-case-iconEdit.svg";
+import {
+  caseIconAction,
+  caseIconSettings,
+  caseIconBin,
+  caseIconEdit,
+} from "../../assets/";
 
 export const CaseItem: React.FC<CaseItemProps> = ({
   time,
   address,
-  link,
+  caseId,
   isTodo,
   message,
   action,
 }) => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { isPopupVisible } = useAppSelector((state) => state.generalSlice);
+  const { userId } = useAppSelector((state) => state.userSlice);
+  const { deletedCaseId } = useAppSelector((state) => state.caseSlice);
   const [size, setSize] = useState(false);
 
   const showEditButton = () => {
     setSize((current) => !current);
   };
 
+  const openCaseHandler = () => {
+    navigate(`/cases/${caseId}`);
+  };
+
+  const setPopUpVisible = () => {
+    dispatch(setDeletedCaseId(caseId));
+    dispatch(setIsPopupVisible(true));
+  };
+
+  const setPopUpUnVisible = () => {
+    dispatch(setIsPopupVisible(false));
+  };
+
+  const closeCaseHandler = () => {
+    dispatch(closeCase({ deletedCaseId, userId }));
+    dispatch(setIsPopupVisible(false));
+  };
+
+  const openCaseEditHandler = () => {
+    navigate(`/cases/${caseId}/edit`, { state: { isNewCase: false } });
+  };
+
   return (
     <>
       <CaseBackgroundContainerStyled>
         <CaseContainerStyled isSize={size}>
-          <CaseInfoStyled>
-            {/* <DataAndAdressStyled to={`/cases/${link}`}> */}
+          <CaseInfoStyled onClick={openCaseHandler}>
             <DataAndAdressStyled>
               <TextMain>{time}</TextMain>
               <TextMain>{address}</TextMain>
@@ -44,22 +76,40 @@ export const CaseItem: React.FC<CaseItemProps> = ({
             {isTodo && (
               <>
                 <TextSecondary>{message}</TextSecondary>
-                <Link to={`/cases/${link}`}>
-                  <ActionStyled>
-                    <IconStyled src={actionIcon} />
-                    <TextSecondary>{action}</TextSecondary>
-                  </ActionStyled>
-                </Link>
+                <ActionStyled>
+                  <IconStyled src={caseIconAction} />
+                  <TextSecondary>{action}</TextSecondary>
+                </ActionStyled>
               </>
             )}
           </CaseInfoStyled>
-          <IconStyled src={settingsIcon} onClick={showEditButton}/>
+          <IconStyled src={caseIconSettings} onClick={showEditButton} />
         </CaseContainerStyled>
         <IconsContainerStyled isSize={size}>
-          <IconStyled src={bin} />
-          <IconStyled src={edit} />
+          <IconStyled src={caseIconBin} onClick={setPopUpVisible} />
+          <IconStyled src={caseIconEdit} onClick={openCaseEditHandler} />
         </IconsContainerStyled>
       </CaseBackgroundContainerStyled>
+
+      {isPopupVisible && (
+        <PopUpConfirm
+          text={"Are you sure you want to close the case?"}
+          buttons={[
+            {
+              title: "Cancel",
+              onClick: () => {
+                setPopUpUnVisible();
+              },
+            },
+            {
+              title: "Confirm",
+              onClick: () => {
+                closeCaseHandler();
+              },
+            },
+          ]}
+        />
+      )}
     </>
   );
 };

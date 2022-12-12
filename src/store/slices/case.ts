@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from '../../utils/api';
 import { Case, Room } from '../../interfaces/cases';
-import {CaseState} from '../../interfaces/store';
-import { apiGetCasesItems, apiGetCasesItemByRoom } from '../../utils/api/apiCase';
+import { CaseState } from '../../interfaces/store';
 
 const initialState: CaseState = {
   createdCaseId: 0,
+  deletedCaseId: 0,
   casesToDo: [],
   cases: [],
   currentCase: undefined,
@@ -40,7 +40,7 @@ export const getCasesById = createAsyncThunk(
 
 export const getCasesToDo = createAsyncThunk(
   "case/getCasesToDo",
-  async (userId : number) => {
+  async (userId: number) => {
     try {
       const response = await api.apiGetCasesToDo(userId);
       return response.cases;
@@ -61,12 +61,25 @@ export const createCase = createAsyncThunk(
     }
   }
 );
+
 export const editTheCase = createAsyncThunk(
   "cases/editTheCase",
   async (values: any) => {
     const response = await api.apiPatchCaseById(
       values.id,
       values.changedValue
+    );
+
+    return response;
+  }
+);
+
+export const closeCase = createAsyncThunk(
+  "cases/closeCase",
+  async (params: any) => {
+    const response = await api.apiPatchCasesByIdClose(
+      params.caseId,
+      params.userId,
     );
 
     return response;
@@ -109,6 +122,58 @@ export const getCaseItem = createAsyncThunk(
   }
 );
 
+export const addCaseItem = createAsyncThunk(
+  "case/addCaseItem",
+  async (params: any) => {
+    try {
+      const response = await api.apiPostCaseItem(params.caseId, params.room, params.item);
+      return response.caseItem;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
+export const updateCaseItem = createAsyncThunk(
+  "case/updateCaseItem",
+  async (params: any) => {
+    try {
+      const response = await api.apiPutCaseItem(params.caseId, params.room, params.item);
+      return response.caseItem;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
+export const deleteCaseItem = createAsyncThunk(
+  "case/deleteCaseItem",
+  async (params: any) => {
+    try {
+      const response = await api.apiDeleteCaseItem(params.caseId, params.room);
+      return response.caseItem;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
+/**
+ * Photos
+ */
+
+export const updateCasePhoto = createAsyncThunk(
+  "case/updateCasePhoto",
+  async (params: any) => {
+    try {
+      const response = await api.apiPutCasePhoto(params.caseId, params.room, params.photos);
+      return response.caseItem;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 
 const caseSlice = createSlice({
   name: "case",
@@ -120,19 +185,23 @@ const caseSlice = createSlice({
     setCasesToDo(state, action) {
       state.casesToDo = action.payload;
     },
-    setCurrentCase(state, action){
+    setCurrentCase(state, action) {
       state.currentCase = action.payload;
     },
     setCreatedCaseId(state, action) {
       state.createdCaseId = action.payload;
     },
-    setCoordinates(state, action){
-      state.coordinates = action.payload;
+    setDeletedCaseId(state, action) {
+      state.deletedCaseId = action.payload;
     },
-    setCaseItems(state, action){
+    setCoordinates(state, action) {
+      if (action.payload) state.coordinates = action.payload;
+      else state.coordinates = [];
+    },
+    setCaseItems(state, action) {
       state.caseRooms = action.payload;
     },
-    setCurrentRoom(state, action){
+    setCurrentRoom(state, action) {
       state.currentRoom = action.payload;
     },
   },
@@ -164,6 +233,7 @@ const caseSlice = createSlice({
 
 export const {
   setCreatedCaseId,
+  setDeletedCaseId,
   setCurrentCase,
   setCurrentRoom,
 

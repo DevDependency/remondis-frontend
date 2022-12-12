@@ -3,7 +3,7 @@ import { UserSettings } from "./users";
 
 export interface File {
   id: number;
-  img: any;
+  photo: any;
   file_name: string;
 }
 
@@ -69,7 +69,7 @@ export interface CasesToDo extends Case {
 export interface CaseItemProps {
   time: string;
   address: string;
-  link: number;
+  caseId: number;
   isTodo?: boolean;
   message?: string;
   action?: string;
