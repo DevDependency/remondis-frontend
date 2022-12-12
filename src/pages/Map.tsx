@@ -47,16 +47,16 @@ export const Map: React.FC = () => {
   return (
     <>
       <TabBarInspector />
-        {coordinates.lat !== 0 && coordinates.lng !== 0 && (
-          <div
-            className="MapWindow"
-            ref={mapContainer}
-            style={{
-              width: "100vw",
-              height: "100vh",
-            }}
-          />
-        )}
+      {coordinates.lat !== 0 && coordinates.lng !== 0 && (
+        <div
+          className="MapWindow"
+          ref={mapContainer}
+          style={{
+            width: "100vw",
+            height: "100vh",
+          }}
+        />
+      )}
     </>
   );
 };

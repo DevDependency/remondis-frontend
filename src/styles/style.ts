@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 export const MainStyled = styled.div<Props>`
   width: 100vw;
-  // height: 100vh;
+  height: 100vh;
 `;
 
 export const InsideMainStyled = styled.div<Props>`
@@ -95,7 +95,10 @@ export const NavBarStyled = styled.div<Props>`
   }
 `;
 
-export const LogoStyled = styled.img``;
+export const LogoStyled = styled.img`
+  position: absolute;
+  top: 0;
+`;
 
 export const IconStyled = styled.img`
   width: 3vh;
@@ -402,3 +405,73 @@ export const PopupStyled = styled.div<Props>`
 `;
 
 //-----
+
+// SignUp
+
+export const AuthorizationWrapper = styled.div<Props>`
+  box-sizing: border-box;
+  margin-top: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  // @media (min-width: 400px) {
+  //   width: 20rem;
+  //   margin: 10rem auto;
+  // }
+`;
+
+export const AuthorizationForm = styled.form``;
+
+export const AuthorizationHeader = styled.p<Props>`
+  font-family: ${(props) => props.theme.fonts.default};
+  color: ${(props) => props.theme.colors.tx_grey_main};
+  font-weight: 400;
+  font-size: 16px;
+`;
+
+export const AuthorizationInput = styled.input<Props>`
+  font-family: ${(props) => props.theme.fonts.default};
+  color: ${(props) => props.theme.colors.tx_grey_main};
+  font-weight: 400;
+  font-size: 32px;
+  text-align: center;
+`;
+
+export const AuthorizationButtonTop = styled.button<Props>`
+  background-color: ${(props) => props.theme.colors.red};
+`;
+
+export const AuthorizationLinkBottom = styled.p<Props>`
+  color: ${(props) => props.theme.colors.tx_grey_main};
+  text-align: center;
+`;
+// Authorization Containers (divs)
+export const AuthorizationContainer = styled.div<Props>`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 100px;
+
+  // @media (max-width: 480px) {
+  //   max-width: 480px;
+  // }
+`;
+
+export const AuthorizationLinksContainer = styled.div<Props>`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const AuthorizationInputContainer = styled.div<Props>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const AuthorizationInputTitleContainer = styled.div<Props>`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 30px;
+`;
