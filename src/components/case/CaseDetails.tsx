@@ -38,16 +38,16 @@ export const CaseDetails: React.FC = () => {
             <TextMain>{currentCase.type_of_property_id}</TextMain>
           </CaseItemStyled>
           <CaseItemStyled>
-            <InputPlaceholderShown>Clear the property</InputPlaceholderShown>
-            <TextMain>{currentCase.clear_area}</TextMain>
-          </CaseItemStyled>
-          <CaseItemStyled>
             <InputPlaceholderShown>Number of rooms</InputPlaceholderShown>
             <TextMain>{currentCase.number_of_rooms}</TextMain>
           </CaseItemStyled>
           <CaseItemStyled>
             <InputPlaceholderShown>Floor</InputPlaceholderShown>
             <TextMain>{currentCase.floor}</TextMain>
+          </CaseItemStyled>
+          <CaseItemStyled>
+            <InputPlaceholderShown>Clear the property</InputPlaceholderShown>
+            <TextMain>{currentCase.clear_area}</TextMain>
           </CaseItemStyled>
           <CaseItemStyled>
             <InputPlaceholderShown>Backyard</InputPlaceholderShown>
