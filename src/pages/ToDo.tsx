@@ -6,6 +6,7 @@ import { TabBarManager, TabBarInspector } from "../components/containers/";
 import { CaseItem } from "../components/case/";
 import { MainContainerStyled} from "../styles/style";
 import { setActiveInspectorTabBar, setActiveManagerTabBar } from "../store/slices/general";
+import { Role } from "../interfaces/users";
 
 export const ToDo: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -21,7 +22,7 @@ export const ToDo: React.FC = () => {
   }, []);
   return (
     <>
-      {userRole === "manager" ? <TabBarManager /> : <TabBarInspector />}
+      {userRole === Role.MANAGER ? <TabBarManager /> : <TabBarInspector />}
       <MainContainerStyled>
         {tasks &&
           tasks.map((item: CasesToDo, index: number) => (

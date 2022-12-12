@@ -105,6 +105,10 @@ export const LogoStyled = styled.img<Props>`
   margin: ${({ isSignUp }) => (isSignUp ? "10px" : "inherit")};
 `;
 
+export const LogoNavBarStyled = styled.img<Props>`
+  top: 0;
+`;
+
 export const IconStyled = styled.img`
   width: 3vh;
 `;
