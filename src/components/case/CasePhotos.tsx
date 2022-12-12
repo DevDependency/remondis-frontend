@@ -1,5 +1,9 @@
 import { useAppSelector, useAppDispatch } from "../../utils/hooks/useStore";
-import { getCaseItems, getCaseItem, setCaseItems } from "../../store/slices/case";
+import {
+  getCaseItems,
+  getCaseItem,
+  setCaseItems,
+} from "../../store/slices/case";
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Room } from "../../interfaces/cases";
@@ -12,7 +16,7 @@ import {
 import {
   ButtonContainerStyled,
   ButtonSmallStyled,
-  CaseItemContainerStyled,
+  RoomItemContainerStyled,
 } from "../../styles/style";
 import { setActiveCaseTabBar } from "../../store/slices/general";
 
@@ -41,7 +45,7 @@ export const CasePhotos: React.FC = () => {
           Array.from(rooms, (x: Room) => x.room)
         );
       }
-      navigate(`${maxRoom + 1}/edit`, {state: {isNewRoom: true}});
+      navigate(`${maxRoom + 1}/edit`, { state: { isNewRoom: true } });
     } else {
       if (caseId) {
         dispatch(
@@ -51,7 +55,7 @@ export const CasePhotos: React.FC = () => {
           })
         );
       }
-      navigate(`${e.target.id}/edit`, {state: {isNewRoom: false}});
+      navigate(`${e.target.id}/edit`, { state: { isNewRoom: false } });
     }
   };
 
@@ -59,9 +63,9 @@ export const CasePhotos: React.FC = () => {
 
   return (
     <>
-      <CaseItemContainerStyled>
-        {rooms.map((el: Room, index: number) => (
-          <div key={index}>
+      {rooms.map((el: Room, index: number) => (
+        <div key={index}>
+          <RoomItemContainerStyled>
             {/* <div>{el.room}</div> */}
             <TextMain
               style={{
@@ -98,16 +102,16 @@ export const CasePhotos: React.FC = () => {
                     alt=""
                     style={{
                       /* position: "relative", */
-                      width: "110px",
-                      height: "100px",
+                      width: "100px",
+                      height: "90px",
                     }}
                   />
                 </PhotoStyled>
               ))}
             </PhotoContainerStyled>
-          </div>
-        ))}
-      </CaseItemContainerStyled>
+          </RoomItemContainerStyled>
+        </div>
+      ))}
       <ButtonContainerStyled>
         <button>
           <ButtonSmallStyled id="0" onClick={editlHandler}>

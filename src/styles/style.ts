@@ -444,6 +444,8 @@ export const PopupStyled = styled.div<Props>`
 
 //-----
 
+// Photo
+
 export const PhotoContainerStyled = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -453,11 +455,26 @@ export const PhotoStyled = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100px;
-  height: 100px;
   margin-bottom: 10px;
   margin-right: 8px;
 `;
+
+export const RoomItemContainerStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 92%;
+  margin: 0 auto 15px;
+  padding: 15px;
+  box-shadow: ${(props: Props) => props.theme.effects.shadow};
+  gap: 10px;
+
+  p {
+      margin-bottom: 15px;
+    }
+`;
+
+//-----
+
 // SignUp
 
 export const AuthorizationWrapper = styled.div<Props>`
@@ -500,7 +517,11 @@ export const AuthorizationLinkBottom = styled.p<Props>`
   text-align: center;
   cursor: pointer;
 `;
+
+//-----
+
 // Authorization Containers (divs)
+
 export const AuthorizationContainer = styled.div<Props>`
   display: flex;
   flex-direction: column;
