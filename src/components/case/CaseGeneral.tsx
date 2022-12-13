@@ -26,7 +26,7 @@ export const CaseGeneral: React.FC = () => {
   const { currentCase, caseChanged } = useAppSelector((state) => state.caseSlice);
   const navigate = useNavigate();
 
-  useEffect(() => {   
+  useEffect(() => {
     dispatch(setActiveCaseTabBar("general"))
     return () => {
       dispatch(setCurrentCase(NEW_CASE));
@@ -94,42 +94,44 @@ export const CaseGeneral: React.FC = () => {
                 {new Date(currentCase?.created_at as string).toLocaleDateString(
                   "en-GB"
                 )}</TextMain>
-        </CaseItemStyled>
-        <CaseItemStyled>
-          <InputPlaceholderShown>Inspector</InputPlaceholderShown>
-          <TextMain>{currentCase?.Inspector?.username}</TextMain>
-        {userRole === Role.MANAGER ? <IconsContainerStyled isSize={true}>          
-          <IconStyled src={caseIconEdit} onClick={assignInspector} />
-        </IconsContainerStyled>: null}
-        </CaseItemStyled>
-      </CaseItemContainerStyled>
+            </CaseItemStyled>
+            <CaseItemStyled>
+              <InputPlaceholderShown>Inspector</InputPlaceholderShown>
+              <TextMain>{currentCase?.Inspector?.username}</TextMain>
+              {userRole === Role.MANAGER ? <IconsContainerStyled isSize={true}>
+                <IconStyled src={caseIconEdit} onClick={assignInspector} />
+              </IconsContainerStyled> : null}
+            </CaseItemStyled>
+          </CaseItemContainerStyled>
+        </>
+        )
       }
-      {userRole === Role.MANAGER ? 
-      <ButtonContainerStyled>             
-        <button>
-          <ButtonSmallStyled onClick={editlHandler}>Edit</ButtonSmallStyled> 
-        </button>             
-        <button >
-          <ButtonSmallStyled color={"red"} onClick={submitHandler}>Submit</ButtonSmallStyled>
-        </button>            
-      </ButtonContainerStyled> 
-      : 
-      (currentCase.state_id === 2 ?
-      <ButtonContainerStyled>             
-      <button>
-        <ButtonSmallStyled onClick={declineHandler}>Decline</ButtonSmallStyled> 
-      </button>             
-      <button>
-        <ButtonSmallStyled color={"red"} onClick={acceptHandler}>Accept</ButtonSmallStyled>
-      </button>            
-      </ButtonContainerStyled>
-    :
-      <ButtonContainerStyled>
-      <button>
-        <ButtonStyled color={"red"} onClick={confirmHandler}>Submit</ButtonStyled>
-      </button>
-      </ButtonContainerStyled>    
-    )
+      {userRole === Role.MANAGER ?
+        <ButtonContainerStyled>
+          <button>
+            <ButtonSmallStyled onClick={editlHandler}>Edit</ButtonSmallStyled>
+          </button>
+          <button >
+            <ButtonSmallStyled color={"red"} onClick={submitHandler}>Submit</ButtonSmallStyled>
+          </button>
+        </ButtonContainerStyled>
+        :
+        (currentCase.state_id === 2 ?
+          <ButtonContainerStyled>
+            <button>
+              <ButtonSmallStyled onClick={declineHandler}>Decline</ButtonSmallStyled>
+            </button>
+            <button>
+              <ButtonSmallStyled color={"red"} onClick={acceptHandler}>Accept</ButtonSmallStyled>
+            </button>
+          </ButtonContainerStyled>
+          :
+          <ButtonContainerStyled>
+            <button>
+              <ButtonStyled color={"red"} onClick={confirmHandler}>Submit</ButtonStyled>
+            </button>
+          </ButtonContainerStyled>
+        )
       }
     </>
   );
