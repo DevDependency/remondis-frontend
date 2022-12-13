@@ -11,7 +11,21 @@ import {
   setIsForgotPassword,
   setAreCredentialsWrong,
 } from "../store/slices/user";
-import { Main } from "./Main";
+import {
+  AuthorizationWrapper,
+  AuthorizationForm,
+  LogoStyled,
+  TitleLogin,
+  InputLabel,
+  AuthorizationInput,
+  AuthorizationLinkBottom,
+  ButtonStyled,
+  AuthorizationInputContainer,
+  AuthorizationContainer,
+  AuthorizationInputTitleContainer,
+  AuthorizationLinksContainer,
+} from "../styles/style";
+import { logo } from "../assets";
 import { Locations } from "../interfaces/route";
 import {
   ButtonStyled,
@@ -43,6 +57,7 @@ export const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const forgotPasswordHandler = () => {
     dispatch(setIsForgotPassword());
+    navigate("/forgotpassword");
   };
 
   // Cookies
@@ -82,15 +97,17 @@ export const Login: React.FC = () => {
 
   return (
     <>
-      <BackgroundStyled>
-        <CaseItemContainerViewStyled>
-          <LogoStyled src={logo} isSignUp={true} />
-          <LoginFormConrainerStyled>
-            <TitleLogin>Login</TitleLogin>
-            <form onSubmit={formik.handleSubmit} noValidate>
-              <CaseItemEditStyled>
-                <label htmlFor="email">Name</label>
-                <input
+      <AuthorizationWrapper>
+        <AuthorizationForm onSubmit={formik.handleSubmit} noValidate>
+          <AuthorizationContainer>
+            <LogoStyled src={logo} isSignUp={true} />
+            <AuthorizationInputTitleContainer>
+              <TitleLogin isSignUp={true}>Login</TitleLogin>
+              <AuthorizationInputContainer>
+                <InputLabel htmlFor="email" isSignUp={true}>
+                  Name
+                </InputLabel>
+                <AuthorizationInput
                   // emailError={formik.errors.email && formik.touched.email}
                   // areCredentialsWrong={areCredentialsWrong}
                   {...formik.getFieldProps("email")}
@@ -98,10 +115,12 @@ export const Login: React.FC = () => {
                 {formik.errors.email && formik.touched.email && (
                   <div>{formik.errors.email}</div>
                 )}
-              </CaseItemEditStyled>
-              <CaseItemEditStyled>
-                <label htmlFor="Password">Password</label>
-                <input
+              </AuthorizationInputContainer>
+              <AuthorizationInputContainer>
+                <InputLabel htmlFor="Password" isSignUp={true}>
+                  Password
+                </InputLabel>
+                <AuthorizationInput
                   // areCredentialsWrong={areCredentialsWrong}
                   // passwordError={
                   //   formik.errors.password && formik.touched.password
@@ -115,24 +134,33 @@ export const Login: React.FC = () => {
                 {areCredentialsWrong && (
                   <div>email or password is incorrect</div>
                 )}
-                <Link
-                  className="link"
-                  to="/forgotpassword"
-                  onClick={forgotPasswordHandler}
+                <AuthorizationLinkBottom
+                  isForgotPassword={true}
+                  onClick={() => {
+                    navigate("/forgotpassword");
+                  }}
                 >
                   Forgot Password
-                </Link>
-              </CaseItemEditStyled>
-              <ButtonStyled>
-                <button type="submit">Login</button>
-              </ButtonStyled>
-              <Link className="link" to="/signup">
+                </AuthorizationLinkBottom>
+              </AuthorizationInputContainer>
+            </AuthorizationInputTitleContainer>
+            <AuthorizationLinksContainer>
+              <button type="submit">
+                <ButtonStyled isSignUp={true} color={"red"}>
+                  Login
+                </ButtonStyled>
+              </button>
+              <AuthorizationLinkBottom
+                onClick={() => {
+                  navigate("/signup");
+                }}
+              >
                 Sign up
-              </Link>
-            </form>
-          </LoginFormConrainerStyled>
-        </CaseItemContainerViewStyled>
-      </BackgroundStyled>
+              </AuthorizationLinkBottom>
+            </AuthorizationLinksContainer>
+          </AuthorizationContainer>
+        </AuthorizationForm>
+      </AuthorizationWrapper>
     </>
   );
 };

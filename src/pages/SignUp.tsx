@@ -69,11 +69,12 @@ export const SignUp: React.FC = () => {
       <AuthorizationForm onSubmit={formik.handleSubmit} noValidate>
         <AuthorizationContainer>
           <LogoStyled src={logo} isSignUp={true} />
-
           <AuthorizationInputTitleContainer>
-            <TitleLogin>Sign Up</TitleLogin>
+            <TitleLogin isSignUp={true}>Sign Up</TitleLogin>
             <AuthorizationInputContainer>
-              <InputLabel htmlFor="email">Email</InputLabel>
+              <InputLabel htmlFor="email" isSignUp={true}>
+                Email
+              </InputLabel>
               <AuthorizationInput
                 {...formik.getFieldProps("email")}
                 // areCredentialsWrong={areCredentialsWrong}
@@ -85,7 +86,9 @@ export const SignUp: React.FC = () => {
           </AuthorizationInputTitleContainer>
           <AuthorizationLinksContainer>
             <button type="submit">
-              <ButtonStyled color={"red"}>Sign Up</ButtonStyled>
+              <ButtonStyled isSignUp={true} color={"red"}>
+                Sign Up
+              </ButtonStyled>
             </button>
             <AuthorizationLinkBottom
               onClick={() => {

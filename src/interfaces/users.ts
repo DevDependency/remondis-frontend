@@ -13,7 +13,7 @@ export interface UserSettings {
 }
 
 export interface UserLogin {
-  name: string;
+  name: string | undefined;
   password: string | undefined;
 }
 

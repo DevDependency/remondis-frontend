@@ -10,6 +10,7 @@ export interface Props {
   role?: string;
   bottom?: string;
   isSignUp?: boolean;
+  isForgotPassword?: boolean;
 }
 
 export interface Theme {
