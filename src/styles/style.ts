@@ -118,7 +118,7 @@ export const LogoNavBarStyled = styled.img<Props>`
 `;
 
 export const IconStyled = styled.img`
-  width: 3vh;
+  min-width: 3vh;
 `;
 
 //-----
@@ -243,6 +243,22 @@ export const CaseItemStyled = styled.div<Props>`
   border-bottom: ${(props) => props.theme.colors.border} 1px solid;
   border-color: ${(props) =>
     props.color === "red" ? props.theme.colors.red : props.theme.colors.grey};
+`;
+
+export const CanyainerForInfoStyled = styled.div<Props>`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const CanyainerForStatusStyled = styled.div<Props>`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  p {
+    color: ${(props) => props.theme.colors.blue_light};
+  }
 `;
 
 //-----

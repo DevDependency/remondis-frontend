@@ -23,6 +23,10 @@ import logoREMONDISx360 from './LogoREMONDISx360.png'
 import inputIconNo from './-input-iconNo.svg';
 import inputIconYes from './-input-iconYes.svg';
 import background from "./background.png";
+import caseIconLocation from './-case-iconLocation.svg';
+import caseIconData from './-case-iconData.svg';
+import caseIconMessage from './-case-iconMessage.svg';
+import caseIconStatus from './-case-iconStatusBlue.svg';
 
 export {
   caseIconAction,
@@ -50,4 +54,8 @@ export {
   background,
   inputIconNo,
   inputIconYes,
+  caseIconLocation,
+  caseIconData,
+  caseIconMessage,
+  caseIconStatus
 }
