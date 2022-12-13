@@ -6,11 +6,13 @@ import styled from "styled-components";
 
 export const MainStyled = styled.div<Props>`
   width: 100vw;
-  height: 100vh;
 `;
 
 export const InsideMainStyled = styled.div<Props>`
   margin-top: 75px;
+`;
+
+export const InsideMainBottomStyled = styled.div<Props>`
   margin-bottom: 100px;
 `;
 
@@ -96,7 +98,8 @@ export const ContainerNavBarIconsStyled = styled.div<Props>`
   display: flex;
   width: 5rem;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 35px;
 `;
 
 export const LogoStyled = styled.img<Props>`
@@ -300,7 +303,7 @@ export const ButtonContainerStyled = styled.div<Props>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 100vw;
   height: 85px;
   margin: 0 auto;
   padding: 15px;
@@ -420,7 +423,7 @@ export const Popup = styled.div<Props>`
   position: fixed;
   left: 0;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.1);
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -442,6 +445,8 @@ export const PopupStyled = styled.div<Props>`
 
 //-----
 
+// Photo
+
 export const PhotoContainerStyled = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -451,11 +456,26 @@ export const PhotoStyled = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100px;
-  height: 100px;
   margin-bottom: 10px;
   margin-right: 8px;
 `;
+
+export const RoomItemContainerStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 92%;
+  margin: 0 auto 15px;
+  padding: 15px;
+  box-shadow: ${(props: Props) => props.theme.effects.shadow};
+  gap: 10px;
+
+  p {
+      margin-bottom: 15px;
+    }
+`;
+
+//-----
+
 // SignUp
 
 export const AuthorizationWrapper = styled.div<Props>`
@@ -498,7 +518,11 @@ export const AuthorizationLinkBottom = styled.p<Props>`
   text-align: center;
   cursor: pointer;
 `;
+
+//-----
+
 // Authorization Containers (divs)
+
 export const AuthorizationContainer = styled.div<Props>`
   display: flex;
   flex-direction: column;

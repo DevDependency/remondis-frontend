@@ -1,10 +1,15 @@
 import { useAppSelector, useAppDispatch } from "../../utils/hooks/useStore";
-import { getCaseItems, getCaseItem, setCaseItems } from "../../store/slices/case";
+import {
+  getCaseItems,
+  getCaseItem,
+  setCaseItems,
+} from "../../store/slices/case";
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Room } from "../../interfaces/cases";
 import { caseIconEdit } from "../../assets/";
 import {
+  InsideMainBottomStyled,
   PhotoContainerStyled,
   PhotoStyled,
   TextMain,
@@ -12,7 +17,7 @@ import {
 import {
   ButtonContainerStyled,
   ButtonSmallStyled,
-  CaseItemContainerStyled,
+  RoomItemContainerStyled,
 } from "../../styles/style";
 import { setActiveCaseTabBar } from "../../store/slices/general";
 
@@ -41,7 +46,7 @@ export const CasePhotos: React.FC = () => {
           Array.from(rooms, (x: Room) => x.room)
         );
       }
-      navigate(`${maxRoom + 1}/edit`, {state: {isNewRoom: true}});
+      navigate(`${maxRoom + 1}/edit`, { state: { isNewRoom: true } });
     } else {
       if (caseId) {
         dispatch(
@@ -51,7 +56,7 @@ export const CasePhotos: React.FC = () => {
           })
         );
       }
-      navigate(`${e.target.id}/edit`, {state: {isNewRoom: false}});
+      navigate(`${e.target.id}/edit`, { state: { isNewRoom: false } });
     }
   };
 
@@ -59,55 +64,57 @@ export const CasePhotos: React.FC = () => {
 
   return (
     <>
-      <CaseItemContainerStyled>
+      <InsideMainBottomStyled>
         {rooms.map((el: Room, index: number) => (
           <div key={index}>
-            {/* <div>{el.room}</div> */}
-            <TextMain
-              style={{
-                position: "relative",
-              }}
-            >
-              {el.room_title}
-              <img
-                onClick={editlHandler}
-                src={caseIconEdit}
-                id={el.room.toString()}
+            <RoomItemContainerStyled>
+              {/* <div>{el.room}</div> */}
+              <TextMain
                 style={{
-                  position: "absolute",
-                  top: "0",
-                  right: "0",
-                  zIndex: "10",
+                  position: "relative",
                 }}
-              />
-            </TextMain>
-            <TextMain>{el.description}</TextMain>
-            <PhotoContainerStyled>
-              {el.CasePhoto.map((img, index) => (
-                <PhotoStyled
-                  /* style={{
+              >
+                {el.room_title}
+                <img
+                  onClick={editlHandler}
+                  src={caseIconEdit}
+                  id={el.room.toString()}
+                  style={{
+                    position: "absolute",
+                    top: "0",
+                    right: "0",
+                    zIndex: "10",
+                  }}
+                />
+              </TextMain>
+              <TextMain>{el.description}</TextMain>
+              <PhotoContainerStyled>
+                {el.CasePhoto.map((img, index) => (
+                  <PhotoStyled
+                    /* style={{
                   position: "relative",
                 }} */
-                  key={index}
-                >
-                  <img
-                    src={
-                      "data:image/jpeg;base64," +
-                      Buffer.from(img.photo.data).toString("base64")
-                    }
-                    alt=""
-                    style={{
-                      /* position: "relative", */
-                      width: "110px",
-                      height: "100px",
-                    }}
-                  />
-                </PhotoStyled>
-              ))}
-            </PhotoContainerStyled>
+                    key={index}
+                  >
+                    <img
+                      src={
+                        "data:image/jpeg;base64," +
+                        Buffer.from(img.photo.data).toString("base64")
+                      }
+                      alt=""
+                      style={{
+                        /* position: "relative", */
+                        width: "100px",
+                        height: "90px",
+                      }}
+                    />
+                  </PhotoStyled>
+                ))}
+              </PhotoContainerStyled>
+            </RoomItemContainerStyled>
           </div>
         ))}
-      </CaseItemContainerStyled>
+      </InsideMainBottomStyled>
       <ButtonContainerStyled>
         <button>
           <ButtonSmallStyled id="0" onClick={editlHandler}>
