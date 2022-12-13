@@ -12,7 +12,15 @@ import {
   AuthorizationForm,
   AuthorizationContainer,
   LogoStyled,
+  TitleLogin,
+  InputLabel,
+  AuthorizationInput,
+  AuthorizationInputContainer,
+  AuthorizationLinksContainer,
+  ButtonStyled,
+  AuthorizationInputTitleContainer,
 } from "../styles/style";
+import { logo } from "../assets";
 
 const validationSchema = Yup.object({
   email: Yup.string().email().required(),
@@ -54,10 +62,10 @@ export const ForgotPassword: React.FC = () => {
     <>
       <AuthorizationWrapper>
         <AuthorizationForm>
-          <AuthorizationContainer>
+          <AuthorizationContainer onSubmit={formik.handleSubmit} noValidate>
             <LogoStyled src={logo} isSignUp={true} />
             {!isEmailSent ? (
-              <AuthorizationForm onSubmit={formik.handleSubmit} noValidate>
+              <>
                 {isResetLinkSend ? (
                   <>
                     <p>We sent a link on your email</p>
@@ -67,22 +75,43 @@ export const ForgotPassword: React.FC = () => {
                   </>
                 ) : (
                   <AuthorizationContainer>
-                    <h1>Reset password</h1>
-                    <label htmlFor="email">Email</label>
-                    <input
-                      {...formik.getFieldProps("email")}
-                      // areCredentialsWrong={areCredentialsWrong}
-                    />
-                    {formik.errors.email && formik.touched.email && (
-                      <>{isHoveringEmail && <div>{formik.errors.email}</div>}</>
-                    )}
-                    <div>
-                      <button type="submit"> Request reset link </button>
-                      <button onClick={forgotPasswordHandler}>Cancel</button>
-                    </div>
+                    <AuthorizationInputTitleContainer>
+                      <TitleLogin isSignUp={true}>Reset password</TitleLogin>
+                      <AuthorizationInputContainer>
+                        <InputLabel htmlFor="email" isSignUp={true}>
+                          Email
+                        </InputLabel>
+                        <AuthorizationInput
+                          {...formik.getFieldProps("email")}
+                          // areCredentialsWrong={areCredentialsWrong}
+                        />
+                        {formik.errors.email && formik.touched.email && (
+                          <>
+                            {isHoveringEmail && (
+                              <div>{formik.errors.email}</div>
+                            )}
+                          </>
+                        )}
+                      </AuthorizationInputContainer>
+                    </AuthorizationInputTitleContainer>
+                    <AuthorizationLinksContainer>
+                      <button type="submit">
+                        <ButtonStyled isSignUp={true} color={"red"}>
+                          Request reset link
+                        </ButtonStyled>
+                      </button>
+                      <button type="submit">
+                        <ButtonStyled
+                          onClick={forgotPasswordHandler}
+                          isSignUp={true}
+                        >
+                          Cancel
+                        </ButtonStyled>
+                      </button>
+                    </AuthorizationLinksContainer>
                   </AuthorizationContainer>
                 )}
-              </AuthorizationForm>
+              </>
             ) : (
               <div>
                 <h1> Email is sent </h1>
