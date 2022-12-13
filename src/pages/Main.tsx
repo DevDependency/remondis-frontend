@@ -22,8 +22,7 @@ export const Main: React.FC = () => {
   };
   const insideCase = useAppSelector((state) => state.generalSlice.insideCase);
 
-  return (
-    <>
+  return (    
       <MainStyled>
         <NavBar />
         {userRole === Role.MANAGER && !insideCase && (
@@ -36,7 +35,6 @@ export const Main: React.FC = () => {
         <InsideMainStyled>
           <Outlet />
         </InsideMainStyled>
-      </MainStyled>
-    </>
+      </MainStyled>    
   );
 };
