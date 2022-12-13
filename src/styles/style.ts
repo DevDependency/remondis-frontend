@@ -367,7 +367,7 @@ export const ButtonStyled = styled.div<Props>`
 
 export const ExtraButtonStyled = styled(ButtonStyled)`
   position: absolute;
-  margin-bottom: 12%;
+  margin-bottom: 30%;
 `;
 
 export const ButtonSmallStyled = styled.div<Props>`
