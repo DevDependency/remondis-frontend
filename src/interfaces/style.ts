@@ -11,6 +11,7 @@ export interface Props {
   bottom?: string;
   isSignUp?: boolean;
   isForgotPassword?: boolean;
+  active?: boolean;
 }
 
 export interface Theme {
