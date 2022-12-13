@@ -77,7 +77,7 @@ export const CaseGeneral: React.FC = () => {
             <CaseItemStyled>
               <InputPlaceholderShown>Inspector</InputPlaceholderShown>
               <TextMain>{currentCase?.Inspector?.username}</TextMain>
-              <div isSize={true}>
+              <div>
                 <IconStyled src={caseIconEdit} onClick={assignInspector} />
               </div>
             </CaseItemStyled>
