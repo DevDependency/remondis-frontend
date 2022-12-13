@@ -284,6 +284,7 @@ export const CaseItemEditStyled = styled.div<Props>`
     padding: 5px 7px;
     width: 100%;
   }
+  }
 `;
 
 //-----
@@ -470,8 +471,8 @@ export const RoomItemContainerStyled = styled.div`
   gap: 10px;
 
   p {
-      margin-bottom: 15px;
-    }
+    margin-bottom: 15px;
+  }
 `;
 
 //-----
@@ -559,14 +560,18 @@ export const AuthorizationInputTitleContainer = styled.div<Props>`
 
 // Login
 
-export const BackgroundColor = styled.div<Props>`
+export const BackgroundStyled = styled.div<Props>`
   background-image: url("../../assets/bg.jpg");
 `;
 
 export const LoginFormConrainerStyled = styled.div<Props>`
   display: flex;
   flex-direction: column;
-  margin-top:50px;
+  margin-top: 50px;
 `;
 
+export const LinkStyled = styled.p<Props>`
+  text-decoration: none;
+  color:red;
+`;
 

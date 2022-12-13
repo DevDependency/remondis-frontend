@@ -20,7 +20,8 @@ import {
   LogoStyled,
   TitleLogin,
   LoginFormConrainerStyled,
-  BackgroundColor,
+  BackgroundStyled,
+  LinkStyled,
 } from "../styles/style";
 import { logo } from "../assets";
 
@@ -81,7 +82,7 @@ export const Login: React.FC = () => {
 
   return (
     <>
-      <BackgroundColor>
+      <BackgroundStyled>
         <CaseItemContainerViewStyled>
           <LogoStyled src={logo} isSignUp={true} />
           <LoginFormConrainerStyled>
@@ -114,18 +115,24 @@ export const Login: React.FC = () => {
                 {areCredentialsWrong && (
                   <div>email or password is incorrect</div>
                 )}
-                <Link to="/forgotpassword" onClick={forgotPasswordHandler}>
+                <Link
+                  className="link"
+                  to="/forgotpassword"
+                  onClick={forgotPasswordHandler}
+                >
                   Forgot Password
                 </Link>
               </CaseItemEditStyled>
               <ButtonStyled>
                 <button type="submit">Login</button>
               </ButtonStyled>
-              <Link to="/signup">Sign up</Link>
+              <Link className="link" to="/signup">
+                Sign up
+              </Link>
             </form>
           </LoginFormConrainerStyled>
         </CaseItemContainerViewStyled>
-      </BackgroundColor>
+      </BackgroundStyled>
     </>
   );
 };
