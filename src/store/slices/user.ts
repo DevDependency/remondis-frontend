@@ -143,8 +143,7 @@ const userSlice = createSlice({
         userSlice.caseReducers.setUserId(state, action);
       })
       .addCase(getUsersByRole.fulfilled, (state, action) => {
-        userSlice.caseReducers.setInspectorList(state, action);
-        console.log(state.inspectorList);
+        userSlice.caseReducers.setInspectorList(state, action);        
       });
   },
 });

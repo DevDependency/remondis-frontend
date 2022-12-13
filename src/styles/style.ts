@@ -236,6 +236,8 @@ export const CaseItemStyled = styled.div<Props>`
   // text-align: right;
   gap: 15px;
   border-bottom: ${(props) => props.theme.colors.border} 1px solid;
+  border-color: ${(props) =>
+    props.color === "red" ? props.theme.colors.red : props.theme.colors.grey};
 `;
 
 //-----
