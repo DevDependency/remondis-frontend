@@ -1,6 +1,5 @@
 import { CaseWithId, CasesToDo, Coordinates, Room, Case } from './cases';
 import { store } from "../store/store";
-import { InspectorList } from "../components/InspectorsList";
 import { UserSettings } from "./users";
 
 export interface CaseState {
