@@ -33,9 +33,6 @@ export const CaseDetails: React.FC = () => {
   type inputValue = keyof typeof inputIcons;
 
   useEffect(() => {
-    // if (caseId) {
-    //   dispatch(getCasesById(parseInt(caseId)));
-    // }
     dispatch(setActiveCaseTabBar("details"));
   }, []);
   
