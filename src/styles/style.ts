@@ -350,6 +350,9 @@ export const ButtonStyled = styled.div<Props>`
   border: none;
   background-color: ${(props) =>
     props.color === "red" ? props.theme.colors.red : props.theme.colors.grey};
+  margin-right: ${({ isSignUp }) => (isSignUp ? "25px" : "none")};
+  margin-left: ${({ isSignUp }) => (isSignUp ? "25px" : "none")};
+  margin-bottom: ${({ isSignUp }) => (isSignUp ? "10px" : "none")};
   border: none;
   font-family: ${(props: Props) => props.theme.fonts.default};
   color: ${(props: Props) => props.theme.colors.white};
