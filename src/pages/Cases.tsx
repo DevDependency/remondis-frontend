@@ -4,8 +4,11 @@ import { useAppSelector, useAppDispatch } from "../utils/hooks/useStore";
 import { getCases } from "../store/slices/case";
 import { CaseWithId } from "../interfaces/cases";
 import { CaseItem } from "../components/case/CaseItem";
-import { MainContainerStyled } from "../styles/style";
-import { setActiveInspectorTabBar, setActiveManagerTabBar } from "../store/slices/general";
+import { InsideMainBottomStyled, MainContainerStyled } from "../styles/style";
+import {
+  setActiveInspectorTabBar,
+  setActiveManagerTabBar,
+} from "../store/slices/general";
 
 export const Cases: React.FC = () => {
   const tasks = useAppSelector((state) => state.caseSlice.cases);
@@ -13,8 +16,8 @@ export const Cases: React.FC = () => {
 
   useEffect(() => {
     dispatch(getCases());
-    dispatch(setActiveManagerTabBar("cases"))
-    dispatch(setActiveInspectorTabBar("cases"))
+    dispatch(setActiveManagerTabBar("cases"));
+    dispatch(setActiveInspectorTabBar("cases"));
   }, []);
 
   return (
@@ -32,6 +35,7 @@ export const Cases: React.FC = () => {
                 )}
                 address={item.address}
                 caseId={item.id}
+                state={item.State?.title}
                 isTodo={false}
               />
             ))}

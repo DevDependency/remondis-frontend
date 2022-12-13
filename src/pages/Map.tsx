@@ -57,8 +57,7 @@ export const Map: React.FC = () => {
           className="MapWindow"
           ref={mapContainer}
           style={{
-            width: "100vw",
-            height: "100vh",
+            width: "100vw"
           }}
         />
       )}

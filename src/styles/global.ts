@@ -24,7 +24,6 @@ export default createGlobalStyle`
       border-radius: 0;
       text-decoration: none;
       cursor: pointer;
-      padding: 10px 20px;
       &: hover {
         border: none;
       }

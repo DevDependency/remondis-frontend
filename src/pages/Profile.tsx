@@ -5,6 +5,19 @@ import { useAppDispatch, useAppSelector } from "../utils/hooks/useStore";
 import { setUserId, updateUser, setUser } from "../store/slices/user";
 import { UsersValidation } from "../interfaces/users";
 import { Role } from "../interfaces/users";
+import { NavBar } from "../components/containers";
+import {
+  ButtonContainerStyled,
+  ButtonStyled,
+  CaseBackgroundContainerStyled,
+  CaseItemContainerViewStyled,
+  CaseItemEditStyled,
+  CaseItemStyled,
+  InputLabel,
+  InputPlaceholderShown,
+  InsideMainStyled,
+  TextMain,
+} from "../styles/style";
 
 export const Profile: React.FC = () => {
   const { state } = useLocation();
@@ -47,104 +60,92 @@ export const Profile: React.FC = () => {
         <Navigate to="/" />
       ) : (
         <div>
-          {/* <NavBar /> */}
+          <NavBar />
           <form className="Form" onSubmit={formik.handleSubmit}>
-            <div className="ContainerInputField">
-              <label className="InputLabel" htmlFor="username">
-                Username
-              </label>
-              <input
-                className="InputCaseStyled"
-                name="username"
-                onChange={formik.handleChange}
-                id="username"
-                type="text"
-                onBlur={formik.handleBlur}
-              />
-              {formik.errors.username && formik.touched.username && (
-                <div className="CaseErrors">{formik.errors.username}</div>
-              )}
-
-              <label className="InputLabel" htmlFor="password">
-                Password
-              </label>
-              <input
-                className="InputCaseStyled"
-                name="password"
-                onChange={formik.handleChange}
-                id="password"
-                type="password"
-                onBlur={formik.handleBlur}
-              />
-              {formik.errors.password && formik.touched.password && (
-                <div className="CaseErrors">{formik.errors.password}</div>
-              )}
-              {afterSignUp && (
-                <>
-                  <label className="InputLabel" htmlFor="email_address">
-                    Email
-                  </label>
+            <InsideMainStyled>
+              <CaseItemContainerViewStyled>
+                <CaseItemEditStyled>
+                  <InputLabel>Username</InputLabel>
                   <input
                     className="InputCaseStyled"
-                    name="email_address"
+                    name="username"
                     onChange={formik.handleChange}
-                    id="email_address"
-                    type="email"
+                    id="username"
+                    type="text"
                     onBlur={formik.handleBlur}
-                    defaultValue={userEmail}
                   />
-                  {formik.errors.email_address &&
-                    formik.touched.email_address && (
-                      <div className="CaseErrors">
-                        {formik.errors.email_address}
-                      </div>
-                    )}
-                </>
-              )}
-              <label className="InputLabel" htmlFor="Phone">
-                Phone Number
-              </label>
-              <input
-                className="InputCaseStyled"
-                name="phone"
-                onChange={formik.handleChange}
-                id="phone"
-                type="text"
-                onBlur={formik.handleBlur}
-              />
-              {formik.errors.phone && formik.touched.phone && (
-                <div className="CaseErrors">{formik.errors.phone}</div>
-              )}
-              {afterSignUp && (
-                <>
-                  <label className="InputLabel" htmlFor="role">
-                    Role
-                  </label>
-                  <select
-                    className="SelectStyled"
-                    id="role"
-                    name="role"
+                  {formik.errors.username && formik.touched.username && (
+                    <div className="CaseErrors">{formik.errors.username}</div>
+                  )}
+                </CaseItemEditStyled>
+                <CaseItemEditStyled>
+                  <InputLabel>Password</InputLabel>
+                  <input
+                    className="InputCaseStyled"
+                    name="password"
                     onChange={formik.handleChange}
-                  >
-                    {Object.values(Role).map((oneRole: any, index: number) => {
-                      return (
-                        <option
-                          className="OptionsStyled"
-                          value={oneRole}
-                          key={index}
-                        >
-                          {oneRole}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </>
-              )}
-            </div>
-
-            <button className="LongButtonStyled" type="submit" color={"red"}>
-              Save
-            </button>
+                    id="password"
+                    type="password"
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.errors.password && formik.touched.password && (
+                    <div className="CaseErrors">{formik.errors.password}</div>
+                  )}
+                </CaseItemEditStyled>
+                <CaseItemEditStyled>
+                  <InputLabel>Phone number</InputLabel>
+                  <input
+                    className="InputCaseStyled"
+                    name="phone"
+                    onChange={formik.handleChange}
+                    id="phone"
+                    type="text"
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.errors.phone && formik.touched.phone && (
+                    <div className="CaseErrors">{formik.errors.phone}</div>
+                  )}
+                </CaseItemEditStyled>
+                {afterSignUp && (
+                  <>
+                    <label className="InputLabel" htmlFor="role">
+                      Role
+                    </label>
+                    <select
+                      className="SelectStyled"
+                      id="role"
+                      name="role"
+                      onChange={formik.handleChange}
+                    >
+                      {Object.values(Role).map(
+                        (oneRole: any, index: number) => {
+                          return (
+                            <option
+                              className="OptionsStyled"
+                              value={oneRole}
+                              key={index}
+                            >
+                              {oneRole}
+                            </option>
+                          );
+                        }
+                      )}
+                    </select>
+                  </>
+                )}
+              </CaseItemContainerViewStyled>
+            </InsideMainStyled>
+            <ButtonContainerStyled>
+              <ButtonStyled>
+                <button
+                  className="LongButtonStyled"
+                  type="submit"
+                  color={"red"}
+                >
+                  Save
+                </button>
+              </ButtonStyled>
+            </ButtonContainerStyled>
           </form>
         </div>
       )}

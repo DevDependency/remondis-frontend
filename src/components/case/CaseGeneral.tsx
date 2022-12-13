@@ -9,10 +9,13 @@ import {
   CaseItemStyled,
   ButtonContainerStyled,
   ButtonSmallStyled,
+  IconsContainerStyled,
+  IconStyled
 
 } from "../../styles/style";
 import { setActiveCaseTabBar } from "../../store/slices/general";
 import { NEW_CASE } from "../../utils/constants";
+import { caseIconEdit } from "../../assets";
 
 export const CaseGeneral: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -34,6 +37,9 @@ export const CaseGeneral: React.FC = () => {
   const submitHandler = () => {
     navigate('/', {relative: "route" })
   }
+  const assignInspector = () => {
+    navigate(`/cases/${caseId}/inspector-assign`);
+  };
   return (
     <>
     {currentCase && 
@@ -67,6 +73,9 @@ export const CaseGeneral: React.FC = () => {
         <CaseItemStyled>
           <InputPlaceholderShown>Inspector</InputPlaceholderShown>
           <TextMain>{currentCase?.Inspector?.username}</TextMain>
+        <IconsContainerStyled isSize={true}>          
+          <IconStyled src={caseIconEdit} onClick={assignInspector} />
+        </IconsContainerStyled>
         </CaseItemStyled>
       </CaseItemContainerStyled>
       }

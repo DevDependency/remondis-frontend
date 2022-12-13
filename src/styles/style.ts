@@ -7,11 +7,14 @@ import { background } from "../assets";
 
 export const MainStyled = styled.div<Props>`
   width: 100vw;
-  height: 100vh;
 `;
 
 export const InsideMainStyled = styled.div<Props>`
   margin-top: 75px;
+`;
+
+export const InsideMainBottomStyled = styled.div<Props>`
+  margin-bottom: 100px;
 `;
 
 export const CalendarContainerStyled = styled.div<Props>`
@@ -94,16 +97,24 @@ export const NavBarStyled = styled.div<Props>`
   width: 100vw;
   left: 0;
   top: 0;
+`;
 
-  & :nth-child(2) {
-    margin-left: 130px;
-  }
+export const ContainerNavBarIconsStyled = styled.div<Props>`
+  display: flex;
+  width: 5rem;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 35px;
 `;
 
 export const LogoStyled = styled.img<Props>`
   top: 0;
   // padding-bottom: 60px;
   margin: ${({ isSignUp }) => (isSignUp ? "10px" : "inherit")};
+`;
+
+export const LogoNavBarStyled = styled.img<Props>`
+  top: 0;
 `;
 
 export const IconStyled = styled.img`
@@ -227,13 +238,24 @@ export const CaseItemStyled = styled.div<Props>`
   margin: 10px 0 10px;
   align-items: center;
   box-sizing: border-box;
-  text-align: right;
+  // text-align: right;
+  gap: 15px;
   border-bottom: ${(props) => props.theme.colors.border} 1px solid;
+  border-color: ${(props) =>
+    props.color === "red" ? props.theme.colors.red : props.theme.colors.grey};
 `;
 
 //-----
 
 // CaseItemEdit
+
+export const CaseItemContainerViewStyled = styled.div<Props>`
+  width: 92%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 15px 0;
+`;
 
 export const CaseItemContainerEditStyled = styled.div<Props>`
   width: 92%;
@@ -259,6 +281,16 @@ export const CaseItemEditStyled = styled.div<Props>`
     padding: 5px 7px;
     width: 100%;
   }
+
+  select {
+    border: ${(props) => props.theme.borderline.border};
+    color: ${(props: any) => props.theme.colors.tx_grey_main};
+    height: 38px;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 5px 7px;
+    width: 100%;
+  }
 `;
 
 //-----
@@ -271,14 +303,14 @@ export const ButtonContainerPopupStyled = styled.div<Props>`
   justify-content: center;
   // width: 100%;
   height: 85px;
-  margin: 0 auto;
+  // margin: 0 auto;
 `;
 
 export const ButtonContainerStyled = styled.div<Props>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 100vw;
   height: 85px;
   margin: 0 auto;
   padding: 15px;
@@ -399,7 +431,7 @@ export const Popup = styled.div<Props>`
   position: fixed;
   left: 0;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.1);
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -421,6 +453,8 @@ export const PopupStyled = styled.div<Props>`
 
 //-----
 
+// Photo
+
 export const PhotoContainerStyled = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -430,11 +464,26 @@ export const PhotoStyled = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100px;
-  height: 100px;
   margin-bottom: 10px;
   margin-right: 8px;
 `;
+
+export const RoomItemContainerStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 92%;
+  margin: 0 auto 15px;
+  padding: 15px;
+  box-shadow: ${(props: Props) => props.theme.effects.shadow};
+  gap: 10px;
+
+  p {
+      margin-bottom: 15px;
+    }
+`;
+
+//-----
+
 // SignUp
 
 export const AuthorizationWrapper = styled.div<Props>`
@@ -487,7 +536,11 @@ export const AuthorizationLinkBottom = styled.p<Props>`
   margin-right: ${({ isForgotPassword }) =>
     isForgotPassword ? "7%" : "inherit"};
 `;
+
+//-----
+
 // Authorization Containers (divs)
+
 export const AuthorizationContainer = styled.div<Props>`
   display: flex;
   flex-direction: column;
