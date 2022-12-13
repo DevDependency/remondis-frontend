@@ -347,6 +347,11 @@ export const ButtonStyled = styled.div<Props>`
   }
 `;
 
+export const ExtraButtonStyled = styled(ButtonStyled)`
+  position: absolute;
+  margin-bottom: 12%;
+`;
+
 export const ButtonSmallStyled = styled.div<Props>`
   display: flex;
   justify-content: center;
@@ -479,8 +484,8 @@ export const RoomItemContainerStyled = styled.div`
   gap: 10px;
 
   p {
-      margin-bottom: 15px;
-    }
+    margin-bottom: 15px;
+  }
 `;
 
 //-----
