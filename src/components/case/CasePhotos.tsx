@@ -9,6 +9,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Room } from "../../interfaces/cases";
 import { caseIconEdit } from "../../assets/";
 import {
+  InsideMainBottomStyled,
   PhotoContainerStyled,
   PhotoStyled,
   TextMain,
@@ -63,55 +64,57 @@ export const CasePhotos: React.FC = () => {
 
   return (
     <>
-      {rooms.map((el: Room, index: number) => (
-        <div key={index}>
-          <RoomItemContainerStyled>
-            {/* <div>{el.room}</div> */}
-            <TextMain
-              style={{
-                position: "relative",
-              }}
-            >
-              {el.room_title}
-              <img
-                onClick={editlHandler}
-                src={caseIconEdit}
-                id={el.room.toString()}
+      <InsideMainBottomStyled>
+        {rooms.map((el: Room, index: number) => (
+          <div key={index}>
+            <RoomItemContainerStyled>
+              {/* <div>{el.room}</div> */}
+              <TextMain
                 style={{
-                  position: "absolute",
-                  top: "0",
-                  right: "0",
-                  zIndex: "10",
+                  position: "relative",
                 }}
-              />
-            </TextMain>
-            <TextMain>{el.description}</TextMain>
-            <PhotoContainerStyled>
-              {el.CasePhoto.map((img, index) => (
-                <PhotoStyled
-                  /* style={{
+              >
+                {el.room_title}
+                <img
+                  onClick={editlHandler}
+                  src={caseIconEdit}
+                  id={el.room.toString()}
+                  style={{
+                    position: "absolute",
+                    top: "0",
+                    right: "0",
+                    zIndex: "10",
+                  }}
+                />
+              </TextMain>
+              <TextMain>{el.description}</TextMain>
+              <PhotoContainerStyled>
+                {el.CasePhoto.map((img, index) => (
+                  <PhotoStyled
+                    /* style={{
                   position: "relative",
                 }} */
-                  key={index}
-                >
-                  <img
-                    src={
-                      "data:image/jpeg;base64," +
-                      Buffer.from(img.photo.data).toString("base64")
-                    }
-                    alt=""
-                    style={{
-                      /* position: "relative", */
-                      width: "100px",
-                      height: "90px",
-                    }}
-                  />
-                </PhotoStyled>
-              ))}
-            </PhotoContainerStyled>
-          </RoomItemContainerStyled>
-        </div>
-      ))}
+                    key={index}
+                  >
+                    <img
+                      src={
+                        "data:image/jpeg;base64," +
+                        Buffer.from(img.photo.data).toString("base64")
+                      }
+                      alt=""
+                      style={{
+                        /* position: "relative", */
+                        width: "100px",
+                        height: "90px",
+                      }}
+                    />
+                  </PhotoStyled>
+                ))}
+              </PhotoContainerStyled>
+            </RoomItemContainerStyled>
+          </div>
+        ))}
+      </InsideMainBottomStyled>
       <ButtonContainerStyled>
         <button>
           <ButtonSmallStyled id="0" onClick={editlHandler}>

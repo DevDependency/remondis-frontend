@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "../../utils/hooks/useStore";
 import { useState, useEffect } from "react";
 import { addPhoto, iconCancel } from "../../assets/";
 import { File } from "../../interfaces/cases";
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import {
   getCaseItem,
   updateCasePhoto,
@@ -18,6 +18,7 @@ import {
   CaseItemContainerEditStyled,
   PhotoStyled,
   PhotoContainerStyled,
+  CaseItemContainerViewStyled,
 } from "../../styles/style";
 import { Formik, Form } from "formik";
 import { setIsEditMode } from "../../store/slices/general";
@@ -26,7 +27,6 @@ import * as buffer from "buffer";
 window.Buffer = buffer.Buffer;
 
 export const CasePhotosEdit: React.FC = () => {
-  
   const { state } = useLocation();
   const { isNewRoom } = state;
 
@@ -114,7 +114,6 @@ export const CasePhotosEdit: React.FC = () => {
   };
 
   const removeElement = (e: any) => {
-
     setRoomImages(roomImages.filter((el) => el.id != e.target.id));
   };
 
@@ -158,7 +157,7 @@ export const CasePhotosEdit: React.FC = () => {
             handleSubmit,
           }) => (
             <Form>
-              <CaseItemContainerEditStyled>
+              <CaseItemContainerViewStyled>
                 <CaseItemEditStyled>
                   <InputLabel htmlFor="title">Name</InputLabel>
                   <input
@@ -235,7 +234,7 @@ export const CasePhotosEdit: React.FC = () => {
                     />
                   </PhotoStyled>
                 </PhotoContainerStyled>
-              </CaseItemContainerEditStyled>
+              </CaseItemContainerViewStyled>
               <ButtonContainerStyled>
                 <button type="button">
                   <ButtonSmallStyled onClick={cancelHandler}>

@@ -98,7 +98,8 @@ export const ContainerNavBarIconsStyled = styled.div<Props>`
   display: flex;
   width: 5rem;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 35px;
 `;
 
 export const LogoStyled = styled.img<Props>`
