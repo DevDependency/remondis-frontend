@@ -86,31 +86,31 @@ export const CaseDetails: React.FC = () => {
             <CaseItemStyled>
               <InputPlaceholderShown>Clear the property</InputPlaceholderShown>
               <IconStyled
-                src={currentCase.clear_area && inputIconYes}
+                src={currentCase.clear_area ? inputIconYes : undefined}
               />
             </CaseItemStyled>
             <CaseItemStyled>
               <InputPlaceholderShown>Backyard</InputPlaceholderShown>
               <IconStyled
-                src={currentCase.back_house && inputIconYes}
+                src={currentCase.back_house ? inputIconYes : undefined}
               />
             </CaseItemStyled>
             <CaseItemStyled>
               <InputPlaceholderShown>
                 Accessibility / parking facilities
               </InputPlaceholderShown>
-              <IconStyled src={currentCase.parking && inputIconYes} />
+              <IconStyled src={currentCase.parking ? inputIconYes : undefined} />
             </CaseItemStyled>
             <CaseItemStyled>
               <InputPlaceholderShown>Elevator</InputPlaceholderShown>
               <IconStyled
-                src={currentCase.elevator && inputIconYes}
+                src={currentCase.elevator ? inputIconYes : undefined}
               />
             </CaseItemStyled>
             <CaseItemStyled>
               <InputPlaceholderShown>Lift for furniture</InputPlaceholderShown>
               <IconStyled
-                src={currentCase.furniture_lift && inputIconYes}
+                src={currentCase.furniture_lift ? inputIconYes : undefined}
               />
             </CaseItemStyled>
             <CaseItemStyled>
@@ -118,7 +118,7 @@ export const CaseDetails: React.FC = () => {
                 Clearance with closet contents (GSA)
               </InputPlaceholderShown>
               <IconStyled
-                src={currentCase.closet_contents && inputIconYes}
+                src={currentCase.closet_contents ? inputIconYes : undefined}
               />
             </CaseItemStyled>
             <CaseItemStyled>
@@ -126,13 +126,13 @@ export const CaseDetails: React.FC = () => {
                 Removing carpets (not glued)
               </InputPlaceholderShown>
               <IconStyled
-                src={currentCase.removing_carpets && inputIconYes}
+                src={currentCase.removing_carpets ? inputIconYes : undefined}
               />
             </CaseItemStyled>
             <CaseItemStyled>
               <InputPlaceholderShown>Removing lamps</InputPlaceholderShown>
               <IconStyled
-                src={currentCase.removing_lamps && inputIconYes}
+                src={currentCase.removing_lamps ? inputIconYes : undefined}
               />
             </CaseItemStyled>
             <CaseItemStyled>
@@ -140,7 +140,7 @@ export const CaseDetails: React.FC = () => {
                 Removing curtain rods
               </InputPlaceholderShown>
               <IconStyled
-                src={currentCase.removing_curtain && inputIconYes}
+                src={currentCase.removing_curtain ? inputIconYes : undefined}
               />
             </CaseItemStyled>
             <CaseItemStyled>
