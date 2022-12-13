@@ -9,7 +9,7 @@ const initialState: CaseState = {
   deletedCaseId: 0,
   casesToDo: [],
   cases: [],
-  currentCase: NEW_CASE,
+  currentCase: undefined,
   coordinates: [],
   caseRooms: [],
   currentRoom: undefined,
@@ -230,6 +230,9 @@ const caseSlice = createSlice({
         caseSlice.caseReducers.setCaseChangedTrue(state);
       })
       .addCase(editTheCase.fulfilled, (state, action) => {
+        caseSlice.caseReducers.setCaseChangedTrue(state);
+      })
+      .addCase(closeCase.fulfilled, (state, action) => {
         caseSlice.caseReducers.setCaseChangedTrue(state);
       })
       .addCase(getCoordinates.fulfilled, (state, action) => {
