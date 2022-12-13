@@ -11,6 +11,7 @@ export interface CaseState {
   coordinates: Coordinates[];
   caseRooms: Room[];
   currentRoom: Room | undefined;
+  caseChanged: boolean;
 }
 
 export interface UserState {

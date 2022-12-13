@@ -85,6 +85,7 @@ export const NavBar: React.FC = () => {
             },
             {
               title: "Confirm",
+              default: true,
               onClick: () => {
                 setInspectorStatus();
               },
