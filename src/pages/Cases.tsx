@@ -4,7 +4,6 @@ import { useAppSelector, useAppDispatch } from "../utils/hooks/useStore";
 import { getCases } from "../store/slices/case";
 import { CaseWithId } from "../interfaces/cases";
 import { CaseItem } from "../components/case/CaseItem";
-import { InsideMainBottomStyled, MainContainerStyled } from "../styles/style";
 import {
   setActiveInspectorTabBar,
   setActiveManagerTabBar,
@@ -23,7 +22,6 @@ export const Cases: React.FC = () => {
   return (
     <>
       <TabBarManager />
-      <MainContainerStyled>
         {tasks &&
           tasks
             .filter((item: CaseWithId) => item.state_id != 7 && item)
@@ -39,7 +37,6 @@ export const Cases: React.FC = () => {
                 isTodo={false}
               />
             ))}
-      </MainContainerStyled>
     </>
   );
 };

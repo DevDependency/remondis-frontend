@@ -14,19 +14,26 @@ import {
 import {
   AuthorizationWrapper,
   AuthorizationForm,
-  LogoStyled,
-  TitleLogin,
   InputLabel,
   AuthorizationInput,
   AuthorizationLinkBottom,
-  ButtonStyled,
   AuthorizationInputContainer,
   AuthorizationContainer,
   AuthorizationInputTitleContainer,
   AuthorizationLinksContainer,
 } from "../styles/style";
-import { logo } from "../assets";
 import { Locations } from "../interfaces/route";
+import {
+  ButtonStyled,
+  CaseItemContainerViewStyled,
+  CaseItemEditStyled,
+  LogoStyled,
+  TitleLogin,
+  LoginFormConrainerStyled,
+  BackgroundStyled,
+  LinkStyled,
+} from "../styles/style";
+import { logo } from "../assets";
 
 const validationSchema = Yup.object({
   email: Yup.string().required(),
