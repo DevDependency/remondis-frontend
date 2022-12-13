@@ -82,8 +82,7 @@ export const getUsersByRole = createAsyncThunk(
   "user/getUsersByRole",
  async () => {
   try{
-    const response = await api.apiGetUsersListByRole();
-    console.log(response.users);
+    const response = await api.apiGetUsersListByRole();    
     return response.users;
   } catch (error) {
     console.error(error);
