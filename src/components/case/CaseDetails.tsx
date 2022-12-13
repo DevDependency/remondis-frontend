@@ -142,15 +142,7 @@ export const CaseDetails: React.FC = () => {
               <IconStyled
                 src={currentCase.removing_curtain && inputIconYes}
               />
-            </CaseItemStyled>
-            <CaseItemStyled>
-              <InputPlaceholderShown>Date of appointment</InputPlaceholderShown>
-              <TextMain>
-                {currentCase.Appointment?.date && new Date(currentCase.Appointment?.date).toLocaleDateString(
-                  "en-GB"
-                )}
-              </TextMain>
-            </CaseItemStyled>
+            </CaseItemStyled>            
           </CaseItemContainerStyled>
         </InsideMainBottomStyled>
       )}
