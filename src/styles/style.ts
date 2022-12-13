@@ -1,6 +1,7 @@
 import { theme } from "../../src/styles/theme";
 import { Theme, Colors, Fonts, BorderLine, Props } from "../interfaces/style";
 import styled from "styled-components";
+import { background } from "../assets";
 
 // Main
 
@@ -29,7 +30,9 @@ export const CalendarContainerStyled = styled.div<Props>`
 
 export const TitleLogin = styled.h1<Props>`
   font-family: ${(props: Props) => props.theme.fonts.default};
-  color: ${(props: Props) => props.theme.colors.tx_grey_main};
+  color: ${(props: Props) =>
+    props.isSignUp ? "black" : props.theme.colors.tx_grey_main};
+  padding-bottom: ${(props: Props) => (props.isSignUp ? "20px" : "0px")};
   font-weight: 400;
   font-size: 32px;
   text-align: center;
@@ -54,6 +57,8 @@ export const InputLabel = styled.label<Props>`
   color: ${(props: Props) => props.theme.colors.blue_dark};
   font-weight: 400;
   font-size: 16px;
+  align-self: ${({ isSignUp }) => (isSignUp ? "start" : "inherit")};
+  margin-left: ${({ isSignUp }) => (isSignUp ? "25px" : "inherit")};
 `;
 
 export const InputPlaceholderShown = styled.p<Props>`
@@ -320,7 +325,8 @@ export const ButtonStyled = styled.div<Props>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 360px;
+  width: ${(props: Props) =>
+    props.isSignUp ? props.theme.fonts.default : "360px"};
   height: 45px;
   border: none;
   background-color: ${(props) =>
@@ -487,6 +493,10 @@ export const AuthorizationWrapper = styled.div<Props>`
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
+  background-image: url(${background});
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: cover;
 
   // @media (min-width: 400px) {
   //   width: 20rem;
@@ -494,7 +504,9 @@ export const AuthorizationWrapper = styled.div<Props>`
   // }
 `;
 
-export const AuthorizationForm = styled.form``;
+export const AuthorizationForm = styled.form`
+  filter: none;
+`;
 
 export const AuthorizationHeader = styled.p<Props>`
   font-family: ${(props) => props.theme.fonts.default};
@@ -519,6 +531,10 @@ export const AuthorizationLinkBottom = styled.p<Props>`
   color: ${(props) => props.theme.colors.tx_grey_main};
   text-align: center;
   cursor: pointer;
+  align-self: ${({ isForgotPassword }) =>
+    isForgotPassword ? "end" : "inherit"};
+  margin-right: ${({ isForgotPassword }) =>
+    isForgotPassword ? "7%" : "inherit"};
 `;
 
 //-----

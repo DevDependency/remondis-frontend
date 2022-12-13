@@ -11,7 +11,21 @@ import {
   setIsForgotPassword,
   setAreCredentialsWrong,
 } from "../store/slices/user";
-import { Main } from "./Main";
+import {
+  AuthorizationWrapper,
+  AuthorizationForm,
+  LogoStyled,
+  TitleLogin,
+  InputLabel,
+  AuthorizationInput,
+  AuthorizationLinkBottom,
+  ButtonStyled,
+  AuthorizationInputContainer,
+  AuthorizationContainer,
+  AuthorizationInputTitleContainer,
+  AuthorizationLinksContainer,
+} from "../styles/style";
+import { logo } from "../assets";
 import { Locations } from "../interfaces/route";
 
 const validationSchema = Yup.object({
@@ -32,6 +46,7 @@ export const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const forgotPasswordHandler = () => {
     dispatch(setIsForgotPassword());
+    navigate("/forgotpassword");
   };
 
   // Cookies
@@ -71,48 +86,70 @@ export const Login: React.FC = () => {
 
   return (
     <>
-      <div>
-        <div>
-          {/* <Logo src={NEW_CONSTANT.logo} /> */}
-          {/* A logo must be here */}
-          <h1>Login</h1>
-          <form onSubmit={formik.handleSubmit} noValidate>
-            <label htmlFor="email">Name</label>
-            <input
-              // emailError={formik.errors.email && formik.touched.email}
-              // areCredentialsWrong={areCredentialsWrong}
-              {...formik.getFieldProps("email")}
-            />
-            {formik.errors.email && formik.touched.email && (
-              <div>{formik.errors.email}</div>
-            )}
-            <br />
-            <div>
-              <label htmlFor="Password">Password</label>
-              <input
-                // areCredentialsWrong={areCredentialsWrong}
-                // passwordError={
-                //   formik.errors.password && formik.touched.password
-                // }
-                {...formik.getFieldProps("password")}
-                type="password"
-              />
-              {formik.errors.password && formik.touched.password && (
-                <div>{formik.errors.password}</div>
-              )}
-              {areCredentialsWrong && <div>email or password is incorrect</div>}
-              <Link to="/forgotpassword" onClick={forgotPasswordHandler}>
-                Forgot Password
-              </Link>
-            </div>
-
-            <button type="submit">Login</button>
-            <div>
-              <Link to="/signup">Sign up</Link>
-            </div>
-          </form>
-        </div>
-      </div>
+      <AuthorizationWrapper>
+        <AuthorizationForm onSubmit={formik.handleSubmit} noValidate>
+          <AuthorizationContainer>
+            <LogoStyled src={logo} isSignUp={true} />
+            <AuthorizationInputTitleContainer>
+              <TitleLogin isSignUp={true}>Login</TitleLogin>
+              <AuthorizationInputContainer>
+                <InputLabel htmlFor="email" isSignUp={true}>
+                  Name
+                </InputLabel>
+                <AuthorizationInput
+                  // emailError={formik.errors.email && formik.touched.email}
+                  // areCredentialsWrong={areCredentialsWrong}
+                  {...formik.getFieldProps("email")}
+                />
+                {formik.errors.email && formik.touched.email && (
+                  <div>{formik.errors.email}</div>
+                )}
+              </AuthorizationInputContainer>
+              <AuthorizationInputContainer>
+                <InputLabel htmlFor="Password" isSignUp={true}>
+                  Password
+                </InputLabel>
+                <AuthorizationInput
+                  // areCredentialsWrong={areCredentialsWrong}
+                  // passwordError={
+                  //   formik.errors.password && formik.touched.password
+                  // }
+                  {...formik.getFieldProps("password")}
+                  type="password"
+                />
+                {formik.errors.password && formik.touched.password && (
+                  <div>{formik.errors.password}</div>
+                )}
+                {areCredentialsWrong && (
+                  <div>email or password is incorrect</div>
+                )}
+                <AuthorizationLinkBottom
+                  isForgotPassword={true}
+                  onClick={() => {
+                    navigate("/forgotpassword");
+                  }}
+                >
+                  Forgot Password
+                </AuthorizationLinkBottom>
+              </AuthorizationInputContainer>
+            </AuthorizationInputTitleContainer>
+            <AuthorizationLinksContainer>
+              <button type="submit">
+                <ButtonStyled isSignUp={true} color={"red"}>
+                  Login
+                </ButtonStyled>
+              </button>
+              <AuthorizationLinkBottom
+                onClick={() => {
+                  navigate("/signup");
+                }}
+              >
+                Sign up
+              </AuthorizationLinkBottom>
+            </AuthorizationLinksContainer>
+          </AuthorizationContainer>
+        </AuthorizationForm>
+      </AuthorizationWrapper>
     </>
   );
 };
