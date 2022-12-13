@@ -95,14 +95,22 @@ export const CaseGeneral: React.FC = () => {
                   "en-GB"
                 )}</TextMain>
             </CaseItemStyled>
-            <CaseItemStyled>
+            {userRole === Role.MANAGER ? <CaseItemStyled>
               <InputPlaceholderShown>Inspector</InputPlaceholderShown>
               <TextMain>{currentCase?.Inspector?.username}</TextMain>
-              {userRole === Role.MANAGER ? <IconsContainerStyled isSize={true}>
+              <IconsContainerStyled isSize={true}>
                 <IconStyled src={caseIconEdit} onClick={assignInspector} />
-              </IconsContainerStyled> : null}
+              </IconsContainerStyled>
+            </CaseItemStyled> : null}
+            <CaseItemStyled>
+              <InputPlaceholderShown>Date of appointment</InputPlaceholderShown>
+              <TextMain>
+                {currentCase.Appointment?.date && new Date(currentCase.Appointment?.date).toLocaleDateString(
+                  "en-GB"
+                )}
+              </TextMain>
             </CaseItemStyled>
-          </CaseItemContainerStyled>
+          </CaseItemContainerStyled>          
         </>
         )
       }
