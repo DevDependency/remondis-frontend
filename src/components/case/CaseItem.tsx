@@ -108,6 +108,7 @@ export const CaseItem: React.FC<CaseItemProps> = ({
             },
             {
               title: "Confirm",
+              default: true,
               onClick: () => {
                 closeCaseHandler();
               },
