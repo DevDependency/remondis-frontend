@@ -175,8 +175,11 @@ export const CaseDetails: React.FC = () => {
       </ButtonContainerStyled>
     :
       <ButtonContainerStyled>
+       <button>
+        <ButtonSmallStyled onClick={editlHandler}>Edit</ButtonSmallStyled>
+      </button> 
       <button>
-        <ButtonStyled color={"red"} onClick={confirmHandler}>Submit</ButtonStyled>
+        <ButtonSmallStyled color={"red"} onClick={confirmHandler}>Submit</ButtonSmallStyled>
       </button>            
       </ButtonContainerStyled>    
     )
