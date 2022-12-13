@@ -365,6 +365,11 @@ export const ButtonStyled = styled.div<Props>`
   }
 `;
 
+export const ExtraButtonStyled = styled(ButtonStyled)`
+  position: absolute;
+  margin-bottom: 12%;
+`;
+
 export const ButtonSmallStyled = styled.div<Props>`
   display: flex;
   justify-content: center;

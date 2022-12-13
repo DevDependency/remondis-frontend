@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../utils/hooks/useStore";
 import { setUserId, updateUser, setUser } from "../store/slices/user";
 import { UsersValidation } from "../interfaces/users";
 import { Role } from "../interfaces/users";
+import { useCookies } from "react-cookie";
 import { NavBar } from "../components/containers";
 import {
   ButtonContainerStyled,
@@ -17,6 +18,7 @@ import {
   InputPlaceholderShown,
   InsideMainStyled,
   TextMain,
+  ExtraButtonStyled,
 } from "../styles/style";
 
 export const Profile: React.FC = () => {
@@ -28,6 +30,11 @@ export const Profile: React.FC = () => {
   const { userId, userEmail, userRole } = useAppSelector(
     (state) => state.userSlice
   );
+  const [cookiesName, setCookiesName, removeCookiesName] = useCookies<string>([
+    "Name",
+  ]);
+  const [cookiesPassword, setCookiesPassword, removeCookiesPassword] =
+    useCookies<string>(["Password"]);
   const userUpdate = async (values: UsersValidation) => {
     const result = await dispatch(
       updateUser({
@@ -53,6 +60,11 @@ export const Profile: React.FC = () => {
       navigate("/");
     },
   });
+
+  const logOutHandler = () => {
+    removeCookiesName("Name", { path: "/" });
+    removeCookiesPassword("Password", { path: "/" });
+  };
 
   return (
     <div className="CaseDiv">
@@ -139,6 +151,16 @@ export const Profile: React.FC = () => {
               </CaseItemContainerViewStyled>
             </InsideMainStyled>
             <ButtonContainerStyled>
+              <ExtraButtonStyled
+                onClick={() => {
+                  logOutHandler();
+                  navigate("/login");
+                  window.location.reload();
+                }}
+              >
+                <button>Log out</button>
+              </ExtraButtonStyled>
+
               <ButtonStyled>
                 <button
                   className="LongButtonStyled"
