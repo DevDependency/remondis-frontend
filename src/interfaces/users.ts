@@ -10,6 +10,7 @@ export interface UserSettings {
   phone?: string;
   roles?: string;
   email_address?: string;
+  state?: boolean;
 }
 
 export interface UserLogin {
@@ -23,7 +24,7 @@ export interface UsersValidation {
   username?: string;
   phone?: string;
   role?: string;
-  email_address?: string;
+  email_address?: string;  
 }
 
 export enum Role {

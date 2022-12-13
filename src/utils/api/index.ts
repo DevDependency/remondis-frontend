@@ -15,6 +15,7 @@ import {
   apiGetUsersForgotPassword,
   apiPutUsersById,
   apiGetUserByEmail,
+  apiGetUsersListByRole,
 } from "./apiUser";
 
 import {
@@ -39,6 +40,7 @@ import {
   apiPostCasePhoto,
   apiPutCasePhoto,
   apiDeleteCasePhoto,
+  
 
 } from "./apiCase";
 
@@ -77,4 +79,5 @@ export {
   apiPostCasePhoto,
   apiPutCasePhoto,
   apiDeleteCasePhoto,
+  apiGetUsersListByRole,
 };
