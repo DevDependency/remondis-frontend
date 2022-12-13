@@ -14,6 +14,17 @@ export const apiGetUsersList = async () => {
   }
 };
 
+export const apiGetUsersListByRole = async () => {
+  try {
+    const res = await server.get("/users?role=inspector");
+    console.log(res.data);
+    return res.data;    
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
 export const apiGetUsersListById = async (userId: number) => {
   try {
     const res = await server.get(`/users/${userId}`);
