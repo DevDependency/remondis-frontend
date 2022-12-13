@@ -60,6 +60,7 @@ export const InputLabel = styled.label<Props>`
   font-size: 16px;
   align-self: ${({ isSignUp }) => (isSignUp ? "start" : "inherit")};
   margin-left: ${({ isSignUp }) => (isSignUp ? "25px" : "inherit")};
+  margin-bottom: ${({ isSignUp }) => (isSignUp ? "5px" : "inherit")};
 `;
 
 export const InputPlaceholderShown = styled.p<Props>`
@@ -545,9 +546,9 @@ export const AuthorizationHeader = styled.p<Props>`
 export const AuthorizationInput = styled.input<Props>`
   font-family: ${(props) => props.theme.fonts.default};
   color: ${(props) => props.theme.colors.tx_grey_main};
-  font-weight: 400;
-  font-size: 32px;
-  text-align: center;
+  width: 340px;
+  height: 33px;
+  padding-left: 10px;
 `;
 
 export const AuthorizationButtonTop = styled.button<Props>`
