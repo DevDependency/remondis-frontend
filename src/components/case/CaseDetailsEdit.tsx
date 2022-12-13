@@ -41,7 +41,7 @@ export const CaseDetailsEdit: React.FC = () => {
   }, []);
   const cancelHandler = () => {
     navigate(-1);
-  };
+  }; 
   const saveHandler = () => {
     navigate(`/cases/${caseId}/details`, { replace: true });
   };

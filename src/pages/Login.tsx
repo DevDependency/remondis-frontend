@@ -13,6 +13,16 @@ import {
 } from "../store/slices/user";
 import { Main } from "./Main";
 import { Locations } from "../interfaces/route";
+import {
+  ButtonStyled,
+  CaseItemContainerViewStyled,
+  CaseItemEditStyled,
+  LogoStyled,
+  TitleLogin,
+  LoginFormConrainerStyled,
+  BackgroundColor,
+} from "../styles/style";
+import { logo } from "../assets";
 
 const validationSchema = Yup.object({
   email: Yup.string().required(),
@@ -71,48 +81,51 @@ export const Login: React.FC = () => {
 
   return (
     <>
-      <div>
-        <div>
-          {/* <Logo src={NEW_CONSTANT.logo} /> */}
-          {/* A logo must be here */}
-          <h1>Login</h1>
-          <form onSubmit={formik.handleSubmit} noValidate>
-            <label htmlFor="email">Name</label>
-            <input
-              // emailError={formik.errors.email && formik.touched.email}
-              // areCredentialsWrong={areCredentialsWrong}
-              {...formik.getFieldProps("email")}
-            />
-            {formik.errors.email && formik.touched.email && (
-              <div>{formik.errors.email}</div>
-            )}
-            <br />
-            <div>
-              <label htmlFor="Password">Password</label>
-              <input
-                // areCredentialsWrong={areCredentialsWrong}
-                // passwordError={
-                //   formik.errors.password && formik.touched.password
-                // }
-                {...formik.getFieldProps("password")}
-                type="password"
-              />
-              {formik.errors.password && formik.touched.password && (
-                <div>{formik.errors.password}</div>
-              )}
-              {areCredentialsWrong && <div>email or password is incorrect</div>}
-              <Link to="/forgotpassword" onClick={forgotPasswordHandler}>
-                Forgot Password
-              </Link>
-            </div>
-
-            <button type="submit">Login</button>
-            <div>
+      <BackgroundColor>
+        <CaseItemContainerViewStyled>
+          <LogoStyled src={logo} isSignUp={true} />
+          <LoginFormConrainerStyled>
+            <TitleLogin>Login</TitleLogin>
+            <form onSubmit={formik.handleSubmit} noValidate>
+              <CaseItemEditStyled>
+                <label htmlFor="email">Name</label>
+                <input
+                  // emailError={formik.errors.email && formik.touched.email}
+                  // areCredentialsWrong={areCredentialsWrong}
+                  {...formik.getFieldProps("email")}
+                />
+                {formik.errors.email && formik.touched.email && (
+                  <div>{formik.errors.email}</div>
+                )}
+              </CaseItemEditStyled>
+              <CaseItemEditStyled>
+                <label htmlFor="Password">Password</label>
+                <input
+                  // areCredentialsWrong={areCredentialsWrong}
+                  // passwordError={
+                  //   formik.errors.password && formik.touched.password
+                  // }
+                  {...formik.getFieldProps("password")}
+                  type="password"
+                />
+                {formik.errors.password && formik.touched.password && (
+                  <div>{formik.errors.password}</div>
+                )}
+                {areCredentialsWrong && (
+                  <div>email or password is incorrect</div>
+                )}
+                <Link to="/forgotpassword" onClick={forgotPasswordHandler}>
+                  Forgot Password
+                </Link>
+              </CaseItemEditStyled>
+              <ButtonStyled>
+                <button type="submit">Login</button>
+              </ButtonStyled>
               <Link to="/signup">Sign up</Link>
-            </div>
-          </form>
-        </div>
-      </div>
+            </form>
+          </LoginFormConrainerStyled>
+        </CaseItemContainerViewStyled>
+      </BackgroundColor>
     </>
   );
 };

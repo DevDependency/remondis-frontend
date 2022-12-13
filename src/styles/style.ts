@@ -554,3 +554,19 @@ export const AuthorizationInputTitleContainer = styled.div<Props>`
   justify-content: space-between;
   // gap: 30px;
 `;
+
+//-----
+
+// Login
+
+export const BackgroundColor = styled.div<Props>`
+  background-image: url("../../assets/bg.jpg");
+`;
+
+export const LoginFormConrainerStyled = styled.div<Props>`
+  display: flex;
+  flex-direction: column;
+  margin-top:50px;
+`;
+
+
