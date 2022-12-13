@@ -38,7 +38,7 @@ export const CaseGeneral: React.FC = () => {
     navigate('/', {relative: "route" })
   }
   const assignInspector = () => {
-    navigate(`/cases/${caseId}/assign`);
+    navigate(`/cases/${caseId}/inspector-assign`);
   };
   return (
     <>

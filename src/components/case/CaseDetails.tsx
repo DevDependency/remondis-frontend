@@ -19,7 +19,7 @@ import { TYPE_OF_PROPERTIES } from "../../utils/constants";
 export const CaseDetails: React.FC = () => {
   const dispatch = useAppDispatch();
   const { caseId } = useParams<{ caseId?: string }>();
-  const currentCase = useAppSelector((state) => state.caseSlice.currentCase);
+  const {currentCase, caseChanged } = useAppSelector((state) => state.caseSlice);
   const navigate = useNavigate();
 
   const inputIcons = {
@@ -29,11 +29,18 @@ export const CaseDetails: React.FC = () => {
   type inputValue = keyof typeof inputIcons;
 
   useEffect(() => {
+    // if (caseId) {
+    //   dispatch(getCasesById(parseInt(caseId)));
+    // }
+    dispatch(setActiveCaseTabBar("details"));
+  }, []);
+  
+  useEffect( ()=> {
     if (caseId) {
       dispatch(getCasesById(parseInt(caseId)));
     }
-    dispatch(setActiveCaseTabBar("details"));
-  }, []);
+  }, [caseChanged])
+
   const editlHandler = () => {
     navigate("edit", { relative: "path" });
   };

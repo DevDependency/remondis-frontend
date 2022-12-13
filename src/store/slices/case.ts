@@ -13,6 +13,7 @@ const initialState: CaseState = {
   coordinates: [],
   caseRooms: [],
   currentRoom: undefined,
+  caseChanged: false,
 }
 
 export const getCases = createAsyncThunk(
@@ -205,6 +206,12 @@ const caseSlice = createSlice({
     setCurrentRoom(state, action) {
       state.currentRoom = action.payload;
     },
+    setCaseChangedTrue(state) {
+      state.caseChanged = true;
+    },
+    setCaseChangedFalse(state) {
+      state.caseChanged = false;
+    },
   },
   extraReducers(builder) {
     builder
@@ -216,9 +223,14 @@ const caseSlice = createSlice({
       })
       .addCase(getCasesById.fulfilled, (state, action) => {
         caseSlice.caseReducers.setCurrentCase(state, action);
+        caseSlice.caseReducers.setCaseChangedFalse(state);
       })
       .addCase(createCase.fulfilled, (state, action) => {
         caseSlice.caseReducers.setCreatedCaseId(state, action);
+        caseSlice.caseReducers.setCaseChangedTrue(state);
+      })
+      .addCase(editTheCase.fulfilled, (state, action) => {
+        caseSlice.caseReducers.setCaseChangedTrue(state);
       })
       .addCase(getCoordinates.fulfilled, (state, action) => {
         caseSlice.caseReducers.setCoordinates(state, action);
