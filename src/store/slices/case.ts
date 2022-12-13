@@ -237,9 +237,17 @@ const caseSlice = createSlice({
       })
       .addCase(getCaseItems.fulfilled, (state, action) => {
         caseSlice.caseReducers.setCaseItems(state, action);
+        caseSlice.caseReducers.setCaseChangedFalse(state);
       })
       .addCase(getCaseItem.fulfilled, (state, action) => {
         caseSlice.caseReducers.setCurrentRoom(state, action);
+        caseSlice.caseReducers.setCaseChangedFalse(state);
+      })
+      .addCase(updateCaseItem.fulfilled, (state, action) => {
+        caseSlice.caseReducers.setCaseChangedTrue(state);
+      })
+      .addCase(updateCasePhoto.fulfilled, (state, action) => {
+        caseSlice.caseReducers.setCaseChangedTrue(state);
       });
   },
 });

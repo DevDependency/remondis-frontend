@@ -52,9 +52,19 @@ export const NavBar: React.FC = () => {
     <>
       <NavBarStyled>
         {insideCase ? (
-          <IconStyled src={navbarIconBack} onClick={() => navigate("/")} alt=""/>
+          <IconStyled
+            src={navbarIconBack}
+            onClick={() => navigate("/")}
+            alt=""
+          />
         ) : (
-          <LogoStyled src={logo} alt=""/>
+          <LogoStyled
+            src={logo}
+            alt=""
+            onClick={() => {
+              navigate("/");
+            }}
+          />
         )}
         <ContainerNavBarIconsStyled>
           {userRole === Role.INSPECTOR && (
