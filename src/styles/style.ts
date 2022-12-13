@@ -7,6 +7,7 @@ import { background } from "../assets";
 
 export const MainStyled = styled.div<Props>`
   width: 100vw;
+  position: relative;
 `;
 
 export const InsideMainStyled = styled.div<Props>`
@@ -89,14 +90,14 @@ export const TextAction = styled.p<Props>`
 export const NavBarStyled = styled.div<Props>`
   position: fixed;
   display: flex;
+  width: 100%;
+  left: 0;
+  top: 0;
   z-index: 2;
   justify-content: space-between;
   background-color: ${(props: Props) => props.theme.colors.grey};
   height: 68px;
   padding: 16px 15px;
-  width: 100vw;
-  left: 0;
-  top: 0;
 `;
 
 export const ContainerNavBarIconsStyled = styled.div<Props>`

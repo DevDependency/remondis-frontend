@@ -22,28 +22,31 @@ import {
 import { setActiveCaseTabBar } from "../../store/slices/general";
 
 export const CasePhotos: React.FC = () => {
-  const rooms = useAppSelector((state) => state.caseSlice.caseRooms);
+  const { caseRooms, caseChanged } = useAppSelector((state) => state.caseSlice);
   const dispatch = useAppDispatch();
   const { caseId } = useParams<{ caseId?: string }>();
   const navigate = useNavigate();
 
   useEffect(() => {
+    dispatch(setActiveCaseTabBar("photos"));
+  }, []);
+
+  useEffect(() => {
     if (caseId) {
       dispatch(getCaseItems(parseInt(caseId)));
     }
-    dispatch(setActiveCaseTabBar("photos"));
     return () => {
       dispatch(setCaseItems([]));
     };
-  }, []);
+  }, [caseChanged]);
 
   const editlHandler = (e: any) => {
     if (e.target.id === "0") {
       let maxRoom = 0;
-      if (rooms.length) {
+      if (caseRooms.length) {
         maxRoom = Math.max.apply(
           null,
-          Array.from(rooms, (x: Room) => x.room)
+          Array.from(caseRooms, (x: Room) => x.room)
         );
       }
       navigate(`${maxRoom + 1}/edit`, { state: { isNewRoom: true } });
@@ -65,7 +68,7 @@ export const CasePhotos: React.FC = () => {
   return (
     <>
       <InsideMainBottomStyled>
-        {rooms.map((el: Room, index: number) => (
+        {caseRooms.map((el: Room, index: number) => (
           <div key={index}>
             <RoomItemContainerStyled>
               {/* <div>{el.room}</div> */}
