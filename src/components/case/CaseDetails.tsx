@@ -127,7 +127,7 @@ export const CaseDetails: React.FC = () => {
             <CaseItemStyled>
               <InputPlaceholderShown>Date of appointment</InputPlaceholderShown>
               <TextMain>
-                {new Date(currentCase.Appointment?.date).toLocaleDateString(
+                {currentCase.Appointment?.date && new Date(currentCase.Appointment?.date).toLocaleDateString(
                   "en-GB"
                 )}
               </TextMain>
