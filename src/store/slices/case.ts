@@ -1,17 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from '../../utils/api';
-import { Case, Room } from '../../interfaces/cases';
-import {CaseState} from '../../interfaces/store';
+import { Case, CaseGeneral, Room } from '../../interfaces/cases';
+import { CaseState } from '../../interfaces/store';
+import { NEW_CASE } from "../../utils/constants";
 
 const initialState: CaseState = {
   createdCaseId: 0,
   deletedCaseId: 0,
   casesToDo: [],
   cases: [],
-  currentCase: undefined,
+  currentCase: NEW_CASE,
   coordinates: [],
   caseRooms: [],
   currentRoom: undefined,
+  caseChanged: false,
 }
 
 export const getCases = createAsyncThunk(
@@ -40,7 +42,7 @@ export const getCasesById = createAsyncThunk(
 
 export const getCasesToDo = createAsyncThunk(
   "case/getCasesToDo",
-  async (userId : number) => {
+  async (userId: number) => {
     try {
       const response = await api.apiGetCasesToDo(userId);
       return response.cases;
@@ -52,7 +54,7 @@ export const getCasesToDo = createAsyncThunk(
 
 export const createCase = createAsyncThunk(
   "case/createCase",
-  async (Case: Case) => {
+  async (Case: CaseGeneral) => {
     try {
       const response = await api.apiPostCases(Case);
       return response.case.id;
@@ -185,7 +187,7 @@ const caseSlice = createSlice({
     setCasesToDo(state, action) {
       state.casesToDo = action.payload;
     },
-    setCurrentCase(state, action){
+    setCurrentCase(state, action) {
       state.currentCase = action.payload;
     },
     setCreatedCaseId(state, action) {
@@ -194,14 +196,21 @@ const caseSlice = createSlice({
     setDeletedCaseId(state, action) {
       state.deletedCaseId = action.payload;
     },
-    setCoordinates(state, action){
-      state.coordinates = action.payload;
+    setCoordinates(state, action) {
+      if (action.payload) state.coordinates = action.payload;
+      else state.coordinates = [];
     },
-    setCaseItems(state, action){
+    setCaseItems(state, action) {
       state.caseRooms = action.payload;
     },
-    setCurrentRoom(state, action){
+    setCurrentRoom(state, action) {
       state.currentRoom = action.payload;
+    },
+    setCaseChangedTrue(state) {
+      state.caseChanged = true;
+    },
+    setCaseChangedFalse(state) {
+      state.caseChanged = false;
     },
   },
   extraReducers(builder) {
@@ -214,9 +223,14 @@ const caseSlice = createSlice({
       })
       .addCase(getCasesById.fulfilled, (state, action) => {
         caseSlice.caseReducers.setCurrentCase(state, action);
+        caseSlice.caseReducers.setCaseChangedFalse(state);
       })
       .addCase(createCase.fulfilled, (state, action) => {
         caseSlice.caseReducers.setCreatedCaseId(state, action);
+        caseSlice.caseReducers.setCaseChangedTrue(state);
+      })
+      .addCase(editTheCase.fulfilled, (state, action) => {
+        caseSlice.caseReducers.setCaseChangedTrue(state);
       })
       .addCase(getCoordinates.fulfilled, (state, action) => {
         caseSlice.caseReducers.setCoordinates(state, action);
@@ -235,6 +249,7 @@ export const {
   setDeletedCaseId,
   setCurrentCase,
   setCurrentRoom,
+  setCaseItems,
 
 } = caseSlice.actions;
 

@@ -7,6 +7,11 @@ export interface File {
   file_name: string;
 }
 
+export interface State {
+  id: number;
+  title: string;
+}
+
 export interface Room {
   id: number;
   room: number;
@@ -27,9 +32,10 @@ export interface CaseGeneral {
   manager_id?: number;
   inspector_id?: number;  
   state_id?: number;
-  inspector: string;
-  Appointment: Appointment;
-  Inspector: UserSettings;
+  inspector?: string;
+  Appointment?: Appointment;
+  Inspector?: UserSettings;
+  State?: State;
 }
 
 export interface CaseDetails {
@@ -73,6 +79,7 @@ export interface CaseItemProps {
   isTodo?: boolean;
   message?: string;
   action?: string;
+  state?: string;
 }
 
 export interface Coordinates {

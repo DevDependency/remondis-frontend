@@ -1,5 +1,5 @@
-import styled, { createGlobalStyle } from 'styled-components'
-import { Props } from "../interfaces/style"
+import styled, { createGlobalStyle } from "styled-components";
+import { Props } from "../interfaces/style";
 
 export default createGlobalStyle`
   *{
@@ -24,9 +24,8 @@ export default createGlobalStyle`
       border-radius: 0;
       text-decoration: none;
       cursor: pointer;
-      padding: 10px 20px;
       &: hover {
         border: none;
       }
     }
-`
+`;

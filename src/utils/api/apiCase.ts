@@ -3,6 +3,9 @@ import { CaseGeneral, Case, Room, File } from '../../interfaces/cases';
 
 const server = axios.create({
   baseURL: import.meta.env.VITE_BASE_API_URL,
+  validateStatus: (status: number) => {
+    return (status >= 200 && status < 300) || status == 404
+},
 });
 
 export const apiGetCases = async () => {
@@ -48,8 +51,7 @@ export const apiPatchCaseById = async (
   caseId: number,
   changedData: Case
 ) => {
-  const { Appointment, Inspector, ...body } = changedData;
-  console.log(changedData)
+  const { Appointment, Inspector, State, ...body } = changedData; 
   try {
     const res = await server.patch(`cases/${caseId}`, body);
     return res.data;

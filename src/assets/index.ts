@@ -20,6 +20,9 @@ import coverPhoto from './coverPhoto.png'
 import logo from './logo.png'
 import logoREMONDISx112 from './LogoREMONDISx112.png'
 import logoREMONDISx360 from './LogoREMONDISx360.png'
+import inputIconNo from './-input-iconNo.svg';
+import inputIconYes from './-input-iconYes.svg';
+import background from "./background.png";
 
 export {
   caseIconAction,
@@ -44,5 +47,7 @@ export {
   logo,
   logoREMONDISx112,
   logoREMONDISx360,
+  background,
+  inputIconNo,
+  inputIconYes,
 }
-

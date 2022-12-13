@@ -1,15 +1,17 @@
-import { CaseWithId, CasesToDo, Coordinates, Room } from "./cases";
+import { CaseWithId, CasesToDo, Coordinates, Room, Case } from './cases';
 import { store } from "../store/store";
+import { UserSettings } from "./users";
 
 export interface CaseState {
   createdCaseId: number;
   deletedCaseId: number;
   cases: CaseWithId[];
   casesToDo: CasesToDo[];
-  currentCase: CaseWithId | undefined;
+  currentCase: Case | undefined;
   coordinates: Coordinates[];
   caseRooms: Room[];
   currentRoom: Room | undefined;
+  caseChanged: boolean;
 }
 
 export interface UserState {
@@ -23,7 +25,9 @@ export interface UserState {
   confirmUserHandler: boolean;
   userEmail: string;
   isInspectorActive: boolean;
+  inspectorList: UserSettings[];  
 }
+
 
 export type AppDispatch = typeof store.dispatch;
 

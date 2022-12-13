@@ -9,6 +9,8 @@ export interface Props {
   scrollDirection?: string;
   role?: string;
   bottom?: string;
+  isSignUp?: boolean;
+  isForgotPassword?: boolean;
 }
 
 export interface Theme {

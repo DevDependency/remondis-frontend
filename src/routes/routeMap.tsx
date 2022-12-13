@@ -22,6 +22,7 @@ import {
   CaseDetailsEdit,
   CasePhotosEdit,
 } from "../components/case";
+import { CaseInspectorEdit } from "../components/case/CaseInspectorEdit";
 
 export const routeMap: RouteObject[] = [
   {
@@ -72,6 +73,10 @@ export const routeMap: RouteObject[] = [
           {
             path: Locations.CASE_PHOTOS_EDIT,
             element: <CasePhotosEdit />,
+          },
+          {
+            path: Locations.CASE_INSPECTOR_ASSIGN,
+            element: <CaseInspectorEdit />,
           },
         ],
       },

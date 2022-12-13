@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "../../utils/hooks/useStore";
 import { useState, useEffect } from "react";
 import { addPhoto, iconCancel } from "../../assets/";
 import { File } from "../../interfaces/cases";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import {
   getCaseItem,
   updateCasePhoto,
@@ -18,6 +18,7 @@ import {
   CaseItemContainerEditStyled,
   PhotoStyled,
   PhotoContainerStyled,
+  CaseItemContainerViewStyled,
 } from "../../styles/style";
 import { Formik, Form } from "formik";
 import { setIsEditMode } from "../../store/slices/general";
@@ -26,6 +27,9 @@ import * as buffer from "buffer";
 window.Buffer = buffer.Buffer;
 
 export const CasePhotosEdit: React.FC = () => {
+  const { state } = useLocation();
+  const { isNewRoom } = state;
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const currentRoom = useAppSelector((state) => state.caseSlice.currentRoom);
@@ -35,7 +39,7 @@ export const CasePhotosEdit: React.FC = () => {
   const { room } = useParams<{ room: string }>();
 
   useEffect(() => {
-    if (caseId && room && caseId !== "0" && room !== "0") {
+    if (!isNewRoom && caseId && room && caseId !== "0" && room !== "0") {
       dispatch(
         getCaseItem({
           caseId: parseInt(caseId),
@@ -43,10 +47,10 @@ export const CasePhotosEdit: React.FC = () => {
         })
       );
     }
-    dispatch(setIsEditMode(true))
+    dispatch(setIsEditMode(true));
 
     return () => {
-      setCurrentRoom(undefined);
+      dispatch(setCurrentRoom(undefined));
       dispatch(setIsEditMode(false));
     };
   }, []);
@@ -68,7 +72,7 @@ export const CasePhotosEdit: React.FC = () => {
         id:
           Math.max.apply(null, [
             0,
-            ...Array.from(roomImages, (x: File) => x.id),
+            ...Array.from(arrayPhotos, (x: File) => x.id),
           ]) + 1,
         file_name: currentPhoto.file_name,
       });
@@ -117,127 +121,134 @@ export const CasePhotosEdit: React.FC = () => {
     navigate(-1);
   };
 
-  console.log(currentRoom)
   return (
     <>
-      <Formik
-        initialValues={{
-          room_title: currentRoom?.room_title,
-          description: currentRoom?.description,
-        }}
-        onSubmit={async (values) => {
-          if (caseId && room && caseId !== "0" && room !== "0") {
-            dispatch(
-              updateCaseItem({
-                caseId: parseInt(caseId),
-                room: parseInt(room),
-                item: values,
-              })
-            );
-            dispatch(
-              updateCasePhoto({
-                caseId: parseInt(caseId),
-                room: parseInt(room),
-                photos: roomImages,
-              })
-            );
-          }
-          navigate(-1);
-        }}
-      >
-        {({ values, isSubmitting, handleChange, handleBlur, handleSubmit }) => (
-          <Form>
-            <CaseItemContainerEditStyled>
-              <CaseItemEditStyled>
-                <InputLabel htmlFor="title">Name</InputLabel>
-                <input
-                  id="room_title"
-                  name="room_title"
-                  type="text"
-                  defaultValue={values?.room_title}
-                  onChange={handleChange}
-                />
-              </CaseItemEditStyled>
-              <CaseItemEditStyled>
-                <InputLabel htmlFor="description">Description</InputLabel>
-                <input
-                  id="description"
-                  name="description"
-                  type="text"
-                  defaultValue={values?.description}
-                  onChange={handleChange}
-                />
-              </CaseItemEditStyled>
-              <PhotoContainerStyled>
-                {roomImages.map((img, index) => (
-                  <PhotoStyled style={{position: "relative"}} key={index}>
-                    <IconStyled
-                      onClick={removeElement}
-                      src={iconCancel}
-                      id={img.id.toString()}
-                      style={{
-                        position: "absolute",
-                        top: "0",
-                        right: "0",
-                        zIndex: "10",
-                      }}
-                    />
-                    <IconStyled
-                      src={img.photo}
-                      alt=""
-                      style={{
-                        position: "relative",
-                        width: "100px",
-                        height: "100px",
-                      }}
-                    />
-                  </PhotoStyled>
-                ))}
+      {(isNewRoom || currentRoom) && (
+        <Formik
+          initialValues={{
+            room_title: currentRoom?.room_title,
+            description: currentRoom?.description,
+          }}
+          onSubmit={async (values) => {
+            if (caseId && room && caseId !== "0" && room !== "0") {
+              dispatch(
+                updateCaseItem({
+                  caseId: parseInt(caseId),
+                  room: parseInt(room),
+                  item: values,
+                })
+              );
+              dispatch(
+                updateCasePhoto({
+                  caseId: parseInt(caseId),
+                  room: parseInt(room),
+                  photos: roomImages,
+                })
+              );
+            }
+            navigate(-1);
+          }}
+        >
+          {({
+            values,
+            isSubmitting,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+          }) => (
+            <Form>
+              <CaseItemContainerViewStyled>
+                <CaseItemEditStyled>
+                  <InputLabel htmlFor="title">Name</InputLabel>
+                  <input
+                    id="room_title"
+                    name="room_title"
+                    type="text"
+                    defaultValue={values?.room_title}
+                    onChange={handleChange}
+                  />
+                </CaseItemEditStyled>
+                <CaseItemEditStyled>
+                  <InputLabel htmlFor="description">Description</InputLabel>
+                  <input
+                    id="description"
+                    name="description"
+                    type="text"
+                    defaultValue={values?.description}
+                    onChange={handleChange}
+                  />
+                </CaseItemEditStyled>
+                <PhotoContainerStyled>
+                  {roomImages.map((img, index) => (
+                    <PhotoStyled style={{ position: "relative" }} key={index}>
+                      <IconStyled
+                        onClick={removeElement}
+                        src={iconCancel}
+                        id={img.id.toString()}
+                        style={{
+                          position: "absolute",
+                          top: "0",
+                          right: "0",
+                          zIndex: "10",
+                        }}
+                      />
+                      <IconStyled
+                        src={img.photo}
+                        alt=""
+                        style={{
+                          position: "relative",
+                          width: "100px",
+                          height: "100px",
+                        }}
+                      />
+                    </PhotoStyled>
+                  ))}
 
-                {/* 
+                  {/* 
             new image 
             */}
-                <PhotoStyled
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <input
-                    id={`file-loader-button-${1}`}
-                    type="file"
-                    accept="image/*"
-                    capture="environment"
-                    onChange={(e) => uploadImage(e)}
-                    style={{ display: "none" }}
-                  />
-                  <InputLabel
-                    htmlFor={`file-loader-button-${1}`}
+                  <PhotoStyled
                     style={{
                       width: "100px",
                       height: "100px",
-                      backgroundImage: `url(${addPhoto})`,
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
                     }}
-                  />
-                </PhotoStyled>
-              </PhotoContainerStyled>
-            </CaseItemContainerEditStyled>
-            <ButtonContainerStyled>
-              <button type="button">
-                <ButtonSmallStyled onClick={cancelHandler}>
-                  Cancel
-                </ButtonSmallStyled>
-              </button>
-              <button id="submit" type="submit">
-                <ButtonSmallStyled color={"red"}>Save</ButtonSmallStyled>
-              </button>
-            </ButtonContainerStyled>
-          </Form>
-        )}
-      </Formik>
+                  >
+                    <input
+                      id={`file-loader-button-${1}`}
+                      type="file"
+                      accept="image/*"
+                      capture="environment"
+                      onChange={(e) => uploadImage(e)}
+                      style={{ display: "none" }}
+                    />
+                    <InputLabel
+                      htmlFor={`file-loader-button-${1}`}
+                      style={{
+                        width: "100px",
+                        height: "100px",
+                        backgroundImage: `url(${addPhoto})`,
+                      }}
+                    />
+                  </PhotoStyled>
+                </PhotoContainerStyled>
+              </CaseItemContainerViewStyled>
+              <ButtonContainerStyled>
+                <button type="button">
+                  <ButtonSmallStyled onClick={cancelHandler}>
+                    Cancel
+                  </ButtonSmallStyled>
+                </button>
+                <button id="submit" type="submit">
+                  <ButtonSmallStyled color={"red"}>Save</ButtonSmallStyled>
+                </button>
+              </ButtonContainerStyled>
+            </Form>
+          )}
+        </Formik>
+      )}
     </>
   );
 };

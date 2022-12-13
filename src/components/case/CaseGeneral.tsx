@@ -1,4 +1,4 @@
-import { getCasesById } from "../../store/slices/case";
+import { getCasesById,setCurrentCase } from "../../store/slices/case";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks/useStore";
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -9,9 +9,13 @@ import {
   CaseItemStyled,
   ButtonContainerStyled,
   ButtonSmallStyled,
+  IconsContainerStyled,
+  IconStyled
 
 } from "../../styles/style";
 import { setActiveCaseTabBar } from "../../store/slices/general";
+import { NEW_CASE } from "../../utils/constants";
+import { caseIconEdit } from "../../assets";
 
 export const CaseGeneral: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -23,6 +27,9 @@ export const CaseGeneral: React.FC = () => {
       dispatch(getCasesById(parseInt(caseId)));
     }
     dispatch(setActiveCaseTabBar("general"))
+    return () => {
+      dispatch(setCurrentCase(NEW_CASE));
+    }
   }, []);
   const editlHandler = () => {
     navigate('edit', {relative: "path", state: { isNewCase: false} })
@@ -30,6 +37,9 @@ export const CaseGeneral: React.FC = () => {
   const submitHandler = () => {
     navigate('/', {relative: "route" })
   }
+  const assignInspector = () => {
+    navigate(`/cases/${caseId}/inspector-assign`);
+  };
   return (
     <>
     {currentCase && 
@@ -63,6 +73,9 @@ export const CaseGeneral: React.FC = () => {
         <CaseItemStyled>
           <InputPlaceholderShown>Inspector</InputPlaceholderShown>
           <TextMain>{currentCase?.Inspector?.username}</TextMain>
+        <IconsContainerStyled isSize={true}>          
+          <IconStyled src={caseIconEdit} onClick={assignInspector} />
+        </IconsContainerStyled>
         </CaseItemStyled>
       </CaseItemContainerStyled>
       }

@@ -7,6 +7,23 @@ import { Link, useNavigate } from "react-router-dom";
 import { RootState } from "../interfaces/store";
 import { UsersValidation } from "../interfaces/users";
 import { apiPostUsersRegister } from "../utils/api";
+import {
+  AuthorizationWrapper,
+  AuthorizationForm,
+  LogoStyled,
+  TitleLogin,
+  InputLabel,
+  AuthorizationInput,
+  AuthorizationLinksContainer,
+  AuthorizationButtonTop,
+  AuthorizationLinkBottom,
+  AuthorizationContainer,
+  AuthorizationInputContainer,
+  AuthorizationInputTitleContainer,
+  ButtonContainerStyled,
+  ButtonStyled,
+} from "../styles/style";
+import { logo } from "../assets";
 
 const validationSchema = Yup.object({
   email: Yup.string().email().required(),
@@ -48,25 +65,41 @@ export const SignUp: React.FC = () => {
   });
 
   return (
-    <>
-      <div>
-        {/* <Logo src={NEW_CONSTANT.logo} /> */}
-        {/* Logo must be here */}
-        <form onSubmit={formik.handleSubmit} noValidate>
-          <h1>Sign Up</h1>
-          <label htmlFor="email">Email</label>
-          <input
-            {...formik.getFieldProps("email")}
-            // areCredentialsWrong={areCredentialsWrong}
-          />
-          {formik.errors.email && formik.touched.email && (
-            <>{isHoveringEmail && <div>{formik.errors.email}</div>}</>
-          )}
-          <div>
-            <Link to="/login">Login</Link>
-          </div>
-        </form>
-      </div>
-    </>
+    <AuthorizationWrapper>
+      <AuthorizationForm onSubmit={formik.handleSubmit} noValidate>
+        <AuthorizationContainer>
+          <LogoStyled src={logo} isSignUp={true} />
+          <AuthorizationInputTitleContainer>
+            <TitleLogin isSignUp={true}>Sign Up</TitleLogin>
+            <AuthorizationInputContainer>
+              <InputLabel htmlFor="email" isSignUp={true}>
+                Email
+              </InputLabel>
+              <AuthorizationInput
+                {...formik.getFieldProps("email")}
+                // areCredentialsWrong={areCredentialsWrong}
+              />
+              {formik.errors.email && formik.touched.email && (
+                <>{isHoveringEmail && <div>{formik.errors.email}</div>}</>
+              )}
+            </AuthorizationInputContainer>
+          </AuthorizationInputTitleContainer>
+          <AuthorizationLinksContainer>
+            <button type="submit">
+              <ButtonStyled isSignUp={true} color={"red"}>
+                Sign Up
+              </ButtonStyled>
+            </button>
+            <AuthorizationLinkBottom
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              Login
+            </AuthorizationLinkBottom>
+          </AuthorizationLinksContainer>
+        </AuthorizationContainer>
+      </AuthorizationForm>
+    </AuthorizationWrapper>
   );
 };

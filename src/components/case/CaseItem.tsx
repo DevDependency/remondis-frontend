@@ -21,11 +21,14 @@ import {
   caseIconSettings,
   caseIconBin,
   caseIconEdit,
+  tabbarIconCalenderDefault,
 } from "../../assets/";
+import { Role } from "../../interfaces/users";
 
 export const CaseItem: React.FC<CaseItemProps> = ({
   time,
   address,
+  state,
   caseId,
   isTodo,
   message,
@@ -34,7 +37,7 @@ export const CaseItem: React.FC<CaseItemProps> = ({
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { isPopupVisible } = useAppSelector((state) => state.generalSlice);
-  const { userId } = useAppSelector((state) => state.userSlice);
+  const { userId, userRole } = useAppSelector((state) => state.userSlice);
   const { deletedCaseId } = useAppSelector((state) => state.caseSlice);
   const [size, setSize] = useState(false);
 
@@ -70,9 +73,11 @@ export const CaseItem: React.FC<CaseItemProps> = ({
         <CaseContainerStyled isSize={size}>
           <CaseInfoStyled onClick={openCaseHandler}>
             <DataAndAdressStyled>
+              <IconStyled src={tabbarIconCalenderDefault}></IconStyled>
               <TextMain>{time}</TextMain>
-              <TextMain>{address}</TextMain>
+              <TextMain>{state}</TextMain>
             </DataAndAdressStyled>
+            <TextMain>{address}</TextMain>
             {isTodo && (
               <>
                 <TextSecondary>{message}</TextSecondary>
@@ -83,7 +88,7 @@ export const CaseItem: React.FC<CaseItemProps> = ({
               </>
             )}
           </CaseInfoStyled>
-          <IconStyled src={caseIconSettings} onClick={showEditButton} />
+          {userRole === Role.MANAGER && <IconStyled src={caseIconSettings} onClick={showEditButton} />}
         </CaseContainerStyled>
         <IconsContainerStyled isSize={size}>
           <IconStyled src={caseIconBin} onClick={setPopUpVisible} />
@@ -103,6 +108,7 @@ export const CaseItem: React.FC<CaseItemProps> = ({
             },
             {
               title: "Confirm",
+              default: true,
               onClick: () => {
                 closeCaseHandler();
               },
