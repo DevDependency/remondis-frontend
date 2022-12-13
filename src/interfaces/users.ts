@@ -9,8 +9,7 @@ export interface UserSettings {
   password?: string;
   phone?: string;
   roles?: string;
-  email_address?: string;
-  state?: boolean;
+  email_address?: string;  
 }
 
 export interface UserLogin {
@@ -25,6 +24,11 @@ export interface UsersValidation {
   phone?: string;
   role?: string;
   email_address?: string;  
+}
+
+export interface User extends UserSettings {
+  state: boolean;
+  id: number;
 }
 
 export enum Role {
