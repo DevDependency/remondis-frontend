@@ -10,15 +10,19 @@ import {
   ButtonContainerStyled,
   ButtonSmallStyled,
   IconsContainerStyled,
-  IconStyled
+  IconStyled,
+  ButtonStyled
 
 } from "../../styles/style";
 import { setActiveCaseTabBar } from "../../store/slices/general";
 import { NEW_CASE } from "../../utils/constants";
 import { caseIconEdit } from "../../assets";
+import { Role } from '../../interfaces/users';
+import { apiPatchCasesByIdDecline, apiPatchCasesByIdAccept, apiPatchCasesByIdReady } from "../../utils/api";
 
 export const CaseGeneral: React.FC = () => {
   const dispatch = useAppDispatch();
+  const {userRole, userId} = useAppSelector((state) => state.userSlice);
   const { caseId } = useParams<{ caseId?: string }>();
   const {currentCase, caseChanged} = useAppSelector((state) => state.caseSlice);
   const navigate = useNavigate();
@@ -28,6 +32,12 @@ export const CaseGeneral: React.FC = () => {
       dispatch(setCurrentCase(NEW_CASE));
     }
   }, []);
+  useEffect( ()=> {
+    if (caseId) {
+      dispatch(getCasesById(parseInt(caseId)));
+    }
+  }, [caseChanged]);
+
   const editlHandler = () => {
     navigate('edit', {relative: "path", state: { isNewCase: false} })
   }
@@ -37,11 +47,22 @@ export const CaseGeneral: React.FC = () => {
   const assignInspector = () => {
     navigate(`/cases/${caseId}/inspector-assign`);
   };
-  useEffect( ()=> {
-    if (caseId) {
-      dispatch(getCasesById(parseInt(caseId)));
-    }
-  }, [caseChanged])
+  
+  const declineHandler = () => {
+    if (caseId) 
+    apiPatchCasesByIdDecline(parseInt(caseId), userId)
+    navigate(`/`, {relative: "route" });
+  };
+  const acceptHandler = () => {
+    if (caseId)
+    apiPatchCasesByIdAccept(parseInt(caseId), userId)
+    navigate(`/`, {relative: "route" });
+  };
+  const confirmHandler = () => {
+    if (caseId)
+      apiPatchCasesByIdReady(parseInt(caseId), userId)
+      navigate(`/`, {relative: "route" });
+  }
   return (
     <>
     {currentCase && 
@@ -75,20 +96,40 @@ export const CaseGeneral: React.FC = () => {
         <CaseItemStyled>
           <InputPlaceholderShown>Inspector</InputPlaceholderShown>
           <TextMain>{currentCase?.Inspector?.username}</TextMain>
-        <IconsContainerStyled isSize={true}>          
+        {userRole === Role.MANAGER ? <IconsContainerStyled isSize={true}>          
           <IconStyled src={caseIconEdit} onClick={assignInspector} />
-        </IconsContainerStyled>
+        </IconsContainerStyled>: null}
         </CaseItemStyled>
       </CaseItemContainerStyled>
       }
+      {userRole === Role.MANAGER ? 
       <ButtonContainerStyled>             
         <button>
           <ButtonSmallStyled onClick={editlHandler}>Edit</ButtonSmallStyled> 
         </button>             
-        <button id="submit" type="submit">
+        <button >
           <ButtonSmallStyled color={"red"} onClick={submitHandler}>Submit</ButtonSmallStyled>
         </button>            
+      </ButtonContainerStyled> 
+      : 
+      (currentCase.state_id === 2 ?
+      <ButtonContainerStyled>             
+      <button>
+        <ButtonSmallStyled onClick={declineHandler}>Decline</ButtonSmallStyled> 
+      </button>             
+      <button>
+        <ButtonSmallStyled color={"red"} onClick={acceptHandler}>Accept</ButtonSmallStyled>
+      </button>            
       </ButtonContainerStyled>
+    :
+      <ButtonContainerStyled>
+      <button>
+        <ButtonStyled color={"red"} onClick={confirmHandler}>Submit</ButtonStyled>
+      </button>            
+      </ButtonContainerStyled>
+    
+    )
+      }
     </>
   );
 };
