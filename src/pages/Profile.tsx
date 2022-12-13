@@ -133,6 +133,9 @@ export const Profile: React.FC = () => {
                     </select>
                   </>
                 )}
+                {/* <ButtonStyled>
+                  <button>Logout</button>
+                </ButtonStyled> */}
               </CaseItemContainerViewStyled>
             </InsideMainStyled>
             <ButtonContainerStyled>

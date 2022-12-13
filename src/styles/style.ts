@@ -119,7 +119,7 @@ export const LogoNavBarStyled = styled.img<Props>`
 `;
 
 export const IconStyled = styled.img`
-  width: 3vh;
+  min-width: 3vh;
 `;
 
 //-----
@@ -228,6 +228,7 @@ export const CaseItemContainerStyled = styled.div<Props>`
   width: 92%;
   margin: 0 auto;
   padding: 15px;
+  margin-bottom: 15px;
   box-shadow: ${(props: Props) => props.theme.effects.shadow};
 `;
 
@@ -244,6 +245,22 @@ export const CaseItemStyled = styled.div<Props>`
   border-bottom: ${(props) => props.theme.colors.border} 1px solid;
   border-color: ${(props) =>
     props.color === "red" ? props.theme.colors.red : props.theme.colors.grey};
+`;
+
+export const CanyainerForInfoStyled = styled.div<Props>`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const CanyainerForStatusStyled = styled.div<Props>`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  p {
+    color: ${(props) => props.theme.colors.blue_light};
+  }
 `;
 
 //-----
@@ -291,6 +308,7 @@ export const CaseItemEditStyled = styled.div<Props>`
     font-size: 16px;
     padding: 5px 7px;
     width: 100%;
+  }
   }
 `;
 
@@ -432,7 +450,7 @@ export const Popup = styled.div<Props>`
   position: fixed;
   left: 0;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -479,8 +497,8 @@ export const RoomItemContainerStyled = styled.div`
   gap: 10px;
 
   p {
-      margin-bottom: 15px;
-    }
+    margin-bottom: 15px;
+  }
 `;
 
 //-----
@@ -572,4 +590,41 @@ export const AuthorizationInputTitleContainer = styled.div<Props>`
   flex-direction: column;
   justify-content: space-between;
   // gap: 30px;
+`;
+
+//-----
+
+// Login
+
+export const BackgroundStyled = styled.div<Props>`
+  background-image: url("../../assets/bg.jpg");
+`;
+
+export const LoginFormConrainerStyled = styled.div<Props>`
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+`;
+
+export const LinkStyled = styled.p<Props>`
+  text-decoration: none;
+  color: red;
+`;
+
+//-----
+
+// Inspector
+
+export const InspectorItemStyled = styled.p<Props>`
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 15px;
+  width: 92%;
+  margin-bottom: 15px;
+  box-shadow: ${(props: Props) => props.theme.effects.shadow};
+
+  &: active {
+    border: 1px red solid;
+  }
 `;

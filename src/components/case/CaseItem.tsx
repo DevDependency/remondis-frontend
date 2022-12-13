@@ -15,13 +15,18 @@ import {
   IconStyled,
   ActionStyled,
   IconsContainerStyled,
+  CanyainerForInfoStyled,
+  CanyainerForStatusStyled,
 } from "../../styles/style";
 import {
   caseIconAction,
   caseIconSettings,
   caseIconBin,
   caseIconEdit,
-  tabbarIconCalenderDefault,
+  caseIconLocation,
+  caseIconData,
+  caseIconMessage,
+  caseIconStatus,
 } from "../../assets/";
 import { Role } from "../../interfaces/users";
 
@@ -73,22 +78,35 @@ export const CaseItem: React.FC<CaseItemProps> = ({
         <CaseContainerStyled isSize={size}>
           <CaseInfoStyled onClick={openCaseHandler}>
             <DataAndAdressStyled>
-              <IconStyled src={tabbarIconCalenderDefault}></IconStyled>
-              <TextMain>{time}</TextMain>
-              <TextMain>{state}</TextMain>
+              <CanyainerForInfoStyled>
+                <IconStyled src={caseIconData}></IconStyled>
+                <TextMain>{time}</TextMain>
+              </CanyainerForInfoStyled>
+              <CanyainerForStatusStyled>
+                <IconStyled src={caseIconStatus} />
+                <TextMain>{state}</TextMain>
+              </CanyainerForStatusStyled>
             </DataAndAdressStyled>
-            <TextMain>{address}</TextMain>
+            <CanyainerForInfoStyled>
+              <IconStyled src={caseIconLocation} />
+              <TextMain>{address}</TextMain>
+            </CanyainerForInfoStyled>
             {isTodo && (
               <>
-                <TextSecondary>{message}</TextSecondary>
+                <CanyainerForInfoStyled>
+                  <IconStyled src={caseIconMessage}></IconStyled>
+                  <TextSecondary>{message}</TextSecondary>
+                </CanyainerForInfoStyled>
                 <ActionStyled>
                   <IconStyled src={caseIconAction} />
-                  <TextSecondary>{action}</TextSecondary>
+                  <TextMain style={{ fontWeight: "800" }}>{action}</TextMain>
                 </ActionStyled>
               </>
             )}
           </CaseInfoStyled>
-          {userRole === Role.MANAGER && <IconStyled src={caseIconSettings} onClick={showEditButton} />}
+          {userRole === Role.MANAGER && (
+            <IconStyled src={caseIconSettings} onClick={showEditButton} />
+          )}
         </CaseContainerStyled>
         <IconsContainerStyled isSize={size}>
           <IconStyled src={caseIconBin} onClick={setPopUpVisible} />
