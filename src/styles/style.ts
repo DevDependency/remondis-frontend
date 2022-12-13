@@ -228,6 +228,7 @@ export const CaseItemContainerStyled = styled.div<Props>`
   width: 92%;
   margin: 0 auto;
   padding: 15px;
+  margin-bottom: 15px;
   box-shadow: ${(props: Props) => props.theme.effects.shadow};
 `;
 
@@ -607,6 +608,23 @@ export const LoginFormConrainerStyled = styled.div<Props>`
 
 export const LinkStyled = styled.p<Props>`
   text-decoration: none;
-  color:red;
+  color: red;
 `;
 
+//-----
+
+// Inspector
+
+export const InspectorItemStyled = styled.p<Props>`
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 15px;
+  width: 92%;
+  margin-bottom: 15px;
+  box-shadow: ${(props: Props) => props.theme.effects.shadow};
+
+  &: active {
+    border: 1px red solid;
+  }
+`;
