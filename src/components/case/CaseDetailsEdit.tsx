@@ -30,9 +30,7 @@ export const CaseDetailsEdit: React.FC = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (caseId && caseId !== "0") {
-      dispatch(getCasesById(parseInt(caseId)));
-      console.log("Inside caseById");
-      console.log(caseId);
+      dispatch(getCasesById(parseInt(caseId)));      
     }
     dispatch(setIsEditMode(true));
     return () => {
