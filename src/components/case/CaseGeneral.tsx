@@ -20,12 +20,9 @@ import { caseIconEdit } from "../../assets";
 export const CaseGeneral: React.FC = () => {
   const dispatch = useAppDispatch();
   const { caseId } = useParams<{ caseId?: string }>();
-  const currentCase = useAppSelector((state) => state.caseSlice.currentCase);
+  const {currentCase, caseChanged} = useAppSelector((state) => state.caseSlice);
   const navigate = useNavigate();
-  useEffect(() => {
-    if (caseId) {
-      dispatch(getCasesById(parseInt(caseId)));
-    }
+  useEffect(() => {   
     dispatch(setActiveCaseTabBar("general"))
     return () => {
       dispatch(setCurrentCase(NEW_CASE));
@@ -40,6 +37,11 @@ export const CaseGeneral: React.FC = () => {
   const assignInspector = () => {
     navigate(`/cases/${caseId}/inspector-assign`);
   };
+  useEffect( ()=> {
+    if (caseId) {
+      dispatch(getCasesById(parseInt(caseId)));
+    }
+  }, [caseChanged])
   return (
     <>
     {currentCase && 
