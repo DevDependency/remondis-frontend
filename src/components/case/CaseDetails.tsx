@@ -86,31 +86,31 @@ export const CaseDetails: React.FC = () => {
             <CaseItemStyled>
               <InputPlaceholderShown>Clear the property</InputPlaceholderShown>
               <IconStyled
-                src={inputIcons[currentCase.clear_area as inputValue]}
+                src={currentCase.clear_area && inputIconYes}
               />
             </CaseItemStyled>
             <CaseItemStyled>
               <InputPlaceholderShown>Backyard</InputPlaceholderShown>
               <IconStyled
-                src={inputIcons[currentCase.back_house as inputValue]}
+                src={currentCase.back_house && inputIconYes}
               />
             </CaseItemStyled>
             <CaseItemStyled>
               <InputPlaceholderShown>
                 Accessibility / parking facilities
               </InputPlaceholderShown>
-              <IconStyled src={inputIcons[currentCase.parking as inputValue]} />
+              <IconStyled src={currentCase.parking && inputIconYes} />
             </CaseItemStyled>
             <CaseItemStyled>
               <InputPlaceholderShown>Elevator</InputPlaceholderShown>
               <IconStyled
-                src={inputIcons[currentCase.elevator as inputValue]}
+                src={currentCase.elevator && inputIconYes}
               />
             </CaseItemStyled>
             <CaseItemStyled>
               <InputPlaceholderShown>Lift for furniture</InputPlaceholderShown>
               <IconStyled
-                src={inputIcons[currentCase.furniture_lift as inputValue]}
+                src={currentCase.furniture_lift && inputIconYes}
               />
             </CaseItemStyled>
             <CaseItemStyled>
@@ -118,7 +118,7 @@ export const CaseDetails: React.FC = () => {
                 Clearance with closet contents (GSA)
               </InputPlaceholderShown>
               <IconStyled
-                src={inputIcons[currentCase.closet_contents as inputValue]}
+                src={currentCase.closet_contents && inputIconYes}
               />
             </CaseItemStyled>
             <CaseItemStyled>
@@ -126,13 +126,13 @@ export const CaseDetails: React.FC = () => {
                 Removing carpets (not glued)
               </InputPlaceholderShown>
               <IconStyled
-                src={inputIcons[currentCase.removing_carpets as inputValue]}
+                src={currentCase.removing_carpets && inputIconYes}
               />
             </CaseItemStyled>
             <CaseItemStyled>
               <InputPlaceholderShown>Removing lamps</InputPlaceholderShown>
               <IconStyled
-                src={inputIcons[currentCase.removing_lamps as inputValue]}
+                src={currentCase.removing_lamps && inputIconYes}
               />
             </CaseItemStyled>
             <CaseItemStyled>
@@ -140,13 +140,13 @@ export const CaseDetails: React.FC = () => {
                 Removing curtain rods
               </InputPlaceholderShown>
               <IconStyled
-                src={inputIcons[currentCase.removing_curtain as inputValue]}
+                src={currentCase.removing_curtain && inputIconYes}
               />
             </CaseItemStyled>
             <CaseItemStyled>
               <InputPlaceholderShown>Date of appointment</InputPlaceholderShown>
               <TextMain>
-                {new Date(currentCase.Appointment?.date).toLocaleDateString(
+                {currentCase.Appointment?.date && new Date(currentCase.Appointment?.date).toLocaleDateString(
                   "en-GB"
                 )}
               </TextMain>

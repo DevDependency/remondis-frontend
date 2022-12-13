@@ -12,7 +12,6 @@ import {
   IconsContainerStyled,
   IconStyled,
   ButtonStyled
-
 } from "../../styles/style";
 import { setActiveCaseTabBar } from "../../store/slices/general";
 import { NEW_CASE } from "../../utils/constants";
@@ -26,11 +25,12 @@ export const CaseGeneral: React.FC = () => {
   const { caseId } = useParams<{ caseId?: string }>();
   const { currentCase, caseChanged } = useAppSelector((state) => state.caseSlice);
   const navigate = useNavigate();
-  useEffect(() => {
+
+  useEffect(() => {   
     dispatch(setActiveCaseTabBar("general"))
     return () => {
       dispatch(setCurrentCase(NEW_CASE));
-    }
+    };
   }, []);
   useEffect(() => {
     if (caseId) {
@@ -39,11 +39,11 @@ export const CaseGeneral: React.FC = () => {
   }, [caseChanged]);
 
   const editlHandler = () => {
-    navigate('edit', { relative: "path", state: { isNewCase: false } })
-  }
+    navigate("edit", { relative: "path", state: { isNewCase: false } });
+  };
   const submitHandler = () => {
-    navigate('/', { relative: "route" })
-  }
+    navigate("/", { relative: "route" });
+  };
   const assignInspector = () => {
     navigate(`/cases/${caseId}/inspector-assign`);
   };
@@ -65,70 +65,71 @@ export const CaseGeneral: React.FC = () => {
   }
   return (
     <>
-      {currentCase &&
-        <CaseItemContainerStyled>
-          <CaseItemStyled>
-            <InputPlaceholderShown>Name</InputPlaceholderShown>
-            <TextMain>{currentCase?.client_first_name}</TextMain>
-          </CaseItemStyled>
-          <CaseItemStyled>
-            <InputPlaceholderShown>Surname</InputPlaceholderShown>
-            <TextMain>{currentCase?.client_last_name}</TextMain>
-          </CaseItemStyled>
-          <CaseItemStyled>
-            <InputPlaceholderShown>Phone Number</InputPlaceholderShown>
-            <TextMain>{currentCase?.client_phone}</TextMain>
-          </CaseItemStyled>
-          <CaseItemStyled>
-            <InputPlaceholderShown>Email</InputPlaceholderShown>
-            <TextMain>{currentCase?.client_email}</TextMain>
-          </CaseItemStyled>
-          <CaseItemStyled>
-            <InputPlaceholderShown>Address</InputPlaceholderShown>
-            <TextMain>{currentCase?.address}</TextMain>
-          </CaseItemStyled>
-          <CaseItemStyled>
-            <InputPlaceholderShown>Date Of Creating</InputPlaceholderShown>
-            <TextMain>{new Date(currentCase?.created_at as string).toLocaleDateString(
-              "en-GB"
-            )}</TextMain>
-          </CaseItemStyled>
-          <CaseItemStyled>
-            <InputPlaceholderShown>Inspector</InputPlaceholderShown>
-            <TextMain>{currentCase?.Inspector?.username}</TextMain>
-            {userRole === Role.MANAGER ? <IconsContainerStyled isSize={true}>
-              <IconStyled src={caseIconEdit} onClick={assignInspector} />
-            </IconsContainerStyled> : null}
-          </CaseItemStyled>
-        </CaseItemContainerStyled>
+      {currentCase && (
+        <>
+          <CaseItemContainerStyled>
+            <CaseItemStyled>
+              <InputPlaceholderShown>Name</InputPlaceholderShown>
+              <TextMain>{currentCase?.client_first_name}</TextMain>
+            </CaseItemStyled>
+            <CaseItemStyled>
+              <InputPlaceholderShown>Surname</InputPlaceholderShown>
+              <TextMain>{currentCase?.client_last_name}</TextMain>
+            </CaseItemStyled>
+            <CaseItemStyled>
+              <InputPlaceholderShown>Phone Number</InputPlaceholderShown>
+              <TextMain>{currentCase?.client_phone}</TextMain>
+            </CaseItemStyled>
+            <CaseItemStyled>
+              <InputPlaceholderShown>Email</InputPlaceholderShown>
+              <TextMain>{currentCase?.client_email}</TextMain>
+            </CaseItemStyled>
+            <CaseItemStyled>
+              <InputPlaceholderShown>Address</InputPlaceholderShown>
+              <TextMain>{currentCase?.address}</TextMain>
+            </CaseItemStyled>
+            <CaseItemStyled>
+              <InputPlaceholderShown>Date Of Creating</InputPlaceholderShown>
+              <TextMain>
+                {new Date(currentCase?.created_at as string).toLocaleDateString(
+                  "en-GB"
+                )}</TextMain>
+        </CaseItemStyled>
+        <CaseItemStyled>
+          <InputPlaceholderShown>Inspector</InputPlaceholderShown>
+          <TextMain>{currentCase?.Inspector?.username}</TextMain>
+        {userRole === Role.MANAGER ? <IconsContainerStyled isSize={true}>          
+          <IconStyled src={caseIconEdit} onClick={assignInspector} />
+        </IconsContainerStyled>: null}
+        </CaseItemStyled>
+      </CaseItemContainerStyled>
       }
-      {userRole === Role.MANAGER ?
-        <ButtonContainerStyled>
-          <button>
-            <ButtonSmallStyled onClick={editlHandler}>Edit</ButtonSmallStyled>
-          </button>
-          <button >
-            <ButtonSmallStyled color={"red"} onClick={submitHandler}>Submit</ButtonSmallStyled>
-          </button>
-        </ButtonContainerStyled>
-        :
-        (currentCase.state_id === 2 ?
-          <ButtonContainerStyled>
-            <button>
-              <ButtonSmallStyled onClick={declineHandler}>Decline</ButtonSmallStyled>
-            </button>
-            <button>
-              <ButtonSmallStyled color={"red"} onClick={acceptHandler}>Accept</ButtonSmallStyled>
-            </button>
-          </ButtonContainerStyled>
-          :
-          <ButtonContainerStyled>
-            <button>
-              <ButtonStyled color={"red"} onClick={confirmHandler}>Submit</ButtonStyled>
-            </button>
-          </ButtonContainerStyled>
-
-        )
+      {userRole === Role.MANAGER ? 
+      <ButtonContainerStyled>             
+        <button>
+          <ButtonSmallStyled onClick={editlHandler}>Edit</ButtonSmallStyled> 
+        </button>             
+        <button >
+          <ButtonSmallStyled color={"red"} onClick={submitHandler}>Submit</ButtonSmallStyled>
+        </button>            
+      </ButtonContainerStyled> 
+      : 
+      (currentCase.state_id === 2 ?
+      <ButtonContainerStyled>             
+      <button>
+        <ButtonSmallStyled onClick={declineHandler}>Decline</ButtonSmallStyled> 
+      </button>             
+      <button>
+        <ButtonSmallStyled color={"red"} onClick={acceptHandler}>Accept</ButtonSmallStyled>
+      </button>            
+      </ButtonContainerStyled>
+    :
+      <ButtonContainerStyled>
+      <button>
+        <ButtonStyled color={"red"} onClick={confirmHandler}>Submit</ButtonStyled>
+      </button>
+      </ButtonContainerStyled>    
+    )
       }
     </>
   );
