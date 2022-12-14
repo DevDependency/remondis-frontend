@@ -27,9 +27,9 @@ export interface UserState {
   confirmUserHandler: boolean;
   userEmail: string;
   isInspectorActive: boolean;
-  inspectorList: UserSettings[];  
+  inspectorList: UserSettings[];
+  currentUser: UsersValidation;
 }
-
 
 export type AppDispatch = typeof store.dispatch;
 

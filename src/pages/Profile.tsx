@@ -1,10 +1,11 @@
 import { useFormik, FormikProps } from "formik";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navigate, useNavigate, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../utils/hooks/useStore";
 import { setUserId, updateUser, setUser } from "../store/slices/user";
 import { UsersValidation } from "../interfaces/users";
-import { Role } from "../interfaces/users";
+import { apiGetUsersListById } from "../utils/api";
+import { Role, UserSettings } from "../interfaces/users";
 import { useCookies } from "react-cookie";
 import { NavBar } from "../components/containers";
 import {
@@ -27,7 +28,7 @@ export const Profile: React.FC = () => {
   console.log(afterSignUp);
   const [resultSuccess] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  const { userId, userEmail, userRole } = useAppSelector(
+  const { userId, userEmail, userRole, currentUser } = useAppSelector(
     (state) => state.userSlice
   );
   const [cookiesName, setCookiesName, removeCookiesName] = useCookies<string>([
@@ -43,6 +44,16 @@ export const Profile: React.FC = () => {
       })
     );
   };
+  const [thisUser, setThisUser] = useState<UserSettings>({});
+
+  const userData = async () => {
+    const userSpecification = await apiGetUsersListById(userId);
+    console.log(userSpecification);
+    await setThisUser(userSpecification.user);
+  };
+  useEffect(() => {
+    userData();
+  }, []);
   const navigate = useNavigate();
   const formik: FormikProps<UsersValidation> = useFormik<UsersValidation>({
     initialValues: {
@@ -85,6 +96,7 @@ export const Profile: React.FC = () => {
                     id="username"
                     type="text"
                     onBlur={formik.handleBlur}
+                    defaultValue={thisUser ? thisUser.username : ""}
                   />
                   {formik.errors.username && formik.touched.username && (
                     <div className="CaseErrors">{formik.errors.username}</div>
@@ -99,6 +111,7 @@ export const Profile: React.FC = () => {
                     id="password"
                     type="password"
                     onBlur={formik.handleBlur}
+                    defaultValue={thisUser ? thisUser.password : ""}
                   />
                   {formik.errors.password && formik.touched.password && (
                     <div className="CaseErrors">{formik.errors.password}</div>
@@ -113,6 +126,7 @@ export const Profile: React.FC = () => {
                     id="phone"
                     type="text"
                     onBlur={formik.handleBlur}
+                    defaultValue={thisUser ? thisUser.phone : ""}
                   />
                   {formik.errors.phone && formik.touched.phone && (
                     <div className="CaseErrors">{formik.errors.phone}</div>

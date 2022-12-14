@@ -17,6 +17,14 @@ const initialState: UserState = {
   userEmail: "",
   isInspectorActive: true,
   inspectorList: [],
+  currentUser: {
+    email: "",
+    password: "",
+    username: "",
+    phone: "",
+    role: "",
+    email_address: "",
+  },
 };
 
 export const registerUser = createAsyncThunk(
@@ -80,14 +88,15 @@ export const getUserByEmail = createAsyncThunk(
 
 export const getUsersByRole = createAsyncThunk(
   "user/getUsersByRole",
- async () => {
-  try{
-    const response = await api.apiGetUsersListByRole();    
-    return response.users;
-  } catch (error) {
-    console.error(error);
- }
- })
+  async () => {
+    try {
+      const response = await api.apiGetUsersListByRole();
+      return response.users;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
 
 const userSlice = createSlice({
   name: "user",
@@ -97,7 +106,9 @@ const userSlice = createSlice({
       if (action.payload && action.payload.success) {
         state.userRole = action.payload.user.role;
         state.userId = action.payload.user.id;
+        console.log(action.payload.user);
         state.isLoggedIn = true;
+        state.currentUser = action.payload.user;
       } else {
         state.isLoggedIn = false;
         state.areCredentialsWrong = true;
@@ -143,7 +154,7 @@ const userSlice = createSlice({
         userSlice.caseReducers.setUserId(state, action);
       })
       .addCase(getUsersByRole.fulfilled, (state, action) => {
-        userSlice.caseReducers.setInspectorList(state, action);        
+        userSlice.caseReducers.setInspectorList(state, action);
       });
   },
 });
