@@ -103,6 +103,7 @@ export const NavBarStyled = styled.div<Props>`
 export const ContainerNavBarIconsStyled = styled.div<Props>`
   display: flex;
   width: 5rem;
+  cursor: pointer;
   align-items: center;
   justify-content: flex-end;
   gap: 35px;
@@ -120,6 +121,8 @@ export const LogoNavBarStyled = styled.img<Props>`
 
 export const IconStyled = styled.img`
   min-width: 3vh;
+  width: 3vh;
+  cursor: pointer;
 `;
 
 //-----
@@ -149,12 +152,14 @@ export const TabTextStyled = styled.div<Props>`
     props.color === "red" ? props.theme.colors.red : props.theme.colors.grey};
   font-weight: 600;
   font-size: 16px;
+  cursor: pointer;
 `;
 
 export const TabIconStyled = styled.div<Props>`
   color: ${(props) =>
     props.color === "red" ? props.theme.colors.red : props.theme.colors.grey};
   width: 3vh;
+  cursor: pointer;
 `;
 
 //-----
@@ -206,11 +211,14 @@ export const ActionStyled = styled.div<Props>`
 
   p {
     color: ${(props) => props.theme.colors.red};
+    font-weight: 800;
+    cursor: pointer;
   }
 `;
 
 export const IconsContainerStyled = styled.div<Props>`
   display: flex;
+  cursor: pointer;
   justify-content: space-around;
   width: 10rem;
   visibility: ${({ isSize }) => (isSize ? "visible" : "hidden")};
@@ -583,6 +591,7 @@ export const AuthorizationContainer = styled.div<Props>`
 export const AuthorizationLinksContainer = styled.div<Props>`
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 `;
 
 export const AuthorizationInputContainer = styled.div<Props>`
@@ -615,6 +624,7 @@ export const LoginFormConrainerStyled = styled.div<Props>`
 
 export const LinkStyled = styled.p<Props>`
   text-decoration: none;
+  cursor: pointer;
   color: red;
 `;
 

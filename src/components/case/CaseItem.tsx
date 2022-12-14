@@ -102,7 +102,7 @@ export const CaseItem: React.FC<CaseItemProps> = ({
                 </CanyainerForInfoStyled>
                 <ActionStyled>
                   <IconStyled src={caseIconAction} />
-                  <TextMain style={{ fontWeight: "800" }}>{action}</TextMain>
+                  <TextMain>{action}</TextMain>
                 </ActionStyled>
               </>
             )}
