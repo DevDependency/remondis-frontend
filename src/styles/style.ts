@@ -637,3 +637,10 @@ export const InspectorItemStyled = styled.p<Props>`
     border: 1px red solid;
   }
 `;
+
+// ForgotPassword Page
+
+export const ForgotPasswordParagraph = styled.p<Props>`
+  text-align: center;
+  margin: 25% 20% auto 20%;
+`;

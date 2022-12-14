@@ -19,6 +19,7 @@ import {
   AuthorizationLinksContainer,
   ButtonStyled,
   AuthorizationInputTitleContainer,
+  ForgotPasswordParagraph,
 } from "../styles/style";
 import { logo } from "../assets";
 
@@ -36,6 +37,7 @@ export const ForgotPassword: React.FC = () => {
   };
   const returnToLogin = () => {
     dispatch(setIsResetLinkSend());
+    dispatch(setIsForgotPassword());
   };
   const forgotPasswordHandler = () => {
     dispatch(setIsForgotPassword());
@@ -68,9 +70,13 @@ export const ForgotPassword: React.FC = () => {
               <>
                 {isResetLinkSend ? (
                   <>
-                    <p>We sent a link on your email</p>
+                    <ForgotPasswordParagraph>
+                      We sent a link for resetting password on your email
+                    </ForgotPasswordParagraph>
                     <button onClick={resetLinkHandler}>
-                      Back to login page
+                      <ButtonStyled isSignUp={true} color={"red"}>
+                        Back to login page
+                      </ButtonStyled>
                     </button>
                   </>
                 ) : (
@@ -96,11 +102,15 @@ export const ForgotPassword: React.FC = () => {
                     </AuthorizationInputTitleContainer>
                     <AuthorizationLinksContainer>
                       <button type="submit">
-                        <ButtonStyled isSignUp={true} color={"red"}>
+                        <ButtonStyled
+                          isSignUp={true}
+                          color={"red"}
+                          onClick={returnToLogin}
+                        >
                           Request reset link
                         </ButtonStyled>
                       </button>
-                      <button type="submit">
+                      <button>
                         <ButtonStyled
                           onClick={forgotPasswordHandler}
                           isSignUp={true}

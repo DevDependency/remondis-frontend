@@ -1,6 +1,6 @@
-import { CaseWithId, CasesToDo, Coordinates, Room, Case } from './cases';
+import { CaseWithId, CasesToDo, Coordinates, Room, Case } from "./cases";
 import { store } from "../store/store";
-import { UserSettings } from "./users";
+import { UserSettings, UsersValidation } from "./users";
 
 export interface CaseState {
   createdCaseId: number;
@@ -25,9 +25,9 @@ export interface UserState {
   confirmUserHandler: boolean;
   userEmail: string;
   isInspectorActive: boolean;
-  inspectorList: UserSettings[];  
+  inspectorList: UserSettings[];
+  currentUser: UsersValidation;
 }
-
 
 export type AppDispatch = typeof store.dispatch;
 
