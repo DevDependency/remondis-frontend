@@ -1,14 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from '../../utils/api';
-import { Case, CaseGeneral, Room } from '../../interfaces/cases';
+import { CaseGeneral } from '../../interfaces/cases';
 import { CaseState } from '../../interfaces/store';
-import { NEW_CASE } from "../../utils/constants";
 
 const initialState: CaseState = {
   createdCaseId: 0,
   deletedCaseId: 0,
   casesToDo: [],
   cases: [],
+  appointments: [],
   currentCase: undefined,
   coordinates: [],
   caseRooms: [],
@@ -176,6 +176,17 @@ export const updateCasePhoto = createAsyncThunk(
   }
 );
 
+export const getAppointmentsByInspector = createAsyncThunk(
+  "case/getAppointmentsByInspector",
+  async (inspectorId: number) => {
+    try {
+      const response = await api.apiGetAppointmentsByInspectorId(inspectorId);
+      return response.appointments;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
 
 const caseSlice = createSlice({
   name: "case",
@@ -212,6 +223,9 @@ const caseSlice = createSlice({
     setCaseChangedFalse(state) {
       state.caseChanged = false;
     },
+    setAppointments(state, action) {
+      state.appointments = action.payload;
+    }
   },
   extraReducers(builder) {
     builder
@@ -251,6 +265,9 @@ const caseSlice = createSlice({
       })
       .addCase(updateCasePhoto.fulfilled, (state, action) => {
         caseSlice.caseReducers.setCaseChangedTrue(state);
+      })
+      .addCase(getAppointmentsByInspector.fulfilled, (state, action) => {
+        caseSlice.caseReducers.setAppointments(state, action);
       });
   },
 });

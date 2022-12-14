@@ -4,6 +4,7 @@ import {
   apiGetAppointmentById,
   apiPutAppointmentById,
   apiDeleteAppointmentById,
+  apiGetAppointmentsByInspectorId,
 } from "./apiAppointment";
 
 import {
@@ -50,6 +51,7 @@ export {
   apiGetAppointmentById,
   apiPutAppointmentById,
   apiDeleteAppointmentById,
+  apiGetAppointmentsByInspectorId,
   apiGetCases,
   apiGetCasesById,
   apiPostCases,
