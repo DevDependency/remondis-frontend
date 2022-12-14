@@ -24,10 +24,12 @@ export const CaseGeneralEdit: React.FC = () => {
     if (caseId && caseId !== "0") {
       dispatch(getCasesById(parseInt(caseId)));      
     }
+    if(isNewCase) {
+      dispatch(setCurrentCase(NEW_CASE))
+    }
     dispatch(setIsEditMode(true))
     return () => {
       dispatch(setIsEditMode(false));
-      dispatch(setCurrentCase(NEW_CASE));
       dispatch(setCreatedCaseId(0));        
     };
   }, []);

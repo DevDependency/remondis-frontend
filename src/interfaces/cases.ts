@@ -1,5 +1,5 @@
-import { Appointment } from "./appointment";
 import { UserSettings } from "./users";
+import { Appointment } from './appointment';
 
 export interface File {
   id: number;
@@ -86,5 +86,3 @@ export interface Coordinates {
   lng: number;
   lat: number;
 }
-
-

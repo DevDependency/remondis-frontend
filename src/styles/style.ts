@@ -310,7 +310,6 @@ export const CaseItemEditStyled = styled.div<Props>`
     padding: 5px 7px;
     width: 100%;
   }
-  }
 `;
 
 //-----
@@ -632,10 +631,10 @@ export const InspectorItemStyled = styled.p<Props>`
   width: 92%;
   margin-bottom: 15px;
   box-shadow: ${(props: Props) => props.theme.effects.shadow};
-
-  &: active {
+  border: ${ (props)=> props.active ? "1px red solid" : "" }
+  /* &:active {
     border: 1px red solid;
-  }
+  } */
 `;
 
 // ForgotPassword Page

@@ -10,15 +10,19 @@ import {
   ButtonContainerStyled,
   ButtonSmallStyled,
   InsideMainBottomStyled,
+  ButtonStyled,
 } from "../../styles/style";
 import { inputIconNo, inputIconYes } from "../../assets";
 import { setActiveCaseTabBar } from "../../store/slices/general";
 import { IconStyled } from "../../styles/style";
 import { TYPE_OF_PROPERTIES } from "../../utils/constants";
+import { apiPatchCasesByIdDecline, apiPatchCasesByIdAccept, apiPatchCasesByIdReady } from "../../utils/api";
+import { Role } from '../../interfaces/users';
 
 export const CaseDetails: React.FC = () => {
   const dispatch = useAppDispatch();
   const { caseId } = useParams<{ caseId?: string }>();
+  const {userRole, userId} = useAppSelector((state) => state.userSlice);
   const {currentCase, caseChanged } = useAppSelector((state) => state.caseSlice);
   const navigate = useNavigate();
 
@@ -29,9 +33,6 @@ export const CaseDetails: React.FC = () => {
   type inputValue = keyof typeof inputIcons;
 
   useEffect(() => {
-    // if (caseId) {
-    //   dispatch(getCasesById(parseInt(caseId)));
-    // }
     dispatch(setActiveCaseTabBar("details"));
   }, []);
   
@@ -47,6 +48,21 @@ export const CaseDetails: React.FC = () => {
   const submitHandler = () => {
     navigate("/cases", { relative: "route" });
   };
+  const declineHandler = () => {
+    if (caseId) 
+    apiPatchCasesByIdDecline(parseInt(caseId), userId)
+    navigate(`/`, {relative: "route" });
+  };
+  const acceptHandler = () => {
+    if (caseId)
+    apiPatchCasesByIdAccept(parseInt(caseId), userId)
+    navigate(`/`, {relative: "route" });
+  };
+  const confirmHandler = () => {
+    if (caseId)
+      apiPatchCasesByIdReady(parseInt(caseId), userId)
+      navigate(`/`, {relative: "route" });
+  }
   return (
     <>
       {currentCase && (
@@ -67,31 +83,31 @@ export const CaseDetails: React.FC = () => {
             <CaseItemStyled>
               <InputPlaceholderShown>Clear the property</InputPlaceholderShown>
               <IconStyled
-                src={inputIcons[currentCase.clear_area as inputValue]}
+                src={currentCase.clear_area ? inputIconYes : undefined}
               />
             </CaseItemStyled>
             <CaseItemStyled>
               <InputPlaceholderShown>Backyard</InputPlaceholderShown>
               <IconStyled
-                src={inputIcons[currentCase.back_house as inputValue]}
+                src={currentCase.back_house ? inputIconYes : undefined}
               />
             </CaseItemStyled>
             <CaseItemStyled>
               <InputPlaceholderShown>
                 Accessibility / parking facilities
               </InputPlaceholderShown>
-              <IconStyled src={inputIcons[currentCase.parking as inputValue]} />
+              <IconStyled src={currentCase.parking ? inputIconYes : undefined} />
             </CaseItemStyled>
             <CaseItemStyled>
               <InputPlaceholderShown>Elevator</InputPlaceholderShown>
               <IconStyled
-                src={inputIcons[currentCase.elevator as inputValue]}
+                src={currentCase.elevator ? inputIconYes : undefined}
               />
             </CaseItemStyled>
             <CaseItemStyled>
               <InputPlaceholderShown>Lift for furniture</InputPlaceholderShown>
               <IconStyled
-                src={inputIcons[currentCase.furniture_lift as inputValue]}
+                src={currentCase.furniture_lift ? inputIconYes : undefined}
               />
             </CaseItemStyled>
             <CaseItemStyled>
@@ -99,7 +115,7 @@ export const CaseDetails: React.FC = () => {
                 Clearance with closet contents (GSA)
               </InputPlaceholderShown>
               <IconStyled
-                src={inputIcons[currentCase.closet_contents as inputValue]}
+                src={currentCase.closet_contents ? inputIconYes : undefined}
               />
             </CaseItemStyled>
             <CaseItemStyled>
@@ -107,13 +123,13 @@ export const CaseDetails: React.FC = () => {
                 Removing carpets (not glued)
               </InputPlaceholderShown>
               <IconStyled
-                src={inputIcons[currentCase.removing_carpets as inputValue]}
+                src={currentCase.removing_carpets ? inputIconYes : undefined}
               />
             </CaseItemStyled>
             <CaseItemStyled>
               <InputPlaceholderShown>Removing lamps</InputPlaceholderShown>
               <IconStyled
-                src={inputIcons[currentCase.removing_lamps as inputValue]}
+                src={currentCase.removing_lamps ? inputIconYes : undefined}
               />
             </CaseItemStyled>
             <CaseItemStyled>
@@ -121,30 +137,42 @@ export const CaseDetails: React.FC = () => {
                 Removing curtain rods
               </InputPlaceholderShown>
               <IconStyled
-                src={inputIcons[currentCase.removing_curtain as inputValue]}
+                src={currentCase.removing_curtain ? inputIconYes : undefined}
               />
-            </CaseItemStyled>
-            <CaseItemStyled>
-              <InputPlaceholderShown>Date of appointment</InputPlaceholderShown>
-              <TextMain>
-                {new Date(currentCase.Appointment?.date).toLocaleDateString(
-                  "en-GB"
-                )}
-              </TextMain>
-            </CaseItemStyled>
+            </CaseItemStyled>            
           </CaseItemContainerStyled>
         </InsideMainBottomStyled>
       )}
-      <ButtonContainerStyled>
+        {userRole === Role.MANAGER ? 
+      <ButtonContainerStyled>             
         <button>
-          <ButtonSmallStyled onClick={editlHandler}>Edit</ButtonSmallStyled>
-        </button>
-        <button id="submit" type="submit">
-          <ButtonSmallStyled color={"red"} onClick={submitHandler}>
-            Submit
-          </ButtonSmallStyled>
-        </button>
+          <ButtonSmallStyled onClick={editlHandler}>Edit</ButtonSmallStyled> 
+        </button>             
+        <button >
+          <ButtonSmallStyled color={"red"} onClick={submitHandler}>Submit</ButtonSmallStyled>
+        </button>            
+      </ButtonContainerStyled> 
+      : 
+      (currentCase.state_id === 2 ?
+      <ButtonContainerStyled>             
+      <button>
+        <ButtonSmallStyled onClick={declineHandler}>Decline</ButtonSmallStyled> 
+      </button>             
+      <button>
+        <ButtonSmallStyled color={"red"} onClick={acceptHandler}>Accept</ButtonSmallStyled>
+      </button>            
       </ButtonContainerStyled>
+    :
+      <ButtonContainerStyled>
+       <button>
+        <ButtonSmallStyled onClick={editlHandler}>Edit</ButtonSmallStyled>
+      </button> 
+      <button>
+        <ButtonSmallStyled color={"red"} onClick={confirmHandler}>Submit</ButtonSmallStyled>
+      </button>            
+      </ButtonContainerStyled>    
+    )
+      }
     </>
   );
 };

@@ -10,20 +10,23 @@ import {
 } from "../store/slices/general";
 
 export const Cases: React.FC = () => {
-  const tasks = useAppSelector((state) => state.caseSlice.cases);
+  const { cases , caseChanged } = useAppSelector((state) => state.caseSlice);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getCases());
     dispatch(setActiveManagerTabBar("cases"));
     dispatch(setActiveInspectorTabBar("cases"));
   }, []);
 
+  useEffect(()=>{
+    dispatch(getCases());;
+  } , [caseChanged])
+
   return (
     <>
       <TabBarManager />
-        {tasks &&
-          tasks
+        {cases &&
+          cases
             .filter((item: CaseWithId) => item.state_id != 7 && item)
             .map((item: CaseWithId, index: number) => (
               <CaseItem

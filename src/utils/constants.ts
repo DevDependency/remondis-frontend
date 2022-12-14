@@ -111,7 +111,7 @@ export const NEW_CASE = {
   client_first_name:"",
   client_last_name:"",
   client_email:"",
-  client_phone:"",  
+  client_phone:"",    
 }
 
 

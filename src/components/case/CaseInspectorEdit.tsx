@@ -46,7 +46,7 @@ export const CaseInspectorEdit: React.FC = () => {
               key={index}
               id={el.id.toString()}
               onClick={selectInspector}
-              color={el.id === selectedInspector ? "red" : ""}
+              active={el.id === selectedInspector}
             >
               <InputPlaceholderShown>{el.username}</InputPlaceholderShown>
               <TextMain>{el.state}</TextMain>

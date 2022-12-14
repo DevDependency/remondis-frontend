@@ -1,12 +1,14 @@
-import { CaseWithId, CasesToDo, Coordinates, Room, Case } from "./cases";
 import { store } from "../store/store";
-import { UserSettings, UsersValidation } from "./users";
+import { CaseWithId, CasesToDo, Coordinates, Room, Case } from './cases';
+import { UserSettings } from "./users";
+import { Appointment } from './appointment';
 
 export interface CaseState {
   createdCaseId: number;
   deletedCaseId: number;
   cases: CaseWithId[];
   casesToDo: CasesToDo[];
+  appointments: Appointment[];
   currentCase: Case | undefined;
   coordinates: Coordinates[];
   caseRooms: Room[];
