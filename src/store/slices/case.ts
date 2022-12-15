@@ -13,7 +13,7 @@ const initialState: CaseState = {
   coordinates: [],
   caseRooms: [],
   currentRoom: undefined,
-  caseChanged: false,
+  caseChanged: false,  
 }
 
 export const getCases = createAsyncThunk(
@@ -188,6 +188,18 @@ export const getAppointmentsByInspector = createAsyncThunk(
   }
 );
 
+export const updateCasesByIdAssign = createAsyncThunk(
+  "case/patchCasesByIdAssign",
+  async (params: any) => {
+    try {
+      const response = await api.apiPatchCasesByIdAssign(params.caseId, params.userId, params.inspectorId);
+      return response.appointments;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 const caseSlice = createSlice({
   name: "case",
   initialState,
@@ -225,7 +237,7 @@ const caseSlice = createSlice({
     },
     setAppointments(state, action) {
       state.appointments = action.payload;
-    }
+    },
   },
   extraReducers(builder) {
     builder
@@ -260,14 +272,17 @@ const caseSlice = createSlice({
         caseSlice.caseReducers.setCurrentRoom(state, action);
         caseSlice.caseReducers.setCaseChangedFalse(state);
       })
-      .addCase(updateCaseItem.fulfilled, (state, action) => {
+      .addCase(updateCaseItem.fulfilled, (state) => {
         caseSlice.caseReducers.setCaseChangedTrue(state);
       })
-      .addCase(updateCasePhoto.fulfilled, (state, action) => {
+      .addCase(updateCasePhoto.fulfilled, (state) => {
         caseSlice.caseReducers.setCaseChangedTrue(state);
       })
       .addCase(getAppointmentsByInspector.fulfilled, (state, action) => {
         caseSlice.caseReducers.setAppointments(state, action);
+      })
+      .addCase(updateCasesByIdAssign.fulfilled, (state) => {        
+        caseSlice.caseReducers.setCaseChangedTrue(state);
       });
   },
 });
@@ -277,7 +292,7 @@ export const {
   setDeletedCaseId,
   setCurrentCase,
   setCurrentRoom,
-  setCaseItems,
+  setCaseItems,  
 
 } = caseSlice.actions;
 

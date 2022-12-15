@@ -11,13 +11,13 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { setIsEditMode } from "../../store/slices/general";
 import { User } from "../../interfaces/users";
-import { apiPatchCasesByIdAssign } from "../../utils/api";
+import { updateCasesByIdAssign } from "../../store/slices/case";
 
 export const CaseInspectorEdit: React.FC = () => {
   const { inspectorList, userId } = useAppSelector((state) => state.userSlice);
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const [selectedInspector, setSelectedInspector] = useState(0);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();  
   const { caseId } = useParams();
 
   useEffect(() => {
@@ -31,11 +31,11 @@ export const CaseInspectorEdit: React.FC = () => {
     navigate(-1);
   };
   const selectInspector = (e: any) => {
-    setSelectedInspector(parseInt(e.target.id));
+   setSelectedInspector(parseInt(e.target.id))
   };
   const setInspector = () => {
     if (caseId)
-      apiPatchCasesByIdAssign(parseInt(caseId), userId, selectedInspector);
+    dispatch(updateCasesByIdAssign({caseId: parseInt(caseId), userId, inspectorId: selectedInspector}));
     navigate(`/cases/${caseId}`, { replace: true });
   };
   return (

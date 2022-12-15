@@ -13,7 +13,7 @@ export interface CaseState {
   coordinates: Coordinates[];
   caseRooms: Room[];
   currentRoom: Room | undefined;
-  caseChanged: boolean;
+  caseChanged: boolean;  
 }
 
 export interface UserState {
