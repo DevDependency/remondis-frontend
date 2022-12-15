@@ -14,27 +14,29 @@ import {
   navbarIconBack,
 } from "../../assets/";
 import { useAppSelector, useAppDispatch } from "../../utils/hooks/useStore";
-import { setIsPopupVisible } from "../../store/slices/general";
 import { setIsInspectorActive, updateUser } from "../../store/slices/user";
 import { Locations } from "../../interfaces/route";
 import { Role } from "../../interfaces/users";
+import { useState } from 'react';
 
 export const NavBar: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { insideCase, isPopupVisible } = useAppSelector(
+  const { insideCase } = useAppSelector(
     (state) => state.generalSlice
   );
   const { userRole, userId, isInspectorActive } = useAppSelector(
     (state) => state.userSlice
   );
+  
+  const [isPopupVisible, setIsPopupVisible] = useState(false)
 
   const handler = () => {
-    dispatch(setIsPopupVisible(true));
+    setIsPopupVisible(true);
   };
 
   const setPopUpUnVisible = () => {
-    dispatch(setIsPopupVisible(false));
+    setIsPopupVisible(false)
   };
 
   const setInspectorStatus = () => {
@@ -44,7 +46,7 @@ export const NavBar: React.FC = () => {
         changedValue: { state: isInspectorActive ? "active" : "inactive" },
       })
     );
-    dispatch(setIsPopupVisible(false));
+    setIsPopupVisible(false)
     dispatch(setIsInspectorActive());
   };
 

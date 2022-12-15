@@ -472,8 +472,6 @@ export const Popup = styled.div<Props>`
   display: flex;
   justify-content: center;
   align-items: center;
-  visibility: ${({ isPopupVisible }) =>
-    isPopupVisible ? "visible" : "hidden"};
 `;
 
 export const PopupStyled = styled.div<Props>`

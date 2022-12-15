@@ -3,7 +3,6 @@ import { CaseItemProps } from "../../interfaces/cases";
 import { useNavigate } from "react-router-dom";
 import { PopUpConfirm } from "../PopUpConfirm";
 import { useAppSelector, useAppDispatch } from "../../utils/hooks/useStore";
-import { setIsPopupVisible } from "../../store/slices/general";
 import { closeCase, setDeletedCaseId } from "../../store/slices/case";
 import {
   CaseContainerStyled,
@@ -41,7 +40,7 @@ export const CaseItem: React.FC<CaseItemProps> = ({
 }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { isPopupVisible } = useAppSelector((state) => state.generalSlice);
+  const [isPopupVisible, setIsPopupVisible] = useState(false)
   const { userId, userRole } = useAppSelector((state) => state.userSlice);
   const { deletedCaseId } = useAppSelector((state) => state.caseSlice);
   const [ showSettings, setShowSettings ] = useState(false);
@@ -56,16 +55,17 @@ export const CaseItem: React.FC<CaseItemProps> = ({
 
   const setPopUpVisible = () => {
     dispatch(setDeletedCaseId(caseId));
-    dispatch(setIsPopupVisible(true));
+    setIsPopupVisible(true)
+    console.log(isPopupVisible)
   };
 
   const setPopUpUnVisible = () => {
-    dispatch(setIsPopupVisible(false));
+    setIsPopupVisible(false)
   };
 
   const closeCaseHandler = () => {
     dispatch(closeCase({ caseId: deletedCaseId, userId }));
-    dispatch(setIsPopupVisible(false));
+    setIsPopupVisible(false)
     setShowSettings((current) => !current);
   };
 
@@ -73,8 +73,7 @@ export const CaseItem: React.FC<CaseItemProps> = ({
     navigate(`/cases/${caseId}/edit`, { state: { isNewCase: false } });
   };
 
-  //console.log(showSettings)
-
+  console.log(isPopupVisible)
   return (
     <>
       <CaseBackgroundContainerStyled>

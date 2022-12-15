@@ -5,14 +5,11 @@ import {
   ButtonSmallStyled,
   ButtonContainerPopupStyled,
 } from "../styles/style";
-import { useAppSelector } from "../utils/hooks/useStore";
 
 export const PopUpConfirm = (props: any) => {
-  const isPopupVisible = useAppSelector(
-    (state) => state.generalSlice.isPopupVisible
-  );
+  
   return (
-    <Popup isPopupVisible={isPopupVisible}>
+    <Popup>
       <PopupStyled>
         <TextMain>{props.text}</TextMain>
         <ButtonContainerPopupStyled>
