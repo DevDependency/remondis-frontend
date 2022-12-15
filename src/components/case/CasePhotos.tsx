@@ -21,12 +21,15 @@ import {
 } from "../../styles/style";
 import { setActiveCaseTabBar } from "../../store/slices/general";
 import { PopUpConfirm } from "../PopUpConfirm";
+import { CasePhotosPreview } from './CasePhotosPreview';
 
 export const CasePhotos: React.FC = () => {
   const { caseRooms, caseChanged } = useAppSelector((state) => state.caseSlice);
   const dispatch = useAppDispatch();
   const { caseId } = useParams<{ caseId?: string }>();
   const navigate = useNavigate();
+  const [isPreviewVisible, setIsPreviewVisible] = useState(false);
+  const [currentSrc, setCurrentSrc] = useState(undefined);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [deletedRoomId, setDeletedRoomId] = useState(0);
 
@@ -88,6 +91,16 @@ export const CasePhotos: React.FC = () => {
     setIsPopupVisible(false);
   };
 
+  const openPhotoPreview = (e: any) => {
+    setCurrentSrc(e.target.src);
+    setIsPreviewVisible(true);
+  };
+
+  const closePhotoPreview = (e: any) => {
+    setCurrentSrc(undefined);
+    setIsPreviewVisible(false);
+  };
+
   const submitHandler = () => {};
 
   return (
@@ -130,6 +143,7 @@ export const CasePhotos: React.FC = () => {
                 {el.CasePhoto.map((img, index) => (
                   <PhotoStyled key={index}>
                     <img
+                      onClick={openPhotoPreview}
                       src={
                         "data:image/jpeg;base64," +
                         Buffer.from(img.photo.data).toString("base64")
@@ -178,6 +192,13 @@ export const CasePhotos: React.FC = () => {
               },
             },
           ]}
+        />
+      )}
+
+      {isPreviewVisible && (
+        <CasePhotosPreview
+          src={currentSrc}
+          onClick={closePhotoPreview}
         />
       )}
     </>

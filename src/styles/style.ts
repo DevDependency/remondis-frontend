@@ -480,6 +480,7 @@ export const PopupStyled = styled.div<Props>`
   flex-direction: column;
   background: white;
   max-width: 100%;
+  max-height: 100%;
   padding: 4em 2em;
   text-align: center;
 `;
