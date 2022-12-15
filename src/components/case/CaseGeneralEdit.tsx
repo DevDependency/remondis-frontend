@@ -16,6 +16,7 @@ import { NEW_CASE } from "../../utils/constants";
 export const CaseGeneralEdit: React.FC = () => {
   const { state } = useLocation();
   const { isNewCase } = state;
+  const { userId } = useAppSelector((state) => state.userSlice);
   const dispatch = useAppDispatch();
   const { caseId } = useParams<{ caseId?: string }>();
   const currentCase = useAppSelector((state) => state.caseSlice.currentCase);
@@ -53,7 +54,7 @@ export const CaseGeneralEdit: React.FC = () => {
           initialValues={{ ...currentCase }}
           onSubmit={async (values) => {
             if (isNewCase) {
-              dispatch(createCase(values));              
+              dispatch(createCase({...values, manager_id: userId}));              
             } else {
               dispatch(editTheCase({ id: caseId, changedValue: values }));              
               saveHandler();

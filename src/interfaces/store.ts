@@ -1,6 +1,6 @@
 import { store } from "../store/store";
 import { CaseWithId, CasesToDo, Coordinates, Room, Case } from './cases';
-import { UserSettings, UsersValidation } from './users';
+import { User, UsersValidation } from './users';
 import { Appointment } from './appointment';
 
 export interface CaseState {
@@ -13,7 +13,7 @@ export interface CaseState {
   coordinates: Coordinates[];
   caseRooms: Room[];
   currentRoom: Room | undefined;
-  caseChanged: boolean;
+  caseChanged: boolean;  
 }
 
 export interface UserState {
@@ -27,7 +27,7 @@ export interface UserState {
   confirmUserHandler: boolean;
   userEmail: string;
   isInspectorActive: boolean;
-  inspectorList: UserSettings[];
+  inspectorList: User[];
   currentUser: UsersValidation;
 }
 
