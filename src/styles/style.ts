@@ -60,6 +60,7 @@ export const InputLabel = styled.label<Props>`
   font-size: 16px;
   align-self: ${({ isSignUp }) => (isSignUp ? "start" : "inherit")};
   margin-left: ${({ isSignUp }) => (isSignUp ? "25px" : "inherit")};
+  margin-bottom: ${({ isSignUp }) => (isSignUp ? "5px" : "inherit")};
 `;
 
 export const InputPlaceholderShown = styled.p<Props>`
@@ -103,6 +104,7 @@ export const NavBarStyled = styled.div<Props>`
 export const ContainerNavBarIconsStyled = styled.div<Props>`
   display: flex;
   width: 5rem;
+  cursor: pointer;
   align-items: center;
   justify-content: flex-end;
   gap: 35px;
@@ -120,6 +122,8 @@ export const LogoNavBarStyled = styled.img<Props>`
 
 export const IconStyled = styled.img`
   min-width: 3vh;
+  width: 3vh;
+  cursor: pointer;
 `;
 
 //-----
@@ -149,12 +153,14 @@ export const TabTextStyled = styled.div<Props>`
     props.color === "red" ? props.theme.colors.red : props.theme.colors.grey};
   font-weight: 600;
   font-size: 16px;
+  cursor: pointer;
 `;
 
 export const TabIconStyled = styled.div<Props>`
   color: ${(props) =>
     props.color === "red" ? props.theme.colors.red : props.theme.colors.grey};
   width: 3vh;
+  cursor: pointer;
 `;
 
 //-----
@@ -206,11 +212,14 @@ export const ActionStyled = styled.div<Props>`
 
   p {
     color: ${(props) => props.theme.colors.red};
+    font-weight: 800;
+    cursor: pointer;
   }
 `;
 
 export const IconsContainerStyled = styled.div<Props>`
   display: flex;
+  cursor: pointer;
   justify-content: space-around;
   width: 10rem;
   visibility: ${({ isSize }) => (isSize ? "visible" : "hidden")};
@@ -463,8 +472,6 @@ export const Popup = styled.div<Props>`
   display: flex;
   justify-content: center;
   align-items: center;
-  visibility: ${({ isPopupVisible }) =>
-    isPopupVisible ? "visible" : "hidden"};
 `;
 
 export const PopupStyled = styled.div<Props>`
@@ -544,9 +551,9 @@ export const AuthorizationHeader = styled.p<Props>`
 export const AuthorizationInput = styled.input<Props>`
   font-family: ${(props) => props.theme.fonts.default};
   color: ${(props) => props.theme.colors.tx_grey_main};
-  font-weight: 400;
-  font-size: 32px;
-  text-align: center;
+  width: 340px;
+  height: 33px;
+  padding-left: 10px;
 `;
 
 export const AuthorizationButtonTop = styled.button<Props>`
@@ -583,6 +590,7 @@ export const AuthorizationContainer = styled.div<Props>`
 export const AuthorizationLinksContainer = styled.div<Props>`
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 `;
 
 export const AuthorizationInputContainer = styled.div<Props>`
@@ -615,6 +623,7 @@ export const LoginFormConrainerStyled = styled.div<Props>`
 
 export const LinkStyled = styled.p<Props>`
   text-decoration: none;
+  cursor: pointer;
   color: red;
 `;
 
@@ -634,4 +643,11 @@ export const InspectorItemStyled = styled.p<Props>`
   /* &:active {
     border: 1px red solid;
   } */
+`;
+
+// ForgotPassword Page
+
+export const ForgotPasswordParagraph = styled.p<Props>`
+  text-align: center;
+  margin: 25% 20% auto 20%;
 `;

@@ -1,5 +1,5 @@
-import { Appointment } from "./appointment";
 import { UserSettings } from "./users";
+import { Appointment } from './appointment';
 
 export interface File {
   id: number;
@@ -8,6 +8,10 @@ export interface File {
 }
 
 export interface State {
+  id: number;
+  title: string;
+}
+export interface TypeOfProperty {
   id: number;
   title: string;
 }
@@ -36,6 +40,7 @@ export interface CaseGeneral {
   Appointment?: Appointment;
   Inspector?: UserSettings;
   State?: State;
+  TypeOfProperty?: TypeOfProperty;
 }
 
 export interface CaseDetails {
@@ -86,5 +91,3 @@ export interface Coordinates {
   lng: number;
   lat: number;
 }
-
-

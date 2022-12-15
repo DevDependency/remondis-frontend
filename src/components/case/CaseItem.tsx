@@ -3,7 +3,6 @@ import { CaseItemProps } from "../../interfaces/cases";
 import { useNavigate } from "react-router-dom";
 import { PopUpConfirm } from "../PopUpConfirm";
 import { useAppSelector, useAppDispatch } from "../../utils/hooks/useStore";
-import { setIsPopupVisible } from "../../store/slices/general";
 import { closeCase, setDeletedCaseId } from "../../store/slices/case";
 import {
   CaseContainerStyled,
@@ -41,13 +40,13 @@ export const CaseItem: React.FC<CaseItemProps> = ({
 }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { isPopupVisible } = useAppSelector((state) => state.generalSlice);
+  const [isPopupVisible, setIsPopupVisible] = useState(false)
   const { userId, userRole } = useAppSelector((state) => state.userSlice);
   const { deletedCaseId } = useAppSelector((state) => state.caseSlice);
-  const [size, setSize] = useState(false);
+  const [ showSettings, setShowSettings ] = useState(false);
 
   const showEditButton = () => {
-    setSize((current) => !current);
+    setShowSettings((current) => !current);
   };
 
   const openCaseHandler = () => {
@@ -56,26 +55,29 @@ export const CaseItem: React.FC<CaseItemProps> = ({
 
   const setPopUpVisible = () => {
     dispatch(setDeletedCaseId(caseId));
-    dispatch(setIsPopupVisible(true));
+    setIsPopupVisible(true)
+    console.log(isPopupVisible)
   };
 
   const setPopUpUnVisible = () => {
-    dispatch(setIsPopupVisible(false));
+    setIsPopupVisible(false)
   };
 
   const closeCaseHandler = () => {
-    dispatch(closeCase({ deletedCaseId, userId }));
-    dispatch(setIsPopupVisible(false));
+    dispatch(closeCase({ caseId: deletedCaseId, userId }));
+    setIsPopupVisible(false)
+    setShowSettings((current) => !current);
   };
 
   const openCaseEditHandler = () => {
     navigate(`/cases/${caseId}/edit`, { state: { isNewCase: false } });
   };
 
+  console.log(isPopupVisible)
   return (
     <>
       <CaseBackgroundContainerStyled>
-        <CaseContainerStyled isSize={size}>
+        <CaseContainerStyled isSize={showSettings}>
           <CaseInfoStyled onClick={openCaseHandler}>
             <DataAndAdressStyled>
               <CanyainerForInfoStyled>
@@ -99,7 +101,7 @@ export const CaseItem: React.FC<CaseItemProps> = ({
                 </CanyainerForInfoStyled>
                 <ActionStyled>
                   <IconStyled src={caseIconAction} />
-                  <TextMain style={{ fontWeight: "800" }}>{action}</TextMain>
+                  <TextMain>{action}</TextMain>
                 </ActionStyled>
               </>
             )}
@@ -108,7 +110,7 @@ export const CaseItem: React.FC<CaseItemProps> = ({
             <IconStyled src={caseIconSettings} onClick={showEditButton} />
           )}
         </CaseContainerStyled>
-        <IconsContainerStyled isSize={size}>
+        <IconsContainerStyled isSize={showSettings}>
           <IconStyled src={caseIconBin} onClick={setPopUpVisible} />
           <IconStyled src={caseIconEdit} onClick={openCaseEditHandler} />
         </IconsContainerStyled>

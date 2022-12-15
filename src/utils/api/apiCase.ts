@@ -51,7 +51,7 @@ export const apiPatchCaseById = async (
   caseId: number,
   changedData: Case
 ) => {
-  const { Appointment, Inspector, State, ...body } = changedData; 
+  const { Appointment, Inspector, State, TypeOfProperty, ...body } = changedData; 
   try {
     const res = await server.patch(`cases/${caseId}`, body);
     return res.data;

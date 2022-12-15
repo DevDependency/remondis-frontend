@@ -66,7 +66,8 @@ export const CaseGeneral: React.FC = () => {
   return (
     <>
       {currentCase && (
-        <>
+       <> 
+        <div>
           <CaseItemContainerStyled>
             <CaseItemStyled>
               <InputPlaceholderShown>Name</InputPlaceholderShown>
@@ -111,9 +112,8 @@ export const CaseGeneral: React.FC = () => {
               </TextMain>
             </CaseItemStyled>
           </CaseItemContainerStyled>          
-        </>
-        )
-      }
+        </div>
+      
       {userRole === Role.MANAGER ?
         <ButtonContainerStyled>
           <button>
@@ -139,6 +139,9 @@ export const CaseGeneral: React.FC = () => {
               <ButtonStyled color={"red"} onClick={confirmHandler}>Submit</ButtonStyled>
             </button>
           </ButtonContainerStyled>
+        )
+      }
+      </>
         )
       }
     </>

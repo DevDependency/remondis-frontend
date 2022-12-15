@@ -7,7 +7,7 @@ import {
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Room } from "../../interfaces/cases";
-import { caseIconEdit } from "../../assets/";
+import { caseIconBin, caseIconEdit } from "../../assets/";
 import {
   InsideMainBottomStyled,
   PhotoContainerStyled,
@@ -63,6 +63,9 @@ export const CasePhotos: React.FC = () => {
     }
   };
 
+  const deletelHandler = (e: any) => {
+
+  }
   const submitHandler = () => {};
 
   return (
@@ -71,13 +74,23 @@ export const CasePhotos: React.FC = () => {
         {caseRooms.map((el: Room, index: number) => (
           <div key={index}>
             <RoomItemContainerStyled>
-              {/* <div>{el.room}</div> */}
               <TextMain
                 style={{
                   position: "relative",
                 }}
               >
                 {el.room_title}
+                <img
+                  onClick={deletelHandler}
+                  src={caseIconBin}
+                  id={el.room.toString()}
+                  style={{
+                    position: "absolute",
+                    top: "0",
+                    right: "50px",
+                    zIndex: "0",
+                  }}
+                />
                 <img
                   onClick={editlHandler}
                   src={caseIconEdit}
@@ -86,7 +99,7 @@ export const CasePhotos: React.FC = () => {
                     position: "absolute",
                     top: "0",
                     right: "0",
-                    zIndex: "10",
+                    zIndex: "0",
                   }}
                 />
               </TextMain>
@@ -94,9 +107,6 @@ export const CasePhotos: React.FC = () => {
               <PhotoContainerStyled>
                 {el.CasePhoto.map((img, index) => (
                   <PhotoStyled
-                    /* style={{
-                  position: "relative",
-                }} */
                     key={index}
                   >
                     <img
@@ -106,7 +116,6 @@ export const CasePhotos: React.FC = () => {
                       }
                       alt=""
                       style={{
-                        /* position: "relative", */
                         width: "100px",
                         height: "90px",
                       }}

@@ -1,17 +1,19 @@
-import { CaseWithId, CasesToDo, Coordinates, Room, Case } from './cases';
 import { store } from "../store/store";
-import { UserSettings } from "./users";
+import { CaseWithId, CasesToDo, Coordinates, Room, Case } from './cases';
+import { User, UsersValidation } from './users';
+import { Appointment } from './appointment';
 
 export interface CaseState {
   createdCaseId: number;
   deletedCaseId: number;
   cases: CaseWithId[];
   casesToDo: CasesToDo[];
+  appointments: Appointment[];
   currentCase: Case | undefined;
   coordinates: Coordinates[];
   caseRooms: Room[];
   currentRoom: Room | undefined;
-  caseChanged: boolean;
+  caseChanged: boolean;  
 }
 
 export interface UserState {
@@ -25,9 +27,9 @@ export interface UserState {
   confirmUserHandler: boolean;
   userEmail: string;
   isInspectorActive: boolean;
-  inspectorList: UserSettings[];  
+  inspectorList: User[];
+  currentUser: UsersValidation;
 }
-
 
 export type AppDispatch = typeof store.dispatch;
 
