@@ -3,8 +3,7 @@ import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from '../utils/hooks/useStore';
 import { setInsideCase } from "../store/slices/general";
-import caseSlice from '../store/slices/case';
-import generalSlice from '../store/slices/general';
+import { setCurrentCase } from '../store/slices/case';
 
 
 export const Case: React.FC = () => {
@@ -15,6 +14,7 @@ export const Case: React.FC = () => {
     dispatch(setInsideCase(true));
     return () => {
       dispatch(setInsideCase(false));
+      dispatch(setCurrentCase(undefined));
     };
   }, []);
 

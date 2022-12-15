@@ -4,7 +4,7 @@ import { getCasesToDo } from "../store/slices/case";
 import { CasesToDo } from "../interfaces/cases";
 import { TabBarManager, TabBarInspector } from "../components/containers/";
 import { CaseItem } from "../components/case/";
-import { InsideMainBottomStyled, MainContainerStyled } from "../styles/style";
+import { MainContainerStyled } from "../styles/style";
 import {
   setActiveInspectorTabBar,
   setActiveManagerTabBar,
@@ -13,22 +13,24 @@ import { Role } from "../interfaces/users";
 
 export const ToDo: React.FC = () => {
   const dispatch = useAppDispatch();
-  const tasks = useAppSelector((state) => state.caseSlice.casesToDo);
-  const userRole = useAppSelector((state) => state.userSlice.userRole);
-  const userId = useAppSelector((state) => state.userSlice.userId);
+  const {casesToDo, caseChanged} = useAppSelector((state) => state.caseSlice);
+  const {userRole, userId} = useAppSelector((state) => state.userSlice);
 
   useEffect(() => {
-    if (userId !== 0) dispatch(getCasesToDo(userId));
     dispatch(setActiveManagerTabBar("todo"));
     dispatch(setActiveInspectorTabBar("todo"));
   }, []);
+
+  useEffect(()=>{
+    if (userId !== 0) dispatch(getCasesToDo(userId));
+  } , [caseChanged])
   
   return (
     <>
       {userRole === Role.MANAGER ? <TabBarManager /> : <TabBarInspector />}
       <MainContainerStyled>
-        {tasks &&
-          tasks.map((item: CasesToDo, index: number) => (
+        {casesToDo &&
+          casesToDo.map((item: CasesToDo, index: number) => (
             <CaseItem
               key={index}
               time={new Date(item.created_at as string).toLocaleDateString(

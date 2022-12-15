@@ -44,10 +44,10 @@ export const CaseItem: React.FC<CaseItemProps> = ({
   const { isPopupVisible } = useAppSelector((state) => state.generalSlice);
   const { userId, userRole } = useAppSelector((state) => state.userSlice);
   const { deletedCaseId } = useAppSelector((state) => state.caseSlice);
-  const [size, setSize] = useState(false);
+  const [ showSettings, setShowSettings ] = useState(false);
 
   const showEditButton = () => {
-    setSize((current) => !current);
+    setShowSettings((current) => !current);
   };
 
   const openCaseHandler = () => {
@@ -64,18 +64,21 @@ export const CaseItem: React.FC<CaseItemProps> = ({
   };
 
   const closeCaseHandler = () => {
-    dispatch(closeCase({ deletedCaseId, userId }));
+    dispatch(closeCase({ caseId: deletedCaseId, userId }));
     dispatch(setIsPopupVisible(false));
+    setShowSettings((current) => !current);
   };
 
   const openCaseEditHandler = () => {
     navigate(`/cases/${caseId}/edit`, { state: { isNewCase: false } });
   };
 
+  //console.log(showSettings)
+
   return (
     <>
       <CaseBackgroundContainerStyled>
-        <CaseContainerStyled isSize={size}>
+        <CaseContainerStyled isSize={showSettings}>
           <CaseInfoStyled onClick={openCaseHandler}>
             <DataAndAdressStyled>
               <CanyainerForInfoStyled>
@@ -108,7 +111,7 @@ export const CaseItem: React.FC<CaseItemProps> = ({
             <IconStyled src={caseIconSettings} onClick={showEditButton} />
           )}
         </CaseContainerStyled>
-        <IconsContainerStyled isSize={size}>
+        <IconsContainerStyled isSize={showSettings}>
           <IconStyled src={caseIconBin} onClick={setPopUpVisible} />
           <IconStyled src={caseIconEdit} onClick={openCaseEditHandler} />
         </IconsContainerStyled>

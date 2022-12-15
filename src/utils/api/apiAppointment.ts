@@ -15,6 +15,15 @@ export const apiGetAppointments = async () => {
   }
 };
 
+export const apiGetAppointmentsByInspectorId = async (inspector_id: number) => {
+  try {
+    const res = await server.get(`/appointments?inspector_id=${inspector_id}`);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const apiPostAppointment = async (caseId: number, body: Appointment) => {
   try {
     const res = await server.post(`/appointments/${caseId}`, body);
