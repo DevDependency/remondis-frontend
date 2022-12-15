@@ -1,6 +1,6 @@
 import { store } from "../store/store";
 import { CaseWithId, CasesToDo, Coordinates, Room, Case } from './cases';
-import { UserSettings } from "./users";
+import { UserSettings, UsersValidation } from './users';
 import { Appointment } from './appointment';
 
 export interface CaseState {

@@ -3,7 +3,8 @@ import { theme } from "./styles/theme";
 import { ThemeProvider } from "styled-components";
 import { RouterProvider } from "react-router-dom";
 import { Provider as StoreProvider } from "react-redux";
-import { store } from "./store/store";
+import { persistor, store } from "./store/store";
+import { PersistGate } from "redux-persist/integration/react";
 import { router } from "./routes/Router";
 
 function App() {
@@ -11,9 +12,11 @@ function App() {
     <>
       <GlobalStyle />
       <StoreProvider store={store}>
-        <ThemeProvider theme={theme}>
-          <RouterProvider router={router} />
-        </ThemeProvider>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider theme={theme}>
+            <RouterProvider router={router} />
+          </ThemeProvider>
+        </PersistGate>
       </StoreProvider>
     </>
   );

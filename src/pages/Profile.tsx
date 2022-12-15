@@ -73,6 +73,7 @@ export const Profile: React.FC = () => {
   });
 
   const logOutHandler = () => {
+    dispatch(setUser(undefined))
     removeCookiesName("Name", { path: "/" });
     removeCookiesPassword("Password", { path: "/" });
   };
