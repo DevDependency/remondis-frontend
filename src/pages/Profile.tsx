@@ -77,6 +77,18 @@ export const Profile: React.FC = () => {
     removeCookiesPassword("Password", { path: "/" });
   };
 
+  const onSaveHandler = () => {
+    dispatch(
+      updateUser({
+        userId,
+        changedValue: {
+          username: formik.values.username,
+          phone: formik.values.phone,
+        },
+      })
+    );
+  };
+
   return (
     <div className="CaseDiv">
       {resultSuccess ? (
@@ -180,6 +192,7 @@ export const Profile: React.FC = () => {
                   className="LongButtonStyled"
                   type="submit"
                   color={"red"}
+                  onClick={onSaveHandler}
                 >
                   Save
                 </button>
