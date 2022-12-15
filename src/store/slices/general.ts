@@ -4,7 +4,6 @@ import { TAB_BAR_MANAGER, TAB_BAR_INSPECTOR, TAB_BAR_CASE } from '../../utils/co
 const initialState = {
   insideCase: false,
   isEditMode: false,
-  isPopupVisible: false,
   activeManagerTabBar: TAB_BAR_MANAGER[0].id,
   activeInspectorTabBar: TAB_BAR_INSPECTOR[0].id,
   activeCaseTabBar: TAB_BAR_CASE[0].id,
@@ -16,9 +15,6 @@ const generalSlice = createSlice({
   reducers: {
     setInsideCase(state, action) {
       state.insideCase = action.payload;
-    },
-    setIsPopupVisible(state, action) {
-      state.isPopupVisible = action.payload;
     },
     setIsEditMode(state, action) {
       state.isEditMode = action.payload;
@@ -35,6 +31,6 @@ const generalSlice = createSlice({
   },
 });
 
-export const { setInsideCase, setIsPopupVisible, setIsEditMode, setActiveManagerTabBar, setActiveInspectorTabBar, setActiveCaseTabBar } = generalSlice.actions;
+export const { setInsideCase, setIsEditMode, setActiveManagerTabBar, setActiveInspectorTabBar, setActiveCaseTabBar } = generalSlice.actions;
 
 export default generalSlice.reducer;
