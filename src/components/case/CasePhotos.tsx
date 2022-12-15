@@ -1,11 +1,13 @@
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+
 import { useAppSelector, useAppDispatch } from "../../utils/hooks/useStore";
 import {
   getCaseItems,
   getCaseItem,
   setCaseItems,
+  deleteCaseItem,
 } from "../../store/slices/case";
-import { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
 import { Room } from "../../interfaces/cases";
 import { caseIconBin, caseIconEdit } from "../../assets/";
 import {
@@ -13,19 +15,20 @@ import {
   PhotoContainerStyled,
   PhotoStyled,
   TextMain,
-} from "../../styles/style";
-import {
   ButtonContainerStyled,
   ButtonSmallStyled,
   RoomItemContainerStyled,
 } from "../../styles/style";
 import { setActiveCaseTabBar } from "../../store/slices/general";
+import { PopUpConfirm } from "../PopUpConfirm";
 
 export const CasePhotos: React.FC = () => {
   const { caseRooms, caseChanged } = useAppSelector((state) => state.caseSlice);
   const dispatch = useAppDispatch();
   const { caseId } = useParams<{ caseId?: string }>();
   const navigate = useNavigate();
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [deletedRoomId, setDeletedRoomId] = useState(0);
 
   useEffect(() => {
     dispatch(setActiveCaseTabBar("photos"));
@@ -63,9 +66,28 @@ export const CasePhotos: React.FC = () => {
     }
   };
 
-  const deletelHandler = (e: any) => {
+  const setPopUpVisible = (e: any) => {
+    setDeletedRoomId(parseInt(e.target.id));
+    setIsPopupVisible(true);
+  };
 
-  }
+  const setPopUpUnvisible = () => {
+    setIsPopupVisible(false);
+  };
+
+  const deletelHandler = () => {
+    if (caseId) {
+      dispatch(
+        deleteCaseItem({
+          caseId: parseInt(caseId),
+          room: deletedRoomId,
+        })
+      );
+    }
+    setDeletedRoomId(0);
+    setIsPopupVisible(false);
+  };
+
   const submitHandler = () => {};
 
   return (
@@ -81,7 +103,7 @@ export const CasePhotos: React.FC = () => {
               >
                 {el.room_title}
                 <img
-                  onClick={deletelHandler}
+                  onClick={setPopUpVisible}
                   src={caseIconBin}
                   id={el.room.toString()}
                   style={{
@@ -106,9 +128,7 @@ export const CasePhotos: React.FC = () => {
               <TextMain>{el.description}</TextMain>
               <PhotoContainerStyled>
                 {el.CasePhoto.map((img, index) => (
-                  <PhotoStyled
-                    key={index}
-                  >
+                  <PhotoStyled key={index}>
                     <img
                       src={
                         "data:image/jpeg;base64," +
@@ -139,6 +159,27 @@ export const CasePhotos: React.FC = () => {
           </ButtonSmallStyled>
         </button>
       </ButtonContainerStyled>
+
+      {isPopupVisible && (
+        <PopUpConfirm
+          text={"Are you sure you want to delete the room?"}
+          buttons={[
+            {
+              title: "Cancel",
+              onClick: () => {
+                setPopUpUnvisible();
+              },
+            },
+            {
+              title: "Confirm",
+              default: true,
+              onClick: () => {
+                deletelHandler();
+              },
+            },
+          ]}
+        />
+      )}
     </>
   );
 };

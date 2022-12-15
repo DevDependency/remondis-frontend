@@ -275,6 +275,9 @@ const caseSlice = createSlice({
       .addCase(updateCaseItem.fulfilled, (state) => {
         caseSlice.caseReducers.setCaseChangedTrue(state);
       })
+      .addCase(deleteCaseItem.fulfilled, (state) => {
+        caseSlice.caseReducers.setCaseChangedTrue(state);
+      })
       .addCase(updateCasePhoto.fulfilled, (state) => {
         caseSlice.caseReducers.setCaseChangedTrue(state);
       })
