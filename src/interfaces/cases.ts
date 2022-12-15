@@ -11,6 +11,10 @@ export interface State {
   id: number;
   title: string;
 }
+export interface TypeOfProperty {
+  id: number;
+  title: string;
+}
 
 export interface Room {
   id: number;
@@ -36,6 +40,7 @@ export interface CaseGeneral {
   Appointment?: Appointment;
   Inspector?: UserSettings;
   State?: State;
+  TypeOfProperty?: TypeOfProperty;
 }
 
 export interface CaseDetails {
