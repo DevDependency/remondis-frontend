@@ -2,10 +2,8 @@ import { useNavigate } from "react-router-dom";
 import {
   TabTextStyled,
   TabBarCantainerStyled,
-  TabBarBackgroundStyled,
 } from "../../styles/style";
 import { TAB_BAR_MANAGER } from "../../utils/constants";
-import generalSlice from "../../store/slices/general";
 import { useAppSelector } from "../../utils/hooks/useStore";
 
 export const TabBarManager: React.FC = () => {
