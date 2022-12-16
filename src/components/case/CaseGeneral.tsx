@@ -113,7 +113,7 @@ export const CaseGeneral: React.FC = () => {
                       type="date"
                       id="date"
                       name="Apointment"
-                      defaultValue={values.Appointment===undefined ? "" : (values.Appointment.date).toLocaleString("en-GB")}
+                      defaultValue={values.Appointment? (values.Appointment.date).toLocaleString("en-GB") : ""}
                       onChange={handleChange}
                       />                      
                     </CaseItemStyled>
