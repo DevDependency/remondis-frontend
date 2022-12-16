@@ -32,7 +32,7 @@ export const Main: React.FC = () => {
             </button>
           </ButtonContainerStyled>
         )}
-        <InsideMainStyled>
+        <InsideMainStyled role={userRole}>
           <Outlet />
         </InsideMainStyled>
       </MainStyled>    
