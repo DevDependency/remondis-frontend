@@ -1,4 +1,4 @@
-import { getCasesById, setCurrentCase } from "../../store/slices/case";
+import { getCasesById, setCurrentCase, addAppointment } from "../../store/slices/case";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks/useStore";
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -15,7 +15,6 @@ import {
   ButtonStyled
 } from "../../styles/style";
 import { setActiveCaseTabBar } from "../../store/slices/general";
-import { NEW_CASE } from "../../utils/constants";
 import { caseIconEdit } from "../../assets";
 import { Role } from '../../interfaces/users';
 import { apiPatchCasesByIdDecline, apiPatchCasesByIdAccept, apiPatchCasesByIdReady } from "../../utils/api";
@@ -30,7 +29,7 @@ export const CaseGeneral: React.FC = () => {
   useEffect(() => {
     dispatch(setActiveCaseTabBar("general"))
     return () => {
-      dispatch(setCurrentCase(NEW_CASE));
+      dispatch(setCurrentCase(undefined));
     };
   }, []);
   useEffect(() => {
@@ -48,7 +47,10 @@ export const CaseGeneral: React.FC = () => {
   const assignInspector = () => {
     navigate(`/cases/${caseId}/inspector-assign`);
   };
-  const createAppointment = () => { }
+  const createAppointment = (e: any) => {
+    console.log(new Date(e.target.value));    
+    dispatch(addAppointment({ caseId: caseId, appointment: {date : new Date(e.target.value), time_from: new Date(0), time_to: new Date(0)} }));    
+   }
 
   const declineHandler = () => {
     if (caseId)
@@ -65,6 +67,8 @@ export const CaseGeneral: React.FC = () => {
       apiPatchCasesByIdReady(parseInt(caseId), userId)
     navigate(`/`, { relative: "route" });
   }
+  console.log(currentCase);
+  console.log(caseId);
   return (
     <>
       {currentCase && (
@@ -113,8 +117,8 @@ export const CaseGeneral: React.FC = () => {
                       type="date"
                       id="date"
                       name="Apointment"
-                      defaultValue={values.Appointment? (values.Appointment.date).toLocaleString("en-GB") : ""}
-                      onChange={handleChange}
+                      defaultValue={values.Appointment?.date ? new Date((values?.Appointment.date)).toISOString().split('T')[0] : ""}
+                      onChange={createAppointment}
                       />                      
                     </CaseItemStyled>
                   </Form>
