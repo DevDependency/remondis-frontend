@@ -124,16 +124,14 @@ export const CaseGeneral: React.FC = () => {
                   </Form>
                 )}
               </Formik>
-            </CaseItemContainerStyled>
-            <CaseItemContainerStyled>
-              {userRole === Role.MANAGER ? <CaseItemStyled>
+            </CaseItemContainerStyled>            
+              {userRole === Role.MANAGER ? <CaseItemContainerStyled><CaseItemStyled>
                 <InputPlaceholderShown>Inspector</InputPlaceholderShown>
                 <TextMain>{currentCase?.Inspector?.username}</TextMain>
                 <IconsContainerStyled isSize={true}>
                   <IconStyled src={caseIconEdit} onClick={assignInspector} />
                 </IconsContainerStyled>
-              </CaseItemStyled> : null}
-            </CaseItemContainerStyled>            
+              </CaseItemStyled></CaseItemContainerStyled>: null}                        
           </div>
           {userRole === Role.MANAGER ?
             <ButtonContainerStyled>
