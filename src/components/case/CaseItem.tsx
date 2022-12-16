@@ -56,7 +56,6 @@ export const CaseItem: React.FC<CaseItemProps> = ({
   const setPopUpVisible = () => {
     dispatch(setDeletedCaseId(caseId));
     setIsPopupVisible(true)
-    console.log(isPopupVisible)
   };
 
   const setPopUpUnVisible = () => {
@@ -73,7 +72,6 @@ export const CaseItem: React.FC<CaseItemProps> = ({
     navigate(`/cases/${caseId}/edit`, { state: { isNewCase: false } });
   };
 
-  console.log(isPopupVisible)
   return (
     <>
       <CaseBackgroundContainerStyled>

@@ -6,6 +6,7 @@ import { CaseDetails } from "./CaseDetails";
 import { CaseDetailsEdit } from "./CaseDetailsEdit";
 import { CasePhotos } from "./CasePhotos";
 import { CasePhotosEdit } from "./CasePhotosEdit";
+import { CasePhotosPreview } from "./CasePhotosPreview";
 
 export {
   CaseItem,
@@ -15,4 +16,5 @@ export {
   CaseDetailsEdit,
   CasePhotos,
   CasePhotosEdit,
+  CasePhotosPreview,
 }

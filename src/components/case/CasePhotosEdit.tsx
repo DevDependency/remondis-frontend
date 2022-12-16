@@ -63,19 +63,21 @@ export const CasePhotosEdit: React.FC = () => {
 
   const fillImages = () => {
     const arrayPhotos: File[] = [];
-    for (const currentPhoto of currentRoom.CasePhoto) {
-      const base64 =
-        "data:image/jpeg;base64," +
-        Buffer.from(currentPhoto.photo.data).toString("base64");
-      arrayPhotos.push({
-        photo: base64,
-        id:
-          Math.max.apply(null, [
-            0,
-            ...Array.from(arrayPhotos, (x: File) => x.id),
-          ]) + 1,
-        file_name: currentPhoto.file_name,
-      });
+    if (currentRoom) {
+      for (const currentPhoto of currentRoom.CasePhoto) {
+        const base64 =
+          "data:image/jpeg;base64," +
+          Buffer.from(currentPhoto.photo.data).toString("base64");
+        arrayPhotos.push({
+          photo: base64,
+          id:
+            Math.max.apply(null, [
+              0,
+              ...Array.from(arrayPhotos, (x: File) => x.id),
+            ]) + 1,
+          file_name: currentPhoto.file_name,
+        });
+      }
     }
     return arrayPhotos;
   };
