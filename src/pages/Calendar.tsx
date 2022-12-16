@@ -12,7 +12,9 @@ import { getAppointmentsByInspector } from '../store/slices/case';
 
 export const Calendar: React.FC = () => {
   const dispatch = useAppDispatch();
-  const [date, setDate] = useState(new Date());
+  let initisalDate = new Date();
+  initisalDate.setHours(0, 0, 0, 0);
+  const [date, setDate] = useState(initisalDate);
   const { appointments } = useAppSelector((state) => state.caseSlice);
   const { userId } = useAppSelector((state) => state.userSlice);
 
