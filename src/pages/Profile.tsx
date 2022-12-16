@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../utils/hooks/useStore";
 import { setUserId, updateUser, setUser } from "../store/slices/user";
 import { UsersValidation } from "../interfaces/users";
 import { apiGetUsersListById } from "../utils/api";
-import { Role, UserSettings } from "../interfaces/users";
+import { Role, UserSettings, InputEvents } from "../interfaces/users";
 import { useCookies } from "react-cookie";
 import { NavBar } from "../components/containers";
 import { setInsideCase } from "../store/slices/general";
@@ -21,6 +21,7 @@ import {
   InsideMainStyled,
   TextMain,
   ExtraButtonStyled,
+  SelectInputStyle,
 } from "../styles/style";
 
 export const Profile: React.FC = () => {
@@ -53,9 +54,9 @@ export const Profile: React.FC = () => {
     console.log(userSpecification);
     await setThisUser(userSpecification.user);
   };
-  useEffect(() => {
-    userData();
-  }, []);
+  // useEffect(() => {
+  //   userData();
+  // }, []);
   const navigate = useNavigate();
   const formik: FormikProps<UsersValidation> = useFormik<UsersValidation>({
     initialValues: {
@@ -92,7 +93,14 @@ export const Profile: React.FC = () => {
     );
   };
 
+  const onInputClick = (e: React.MouseEvent<HTMLElement>): void => {
+    e.target.value = "";
+  };
+
+  const onInputBlur = (e) => {};
+
   useEffect(() => {
+    userData();
     dispatch(setInsideCase(true));
     return () => {
       dispatch(setInsideCase(false));
@@ -117,8 +125,14 @@ export const Profile: React.FC = () => {
                     onChange={formik.handleChange}
                     id="username"
                     type="text"
-                    onBlur={formik.handleBlur}
+                    // onBlur={formik.handleBlur}
+                    onBlur={(e) => {
+                      e.target.value !== "" ||
+                        (e.target.value !== thisUser.username &&
+                          (e.target.value = thisUser.username));
+                    }}
                     defaultValue={thisUser ? thisUser.username : ""}
+                    onClick={onInputClick}
                   />
                   {formik.errors.username && formik.touched.username && (
                     <div className="CaseErrors">{formik.errors.username}</div>
@@ -132,7 +146,12 @@ export const Profile: React.FC = () => {
                     onChange={formik.handleChange}
                     id="password"
                     type="password"
-                    onBlur={formik.handleBlur}
+                    onBlur={(e) => {
+                      e.target.value !== "";
+                      e.target.value !== thisUser.password &&
+                        (e.target.value = thisUser.password);
+                    }}
+                    onClick={onInputClick}
                     defaultValue={thisUser ? thisUser.password : ""}
                   />
                   {formik.errors.password && formik.touched.password && (
@@ -147,7 +166,12 @@ export const Profile: React.FC = () => {
                     onChange={formik.handleChange}
                     id="phone"
                     type="text"
-                    onBlur={formik.handleBlur}
+                    onBlur={(e) => {
+                      e.target.value !== "" ||
+                        (e.target.value !== thisUser.phone &&
+                          (e.target.value = thisUser.phone));
+                    }}
+                    onClick={onInputClick}
                     defaultValue={thisUser ? thisUser.phone : ""}
                   />
                   {formik.errors.phone && formik.touched.phone && (
@@ -159,7 +183,7 @@ export const Profile: React.FC = () => {
                     <label className="InputLabel" htmlFor="role">
                       Role
                     </label>
-                    <select
+                    <SelectInputStyle
                       className="SelectStyled"
                       id="role"
                       name="role"
@@ -178,7 +202,7 @@ export const Profile: React.FC = () => {
                           );
                         }
                       )}
-                    </select>
+                    </SelectInputStyle>
                   </>
                 )}
                 {/* <ButtonStyled>
@@ -197,15 +221,12 @@ export const Profile: React.FC = () => {
                 <button>Log out</button>
               </ExtraButtonStyled>
 
-              <ButtonStyled>
-                <button
-                  className="LongButtonStyled"
-                  type="submit"
-                  color={"red"}
-                  onClick={onSaveHandler}
-                >
-                  Save
-                </button>
+              <ButtonStyled
+                className="LongButtonStyled"
+                color={"red"}
+                onClick={onSaveHandler}
+              >
+                Save
               </ButtonStyled>
             </ButtonContainerStyled>
           </form>

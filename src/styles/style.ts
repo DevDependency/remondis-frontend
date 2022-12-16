@@ -378,7 +378,10 @@ export const ButtonStyled = styled.div<Props>`
 
 export const ExtraButtonStyled = styled(ButtonStyled)`
   position: absolute;
-  margin-bottom: 45%;
+  margin-bottom: 20%;
+  @media screen and (max-width: 480px) {
+    margin-bottom: 40%;
+  }
 `;
 
 export const ButtonSmallStyled = styled.div<Props>`
@@ -640,7 +643,7 @@ export const InspectorItemStyled = styled.p<Props>`
   width: 92%;
   margin-bottom: 15px;
   box-shadow: ${(props: Props) => props.theme.effects.shadow};
-  border: ${ (props)=> props.active ? "1px red solid" : "" }
+  border: ${(props) => (props.active ? "1px red solid" : "")};
   /* &:active {
     border: 1px red solid;
   } */
@@ -651,4 +654,11 @@ export const InspectorItemStyled = styled.p<Props>`
 export const ForgotPasswordParagraph = styled.p<Props>`
   text-align: center;
   margin: 25% 20% auto 20%;
+`;
+
+//Select Default Style
+
+export const SelectInputStyle = styled.select<Props>`
+  height: 40px;
+  font-size: 20px;
 `;
