@@ -1,4 +1,4 @@
-import maplibregl from "maplibre-gl";
+import { Map as glMap, Marker, Popup, NavigationControl } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useRef, useState, useEffect } from "react";
 import { TabBarInspector } from "../components/containers/";
@@ -19,7 +19,7 @@ export const Map: React.FC = () => {
 
   const renderCurrentMap = () => {
     if (mapContainer.current !== null)
-      map.current = new maplibregl.Map({
+      map.current = new glMap({
         container: mapContainer.current,
         style: `https://api.maptiler.com/maps/streets/style.json?key=${
           import.meta.env.VITE_MAPTILER_API_KEY
@@ -29,12 +29,12 @@ export const Map: React.FC = () => {
           : COORDINATES_BERLIN,
         zoom,
       });
-    map.current.addControl(new maplibregl.NavigationControl({}), "top-right");
+    map.current.addControl(new NavigationControl({}), "top-right");
 
     coordinates.map((el: any, index: number) => {
-      return new maplibregl.Marker({ color: "#FF0000" })
+      return new Marker({ color: "#FF0000" })
         .setLngLat([el.lng, el.lat])
-        .setPopup(new maplibregl.Popup().setHTML(`<h2>${el.address}<h2>`))
+        .setPopup(new Popup().setHTML(`<h2>${el.address}<h2>`))
         .addTo(map.current);
     });
   };
