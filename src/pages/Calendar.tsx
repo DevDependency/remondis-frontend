@@ -12,9 +12,9 @@ import { getAppointmentsByInspector } from '../store/slices/case';
 
 export const Calendar: React.FC = () => {
   const dispatch = useAppDispatch();
-  let initisalDate = new Date();
-  initisalDate.setHours(0, 0, 0, 0);
-  const [date, setDate] = useState(initisalDate);
+  let initialDate = new Date();
+  initialDate.setHours(0, 0, 0, 0);
+  const [date, setDate] = useState(initialDate);
   const { appointments } = useAppSelector((state) => state.caseSlice);
   const { userId } = useAppSelector((state) => state.userSlice);
 
@@ -51,12 +51,12 @@ export const Calendar: React.FC = () => {
             <CaseItem
               key={index}
               time={
-                item.Case.created_at
+                item.Case?.created_at
                   ? new Date(item.Case.created_at).toLocaleDateString("en-GB")
                   : ""
               }
-              address={item.Case.address}
-              caseId={item.Case.id}
+              address={item.Case ? item.Case.address : ""}
+              caseId={item.Case ? item.Case.id : 0 }
               isTodo={false}
             />
           ))}
