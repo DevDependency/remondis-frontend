@@ -2,6 +2,7 @@ import { theme } from "../../src/styles/theme";
 import { Theme, Colors, Fonts, BorderLine, Props } from "../interfaces/style";
 import styled from "styled-components";
 import { background } from "../assets";
+import { Role } from "../interfaces/users";
 
 // Main
 
@@ -12,6 +13,7 @@ export const MainStyled = styled.div<Props>`
 
 export const InsideMainStyled = styled.div<Props>`
   margin-top: 75px;
+  margin-bottom: ${(props: Props) => (props.role===Role.MANAGER ? "95px" : "15px")};
 `;
 
 export const InsideMainBottomStyled = styled.div<Props>`
@@ -480,6 +482,7 @@ export const PopupStyled = styled.div<Props>`
   flex-direction: column;
   background: white;
   max-width: 100%;
+  max-height: 100%;
   padding: 4em 2em;
   text-align: center;
 `;

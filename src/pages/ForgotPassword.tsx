@@ -63,8 +63,8 @@ export const ForgotPassword: React.FC = () => {
   return (
     <>
       <AuthorizationWrapper>
-        <AuthorizationForm>
-          <AuthorizationContainer onSubmit={formik.handleSubmit} noValidate>
+        <AuthorizationForm onSubmit={formik.handleSubmit} noValidate>
+          <AuthorizationContainer >
             <LogoStyled src={logo} isSignUp={true} />
             {!isEmailSent ? (
               <>

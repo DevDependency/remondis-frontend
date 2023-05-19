@@ -160,6 +160,18 @@ export const deleteCaseItem = createAsyncThunk(
   }
 );
 
+export const addAppointment = createAsyncThunk(
+  "case/addAppointment",
+  async (params: any) => {
+    try {
+      const response = await api.apiPostAppointment(params.caseId, params.appointment);
+      return response.appointment;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 /**
  * Photos
  */
@@ -273,6 +285,9 @@ const caseSlice = createSlice({
         caseSlice.caseReducers.setCaseChangedFalse(state);
       })
       .addCase(updateCaseItem.fulfilled, (state) => {
+        caseSlice.caseReducers.setCaseChangedTrue(state);
+      })
+      .addCase(deleteCaseItem.fulfilled, (state) => {
         caseSlice.caseReducers.setCaseChangedTrue(state);
       })
       .addCase(updateCasePhoto.fulfilled, (state) => {

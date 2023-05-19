@@ -1,0 +1,14 @@
+node_modules
+Dockerfile
+.gitignore
+.git
+.github
+.husky
+.vscode
+coverega
+docs
+test
+.vcmrc
+jest.config.js
+*.pem
+

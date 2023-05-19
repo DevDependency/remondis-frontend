@@ -8,6 +8,7 @@ import { apiGetUsersListById } from "../utils/api";
 import { Role, UserSettings } from "../interfaces/users";
 import { useCookies } from "react-cookie";
 import { NavBar } from "../components/containers";
+import { setInsideCase } from "../store/slices/general";
 import {
   ButtonContainerStyled,
   ButtonStyled,
@@ -31,6 +32,7 @@ export const Profile: React.FC = () => {
   const { userId, userEmail, userRole, currentUser } = useAppSelector(
     (state) => state.userSlice
   );
+  const { insideCase } = useAppSelector((state) => state.generalSlice);
   const [cookiesName, setCookiesName, removeCookiesName] = useCookies<string>([
     "Name",
   ]);
@@ -73,10 +75,29 @@ export const Profile: React.FC = () => {
   });
 
   const logOutHandler = () => {
-    dispatch(setUser(undefined))
+    dispatch(setUser(undefined));
     removeCookiesName("Name", { path: "/" });
     removeCookiesPassword("Password", { path: "/" });
   };
+
+  const onSaveHandler = () => {
+    dispatch(
+      updateUser({
+        userId,
+        changedValue: {
+          username: formik.values.username,
+          phone: formik.values.phone,
+        },
+      })
+    );
+  };
+
+  useEffect(() => {
+    dispatch(setInsideCase(true));
+    return () => {
+      dispatch(setInsideCase(false));
+    };
+  }, []);
 
   return (
     <div className="CaseDiv">
@@ -181,6 +202,7 @@ export const Profile: React.FC = () => {
                   className="LongButtonStyled"
                   type="submit"
                   color={"red"}
+                  onClick={onSaveHandler}
                 >
                   Save
                 </button>
